@@ -1,6 +1,12 @@
 Tabby::Application.routes.draw do
+  get "conditions/index"
+  get "conditions/show"
+  get "allergies/index"
+  get "allergies/show"
+  devise_for :users
   resources :catalogs
-
+  resources :users
+  
   root 'static_pages#home'
   get "static_pages/home"
   get "static_pages/help"
