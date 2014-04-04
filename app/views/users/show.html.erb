@@ -2,5 +2,16 @@
 
 <div class="cover-container tabbyapp">
   <hr>
+  <div class="well">
+  <h3>Contact Information</h3>
+  <hr>
 	<%= @user.email %>
 </div>
+<div class="well">
+	<h3>Allergies</h3><%= link_to "New Allergy", new_allergy_path, class: "btn btn-link" %>
+	<%= render :partial => @user.allergies %>
+	<hr>
+</div>
+
+</div>
+

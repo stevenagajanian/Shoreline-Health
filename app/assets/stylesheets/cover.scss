@@ -194,13 +194,13 @@ a:hover {
     bottom: 0;
   }
   /* Start the vertical centering */
-  .site-wrapper-inner {
+  .site-wrapper-inner, .tabbyapp {
     vertical-align: middle;
   }
   /* Handle the widths */
   .masthead,
   .mastfoot,
-  .cover-container {
+  .cover-container, .tabbyapp {
     width: 100%; /* Must be percentage or pixels for horizontal alignment */
   }
 }

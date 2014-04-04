@@ -5,7 +5,10 @@ Tabby::Application.routes.draw do
   get "allergies/show"
   devise_for :users
   resources :catalogs
-  resources :users
+  resources :users do
+    resources :allergies
+  end
+  resources :allergies
   
   root 'static_pages#home'
   get "static_pages/home"

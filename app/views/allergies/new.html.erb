@@ -1,0 +1,21 @@
+<%= render "layouts/navbar" %>
+
+
+<div class="cover-container tabbyapp">
+  <hr>
+
+<%= form_for @allergy do |f| %>
+  <p>
+    <%= f.label :user_id %><br />
+    <%= f.number_field :user_id %>
+  </p>
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </p>
+  <p><%= f.submit class: "btn btn-default" %></p>
+<% end %>
