@@ -1,4 +1,6 @@
 Tabby::Application.routes.draw do
+  get "friendships/create"
+  get "friendships/destroy"
   get "conditions/index"
   get "conditions/show"
   get "allergies/index"
@@ -9,6 +11,7 @@ Tabby::Application.routes.draw do
     resources :allergies
   end
   resources :allergies
+  resources :friendships
   
   root 'static_pages#home'
   get "static_pages/home"

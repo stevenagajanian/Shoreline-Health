@@ -9,6 +9,7 @@ gem 'devise'
 gem 'aws-sdk'
 gem 'paperclip', "~> 3.0"
 gem 'font-awesome-rails'
+gem 'state_machine'
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'

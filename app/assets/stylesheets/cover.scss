@@ -1,59 +1,26 @@
-/*
- * Globals
- */
 
-
-
-
-
-
-/*
- * Base structure
- */
-
-.tabbyapp {
-  padding-top: 60px;
- }
-
-html,
-body {
-  height: 100%;
-  background-color: #333;
-}
 
 .homepage {
   /* Links */
-a,
-a:focus,
-a:hover {
-  color: #fff;
-}
+
 
 /* Custom default button */
 .btn-default,
 .btn-default:hover,
 .btn-default:focus {
-  color: #fff;
-  text-shadow: none; /* Prevent inheritence from `body` */
-  background-color: #fff;
-  border: 1px solid #fff;
 }
-  color: #fff;
   text-align: center;
-  text-shadow: 0 1px 3px rgba(0,0,0,.5);
-  box-shadow: inset 0 0 100px rgba(0,0,0,.5);
 }
 
 /* Extra markup and styles for table-esque vertical and horizontal centering */
 .site-wrapper {
-  background-image: url(image_path('Green.jpg'));
+ /* background-image: url(image_path('Green.jpg')); */
+ background: #fff;
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: left top;
   display: table;
   width: 100%;
-  height: 100%; /* For at least Firefox */
-  min-height: 100%;
 }
 .site-wrapper-inner {
   display: table-cell;
@@ -64,21 +31,25 @@ a:hover {
   margin-left: auto;
 }
 
-/* Padding for spacing */
-.inner {
-  color: #fff;
-  padding: 30px;
-}
-
 
 /*
  * Header
  */
-
+h3 {
+    padding: 0px;
+    margin: 0px;
+  }
 .masthead-brand {
+  padding-left: 0px;
+  padding-bottom: 0px;
+  margin-left: 0px;
   margin-top: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 0px;
   color: #000;
+  h3 {
+    padding: 0px;
+    margin: 0px;
+  }
 }
 
 .masthead-nav > li {
@@ -92,8 +63,6 @@ a:hover {
   padding-left: 0;
   font-size: 16px;
   font-weight: bold;
-  color: #eee; /* IE8 proofing */
-  color: rgba(0,0,0,.75);
   border-bottom: 2px solid transparent;
 }
 .masthead-nav > li > a:hover,
@@ -104,44 +73,9 @@ a:hover {
 .masthead-nav > .active > a,
 .masthead-nav > .active > a:hover,
 .masthead-nav > .active > a:focus {
-  color: #000;
   border-bottom-color: #000;
 }
 
-.homepage{
-.masthead-brand {
-  margin-top: 10px;
-  margin-bottom: 10px;
-  color: #fff;
-}
-
-.masthead-nav > li {
-  display: inline-block;
-}
-.masthead-nav > li + li {
-  margin-left: 20px;
-}
-.masthead-nav > li > a {
-  padding-right: 0;
-  padding-left: 0;
-  font-size: 16px;
-  font-weight: bold;
-  color: #fff; /* IE8 proofing */
-  color: rgba(255,255,255,.75);
-  border-bottom: 2px solid transparent;
-}
-.masthead-nav > li > a:hover,
-.masthead-nav > li > a:focus {
-  background-color: transparent;
-  border-bottom-color: rgba(255,255,255,.25);
-}
-.masthead-nav > .active > a,
-.masthead-nav > .active > a:hover,
-.masthead-nav > .active > a:focus {
-  color: #fff;
-  border-bottom-color: #fff;
-}
-}
 
 @media (min-width: 768px) {
   .masthead-brand {
@@ -160,23 +94,6 @@ a:hover {
 .cover {
   padding: 0 20px;
 }
-.cover .btn-lg {
-  padding: 10px 20px;
-  font-weight: bold;
-}
-
-
-/*
- * Footer
- */
-
-.mastfoot {
-  color: #fff; /* IE8 proofing */
-  color: rgba(255,255,255,.5);
-  a {
-    color: #fff;
-  }
-}
 
 
 /*
@@ -186,7 +103,6 @@ a:hover {
 @media (min-width: 768px) {
   /* Pull out the header and footer */
   .masthead {
-    position: fixed;
     top: 0;
   }
   .mastfoot {
