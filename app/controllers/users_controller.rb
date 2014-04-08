@@ -10,7 +10,7 @@ class UsersController < ApplicationController
 	private
 
 	def user_params
-		params.require(:user).permit(:email, allergies_attributes: [ :user_id, :name, :description ])
+		params.require(:user).permit(:email, :profile_name, :first_name, :last_name, :avatar, allergies_attributes: [ :user_id, :name, :description ])
 	end
-	
+
 end

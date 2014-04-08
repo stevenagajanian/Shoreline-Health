@@ -10,6 +10,9 @@ gem 'aws-sdk'
 gem 'paperclip', "~> 3.0"
 gem 'font-awesome-rails'
 gem 'state_machine'
+gem 'simple_form'
+gem 'draper', '~> 1.0'
+gem 'js-routes'
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'

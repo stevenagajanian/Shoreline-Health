@@ -1,6 +1,4 @@
 <%= render "layouts/navbar" %>
-<div class="cover-container tabbyapp">
-	<hr>
 	<div class="starter-template">
 		<%= link_to users_path do %>
 		<i class="fa fa-home"></i> Home
@@ -17,9 +15,11 @@
 	</div>
 	<br>
 	<div class="well">
-		<h3>Contact Information</h3>
+		<h3>Contact Informations</h3>
 		<hr>
-		<%= @user.email %>
+		<%= @user.email %><p>
+		<%= @user.first_name %></p>
+		<%= @user.password %>
 	</div>
 	<div class="well">
 		<h3>Allergies</h3><%= link_to "New Allergy", new_allergy_path, class: "btn btn-link" %>

@@ -1,18 +1,29 @@
 Tabby::Application.routes.draw do
-  get "friendships/create"
-  get "friendships/destroy"
-  get "conditions/index"
-  get "conditions/show"
-  get "allergies/index"
-  get "allergies/show"
-  devise_for :users
+
+  get "profiles/show"
+
+  as :user do
+    get '/register', to: 'devise/registrations#new', as: :register
+    get '/login', to: 'devise/sessions#new', as: :login
+    get '/logout', to: 'devise/sessions#destroy', as: :logout
+  end
+
+  devise_for :users, skip: [:sessions]
+
+  as :user do
+    get "/login" => 'devise/sessions#new', as: :new_user_session
+    post "/login" => 'devise/sessions#create', as: :user_session
+    delete "/logout" => 'devise/sessions#destroy', as: :destroy_user_session
+  end
+
+  
   resources :catalogs
   resources :users do
     resources :allergies
   end
   resources :allergies
   resources :friendships
-  
+  resources :users
   root 'static_pages#home'
   get "static_pages/home"
   get "static_pages/help"

@@ -14,13 +14,12 @@
             <li>
             <%= link_to "View Profile", current_user %>
             </li>
-            <li><%= link_to 'Friends', friendships_path %></li>
             <li>
             <%= link_to "Edit Profile", edit_registration_path(current_user) %>
             </li>  
             <li class="divider"></li>
             <li>
-            <%= link_to "Sign out", logout_path, :method => :delete %>
+            <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
             </li>        
         <% else %>
         <li><%= link_to "Sign In", new_user_session_path %></li> 
