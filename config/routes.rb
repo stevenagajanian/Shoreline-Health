@@ -8,7 +8,11 @@ Tabby::Application.routes.draw do
     get '/logout', to: 'devise/sessions#destroy', as: :logout
   end
 
-  devise_for :users, skip: [:sessions]
+  devise_for :users, skip: [:sessions] do
+    members do
+      patch :edit
+    end
+  end
 
   as :user do
     get "/login" => 'devise/sessions#new', as: :new_user_session
@@ -28,6 +32,8 @@ Tabby::Application.routes.draw do
   get "static_pages/home"
   get "static_pages/help"
   resources :posts
+
+  get '/:id', to: 'profiles#show', as: 'profile'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

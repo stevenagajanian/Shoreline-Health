@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140408094315) do
+ActiveRecord::Schema.define(version: 20140411073013) do
 
   create_table "allergies", force: true do |t|
     t.integer  "user_id"
@@ -36,6 +36,18 @@ ActiveRecord::Schema.define(version: 20140408094315) do
     t.datetime "updated_at"
   end
 
+  create_table "documents", force: true do |t|
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "attachment_file_name"
+    t.string   "attachment_content_type"
+    t.integer  "attachment_file_size"
+    t.datetime "attachment_updated_at"
+  end
+
+  add_index "documents", ["user_id"], name: "index_documents_on_user_id"
+
   create_table "friendships", force: true do |t|
     t.integer  "user_id"
     t.integer  "friend_id"
@@ -52,6 +64,16 @@ ActiveRecord::Schema.define(version: 20140408094315) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "statuses", force: true do |t|
+    t.integer  "user_id"
+    t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "document_id"
+  end
+
+  add_index "statuses", ["user_id"], name: "index_statuses_on_user_id"
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

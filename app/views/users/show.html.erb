@@ -1,28 +1,14 @@
 <%= render "layouts/navbar" %>
-	<div class="starter-template">
-		<%= link_to users_path do %>
-		<i class="fa fa-home"></i> Home
-		<% end%> | 
-		<%= link_to users_path do %>
-		<i class="fa fa-chart"></i> Activity
-		<% end%> | 
-		<%= link_to users_path do %>
-		<i class="fa fa-medkit"></i> Files
-		<% end%> | 
-		<%= link_to users_path do %>
-		<i class="fa fa-stethoscope"></i> Tests
-		<% end%>
-	</div>
-	<br>
+	<p>
+	<%= avatar_profile_link @user, {}, class: '' %>
+	<%= @user.email %>
+	<%= link_to @user, class: "btn btn-lg btn-default" do %><i class="fa fa-home"> Activity</i><% end %>
+	<%= link_to @user, class: "btn btn-lg btn-default" do %><i class="fa fa-medkit"> Medical Info</i><% end %>
+	<%= link_to @user, class: "btn btn-lg btn-default" do %><i class="fa fa-file"> Files</i><% end %>
+	<%= link_to @user, class: "btn btn-lg btn-default" do %><i class="fa fa-list"> Todo</i><% end %>
+	</p>
 	<div class="well">
-		<h3>Contact Informations</h3>
-		<hr>
-		<%= @user.email %><p>
-		<%= @user.first_name %></p>
-		<%= @user.password %>
-	</div>
-	<div class="well">
-		<h3>Allergies</h3><%= link_to "New Allergy", new_allergy_path, class: "btn btn-link" %>
+		<h3>Allergies <%= link_to  new_allergy_path, class: "btn btn-sm btn-default" do %>+<% end %></h3>
 		<%= render :partial => @user.allergies %>
 		<hr>
 	</div>
