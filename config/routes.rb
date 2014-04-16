@@ -22,16 +22,39 @@ Tabby::Application.routes.draw do
 
   
   resources :catalogs
-  resources :users do
-    resources :allergies
-  end
+  resources :statuses
+  resources :documents
   resources :allergies
-  resources :friendships
-  resources :users
+
+  resources :users do
+    resources :pictures
+    resources :albums do
+      resources :pictures
+    end
+    resources :allergies
+    resources :statuses
+  end
+  resources :albums do
+    resources :pictures
+  end
+
+  resources :user_friendships do
+    member do
+      put :accept
+      put :block
+    end
+  end
+  resources :pictures
+
   root 'static_pages#home'
   get "static_pages/home"
   get "static_pages/help"
-  resources :posts
+
+  scope ":profile_name" do
+    resources :albums do
+      resources :pictures
+    end
+  end
 
   get '/:id', to: 'profiles#show', as: 'profile'
 

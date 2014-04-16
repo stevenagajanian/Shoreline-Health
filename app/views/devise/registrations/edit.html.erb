@@ -1,7 +1,5 @@
 <%= render "layouts/navbar" %>
-<div class="cover-container tabbyapp">
-  <hr>
-  <div class="starter-template">
+<div class="container">
 
 <h2>Edit <%= resource_name.to_s.humanize %></h2>
 
@@ -20,7 +18,7 @@
     <div class="control-group">
     <%= f.file_field :avatar, as: :file, class: "form-control" %>
     <% if f.object.avatar? %>
-    <%= image_tag f.object.avatar.url %>
+    <%= avatar_profile_link f.object, {width: 130}, class: ' pull-left', style: "margin: 0 20px 10px 0;" %>
     <% end %>
     </div>  
   </fieldset>

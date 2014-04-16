@@ -1,15 +1,16 @@
 <%= render "layouts/navbar" %>
 
-  <div class="starter-template">
-    <table>
-      <h1>Showing All Users</h1>
-      <% @users.each do |user| %>
-      <tr>
-        <td class="well"><%= user.email %></td>
-        <td><%= link_to "Show", user, class: "btn btn-link" %></td>
-        <td><%= link_to "Add Friendship", friendships_path(:friend_id => user), :method => :post, class: "btn btn-link" %></td>
-        <td><%= link_to "Remove", user, class: "btn btn-link", method: :delete, data: { confirm: "Are you sure?" } %></td>
-      </tr>
-      <% end %>
-    </table>
+<div class="container">
+  <h1>Find A User</h1>
+  <% @users.each do |user| %>
+  <div class="media">
+    <%= avatar_profile_link user, {height: 70}, class: "pull-left media-object" %>
+    <div class="media-body">
+      <h4 class="media-heading"><%= user.first_name %></h4>
+        <%= link_to "Show", user, class: "btn btn-link" %>
+        <%= link_to "Remove", user, class: "btn btn-link", method: :delete, data: { confirm: "Are you sure?" } %>
+    </div>
   </div>
+  <hr>
+  <% end %>
+</div>

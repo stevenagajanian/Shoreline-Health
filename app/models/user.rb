@@ -1,30 +1,60 @@
 class User < ActiveRecord::Base
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
-  has_many :allergies
-  accepts_nested_attributes_for :allergies
-  has_many :friendships
-  has_many :friends, :through => :friendships
-  has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
-  has_many :inverse_friends, :through => :inverse_friendships, :source => :user
-  has_many :pending_friends, :through => :friendships, :source => :friend, :conditions => "confirmed = 0"
+	# Include default devise modules. Others available are:
+	# :confirmable, :lockable, :timeoutable and :omniauthable
+	devise :database_authenticatable, :registerable,
+	:recoverable, :rememberable, :trackable, :validatable
 
-  has_attached_file :avatar
+	has_many :allergies
+	accepts_nested_attributes_for :allergies
 
-  validates :first_name, presence: true
+	has_many :statuses
+	has_many :pictures
+	has_many :albums
 
-  def full_name
-  	first_name
-  end
+	has_many :user_friendships
+	
+	has_many :friends, through: :user_friendships,
+	conditions: { user_friendships: { state: 'accepted' } }
+
+	has_many :pending_user_friendships, class_name: 'UserFriendship',
+	foreign_key: :user_id,
+	conditions: { state: 'pending' }
+	has_many :pending_friends, through: :pending_user_friendships, source: :friend
+
+	has_many :requested_user_friendships, class_name: 'UserFriendship',
+	foreign_key: :user_id,
+	conditions: { state: 'requested' }
+	has_many :requested_friends, through: :requested_user_friendships, source: :friend
+
+	has_many :blocked_user_friendships, class_name: 'UserFriendship',
+	foreign_key: :user_id,
+	conditions: { state: 'blocked' }
+	has_many :blocked_friends, through: :blocked_user_friendships, source: :friend
+
+	has_many :accepted_user_friendships, class_name: 'UserFriendship',
+	foreign_key: :user_id,
+	conditions: { state: 'accepted' }
+	has_many :accepted_friends, through: :accepted_user_friendships, source: :friend
 
 
-  def gravatar_url
-    stripped_email = email.strip
-    downcased_email = stripped_email.downcase
-    hash = Digest::MD5.hexdigest(downcased_email)
+	has_attached_file :avatar
 
-    "http://gravatar.com/avatar/#{hash}"
-  end
+	validates :first_name, presence: true
+
+	def full_name
+		first_name + " " + last_name
+	end
+
+
+	def gravatar_url
+		stripped_email = email.strip
+		downcased_email = stripped_email.downcase
+		hash = Digest::MD5.hexdigest(downcased_email)
+
+		"http://gravatar.com/avatar/#{hash}"
+	end
+
+	def has_blocked?(other_user)
+		blocked_friends.include?(other_user)
+	end
 end

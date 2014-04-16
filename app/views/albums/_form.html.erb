@@ -1,0 +1,13 @@
+<%= render "layouts/navbar" %>
+
+<%= form_for(@album) do |f| %>
+ 
+
+  <div class="">
+    <%= f.text_field :title, class: "form-control" %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, class: "btn btn-sm" %>
+  </div>
+<% end %>

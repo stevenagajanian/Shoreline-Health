@@ -1,34 +1,37 @@
 <%= render "layouts/navbar" %>
-	<p>
-	<%= avatar_profile_link @user, {}, class: '' %>
-	<%= @user.email %>
-	<%= link_to @user, class: "btn btn-lg btn-default" do %><i class="fa fa-home"> Activity</i><% end %>
-	<%= link_to @user, class: "btn btn-lg btn-default" do %><i class="fa fa-medkit"> Medical Info</i><% end %>
-	<%= link_to @user, class: "btn btn-lg btn-default" do %><i class="fa fa-file"> Files</i><% end %>
-	<%= link_to @user, class: "btn btn-lg btn-default" do %><i class="fa fa-list"> Todo</i><% end %>
-	</p>
-	<div class="well">
-		<h3>Allergies <%= link_to  new_allergy_path, class: "btn btn-sm btn-default" do %>+<% end %></h3>
-		<%= render :partial => @user.allergies %>
-		<hr>
-	</div>
+<div class="container">
 
-	<div class="well">
-		<h3>Friends</h3>
-		<% for friendship in @user.friendships %>
-		<li>
-			<%=h friendship.friend.email %>
-			(<%= link_to "remove", friendship, :method => :delete %>)
-		</li>
-		<% end %>
-		<h3>Friended by Users</h3>
-		<ul>
-			<% for user in @user.inverse_friends %>
-			<li><%=h user.email %></li>
-			<% end %>
-		</ul>
-		<hr>
-	</div>
+	<h1 >
+		<%= avatar_profile_link @user, {width: 130}, class: ' pull-left', style: "margin: 0 20px 10px 0;" %><%= @user.full_name %>
+	</h1>
 
-</div>
+	<%= link_to @user, class: "btn btn-md btn-success" do %><i class="fa fa-home" style=""></i> Activity<% end %>
+	<%= link_to @user, class: "btn btn-md btn-warning" do %><i class="fa fa-medkit"></i> Medical Info<% end %>
+	<%= link_to albums_path(@user), class: "btn btn-md btn-danger" do %><i class="fa fa-file"></i> Files<% end %>
+	<%= link_to user_pictures_path(@user), class: "btn btn-md btn-primary" do %><i class="fa fa-list"></i> Todo<% end %>
+	
+	<% if current_user.friends.include?(@user) || current_user.pending_friends.include?(@user) %>
+	<%= link_to "Edit Friendship", edit_user_friendship_path(friend_id: @user), class: 'btn' %>
+	<% else %>
+	<%= link_to "Add Friend", new_user_friendship_path(friend_id: @user), class: 'btn', id: 'add-friendship', data: { friend_id: @user.to_param } %>
+	<% end %>
+
+	<div class="row">
+		<h3>Activity</h3>
+		<%= link_to "New Status", new_status_path %>
+		<div class="well">
+			<%= render :partial => @user.statuses %>
+		</div>
+		<div class="well">
+			<h3>Allergies <%= link_to  new_allergy_path, class: "btn btn-sm btn-default" do %>+<% end %></h3>
+			<%= render :partial => @user.allergies %>
+			<hr>
+		</div>
+
+		<div class="well">
+			<h3>Friends</h3>
+
+		</div>
+
+	</div>
 
