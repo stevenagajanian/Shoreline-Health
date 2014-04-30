@@ -29,6 +29,7 @@ Tabby::Application.routes.draw do
   resources :weights
   resources :heights
   resources :allergies
+  resources :pictures
 
   resources :users do
     resources :pictures

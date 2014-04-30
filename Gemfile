@@ -18,6 +18,7 @@ gem 'js-routes'
 gem 'twitter-bootstrap-rails'
 gem 'chartkick'
 gem 'groupdate'
+gem 'searchkick'
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'

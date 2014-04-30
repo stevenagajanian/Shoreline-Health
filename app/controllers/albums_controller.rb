@@ -1,22 +1,29 @@
 class AlbumsController < ApplicationController
 
-	before_filter :authenticate_user!, only: [:create, :new, :update, :edit, :destroy]
-	before_filter :find_user
-	before_filter :find_album, only: [:edit, :update, :destroy]
-
-	before_filter :ensure_proper_user, only: [:edit, :new, :create, :update, :destroy]
-
+	before_filter :authenticate_user!
 
 	def show
-		redirect_to album_pictures_path(params[:id])
+		@album = Album.find(params[:id])
+		@user = @album.user
+		#redirect_to album_pictures_path(params[:id])
+		respond_to do |format|
+        		format.html # show.html.erb
+       		format.json { render json: @album }
+   		end
 	end
 
 	def index
+		@user = User.find(params[:user_id])
 		@albums = @user.albums.all
 	end
 
 	def new
+		@user = User.find(params[:user_id])
 		@album = current_user.albums.new
+		respond_to do |format|
+       	format.html # new.html.erb
+       	 format.json { render json: @album }
+  	  end
 	end
 
 	def create
@@ -24,7 +31,7 @@ class AlbumsController < ApplicationController
 
 		respond_to do |format|
 			if @album.save
-				format.html { redirect_to @album, notice: 'Album was successfully created.' }
+				format.html { redirect_to user_albums_path(@album.user), notice: 'Album was successfully created.' }
 				format.json { render json: @album, status: :created, location: @album }
 			else
 				format.html { render action: "new" }
@@ -33,22 +40,30 @@ class AlbumsController < ApplicationController
 		end
 	end
 
+	def destroy
+  		@album = Album.find(params[:id])
+  		@user = @album.user
+    		@album.destroy
+    		redirect_to user_albums_path(@album.user), :notice => "Successfully destroyed album."
+  	end
+
+
 	private
 
 	def album_params
-		params.require(:album).permit(:user_id, :title, pictures_attributes[:user_id])
+		params.require(:album).permit(:pictures, :user_id, :title, pictures_attributes: [:user_id, :album_id])
 	end
 
 	def ensure_proper_user
 		if current_user != @user
 			flash[:error] = "You don't have permission to do that."
-			redirect_to albums_path
+			redirect_to user_albums_path(@user)
 		end
 	end
 
 
 	def find_user
-		@user = User.find_by_profile_name(params[:profile_name])
+		@user = User.find(params[:user_id])
 	end
 
 	def find_albums
