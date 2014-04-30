@@ -1,6 +1,6 @@
 class StatusesController < ApplicationController
 	before_filter :authenticate_user!
-	
+
 
 	def show
 		@status = Status.find(params[:id])
@@ -8,7 +8,7 @@ class StatusesController < ApplicationController
 		respond_to do |format|
 	      format.html # show.html.erb
 	      format.json { render json: @status }
-	  end
+	 end
 	end
 
 	def create
@@ -26,13 +26,14 @@ class StatusesController < ApplicationController
 	end
 
 	def new
+		@user = current_user
 		@status = current_user.statuses.new
 		@status.build_document
 
 		respond_to do |format|
-	      format.html # new.html.erb
-	      format.json { render json: @status }
-	  end
+	     	format.html # new.html.erb
+	     	format.json { render json: @status }
+		end
 	end
 
 	private

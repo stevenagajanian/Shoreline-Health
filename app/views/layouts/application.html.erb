@@ -3,11 +3,13 @@
 <head>
   <title>Tabby</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-
+<%= render "layouts/navbar" %>
+<div class="container"><%= bootstrap_flash %></div>
 <%= yield %>
 
 </body>

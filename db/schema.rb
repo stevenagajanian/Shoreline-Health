@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140416031332) do
+ActiveRecord::Schema.define(version: 20140430044755) do
 
   create_table "albums", force: true do |t|
     t.integer  "user_id"
@@ -66,6 +66,23 @@ ActiveRecord::Schema.define(version: 20140416031332) do
   end
 
   add_index "friendships", ["state"], name: "index_friendships_on_state"
+
+  create_table "heights", force: true do |t|
+    t.integer  "user_id"
+    t.float    "amount"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "medications", force: true do |t|
+    t.integer  "user_id"
+    t.text     "name"
+    t.text     "dosage"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "medications", ["user_id"], name: "index_medications_on_user_id"
 
   create_table "pictures", force: true do |t|
     t.integer  "album_id"
@@ -138,5 +155,12 @@ ActiveRecord::Schema.define(version: 20140416031332) do
   add_index "users", ["last_name"], name: "index_users_on_last_name"
   add_index "users", ["profile_name"], name: "index_users_on_profile_name"
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+
+  create_table "weights", force: true do |t|
+    t.integer  "user_id"
+    t.float    "amount"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

@@ -16,4 +16,10 @@ class FriendshipsController < ApplicationController
 		flash[:notice] = "Removed friendship."
 		redirect_to current_user
 	end
+
+	private
+
+	def user_friendship_params
+		params.require(:user_friendship).permit(:user, :friend, :user_id, :friend_id, :state, :friend_params[:email] )
+	end
 end

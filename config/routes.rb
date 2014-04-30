@@ -1,11 +1,17 @@
 Tabby::Application.routes.draw do
 
-  get "profiles/show"
-
   as :user do
     get '/register', to: 'devise/registrations#new', as: :register
     get '/login', to: 'devise/sessions#new', as: :login
     get '/logout', to: 'devise/sessions#destroy', as: :logout
+  end
+
+  devise_for :users, skip: [:sessions]
+
+  as :user do
+    get "/login" => 'devise/sessions#new', as: :new_user_session
+    post "/login" => 'devise/sessions#create', as: :user_session
+    delete "/logout" => 'devise/sessions#destroy', as: :destroy_user_session
   end
 
   devise_for :users, skip: [:sessions] do
@@ -14,16 +20,14 @@ Tabby::Application.routes.draw do
     end
   end
 
-  as :user do
-    get "/login" => 'devise/sessions#new', as: :new_user_session
-    post "/login" => 'devise/sessions#create', as: :user_session
-    delete "/logout" => 'devise/sessions#destroy', as: :destroy_user_session
-  end
-
+  get "profiles/show"
   
   resources :catalogs
   resources :statuses
   resources :documents
+  resources :medications
+  resources :weights
+  resources :heights
   resources :allergies
 
   resources :users do
@@ -33,6 +37,9 @@ Tabby::Application.routes.draw do
     end
     resources :allergies
     resources :statuses
+    resources :heights
+    resources :weights
+    resources :medications
   end
   resources :albums do
     resources :pictures

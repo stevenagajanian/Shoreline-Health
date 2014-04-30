@@ -5,9 +5,9 @@ module ApplicationHelper
 			link_to(status.document.attachment_file_name, status.document.attachment.url)
 		end
 	end
-	
+
 	def avatar_profile_link(user, image_options={}, html_options={})
-		avatar_url = user.avatar? ? user.avatar.url : user.gravatar_url
+		avatar_url = user.avatar? ? user.avatar.url(:thumb) : nil
 		link_to(image_tag(avatar_url, image_options), user_path(user), html_options)
 	end
 

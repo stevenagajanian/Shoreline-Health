@@ -1,14 +1,9 @@
 <%= render "layouts/navbar" %>
 
-
-<div class="cover-container tabbyapp">
-  <hr>
+<div class="container">
 
 <%= form_for @allergy do |f| %>
-  <p>
-    <%= f.label :user_id %><br />
-    <%= f.number_field :user_id %>
-  </p>
+
   <p>
     <%= f.label :name %><br />
     <%= f.text_field :name %>

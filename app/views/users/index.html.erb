@@ -1,11 +1,12 @@
 <%= render "layouts/navbar" %>
 
 <div class="container">
+
   <h1>Find A User</h1>
   <% @users.each do |user| %>
   <div class="media">
     <%= avatar_profile_link user, {height: 70}, class: "pull-left media-object" %>
-    <div class="media-body">
+    <div class="media-body">s
       <h4 class="media-heading"><%= user.first_name %></h4>
         <%= link_to "Show", user, class: "btn btn-link" %>
         <%= link_to "Remove", user, class: "btn btn-link", method: :delete, data: { confirm: "Are you sure?" } %>
@@ -13,4 +14,5 @@
   </div>
   <hr>
   <% end %>
+  <%= line_chart User.group(:created_at).count %>
 </div>

@@ -1,0 +1,143 @@
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<% if user_signed_in? %>
+				<%= link_to "Komodo", current_user, style: "font-size: 18px;", class: "navbar-brand" %>
+			<% else %>
+			<%= link_to "Komodo", root_path, style: "font-size: 18px;", class: "navbar-brand" %>
+			<% end %>
+		</div>
+		<div class="navbar-collapse collapse">
+			<ul class="nav navbar-nav">
+				<% if user_signed_in? %>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" style="font-size: 18px" data-toggle="dropdown">
+						<span class="glyphicon glyphicon-th"></span>
+					</a>
+					<ul class="dropdown-menu well">
+						<table class="table">
+							<tr>
+								<td>
+									<%= link_to current_user, class: "btn btn-block btn-default" do %>
+									<span class="glyphicon glyphicon-user"></span><br>Me
+									<% end %> 
+								</td>
+								<td>
+									<%= link_to user_weights_path(current_user), class: "btn btn-block btn-warning" do %>
+									<i class="fa fa-list"></i><br>Weight
+									<% end %>
+								</td>
+								<td>
+									<%= link_to user_allergies_path(current_user), class: "btn btn-block btn-success" do %>
+									<span class="glyphicon glyphicon-leaf"></span><br>Allergies
+									<% end %>
+								</td>
+								<td>
+									<%= link_to current_user, class: "btn btn-block btn-danger" do %>
+									<span class="glyphicon glyphicon-tree-conifer"></span><br>Family
+									<% end %>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<%= link_to current_user, class: "btn btn-block btn-warning" do %>
+									<span class="glyphicon glyphicon-camera"></span><br>Photos
+									<% end %> 
+								</td>
+								<td>
+									<%= link_to current_user, class: "btn btn-block btn-danger" do %>
+									<span class="glyphicon glyphicon-heart"></span><br> Trackers
+									<% end %>
+								</td>
+								<td>
+									<%= link_to current_user, class: "btn btn-block btn-primary" do %>
+									<span class="glyphicon glyphicon-comment"></span><br> Messages
+									<% end %>
+								</td>
+								<td>
+									<%= link_to users_path, class: "btn btn-block btn-default" do %>
+									<span class="glyphicon glyphicon-globe"></span><br>Everyone
+									<% end %>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<%= link_to user_medications_path(current_user), class: "btn btn-block btn-default" do %>
+									<i style="" class="fa fa-medkit "></i><br>Medications
+									<% end %> 
+								</td>
+								<td>
+									<%= link_to current_user, class: "btn btn-block btn-success" do %>
+									<span class="glyphicon glyphicon-flash"></span><br>Conditions
+									<% end %>
+								</td>
+							</tr>
+						</table>
+						<li>
+							<%= link_to current_user, class: "text-center" do %>
+							<strong>See All Apps</strong>
+							<i class="fa fa-angle-right"></i>
+							<% end %>
+						</li>
+					</uL>
+				</li>
+				
+				<form class="navbar-form navbar-left" role="search">
+					<div class="form-group">
+						<input type="text" class="form-control" placeholder="Search...">
+					</div>
+					<button type="submit" class="btn btn-default"><i  class="fa fa-search"></i></button>
+				</form>
+				<% end %>	
+
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<% if user_signed_in? %>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" style="" data-toggle="dropdown">
+						<span class="glyphicon glyphicon-search"></span>
+					</a>
+				</li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" style="" data-toggle="dropdown">
+						<span class="glyphicon glyphicon-bell"></span>
+					</a>
+					<ul class="dropdown-menu">
+						<li>
+							<a class="text-center" href="#">
+								<strong>See All Alerts</strong>
+								<i class="fa fa-angle-right"></i>
+							</a>
+						</li>
+					</uL>
+				</li>
+				
+				<li class="dropdown ">
+					<a href="#" class="dropdown-toggle" style="outline: none"data-toggle="dropdown">
+						<span style="padding-left: 5px; padding-top: 15px;"><i class="fa fa-gear"></i></span> 
+					</a>
+					<ul class="dropdown-menu">
+						<li>
+							<%= link_to "View Profile", current_user  %>
+						</li>
+						<li>
+							<%= link_to "Edit Profile", edit_registration_path(current_user) %>
+						</li>  
+						<li class="divider"></li>
+						<li>
+							<%= link_to  logout_path, :method => :delete do %><span class="glyphicon glyphicon-log-out"></span> Log out<% end %>
+						</li>
+					</ul>
+				</li>
+				<% else %>
+				<% end %>
+			</ul>
+		</div><!--/.nav-collapse -->
+	</div>
+</div>

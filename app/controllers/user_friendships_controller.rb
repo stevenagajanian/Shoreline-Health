@@ -29,7 +29,7 @@ class UserFriendshipsController < ApplicationController
 
 	def new
 		if params[:friend_id]
-			@friend = User.where(profile_name: params[:friend_id]).first
+			@friend = User.where(id: params[:friend_id]).first
 			raise ActiveRecord::RecordNotFound if @friend.nil?
 			@user_friendship = current_user.user_friendships.new(friend: @friend)
 		else
@@ -41,19 +41,19 @@ class UserFriendshipsController < ApplicationController
 
 	def create
 		if params[:user_friendship] && params[:user_friendship].has_key?(:friend_id)
-			@friend = User.where(profile_name: params[:user_friendship][:friend_id]).first
+			@friend = User.where(id: params[:user_friendship][:friend_id]).first
 			@user_friendship = UserFriendship.request(current_user, @friend)
 			respond_to do |format|
 				if @user_friendship.new_record?
 					format.html do 
 						flash[:error] = "There was problem creating that friend request."
-						redirect_to profile_path(@friend)
+						redirect_to user_path(@friend)
 					end
 					format.json { render json: @user_friendship.to_json, status: :precondition_failed }
 				else
 					format.html do
 						flash[:success] = "Friend request sent."
-						redirect_to profile_path(@friend)
+						redirect_to user_path(@friend)
 					end
 					format.json { render json: @user_friendship.to_json }
 				end
@@ -65,7 +65,7 @@ class UserFriendshipsController < ApplicationController
 	end
 
 	def edit
-		@friend = User.where(profile_name: params[:id]).first
+		@friend = User.where(id: params[:id]).first
 		@user_friendship = current_user.user_friendships.where(friend_id: @friend.id).first.decorate
 	end
 
@@ -94,6 +94,6 @@ class UserFriendshipsController < ApplicationController
 	end
 
 	def user_friendship_params
-		params.require(:user_friendship).permit(:user, :friend, :user_id, :friend_id, :state)
+		params.require(:user_friendship).permit(:user, :email, :friend, :user_id, :friend_id, :state, friends_attributes: [ :email ], users_attributes: [ :email ] )
 	end
 end

@@ -15,6 +15,9 @@ gem 'state_machine'
 gem 'simple_form'
 gem 'draper', '~> 1.0'
 gem 'js-routes'
+gem 'twitter-bootstrap-rails'
+gem 'chartkick'
+gem 'groupdate'
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
