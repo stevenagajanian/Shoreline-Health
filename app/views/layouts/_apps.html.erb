@@ -50,13 +50,18 @@
 			<% end %> 
 		</td>
 		<td>
-			<%= link_to @user, class: "btn btn-block btn-success" do %>
+			<%= link_to user_conditions_path(@user), class: "btn btn-block btn-success" do %>
 			<span class="glyphicon glyphicon-flash"></span><br>Conditions
 			<% end %>
 		</td>
 		<td>
 			<%= link_to user_heights_path(@user), class: "btn btn-block btn-warning" do %>
 			<span class="glyphicon glyphicon-flash"></span><br>Height
+			<% end %>
+		</td>
+		<td>
+			<%= link_to user_episodes_path(@user), class: "btn btn-block btn-primary" do %>
+			<span class="glyphicon glyphicon-book"></span><br>Episodes
 			<% end %>
 		</td>
 	</tr>

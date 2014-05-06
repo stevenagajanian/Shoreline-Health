@@ -12,7 +12,9 @@
 				<%= image_tag "TabbyCat.png", width: 36 %> Tabby
 				<% end %>
 			<% else %>
-			<%= link_to "Tabby", root_path, style: "font-size: 18px;", class: "navbar-brand" %>
+				<%= link_to root_path, style: "font-size: 18px;", class: "navbar-brand" do %>
+					<%= image_tag "TabbyCat.png", width: 36 %> Tabby
+				<% end %>
 			<% end %>
 		</div>
 		<div class="navbar-collapse collapse">

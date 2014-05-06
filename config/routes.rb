@@ -26,6 +26,10 @@ Tabby::Application.routes.draw do
   resources :statuses
   resources :documents
   resources :medications
+  resources :conditions
+  resources :episodes do
+    resources :posts
+  end
   resources :weights
   resources :heights
   resources :allergies
@@ -38,6 +42,10 @@ Tabby::Application.routes.draw do
     end
     resources :allergies
     resources :statuses
+    resources :conditions
+    resources :episodes do
+      resources :posts
+    end
     resources :heights
     resources :weights
     resources :medications

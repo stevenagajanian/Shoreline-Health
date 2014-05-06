@@ -12,8 +12,10 @@ class User < ActiveRecord::Base
 	has_many :statuses
 	has_many :pictures
 	has_many :weights
+	has_many :episodes
 	has_many :heights
 	has_many :albums
+	has_many :conditions	
 
 	has_many :user_friendships
 

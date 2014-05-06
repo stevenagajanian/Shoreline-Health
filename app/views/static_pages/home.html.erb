@@ -1,21 +1,45 @@
-<div class="homepage site-wrapper">
-      <div class="homepage site-wrapper-inner">
+<%= render "layouts/navbar" %>
 
-      	<%= render "layouts/home_navbar" %>
+<div class="container">
 
-        <div class="cover-container">
+<div class="jumbotron">
+  <h1>Tabby</h1>
+  <h2>Health Cataloging of the Future</h2>
+  <p><%= link_to "Get Started Today!", new_user_registration_path, class: "btn btn-lg btn-default" %>
+  </p>
+</div>
 
-          <div class="inner cover">
-            <h1 class="cover-heading">Introducing: Tabby</h1>
-            <p class="lead">Share your important health catalogs. </p>
-            <p class="lead">
-              <%= link_to "Signup Today", new_user_registration_path, class: "btn btn-lg btn-default" %>
-            </p>
-          </div>
+<div class="row">
+  <div class="col-md-6">
+    <h1>Start building your health portfolio</h1>
+  </div>
+  <div class="col-md-6">
+    <h1><center><i class="fa fa-stethoscope fa-4x"></i></center></h1>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <h1><center><i class="fa fa-group fa-4x"></i></center></h1>
+  </div>
+  <div class="col-md-6">
+    <h1>Make health a collaborative effort</h1>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <h1>Be in control of your data: anywhere &amp; anytime</h1>
+  </div>
+  <div class="col-md-6">
+   <h1><center><i class="fa fa-list fa-4x"></i></center></h1>
+  </div>
+</div>
+
 
           <div class="mastfoot">
             <div class="inner">
-              <p>Tabby Catalogs managed by <a class="btn btn-sm btn-default btn-link" href="https://twitter.com/jamessteininger">@JamesSteininger</a>
+              <p>Tabby - Health Catalogs managed by <a class="btn btn-sm btn-default btn-link" href="https://twitter.com/jamessteininger">@JamesSteininger</a>
             </div>
           </div>
 
