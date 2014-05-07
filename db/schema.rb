@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140506040931) do
+ActiveRecord::Schema.define(version: 20140506065641) do
 
   create_table "albums", force: true do |t|
     t.integer  "user_id"
@@ -115,6 +115,7 @@ ActiveRecord::Schema.define(version: 20140506040931) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "episode_id"
   end
 
   create_table "statuses", force: true do |t|

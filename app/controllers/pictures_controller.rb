@@ -44,7 +44,7 @@ class PicturesController < ApplicationController
 	        format.json { render json: @picture.errors, status: :unprocessable_entity }
 	      end
 	    end
-	  end
+	end
 
 	private
 

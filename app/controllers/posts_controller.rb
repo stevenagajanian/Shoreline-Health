@@ -1,55 +1,43 @@
 class PostsController < ApplicationController
+  before_filter :find_episode
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
+    @episode = Episode.find(params[:episode_id])
+    @posts = @episode.posts.all
   end
 
-  # GET /posts/1
-  # GET /posts/1.json
   def show
+    respond_to do |format|
+        format.html # show.html.erb
+        format.json { render json: @post }
+      end
   end
 
   # GET /posts/new
   def new
-    @post = Post.new
-  end
-
-  # GET /posts/1/edit
-  def edit
+    @episode = Episode.find(params[:episode_id])
+    @post = @episode.posts.new
   end
 
   # POST /posts
   # POST /posts.json
   def create
-    @post = Post.new(post_params)
-
-    respond_to do |format|
-      if @post.save
-        format.html { redirect_to @post, notice: 'Post was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @post }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
+      @post = @episode.posts.new( post_params)
+      
+      respond_to do |format|
+        if @post.save
+          format.html { redirect_to episode_posts_path(@episode), notice: 'Post was successfully created.' }
+          format.json { render json: @post, status: :created, location: @post }
+        else
+          format.html { render action: "new" }
+          format.json { render json: @post.errors, status: :unprocessable_entity }
+        end
       end
-    end
   end
 
-  # PATCH/PUT /posts/1
-  # PATCH/PUT /posts/1.json
-  def update
-    respond_to do |format|
-      if @post.update(post_params)
-        format.html { redirect_to @post, notice: 'Post was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
-      end
-    end
-  end
 
   # DELETE /posts/1
   # DELETE /posts/1.json
@@ -62,13 +50,19 @@ class PostsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_post
-      @post = Post.find(params[:id])
-    end
+   
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def post_params
+    params.require(:post).permit(:title, :description)
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def post_params
-      params.require(:post).permit(:title, :description)
-    end
+  def find_episode
+    @episode = Episode.find(params[:episode_id])
+    #@user = User.find(@album.user_id)
+    #@album = @user.albums.find(params[:album_id])
+  end
+
+  def find_post
+    @post = @episode.posts.find(params[:id])
+  end
 end

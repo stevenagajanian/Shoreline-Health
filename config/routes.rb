@@ -61,6 +61,7 @@ Tabby::Application.routes.draw do
     end
   end
   resources :pictures
+  resources :posts
 
   root 'static_pages#home'
   get "static_pages/home"
