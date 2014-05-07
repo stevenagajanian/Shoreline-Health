@@ -26,6 +26,7 @@ gem 'searchkick'
 group :test do
 	gem 'sqlite3'
 end
+
 gem 'unicorn'
 
 # Use SCSS for stylesheets

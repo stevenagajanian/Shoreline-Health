@@ -21,4 +21,7 @@ test:
 production:
   adapter: postgresql
   encoding: unicde
+  database: tabbypostgresprod
   pool: 5
+  username: jesteininger@gmail.com
+  password: Js13js#!js
