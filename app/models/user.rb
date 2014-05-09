@@ -5,9 +5,7 @@ class User < ActiveRecord::Base
 	:recoverable, :rememberable, :trackable, :validatable
 
 	has_many :allergies
-	accepts_nested_attributes_for :allergies
 	has_many :medications
-	accepts_nested_attributes_for :medications
 
 	has_many :statuses
 	has_many :pictures
