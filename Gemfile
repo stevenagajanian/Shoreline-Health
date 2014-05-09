@@ -21,6 +21,7 @@ gem 'chartkick'
 gem 'acts-as-taggable-on'
 gem 'groupdate'
 gem 'searchkick'
+gem 'acts_as_commentable'
 
 # Use sqlite3 as the database for Active Record
 group :test do

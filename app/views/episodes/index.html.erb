@@ -9,11 +9,7 @@
 
 	<% @episodes.each do |episode| %>
   <div class="col-md-4">
-    <div class="thumbnail">
     	<h3><%= episode.name %></h3>
-      <%= link_to "View Episode", episode_posts_path(episode) %>
-       <%= link_to "Edit", edit_episode_path(episode) %>
-       <%= link_to "Delete", episode_path(episode), method: :delete, data: { confirm: "Are you sure?" } %>
-    </div>
+      <%= link_to "View", episode_posts_path(episode), class: "btn btn-default" %>
   </div>
 <% end %>

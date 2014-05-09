@@ -19,6 +19,10 @@ class UsersController < ApplicationController
 		@user = User.find(params[:id])
 	end
 
+	def ecard
+		@user = User.find(params[:id])
+	end
+
 	private
 
 	def find_user
