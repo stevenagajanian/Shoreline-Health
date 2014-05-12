@@ -4,9 +4,10 @@ class User < ActiveRecord::Base
 	devise :database_authenticatable, :registerable,
 	:recoverable, :rememberable, :trackable, :validatable
 
+	acts_as_birthday :date_of_birth
+
 	has_many :allergies
 	has_many :medications
-
 	has_many :statuses
 	has_many :pictures
 	has_many :weights

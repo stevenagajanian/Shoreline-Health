@@ -27,6 +27,8 @@
 							<%= link_to "Sign out", logout_path, :method => :delete %>
 						</li>        
 						<% else %>
+						<%= link_to "Sign Up!", new_user_registration_path, class: "btn btn-lg btn-default" %>
+				<% end %>
 						<li><%= link_to "Sign In", new_user_session_path %></li> 
 						<% end %>
 					</ul>

@@ -8,13 +8,13 @@
 				<span class="icon-bar"></span>
 			</button>
 			<% if user_signed_in? %>
-				<%= link_to current_user, style: "padding-top: 21px; font-size: 18px;", class: "navbar-brand" do %>
-				<%= image_tag "TabbyPureWhiteText.png", width: 100, style: "margin: 0px;, padding: 0px;" %>
-				<% end %>
+			<%= link_to current_user, style: "padding-top: 21px; font-size: 18px;", class: "navbar-brand" do %>
+			<%= image_tag "TabbyPureWhiteText.png", width: 100, style: "margin: 0px;, padding: 0px;" %>
+			<% end %>
 			<% else %>
-				<%= link_to root_path, style: "font-size: 18px;", class: "navbar-brand" do %>
-					<%= image_tag "TabbyPureWhite.png", width: 35 %> Tabby
-				<% end %>
+			<%= link_to root_path, style: "font-size: 18px;", class: "navbar-brand" do %>
+			<%= image_tag "TabbyPureWhite.png", width: 35 %> Tabby
+			<% end %>
 			<% end %>
 		</div>
 		<div class="navbar-collapse collapse">
@@ -143,6 +143,18 @@
 					</ul>
 				</li>
 				<% else %>
+				<form class="navbar-form navbar-right">
+					<%= link_to "Sign In", new_user_session_path, class: "btn btn-default" %>
+				</form>
+				<li>
+					<%= link_to "Home", root_path, class: "" %>
+				</li>
+				<li>
+					<%= link_to "About", static_pages_about_path, class: "" %>
+				</li>
+				<li>
+					<%= link_to "Sign Up", new_user_registration_path, class: "" %>
+				</li>
 				<% end %>
 			</ul>
 		</div><!--/.nav-collapse -->

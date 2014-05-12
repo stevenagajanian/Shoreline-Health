@@ -5,6 +5,7 @@
  *= require_self
  *= require custom_bootstrap/custom_bootstrap
  *= require font-awesome
+  *= require rails_bootstrap_forms
  *= require_tree .
 */
 
@@ -14,6 +15,7 @@
 
 body {
 	padding-top: 80px;
+	background: #eee;
 }
 
 

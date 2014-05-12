@@ -28,7 +28,7 @@ class MedicationsController < ApplicationController
   	@medication = Medication.find(params[:id])
   	@user = @medication.user
     @medication.destroy
-    redirect_to user_medications_path(@medication.user), :notice => "Successfully destroyed medication."
+    redirect_to user_medications_path(@medication.user), flash: { info: "Successfully destroyed medication."}
   end
 
   def create
