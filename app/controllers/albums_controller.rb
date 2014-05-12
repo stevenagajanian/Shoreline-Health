@@ -21,9 +21,9 @@ class AlbumsController < ApplicationController
 		@user = User.find(params[:user_id])
 		@album = current_user.albums.new
 		respond_to do |format|
-       	format.html # new.html.erb
-       	 format.json { render json: @album }
-  	  end
+       		format.html # new.html.erb
+       	 	format.json { render json: @album }
+  	  	end
 	end
 
 	def create

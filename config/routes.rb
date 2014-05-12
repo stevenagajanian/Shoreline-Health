@@ -65,7 +65,11 @@ Tabby::Application.routes.draw do
 
   root 'static_pages#home'
   get "static_pages/home"
+  get "static_pages/about"
   get "static_pages/help"
+
+  #Modals
+  get "albums/form" => 'albums#form', as: :form
 
   scope ":profile_name" do
     resources :albums do

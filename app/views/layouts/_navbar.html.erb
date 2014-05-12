@@ -133,6 +133,9 @@
 						<li>
 							<%= link_to "Edit Profile", edit_registration_path(current_user) %>
 						</li>  
+						<li>
+							<%= link_to "Help", static_pages_about_path %>
+						</li>  
 						<li class="divider"></li>
 						<li>
 							<%= link_to  logout_path, :method => :delete do %><span class="glyphicon glyphicon-log-out"></span> Log out<% end %>
