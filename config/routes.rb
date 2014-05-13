@@ -39,6 +39,7 @@ Tabby::Application.routes.draw do
 
   resources :users do
     get 'apps'
+    get 'ecard'
     resources :pictures
     resources :albums do
       resources :pictures

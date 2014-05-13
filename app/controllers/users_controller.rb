@@ -16,7 +16,7 @@ class UsersController < ApplicationController
 	end
 
 	def apps
-		@user = User.find(params[:id])
+		@user = User.find(params[:user_id])
 	end
 
 	def show
@@ -24,7 +24,7 @@ class UsersController < ApplicationController
 	end
 
 	def ecard
-		@user = User.find(params[:id])
+		@user = User.find(params[:user_id])
 	end
 
 	private
