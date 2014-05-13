@@ -31,17 +31,21 @@
 		</div>
 		<div class="panel-body">
 			<h3 class="text-success">Allergies <%= link_to "View All", user_allergies_path(@user), class: "pull-right btn btn-default" %> <%= link_to "View All", user_allergies_path(@user), class: "pull-right btn btn-default" %></h3>
+			<% if @user.allergies.any? %>
 			<% for allergy in @user.allergies %>
 				<tr>
 					<td><%= allergy.name %></td>
 				</tr>
 			<% end %>
+			<% end %>
+			<% if @user.medications.any? %>
 			<h3 class="text-success">Medications</h3>
 			<% for medication in @user.medications %>
 				<tr>
 					<td><%= link_to medication.name, medication %></td>
-					<td><%= medication.description %></td>
+					<td><%= medication.dosage %></td>
 				</tr>
+			<% end %>
 			<% end %>
 		</div>
 	</div>
