@@ -1,14 +1,16 @@
 class PostsController < ApplicationController
-  before_filter :find_episode
+  before_filter :find_condition, only: [:index, :new, :create]
 
   # GET /posts
   # GET /posts.json
   def index
-    @episode = Episode.find(params[:episode_id])
-    @posts = @episode.posts.all
+    @condition = Condition.find(params[:condition_id])
+    @posts = @condition.posts.all
+    @user = @condition.user
   end
 
   def show
+    @post = Post.find(params[:id])
     respond_to do |format|
         format.html # show.html.erb
         format.json { render json: @post }
@@ -17,18 +19,19 @@ class PostsController < ApplicationController
 
   # GET /posts/new
   def new
-    @episode = Episode.find(params[:episode_id])
-    @post = @episode.posts.new
+    @condition = Condition.find(params[:condition_id])
+    @post = @condition.posts.new
+    @user = @condition.user
   end
 
   # POST /posts
   # POST /posts.json
   def create
-      @post = @episode.posts.new( post_params)
+      @post = @condition.posts.new( post_params)
       
       respond_to do |format|
         if @post.save
-          format.html { redirect_to episode_posts_path(@episode), notice: 'Post was successfully created.' }
+          format.html { redirect_to condition_posts_path(@condition), notice: 'Post was successfully created.' }
           format.json { render json: @post, status: :created, location: @post }
         else
           format.html { render action: "new" }
@@ -41,6 +44,7 @@ class PostsController < ApplicationController
   # DELETE /posts/1
   # DELETE /posts/1.json
   def destroy
+    @post = Post.find(params[:id])
     @post.destroy
     respond_to do |format|
       format.html { redirect_to posts_url }
@@ -55,13 +59,13 @@ class PostsController < ApplicationController
     params.require(:post).permit(:title, :description)
   end
 
-  def find_episode
-    @episode = Episode.find(params[:episode_id])
+  def find_condition
+    @condition = Condition.find(params[:condition_id])
     #@user = User.find(@album.user_id)
     #@album = @user.albums.find(params[:album_id])
   end
 
   def find_post
-    @post = @episode.posts.find(params[:id])
+    @post = @condition.posts.find(params[:id])
   end
 end

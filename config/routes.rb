@@ -26,7 +26,9 @@ Tabby::Application.routes.draw do
   resources :statuses
   resources :documents
   resources :medications
-  resources :conditions
+  resources :conditions do
+    resources :posts
+  end
   resources :episodes do
     resources :posts
   end

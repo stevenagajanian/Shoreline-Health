@@ -1,25 +1,90 @@
 <%= render partial: 'layouts/profile_nav', object: @user %>
 <div class="container">
-  <div class="panel panel-default">
-    <div class="panel-body">
-  <h2><%= link_to "Issues", user_episodes_path(current_user) %> / <strong><%= @episode.name %></strong>
-  <%= link_to new_episode_post_path(@episode), class: "btn pull-right btn-default btn-lg" do %>
-    <span class="glyphicon glyphicon-plus"></span> Post
-  <% end %>
-</h2>
-  <hr>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h2>
+				<%= link_to "Conditions", user_conditions_path(current_user) %> / <strong><%= @condition.name %></strong>
+				<button style="margin-left: 10px;" class="btn btn-default pull-right" data-toggle="modal" data-target="#myModal">
+					+ Add Post
+				</button>
+				<button class="btn btn-default pull-right" data-toggle="modal" data-target="#photoModal">
+					<span class="glyphicon glyphicon-picture"></span> Add Photo
+				</button>
+			</h2>
+		</div>
+		<div class="panel-body">
+			<!-- Modal -->
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h3 class="modal-title" id="myModalLabel">New Information about <%= @condition.name %></h3>
+						</div>
+						<%= form_for [@condition, Post.new] do |f| %>
+						<div class="modal-body">
+							<div>
+								<%= f.label :title %><br />
+								<%= f.text_area :title, class:"form-control" %>
+							</div>
+							<div>
+								<%= f.label :information %><br />
+								<%= f.text_area :description, class:"form-control" %>
+							</div>
+							<div>
+								<%= f.label :upload %><br />
+								<%= f.file_field :upload, class:"form-control" %>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							<%= f.submit "Save New Post", class: "btn btn-primary" %>
+						</div>
+						<% end %>
+					</div>
+				</div>
+			</div>
+			<!-- Modal -->
+			<div class="modal fade" id="photoModal" tabindex="-2" role="dialog" aria-labelledby="myPhotoLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h3 class="modal-title" id="myModalLabel">New Photo Upload for <%= @condition.name %></h3>
+						</div>
+						<%= form_for [@condition, Post.new] do |f| %>
+						<div class="modal-body">
+							<div>
+								<%= f.label :upload %><br />
+								<%= f.file_field :upload, class:"form-control" %>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							<%= f.submit "Save New Post", class: "btn btn-primary" %>
+						</div>
+						<% end %>
+					</div>
+				</div>
+			</div>
 
+			<%= @posts.count %>
 
-<% @posts.each do |post| %>
-<div class="row">
-  <div class="col-md-6">
-        <% if post.title? %><%= post.title %><br /><% end %>
-        
-        <%= link_to 'View full size', episode_post_path( @episode, post) %>
+			<% @posts.each do |post| %>
+			<div class="row">
+				<div class="col-sm-2">
+					Posted by <%= post.user %> <br>
+					on <%= post.created_at.strftime("%B %d, %Y") %> <br>
+					at <%= post.created_at.strftime("%I:%M") %>
+				</div>
+				<div class="col-md-6">
+					<% if post.title? %><%= post.title %><br /><% end %>
 
-          <%= link_to "Edit", edit_episode_post_path(@episode, post) %>
-          <%= link_to "Delete", episode_post_path(@episode, post), method: :delete, data: { confirm: "Are you sure?" } %>
-        </div>
-</div>
-<% end %>
+					<%= link_to 'View full size', post_path( post) %>
+
+					<%= link_to "Edit", edit_condition_post_path(@condition, post) %>
+					<%= link_to "Delete", condition_post_path(@condition, post), method: :delete, data: { confirm: "Are you sure?" } %>
+				</div>
+			</div>
+			<% end %>
 

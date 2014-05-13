@@ -8,6 +8,7 @@ before_filter :authenticate_user!
 
   def show
     @condition = Condition.find(params[:id])
+    @user = @condition.user
 
     respond_to do |format|
         format.html # show.html.erb

@@ -18,7 +18,7 @@
 		</div><% end %>
 		<% if @user.weights.presence %>
 		<div class="col-sm-2">
-			<h3 class=""><strong><%= @user.weights.last.amount%></strong><small>lbs</small></h3>
+			<h3 class=""><strong><%= link_to @user.weights.last.amount, user_weights_path(@user) %></strong><small>lbs</small></h3>
 		</div>
 		<% end %>
 	</div>
