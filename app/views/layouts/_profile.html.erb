@@ -30,6 +30,26 @@
 				</div>
 		</div>
 	</div>
+	<div class="panel panel-success">
+		<div class="panel-heading">
+			<h1>Medical Information</h1>
+		</div>
+		<div class="panel-body">
+			<h3 class="text-success">Allergies <%= link_to "View All", user_allergies_path(@user), class: "pull-right btn btn-default" %> <%= link_to "View All", user_allergies_path(@user), class: "pull-right btn btn-default" %></h3>
+			<% for allergy in @user.allergies %>
+				<tr>
+					<td><%= allergy.name %></td>
+				</tr>
+			<% end %>
+			<h3 class="text-success">Medications</h3>
+			<% for medication in @user.medications %>
+				<tr>
+					<td><%= link_to medication.name, medication %></td>
+					<td><%= medication.description %></td>
+				</tr>
+			<% end %>
+		</div>
+	</div>
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h1>Physical Fitness</h1>

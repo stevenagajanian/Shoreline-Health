@@ -13,7 +13,8 @@
 				<li class="active"><a href="#home" data-toggle="tab">Profile</a></li>
 				<li><a href="#profile" data-toggle="tab">Apps</a></li>
 				<li><a href="#messages" data-toggle="tab">Messages</a></li>
-				<li><a href="#settings" data-toggle="tab">Settings</a></li>
+				<li><%= link_to "Edit Profile", edit_registration_path(current_user) %>
+				</li>
 			</ul>
 		</div>
 	</div>	
