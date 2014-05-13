@@ -24,6 +24,7 @@ class PicturesController < ApplicationController
 	def index
 		@album = Album.find(params[:album_id])
 		@pictures = @album.pictures.all
+		@user = @album.user
 	end
 
 	def new

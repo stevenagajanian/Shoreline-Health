@@ -1,11 +1,12 @@
+<%= render partial: 'layouts/profile_nav', object: @user %>
 <div class="container">
 	<div class="panel panel-default">
 		<div class="panel-body">
 	<h2>
 		<strong>Allergies</strong> - <%= link_to @user.full_name, @user %>
 		<button class="btn btn-default pull-right" data-toggle="modal" data-target="#myModal">
-		New Allergy
-	</button>
+			New Allergy
+		</button>
 	</h2>
 	<hr>
 

@@ -1,13 +1,41 @@
+<%= render partial: 'layouts/profile_nav', object: @user %>
 <div class="container">
 	<div class="panel panel-default">
 		<div class="panel-body">
 	<h2>
 		<strong>Albums</strong>
-		<%= link_to new_user_album_path, {remote: true, 'data-toggle' => "modal", 'data-target' => '#modal-window'}, class: "btn pull-right btn-default btn-lg" do %>
-			<span class="glyphicon glyphicon-picture"></span> New Album
-		<% end %>
+		<button class="btn btn-default pull-right" data-toggle="modal" data-target="#myModal">
+			New Album
+		</button>
 	</h2>
 	<hr>
+
+
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h3 class="modal-title" id="myModalLabel">New Album</h3>
+				</div>
+				<%= form_for Album.new do |f| %>
+				<div class="modal-body">
+					<div>
+						<%= f.label :title %><br />
+						<%= f.text_field :title, autofocus: true, class:"form-control" %>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<%= f.submit "Save Album", class: "btn btn-primary" %>
+				</div>
+				<% end %>
+			</div>
+		</div>
+	</div>
+
+
 	<div id="modal-window" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"><div class="modal-header">
 	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
 	<h3>New Album</h3>

@@ -1,60 +1,60 @@
-
-	<div class="panel panel-primary">
-		<div class="panel-heading">
-			<h1>My Information</h1>
-		</div>
-		<div class="panel-body">
+<div class="panel panel-primary">
+	<div class="panel-heading">
+		<h1>My Information</h1>
+	</div>
+	<div class="panel-body">
+		<% if @user.date_of_birth.presence %>
+		<strong>Birthday</strong>
+		<%= @user.date_of_birth.strftime("%B %d, %Y") %>
+		<% end %>
+		<div class="row text-primary">
 			<% if @user.date_of_birth.presence %>
-			<strong>Birthday</strong>
-			<%= @user.date_of_birth.strftime("%B %d, %Y") %>
+			<div class="col-sm-2">
+				<h3 class=""><strong><%= @user.date_of_birth_age %></strong><small> years old</small></h3>
+			</div>
 			<% end %>
-			<div class="row text-primary">
-					<% if @user.date_of_birth.presence %>
-					<div class="col-sm-2">
-						<h3 class=""><strong><%= @user.date_of_birth_age %></strong><small> years old</small></h3>
-					</div>
-					<% end %>
-					<% if @user.heights.presence %><div class="col-sm-2">
-						<h3 class=""><strong><%= @user.heights.last.amount %></strong><small> height</small></h3>
-					</div><% end %>
-					<% if @user.weights.presence %>
-					<div class="col-sm-2">
-						<h3 class=""><strong><%= @user.weights.last.amount%></strong><small>lbs</small></h3>
-					</div>
-					<% end %>
-				</div>
+			<% if @user.heights.presence %><div class="col-sm-2">
+			<h3 class=""><strong><%= @user.heights.last.amount %></strong><small> height</small></h3>
+		</div><% end %>
+		<% if @user.weights.presence %>
+		<div class="col-sm-2">
+			<h3 class=""><strong><%= @user.weights.last.amount%></strong><small>lbs</small></h3>
 		</div>
+		<% end %>
 	</div>
-	<div class="panel panel-success">
-		<div class="panel-heading">
-			<h1>Medical Information</h1>
-		</div>
-		<div class="panel-body">
-			<h3 class="text-success">Allergies <%= link_to "View All", user_allergies_path(@user), class: "pull-right btn btn-default" %> <%= link_to "View All", user_allergies_path(@user), class: "pull-right btn btn-default" %></h3>
-			<% if @user.allergies.any? %>
-			<% for allergy in @user.allergies %>
-				<tr>
-					<td><%= allergy.name %></td>
-				</tr>
-			<% end %>
-			<% end %>
-			<% if @user.medications.any? %>
-			<h3 class="text-success">Medications</h3>
-			<% for medication in @user.medications %>
-				<tr>
-					<td><%= link_to medication.name, medication %></td>
-					<td><%= medication.dosage %></td>
-				</tr>
-			<% end %>
-			<% end %>
-		</div>
+</div>
+
+</div>
+<div class="panel panel-success">
+	<div class="panel-heading">
+		<h1>Medical Information</h1>
 	</div>
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			<h1>Physical Fitness</h1>
-		</div>
-		<div class="panel-body">
-			<h3>Weight</h3>
-			<%= line_chart @user.weights.group(:created_at).maximum(:amount) %>
-		</div>
+	<div class="panel-body">
+		<h3 class="text-success">Allergies <%= link_to "View All", user_allergies_path(@user), class: "pull-right btn btn-default" %> <%= link_to "View All", user_allergies_path(@user), class: "pull-right btn btn-default" %></h3>
+		<% if @user.allergies.any? %>
+		<% for allergy in @user.allergies %>
+		<tr>
+			<td><%= allergy.name %></td>
+		</tr>
+		<% end %>
+		<% end %>
+		<% if @user.medications.any? %>
+		<h3 class="text-success">Medications</h3>
+		<% for medication in @user.medications %>
+		<tr>
+			<td><%= link_to medication.name, medication %></td>
+			<td><%= medication.dosage %></td>
+		</tr>
+		<% end %>
+		<% end %>
 	</div>
+</div>
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h1>Physical Fitness</h1>
+	</div>
+	<div class="panel-body">
+		<h3>Weight</h3>
+		<%= line_chart @user.weights.group(:created_at).maximum(:amount) %>
+	</div>
+</div>

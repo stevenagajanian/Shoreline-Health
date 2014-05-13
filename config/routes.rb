@@ -36,6 +36,7 @@ Tabby::Application.routes.draw do
   resources :pictures
 
   resources :users do
+    get 'apps'
     resources :pictures
     resources :albums do
       resources :pictures
@@ -70,6 +71,8 @@ Tabby::Application.routes.draw do
 
   #Modals
   get "albums/form" => 'albums#form', as: :form
+
+
 
   scope ":profile_name" do
     resources :albums do
