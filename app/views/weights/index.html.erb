@@ -2,7 +2,7 @@
 <div class="container">
 	<h2><strong>Weight</strong> - <%= link_to @user.full_name, @user %><span class="pull-right"></span></h2>
 	<hr>
-<%= line_chart Weight.group(:created_at).maximum(:amount) %>
+<%= line_chart @user.weights.group(:created_at).maximum(:amount) %>
 
 <%= form_for Weight.new do |f| %>
 

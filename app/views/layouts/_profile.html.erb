@@ -4,27 +4,24 @@
 			<h1>My Information</h1>
 		</div>
 		<div class="panel-body">
+			<% if @user.date_of_birth.presence %>
 			<strong>Birthday</strong>
 			<%= @user.date_of_birth.strftime("%B %d, %Y") %>
+			<% end %>
 			<div class="row text-primary">
+					<% if @user.date_of_birth.presence %>
 					<div class="col-sm-2">
 						<h3 class=""><strong><%= @user.date_of_birth_age %></strong><small> years old</small></h3>
 					</div>
-					<% if @user.heights.any? %><div class="col-sm-2">
+					<% end %>
+					<% if @user.heights.presence %><div class="col-sm-2">
 						<h3 class=""><strong><%= @user.heights.last.amount %></strong><small> height</small></h3>
 					</div><% end %>
+					<% if @user.weights.presence %>
 					<div class="col-sm-2">
 						<h3 class=""><strong><%= @user.weights.last.amount%></strong><small>lbs</small></h3>
 					</div>
-					<div class="col-sm-2">
-						<h3 class=""><strong><%= @user.date_of_birth_age %></strong></h3> <small>blood pressure</small>
-					</div>
-					<div class="col-sm-2">
-						<h3 class=""><strong><%= @user.date_of_birth_age %></strong></h3> <small>t.cholesterol</small>
-					</div>
-					<div class="col-sm-2">
-						<h3 class=""><strong><%= @user.date_of_birth_age %></strong></h3> <small>glucose</small>
-					</div>
+					<% end %>
 				</div>
 		</div>
 	</div>
@@ -54,6 +51,6 @@
 		</div>
 		<div class="panel-body">
 			<h3>Weight</h3>
-			<%= line_chart Weight.group(:created_at).maximum(:amount) %>
+			<%= line_chart @user.weights.group(:created_at).maximum(:amount) %>
 		</div>
 	</div>
