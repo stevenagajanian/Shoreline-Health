@@ -36,7 +36,9 @@ Tabby::Application.routes.draw do
   resources :heights
   resources :allergies
   resources :pictures
-  resources :goals
+  resources :goals do
+    get 'mark_complete'
+  end
 
   resources :users do
     get 'apps'

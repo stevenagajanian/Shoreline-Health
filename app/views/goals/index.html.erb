@@ -52,7 +52,8 @@
 				</div>
 			</div>
 
-			<% for goal in @goals %>
+
+			<% for goal in @unfinished_goals %>
 				<div class="col-sm-12 panel panel-default" style="margin: 0px;">
 					<h3>
 						<i class="fa fa-star fa-x"></i> <strong><%= link_to goal.name, goal %>
@@ -76,6 +77,15 @@
 		</div>
 
 		<div class="panel-body">
+			<% for goal in @completed_goals %>
+				<div class="col-sm-4 -default" style="margin: 0px;">
+					<h3><center>
+						<i class="fa fa-trophy fa-3x"></i><br><strong><%= link_to goal.name, goal %><br>
+						</center>
+					</h3>
+					
+				</div>
+			<% end %>
 		</div>
 	</div>
 </div>

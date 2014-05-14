@@ -3,7 +3,13 @@ class GoalsController < ApplicationController
   		@goal = Goal.find(params[:id])
   		@user = @goal.user
     		@goal.destroy
-    		redirect_to album_goals_path(@goal.album), :notice => "Successfully destroyed goal."
+    		redirect_to user_goals_path(@goal.user), :notice => "Successfully destroyed goal."
+  	end
+
+  	def mark_complete
+  		@goal = Goal.find(params[:goal_id])
+  		@goal.mark_completed
+  		redirect_to goal_path(@goal)
   	end
 
 	def show
@@ -18,6 +24,8 @@ class GoalsController < ApplicationController
 	def index
 		@user = User.find(params[:user_id])
 		@goals = @user.goals.all
+		@unfinished_goals = @user.goals.get_unfinished
+		@completed_goals = @user.goals.get_completed
 	end
 
 	def new
@@ -44,6 +52,6 @@ class GoalsController < ApplicationController
 	private
 
 	def goal_params
-		params.require(:goal).permit(:user_id, :name, :number_name, :use_number, :use_photo, :use_words, :number_goal, :use_goal_date, :goal_date, :text, :category)
+		params.require(:goal).permit(:completed, :user_id, :name, :number_name, :use_number, :use_photo, :use_words, :number_goal, :use_goal_date, :goal_date, :text, :category)
 	end
 end
