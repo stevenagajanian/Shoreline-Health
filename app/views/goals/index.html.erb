@@ -38,6 +38,7 @@
 								<%= f.label "Number goal" %><br />
 								<%= f.text_field :number_goal, class:"form-control" %>
 							</div>
+							<%= f.hidden_field :completed, :value => false %>
 							<div>
 								<span><%= f.check_box :use_goal_date %><%= f.label :use_goal_date %></span><br>
 								<%= f.date_select :goal_date, class:"form-control" %>

@@ -24,7 +24,7 @@
 				<% end %><br>
 				<% if @user.bloodtype.presence %>
 				<strong>Bloodtype</strong>
-				<%= @user.full_name %>
+				<%= @user.bloodtype %>
 				<% end %>
 				<div class="row text-primary">
 					<% if @user.date_of_birth.presence %>
@@ -43,8 +43,8 @@
 			</div>
 		</div>
 	</div>
-
 </div>
+
 <div class="panel panel-default">
 	<div class="panel-heading">
 		<h2 class="panel-"><a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><i class="fa fa-medkit"></i> Medical Information</a></h2>
@@ -75,6 +75,35 @@
 		<% end %>
 
 
+	</div>
+</div>
+</div>
+
+
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h2 class="panel-"><a data-toggle="collapse" data-parent="#accordion" href="#collapseThree"><i class="fa fa-star"></i> Goals</a>
+			<small>
+				<%= link_to "View Goals", user_conditions_path(@user), class: "btn btn-default pull-right" %>
+			</small>
+		</h2>
+	</div>
+	<div id="collapseThree" class="panel-collapse collapse out">
+	<div class="panel-body">
+		<% for goal in @unfinished_goals %>
+				<div class="col-sm-12 panel panel-default" style="margin: 0px;">
+					<h3>
+						<i class="fa fa-star fa-x"></i> <strong><%= link_to goal.name, goal %>
+						<%= link_to "View", goal_path(goal), class: "btn btn-primary pull-right" %></strong>
+					</h3>
+					<p>
+						<strong>Goal: </strong><%= goal.number_goal %> <%= goal.number_name %><br>
+						<strong>Goal Date: </strong><%= goal.goal_date.strftime("%B %d, %Y") %><br>
+						<strong>Goal Started: </strong><%= goal.created_at.strftime("%B %d, %Y") %>
+					</p>
+					<p>Last Update: </p>
+				</div>
+			<% end %>
 	</div>
 </div>
 </div>
@@ -110,6 +139,7 @@
 	</div>
 </div>
 </div>
+
 
 <div class="panel panel-default">
 	<div class="panel-heading">
