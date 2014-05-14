@@ -36,6 +36,7 @@ Tabby::Application.routes.draw do
   resources :heights
   resources :allergies
   resources :pictures
+  resources :goals
 
   resources :users do
     get 'apps'
@@ -46,6 +47,8 @@ Tabby::Application.routes.draw do
     end
     resources :allergies
     resources :statuses
+    resources :fitnesses
+    resources :goals
     resources :conditions
     resources :episodes do
       resources :posts
@@ -71,6 +74,7 @@ Tabby::Application.routes.draw do
   get "static_pages/home"
   get "static_pages/about"
   get "static_pages/help"
+  get "static_pages/community_stats"
 
   #Modals
   get "albums/form" => 'albums#form', as: :form

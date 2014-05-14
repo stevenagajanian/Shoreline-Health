@@ -47,7 +47,7 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @post.destroy
     respond_to do |format|
-      format.html { redirect_to posts_url }
+      format.html { redirect_to condition_posts_path(@post.condition) }
       format.json { head :no_content }
     end
   end
@@ -56,7 +56,7 @@ class PostsController < ApplicationController
    
   # Never trust parameters from the scary internet, only allow the white list through.
   def post_params
-    params.require(:post).permit(:title, :description)
+    params.require(:post).permit(:upload, :uplaod_file_name, :user_id, :title, :description)
   end
 
   def find_condition

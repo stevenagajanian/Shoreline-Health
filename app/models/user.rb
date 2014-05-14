@@ -9,6 +9,8 @@ class User < ActiveRecord::Base
 	has_many :allergies
 	has_many :medications
 	has_many :statuses
+	has_many :fitnesses
+	has_many :goals
 	has_many :pictures
 	has_many :weights
 	has_many :episodes

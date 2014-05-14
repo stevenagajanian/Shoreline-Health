@@ -1,12 +1,21 @@
 <%= render partial: 'layouts/profile_nav', object: @user %>
 <div class="container">
-	<div class="panel panel-default">
+	<div class="panel panel-primary">
 		<div class="panel-heading">
 			<h2>
-				<%= link_to "Conditions", user_conditions_path(current_user) %> / <strong><%= @condition.name %></strong>
-				<button style="margin-left: 10px;" class="btn btn-default pull-right" data-toggle="modal" data-target="#myModal">
+				<%= link_to "Conditions", user_conditions_path(current_user), class: "" %> / <strong><%= @condition.name %></strong>
+				<span class="pull-right"><button style="margin-left: 10px;" class="btn btn-default pull-" data-toggle="modal" data-target="#myModal">
 					+ Add Post
-				</button>
+				</button></span>
+				<span class="dropdown pull-right">
+					<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+						Edit
+						<span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu">
+						<li><%= link_to "Delete", condition_path(@condition ), method: :delete, data: { confirm: "Are you sure?" } %></li>
+					</ul>
+				</span>
 			</h2>
 		</div>
 		<div class="panel-body">
@@ -21,16 +30,12 @@
 						<%= form_for [@condition, Post.new] do |f| %>
 						<div class="modal-body">
 							<div>
-								<%= f.label :title %><br />
-								<%= f.text_area :title, class:"form-control" %>
-							</div>
-							<div>
-								<%= f.label :description %><br />
+								<%= f.label :information %><br />
 								<%= f.text_area :description, class:"form-control" %>
 							</div>
 							<div>
 								<%= f.label :upload %><br />
-								<%= f.file_field :upload, class:"form-control" %>
+								<%= f.file_field :upload, class:"form-control", as: :file  %>
 							</div>
 						</div>
 						<div class="modal-footer">
@@ -45,12 +50,14 @@
 			<% @posts.each do |post| %>
 			<div class="row">
 				<div class="col-sm-2">
-					Posted by <%= post.user %> <br>
-					on <%= post.created_at.strftime("%B %d, %Y") %> <br>
+					Posted on <%= post.user %> <br>
+					<%= post.created_at.strftime("%B %d, %Y") %> <br>
 					at <%= post.created_at.strftime("%I:%M") %>
 				</div>
 				<div class="col-md-6">
+					<%= link_to image_tag(post.upload.url(:small)), condition_post_path( @condition, post) %>
 					<% if post.title? %><%= post.title %><br /><% end %>
+					<% if post.upload? %><%= link_to image_tag(post.upload.url(:small)), condition_post_path( @condition, post) %><% end %>
 
 					<%= link_to 'View full size', post_path( post) %>
 
@@ -58,5 +65,6 @@
 					<%= link_to "Delete", condition_post_path(@condition, post), method: :delete, data: { confirm: "Are you sure?" } %>
 				</div>
 			</div>
+			<hr>
 			<% end %>
 

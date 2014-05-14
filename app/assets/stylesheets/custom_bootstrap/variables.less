@@ -1,7 +1,18 @@
 // Use this file to override Twitter Bootstrap variables or define own variables.
 
-
+//old blue #428bca
 @brand-primary: #428bca;
+@neko-blue: #369FAD;
+@neko-gray: #F6FFF5;
+@neko-orange: #FF802C;
+@neko-red: #D82825;
+@neko-breige: #E5A36E;
+@neko-red2: #D85242;
+
+@brand-primary: @neko-blue;
+@brand-warning: @neko-orange;
+@brand-danger: @neko-red2;
+@brand-success: @neko-breige;
 
 @dark-grey: #999;
 
@@ -43,10 +54,7 @@ body {
 
 .jumbotron {
 	color: white;
-	background-color: #428bca;
-    background-image: -webkit-linear-gradient(top, #fff 0, #428bca 100%);
-    background-image: linear-gradient(to bottom, #98c8f7 0, #428bca 100%);
-    background-repeat: repeat-x;
+	background-color: @brand-primary;
    
 }
 

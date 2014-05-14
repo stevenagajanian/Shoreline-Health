@@ -1,36 +1,59 @@
-<div class="panel panel-primary">
-	<div class="panel-heading">
-		<h1>My Information</h1>
-	</div>
-	<div class="panel-body">
-		<% if @user.date_of_birth.presence %>
-		<strong>Birthday</strong>
-		<%= @user.date_of_birth.strftime("%B %d, %Y") %>
-		<% end %>
-		<div class="row text-primary">
-			<% if @user.date_of_birth.presence %>
-			<div class="col-sm-2">
-				<h3 class=""><strong><%= @user.date_of_birth_age %></strong><small> years old</small></h3>
-			</div>
-			<% end %>
-			<% if @user.heights.presence %><div class="col-sm-2">
-			<h3 class=""><strong><%= @user.heights.last.amount %></strong><small> height</small></h3>
-		</div><% end %>
-		<% if @user.weights.presence %>
-		<div class="col-sm-2">
-			<h3 class=""><strong><%= link_to @user.weights.last.amount, user_weights_path(@user) %></strong><small>lbs</small></h3>
+<div class="panel-group" id="accordion">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h1 class="panel-title">
+				<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Basic Information</a>
+				<small>
+					<%= link_to "Update Profile", edit_registration_path(@user), class: "btn btn-default pull-right" %>
+				</small>
+			</h1>
 		</div>
-		<% end %>
+		<div id="collapseOne" class="panel-collapse collapse in">
+			<div class="panel-body">
+				<% if @user.date_of_birth.presence %>
+				<strong>Birthday</strong>
+				<%= @user.date_of_birth.strftime("%B %d, %Y") %>
+				<% end %><br>
+				<% if @user.gender.presence %>
+				<strong>Gender</strong>
+				<%= @user.gender %>
+				<% end %><br>
+				<% if @user.date_of_birth.presence %>
+				<strong>Doner?</strong>
+				<%= @user.doner %>
+				<% end %><br>
+				<% if @user.bloodtype.presence %>
+				<strong>Bloodtype</strong>
+				<%= @user.bloodtype %>
+				<% end %>
+				<div class="row text-primary">
+					<% if @user.date_of_birth.presence %>
+					<div class="col-sm-2">
+						<h3 class=""><strong><%= @user.date_of_birth_age %></strong><small> years old</small></h3>
+					</div>
+					<% end %>
+					<% if @user.heights.presence %><div class="col-sm-2">
+					<h3 class=""><strong><%= @user.heights.last.amount %></strong><small> height</small></h3>
+				</div><% end %>
+				<% if @user.weights.presence %>
+				<div class="col-sm-2">
+					<h3 class=""><strong><%= link_to @user.weights.last.amount, user_weights_path(@user) %></strong><small>lbs</small></h3>
+				</div>
+				<% end %>
+			</div>
+		</div>
 	</div>
-</div>
 
 </div>
 <div class="panel panel-success">
 	<div class="panel-heading">
-		<h1>Medical Information</h1>
+		<h1 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Medical Information</a></h1>
 	</div>
+	<div id="collapseTwo" class="panel-collapse collapse in">
 	<div class="panel-body">
-		<h3 class="text-success">Allergies <%= link_to "View All", user_allergies_path(@user), class: "pull-right btn btn-default" %> <%= link_to "View All", user_allergies_path(@user), class: "pull-right btn btn-default" %></h3>
+		<h3 class="text-success">Allergies 
+			<%= link_to "Edit", user_allergies_path(@user), class: "pull- btn-sm btn btn-default" %> 
+		</h3>
 		<% if @user.allergies.any? %>
 		<% for allergy in @user.allergies %>
 		<tr>
@@ -39,7 +62,9 @@
 		<% end %>
 		<% end %>
 		<% if @user.medications.any? %>
-		<h3 class="text-success">Medications</h3>
+		<h3 class="text-success">Medications
+			<%= link_to "Edit", user_medications_path(@user), class: "pull- btn-sm btn btn-default" %> 
+		</h3>
 		<% for medication in @user.medications %>
 		<tr>
 			<td><%= link_to medication.name, medication %></td>
@@ -49,6 +74,38 @@
 		<% end %>
 	</div>
 </div>
+</div>
+
+<div class="panel panel-warning">
+	<div class="panel-heading">
+		<h1>Conditions
+			<small>
+				<%= link_to "Update Conditions", user_conditions_path(@user), class: "btn btn-default pull-right" %>
+			</small>
+		</h1>
+	</div>
+	<div class="panel-body">
+		<% for condition in @user.conditions %>
+		<div class="row">
+			<div class="col-sm-2">
+				<h5>
+					<%= time_ago_in_words(condition.created_at) %>
+				</h5>
+			</div>
+			<div class="col-sm-10">
+				<h4>
+					<strong><%= condition.name %></strong>
+					<%= link_to "View full history", condition_posts_path(condition), class: "btn btn-primary pull-right" %>
+				</h4>
+				<p><%= condition.created_at.strftime("%B %d, %Y") %> - Present</p><br />
+				<p>Last Update: </p>
+			</div>
+		</div>
+		<hr>
+		<% end %>
+	</div>
+</div>
+
 <div class="panel panel-default">
 	<div class="panel-heading">
 		<h1>Physical Fitness</h1>
@@ -57,4 +114,15 @@
 		<h3>Weight</h3>
 		<%= line_chart @user.weights.group(:created_at).maximum(:amount) %>
 	</div>
+</div>
+
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h1>Print Your Profile</h1>
+	</div>
+	<div class="panel-body">
+		<%= link_to user_path(@user, :format => "pdf"), class: "btn btn-lg, btn-default" do %><h2><center>
+		<span class="glyphicon glyphicon-picture"></span><br>Profile (PDF)</center></h2><% end %>
+	</div>
+</div>
 </div>

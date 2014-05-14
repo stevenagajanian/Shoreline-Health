@@ -10,4 +10,7 @@ class StaticPagesController < ApplicationController
 
   def about
   end
+
+  def community_stats
+  end
 end

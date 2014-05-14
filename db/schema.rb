@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140513050858) do
+ActiveRecord::Schema.define(version: 20140514071338) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -85,6 +85,13 @@ ActiveRecord::Schema.define(version: 20140513050858) do
 
   add_index "episodes", ["user_id"], name: "index_episodes_on_user_id", using: :btree
 
+  create_table "fitnesses", force: true do |t|
+    t.integer  "user_id"
+    t.string   "activity"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "friendships", force: true do |t|
     t.integer  "user_id"
     t.integer  "friend_id"
@@ -94,6 +101,22 @@ ActiveRecord::Schema.define(version: 20140513050858) do
   end
 
   add_index "friendships", ["state"], name: "index_friendships_on_state", using: :btree
+
+  create_table "goals", force: true do |t|
+    t.integer  "user_id"
+    t.string   "number_name"
+    t.boolean  "use_number"
+    t.boolean  "use_photo"
+    t.boolean  "use_words"
+    t.float    "number_goal"
+    t.boolean  "use_goal_date"
+    t.date     "goal_date"
+    t.string   "text"
+    t.string   "category"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "heights", force: true do |t|
     t.integer  "user_id"
@@ -197,12 +220,15 @@ ActiveRecord::Schema.define(version: 20140513050858) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "profile_name"
-    t.string   "gender"
     t.string   "language"
     t.string   "ethnicity"
     t.text     "address"
     t.datetime "birthday"
     t.date     "date_of_birth"
+    t.string   "phone_number"
+    t.string   "gender"
+    t.string   "doner"
+    t.string   "bloodtype"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

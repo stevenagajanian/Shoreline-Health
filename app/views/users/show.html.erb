@@ -12,8 +12,14 @@
 			<ul class="nav nav-pills pull-right">
 				<li class="active"><a href="#home" data-toggle="tab">Profile</a></li>
 				<li><a href="#apps" data-toggle="tab">Apps</a></li>
-				<li><a href="#messages" data-toggle="tab">Messages</a></li>
-				<li><%= link_to "Edit Profile", edit_registration_path(current_user) %>
+				<li>
+					<%= link_to "Goals", user_goals_path(@user) %>
+				</li>
+				<li>
+					<%= link_to "Conditions", user_conditions_path(@user) %>
+				</li>
+				<li>
+					<%= link_to "Fitness", user_fitnesses_path(@user) %>
 				</li>
 			</ul>
 		</div>
@@ -27,8 +33,10 @@
 		</div>
 		<div class="tab-pane" id="apps">
 			<div class="panel panel-default">
-				<div class="panel-body">
+				<div class="panel-heading">
 					<h2>My Apps</h2>
+				</div>
+				<div class="panel-body">
 					<%= render "layouts/apps" %>
 				</div>
 			</div>

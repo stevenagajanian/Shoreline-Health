@@ -8,13 +8,13 @@
 				<span class="icon-bar"></span>
 			</button>
 			<% if user_signed_in? %>
-			<%= link_to current_user, style: "padding-top: 21px; font-size: 18px;", class: "navbar-brand" do %>
-			<%= image_tag "TabbyPureWhiteText.png", width: 100, style: "margin: 0px;, padding: 0px;" %>
-			<% end %>
+				<%= link_to current_user, style: "padding-top: 26px; font-size: 18px;", class: "navbar-brand" do %>
+					HealthBase
+				<% end %>
 			<% else %>
-			<%= link_to root_path, style: "font-size: 18px;", class: "navbar-brand" do %>
-			<%= image_tag "TabbyPureWhite.png", width: 35 %> Tabby
-			<% end %>
+				<%= link_to root_path, style: "font-size: 18px;", class: "navbar-brand" do %>
+				HealthBase
+				<% end %>
 			<% end %>
 		</div>
 		<div class="navbar-collapse collapse">
