@@ -6,7 +6,7 @@ before_filter :authenticate_user!
     @conditions = @user.conditions
 
     if current_user.id == @user.id
-			render action: :show
+			render action: :index
 		else
 			render file: 'public/denied'
 		end

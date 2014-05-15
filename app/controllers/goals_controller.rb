@@ -32,12 +32,9 @@ class GoalsController < ApplicationController
 	def show
 		@goal = Goal.find(params[:id])
 		@user = @goal.user
-		respond_to do |format|
-	      format.html # show.html.erb
-	      format.json { render json: @goal }
-	    end
 
-	    if current_user.id == @user.id
+
+	     if current_user.id == @user.id
 			render action: :show
 		else
 			render file: 'public/denied'
@@ -51,7 +48,7 @@ class GoalsController < ApplicationController
 		@completed_goals = @user.goals.get_completed
 
 		if current_user.id == @user.id
-			render action: :show
+			render action: :index
 		else
 			render file: 'public/denied'
 		end

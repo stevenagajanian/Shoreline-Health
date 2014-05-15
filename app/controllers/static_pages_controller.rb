@@ -2,6 +2,7 @@ class StaticPagesController < ApplicationController
   def home
   	if user_signed_in?
   		redirect_to current_user
+  		@user = current_user
   	end
   end
 
@@ -13,11 +14,14 @@ class StaticPagesController < ApplicationController
   end
 
   def help
+  	@user = current_user
   end
 
   def about
+  	@user = current_user
   end
 
   def community_stats
+  	@user = current_user
   end
 end

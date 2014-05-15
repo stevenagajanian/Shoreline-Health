@@ -1,6 +1,6 @@
 <%= render partial: 'layouts/profile_nav', object: @user %>
 <div class="container">
-	<div class="panel panel-primary">
+	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h2>
 				<%= link_to "Conditions", user_conditions_path(current_user), class: "" %> / <strong><%= @condition.name %></strong>
@@ -33,10 +33,6 @@
 								<%= f.label :information %><br />
 								<%= f.text_area :description, class:"form-control" %>
 							</div>
-							<div>
-								<%= f.label :upload %><br />
-								<%= f.file_field :upload, class:"form-control", as: :file  %>
-							</div>
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -55,13 +51,10 @@
 					at <%= post.created_at.strftime("%I:%M") %>
 				</div>
 				<div class="col-md-6">
-					<%= link_to image_tag(post.upload.url(:small)), condition_post_path( @condition, post) %>
-					<% if post.title? %><%= post.title %><br /><% end %>
-					<% if post.upload? %><%= link_to image_tag(post.upload.url(:small)), condition_post_path( @condition, post) %><% end %>
-
-					<%= link_to 'View full size', post_path( post) %>
-
-					<%= link_to "Edit", edit_condition_post_path(@condition, post) %>
+					
+					<h4><% if post.title? %><%= post.title %><br /><% end %>
+					<% if post.description? %><%= post.description %><br /><% end %></h4>
+				
 					<%= link_to "Delete", condition_post_path(@condition, post), method: :delete, data: { confirm: "Are you sure?" } %>
 				</div>
 			</div>

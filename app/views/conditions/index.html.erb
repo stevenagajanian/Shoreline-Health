@@ -1,4 +1,32 @@
-<%= render partial: 'layouts/profile_nav', object: @user %>
+<div class="container">
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<%= avatar_profile_link @user, {height: 40}, class: "pull-left media-object", style: "margin: 0px;  padding: 0px; padding-right: 10px;" %>
+			<ul class="nav pull-left">
+				<li>
+					<h3 style="margin: 6px;">
+						<%= @user.full_name %>
+					</h3>
+				</li>
+			</ul>
+			
+			<ul class="nav nav-pills pull-right">
+				<li>
+					<%= link_to "Profile", user_path(@user) %>
+				</li>
+				<li>
+					<%= link_to "Apps", user_apps_path(@user) %>
+				</li>
+				<li>
+					<%= link_to "Goals", user_goals_path(@user) %>
+				</li>
+				<li class="active">
+					<%= link_to "Conditions", user_conditions_path(@user) %>
+				</li>
+			</ul>
+		</div>
+	</div>	
+</div>
 <div class="container">
 	<div class="panel panel-primary">
 		<div class="panel-heading">
@@ -39,18 +67,12 @@
 
 			<% for condition in @conditions %>
 			<div class="row">
-				<div class="col-sm-2">
-					<h5>
-						<%= time_ago_in_words(condition.created_at) %>
-					</h5>
-				</div>
-				<div class="col-sm-10">
+				<div class="col-sm-12">
 					<h4>
 						<strong><%= condition.name %></strong>
 						<%= link_to "View full history", condition_posts_path(condition), class: "btn btn-primary pull-right" %>
 					</h4>
 					<p><%= condition.created_at.strftime("%B %d, %Y") %> - Present</p><br />
-					<p>Last Update: </p>
 				</div>
 			</div>
 			<hr>

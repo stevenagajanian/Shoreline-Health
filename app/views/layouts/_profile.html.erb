@@ -1,18 +1,18 @@
 <div class="panel-group" id="accordion">
-	<div class="panel panel-default">
+	<div class="panel panel-primary">
 		<div class="panel-heading">
 			<h2 class="panel-">
-				<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><i class="fa fa-user"></i> Basic Information</a>
+				<i class="fa fa-user"></i> Basic Information
 				<small>
 					<%= link_to "Update Profile",edit_registration_path(@user),  class: "btn btn-default pull-right" %>
 				</small>
 			</h2>
 		</div>
-		<div id="collapseOne" class="panel-collapse collapse in">
+		<div id=" One" class="panel-    in">
 			<div class="panel-body">
 				<% if @user.date_of_birth.presence %>
 				<strong>Birthday</strong>
-				<%= @user.date_of_birth.strftime("%B %d, %Y") %>
+				<%= @user.date_of_birth.strftime("%B %d, %Y") %> (Age <%= @user.date_of_birth_age %>)
 				<% end %><br>
 				<% if @user.gender.presence %>
 				<strong>Gender</strong>
@@ -24,32 +24,26 @@
 				<% end %><br>
 				<% if @user.bloodtype.presence %>
 				<strong>Bloodtype</strong>
-				<%= @user.bloodtype %>
+				<%= @user.bloodtype %><br>
 				<% end %>
-				<div class="row text-default">
-					<% if @user.date_of_birth.presence %>
-					<div class="col-sm-2">
-						<h3 class=""><strong><%= @user.date_of_birth_age %></strong><small> years old</small></h3>
-					</div>
-					<% end %>
-					<% if @user.heights.presence %><div class="col-sm-2">
-					<h3 class=""><strong><%= @user.heights.last.amount %></strong><small> height</small></h3>
-				</div><% end %>
-				<% if @user.weights.presence %>
-				<div class="col-sm-2">
-					<h3 class=""><strong><%= link_to @user.weights.last.amount, user_weights_path(@user) %></strong><small>lbs</small></h3>
-				</div>
+				<% if @user.address.presence %>
+				<strong>Address</strong>
+				<%= @user.address %><br>
+				<% end %>
+				<% if @user.bio.presence %>
+				<strong>Bio</strong>
+				<%= @user.bio %>
 				<% end %>
 			</div>
 		</div>
 	</div>
 </div>
 
-<div class="panel panel-default">
+<div class="panel  panel-primary">
 	<div class="panel-heading">
-		<h2 class="panel-"><a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><i class="fa fa-medkit"></i> Medical Information</a></h2>
+		<h2 class="panel-"><i class="fa fa-medkit"></i> Medical Information</h2>
 	</div>
-	<div id="collapseTwo" class="panel-collapse collapse out">
+	<div id=" Two" class="panel-    out">
 	<div class="panel-body">
 		<h3 class="text-">Allergies 
 			<%= link_to "Edit", user_allergies_path(@user), class: "pull- btn-sm btn btn-default" %> 
@@ -80,18 +74,18 @@
 </div>
 
 
-<div class="panel panel-default">
+<div class="panel  panel-primary">
 	<div class="panel-heading">
-		<h2 class="panel-"><a data-toggle="collapse" data-parent="#accordion" href="#collapseThree"><i class="fa fa-star"></i> Goals</a>
+		<h2 class="panel-"><i class="fa fa-star"></i> Goals
 			<small>
 				<%= link_to "View Goals", user_conditions_path(@user), class: "btn btn-default pull-right" %>
 			</small>
 		</h2>
 	</div>
-	<div id="collapseThree" class="panel-collapse collapse out">
+	<div id=" Three" class="panel-    out">
 	<div class="panel-body">
 		<% for goal in @unfinished_goals %>
-				<div class="col-sm-12 panel panel-default" style="margin: 0px;">
+				<div class="col-sm-12 panel  primary" style="margin: 0px;">
 					<h3>
 						<i class="fa fa-star fa-x"></i> <strong><%= link_to goal.name, goal %>
 						<%= link_to "View", goal_path(goal), class: "btn btn-default pull-right" %></strong>
@@ -108,63 +102,44 @@
 </div>
 </div>
 
-<div class="panel panel-default">
+<div class="panel  panel-primary">
 	<div class="panel-heading">
-		<h2 class="panel-"><a data-toggle="collapse" data-parent="#accordion" href="#collapseFour"><i class="fa fa-stethoscope"></i> Conditions</a>
+		<h2 class="panel-"><i class="fa fa-stethoscope"></i> Conditions
 			<small>
 				<%= link_to "Update Conditions", user_conditions_path(@user), class: "btn btn-default pull-right" %>
 			</small>
 		</h2>
 	</div>
-	<div id="collapseFour" class="panel-collapse collapse out">
+	<div id=" Four" class="panel-    out">
 	<div class="panel-body">
 		<% for condition in @user.conditions %>
-		<div class="row">
-			<div class="col-sm-2">
-				<h5>
-					<%= time_ago_in_words(condition.created_at) %>
-				</h5>
+			<div class="row">
+				<div class="col-sm-12">
+					<h4>
+						<strong><%= condition.name %></strong>
+						<%= link_to "View full history", condition_posts_path(condition), class: "btn btn-primary pull-right" %>
+					</h4>
+					<p><%= condition.created_at.strftime("%B %d, %Y") %> - Present</p><br />
+				</div>
 			</div>
-			<div class="col-sm-10">
-				<h4>
-					<strong><%= condition.name %></strong>
-					<%= link_to "View full history", condition_posts_path(condition), class: "btn btn-default pull-right" %>
-				</h4>
-				<p><%= condition.created_at.strftime("%B %d, %Y") %> - Present</p><br />
-				<p>Last Update: </p>
-			</div>
-		</div>
-		<hr>
+			<hr>
 		<% end %>
 	</div>
 </div>
 </div>
 
-<div class="panel panel-default">
+<div class="panel  panel-primary">
 	<div class="panel-heading">
-		<h2 class="panel-"><a data-toggle="collapse" data-parent="#accordion" href="#collapseFive"><i class="fa fa-bolt"></i> Fitness</a>
+		<h2 class="panel-"><i class="fa fa-bolt"></i> Fitness
 		
 		</h2>
 	</div>
-	<div id="collapseFive" class="panel-collapse collapse out">
+	<div >
 	<div class="panel-body">
 		<h3>Weight</h3>
 		<%= line_chart @user.weights.group(:created_at).maximum(:amount) %>
+		<h3>Height</h3>
+		<%= line_chart @user.heights.group(:created_at).maximum(:amount) %>
 	</div>
-</div>
-</div>
-
-<div class="panel panel-default">
-	<div class="panel-heading">
-		<h2 class="panel-"><a data-toggle="collapse" data-parent="#accordion" href="#collapseSix"><i class="fa fa-print"></i> Print</a>
-		
-		</h2>
-	</div>
-	<div id="collapseSix" class="panel-collapse collapse out">
-	<div class="panel-body">
-		<%= link_to user_path(@user, :format => "pdf"), class: "btn btn-lg, btn-default" do %><h2><center>
-		Profile (PDF)</center></h2><% end %>
-	</div>
-</div>
 </div>
 </div>

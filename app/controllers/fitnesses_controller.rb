@@ -6,7 +6,7 @@ class FitnessesController < ApplicationController
     @fitnesses = @user.fitnesses
 
     if current_user.id == @user.id
-			render action: :show
+			render action: :index
 		else
 			render file: 'public/denied'
 		end

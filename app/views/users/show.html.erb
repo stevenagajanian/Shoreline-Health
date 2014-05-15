@@ -9,22 +9,25 @@
 					</h3>
 				</li>
 			</ul>
+			
 			<ul class="nav nav-pills pull-right">
-				<li class="active"><a href="#home" data-toggle="tab">Profile</a></li>
-				<li><a href="#apps" data-toggle="tab">Apps</a></li>
+				<li class="active">
+					<%= link_to "Profile", user_path(@user) %>
+				</li>
+				<li>
+					<%= link_to "Apps", user_apps_path(@user) %>
+				</li>
 				<li>
 					<%= link_to "Goals", user_goals_path(@user) %>
 				</li>
 				<li>
 					<%= link_to "Conditions", user_conditions_path(@user) %>
 				</li>
-				<li>
-					<%= link_to "Fitness", user_fitnesses_path(@user) %>
-				</li>
 			</ul>
 		</div>
 	</div>	
 </div>
+
 <div class="container">
 	<!-- Tab panes -->
 	<div class="tab-content">
