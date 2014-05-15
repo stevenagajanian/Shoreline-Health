@@ -24,6 +24,7 @@ gem 'acts-as-taggable-on'
 gem 'groupdate'
 gem 'birthday'
 gem 'acts_as_commentable'
+gem 'activeadmin', github: 'gregbell/active_admin'
 
 # Use sqlite3 as the database for Active Record
 group :test do
