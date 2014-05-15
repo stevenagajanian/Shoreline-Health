@@ -67,23 +67,12 @@ GEM
       activemodel (>= 3.0)
       activesupport (>= 3.0)
       request_store (~> 1.0.3)
-    elasticsearch (0.4.11)
-      elasticsearch-api (= 0.4.11)
-      elasticsearch-transport (= 0.4.11)
-    elasticsearch-api (0.4.11)
-      multi_json
-    elasticsearch-transport (0.4.11)
-      faraday
-      multi_json
     erubis (2.7.0)
     execjs (2.0.2)
-    faraday (0.9.0)
-      multipart-post (>= 1.2, < 3)
     font-awesome-rails (4.0.3.1)
       railties (>= 3.2, < 5.0)
     groupdate (2.1.0)
       activerecord (>= 3.0.0)
-    hashie (2.1.1)
     hike (1.2.3)
     i18n (0.6.9)
     jbuilder (1.5.3)
@@ -115,7 +104,6 @@ GEM
     mocha (1.0.0)
       metaclass (~> 0.0.1)
     multi_json (1.9.2)
-    multipart-post (2.0.0)
     nifty-generators (0.4.6)
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
@@ -174,10 +162,6 @@ GEM
     sdoc (0.4.0)
       json (~> 1.8)
       rdoc (~> 4.0, < 5.0)
-    searchkick (0.7.2)
-      activemodel
-      elasticsearch (~> 0.4.11)
-      hashie
     simple_form (3.0.1)
       actionpack (>= 4.0.0, < 4.1)
       activemodel (>= 4.0.0, < 4.1)
@@ -252,7 +236,6 @@ DEPENDENCIES
   rails_12factor
   sass-rails (~> 4.0.2)
   sdoc
-  searchkick
   simple_form
   sqlite3
   state_machine

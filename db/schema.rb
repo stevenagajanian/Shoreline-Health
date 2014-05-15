@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140514222000) do
+ActiveRecord::Schema.define(version: 20140514232347) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -90,6 +90,10 @@ ActiveRecord::Schema.define(version: 20140514222000) do
     t.string   "activity"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
   end
 
   create_table "friendships", force: true do |t|
@@ -101,6 +105,19 @@ ActiveRecord::Schema.define(version: 20140514222000) do
   end
 
   add_index "friendships", ["state"], name: "index_friendships_on_state", using: :btree
+
+  create_table "goal_posts", force: true do |t|
+    t.integer  "user_id"
+    t.text     "words"
+    t.float    "number"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+    t.integer  "goal_id"
+  end
 
   create_table "goals", force: true do |t|
     t.integer  "user_id"

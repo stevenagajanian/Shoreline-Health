@@ -4,6 +4,12 @@ before_filter :authenticate_user!
   def index
     @user = User.find(params[:user_id])
     @conditions = @user.conditions
+
+    if current_user.id == @user.id
+			render action: :show
+		else
+			render file: 'public/denied'
+		end
   end
 
   def show
@@ -14,6 +20,12 @@ before_filter :authenticate_user!
         format.html # show.html.erb
         format.json { render json: @condition }
    end
+
+   if current_user.id == @user.id
+			render action: :show
+		else
+			render file: 'public/denied'
+		end
   end
 
   def new

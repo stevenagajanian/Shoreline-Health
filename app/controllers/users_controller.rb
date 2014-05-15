@@ -17,15 +17,34 @@ class UsersController < ApplicationController
 
 	def apps
 		@user = User.find(params[:user_id])
+		@unfinished_goals = @user.goals.get_unfinished
+
+		if current_user.id == @user.id
+			render action: :show
+		else
+			render file: 'public/denied'
+		end
 	end
 
 	def show
 		@user = User.find(params[:id])
 		@unfinished_goals = @user.goals.get_unfinished
+
+		if current_user.id == @user.id
+			render action: :show
+		else
+			render file: 'public/denied', formats: [:html]
+		end
 	end
 
 	def ecard
 		@user = User.find(params[:user_id])
+
+		if current_user.id == @user.id
+			render action: :show
+		else
+			render file: 'public/denied'
+		end
 	end
 
 	private

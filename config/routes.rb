@@ -25,6 +25,7 @@ Tabby::Application.routes.draw do
   resources :catalogs
   resources :statuses
   resources :documents
+  resources :goal_posts
   resources :medications
   resources :conditions do
     resources :posts
@@ -35,8 +36,10 @@ Tabby::Application.routes.draw do
   resources :weights
   resources :heights
   resources :allergies
+  resources :goal_posts
   resources :pictures
   resources :goals do
+    resources :goal_posts
     get 'mark_complete'
   end
 
@@ -49,8 +52,11 @@ Tabby::Application.routes.draw do
     end
     resources :allergies
     resources :statuses
+    resources :goal_posts
     resources :fitnesses
-    resources :goals
+    resources :goals do
+      resources :goal_posts
+    end
     resources :conditions
     resources :episodes do
       resources :posts
@@ -77,6 +83,7 @@ Tabby::Application.routes.draw do
   get "static_pages/about"
   get "static_pages/help"
   get "static_pages/community_stats"
+  get "static_pages/search"
 
   #Modals
   get "albums/form" => 'albums#form', as: :form

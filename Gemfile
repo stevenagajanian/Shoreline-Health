@@ -22,7 +22,6 @@ gem 'twitter-bootstrap-rails'
 gem 'chartkick'
 gem 'acts-as-taggable-on'
 gem 'groupdate'
-gem 'searchkick'
 gem 'birthday'
 gem 'acts_as_commentable'
 

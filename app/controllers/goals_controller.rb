@@ -12,6 +12,23 @@ class GoalsController < ApplicationController
   		redirect_to goal_path(@goal)
   	end
 
+  	def update
+
+		@goal = Goal.find(params[:id])
+
+		@goal.update_attributes(params.require(:foo).permit(:name))
+
+		respond_to do |format|
+			format.html { redirect_to goal_path(@goal), notice: 'Goal was successfully updated.' }
+			format.json { head :no_content }
+		end
+  	end
+
+  	def edit 
+  		@goal = Goal.find(params[:id])
+
+  	end
+
 	def show
 		@goal = Goal.find(params[:id])
 		@user = @goal.user
@@ -19,6 +36,12 @@ class GoalsController < ApplicationController
 	      format.html # show.html.erb
 	      format.json { render json: @goal }
 	    end
+
+	    if current_user.id == @user.id
+			render action: :show
+		else
+			render file: 'public/denied'
+		end
 	end
 
 	def index
@@ -26,6 +49,12 @@ class GoalsController < ApplicationController
 		@goals = @user.goals.all
 		@unfinished_goals = @user.goals.get_unfinished
 		@completed_goals = @user.goals.get_completed
+
+		if current_user.id == @user.id
+			render action: :show
+		else
+			render file: 'public/denied'
+		end
 	end
 
 	def new

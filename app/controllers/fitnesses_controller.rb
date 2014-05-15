@@ -4,6 +4,12 @@ class FitnessesController < ApplicationController
   def index
     @user = User.find(params[:user_id])
     @fitnesses = @user.fitnesses
+
+    if current_user.id == @user.id
+			render action: :show
+		else
+			render file: 'public/denied'
+		end
   end
 
   def show
@@ -13,6 +19,12 @@ class FitnessesController < ApplicationController
         format.html # show.html.erb
         format.json { render json: @fitness }
    end
+
+   if current_user.id == @user.id
+			render action: :show
+		else
+			render file: 'public/denied'
+		end
   end
 
   def new
