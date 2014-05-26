@@ -4,11 +4,11 @@
 
   <h1>Find A User</h1>
   <% @users.each do |user| %>
-  <div class="media">
-    <%= avatar_profile_link user, {height: 70}, class: "pull-left media-object" %>
-    <div class="media-body">s
-      <h4 class="media-heading"><%= user.first_name %></h4>
-        <%= link_to "Show", user, class: "btn btn-link" %>
+  <div class="well">
+    <%= avatar_profile_link user, {height: 70}, class: "pull-left media-object", style: "padding-right: 10px;" %>
+    <div class="media-body">
+      <h2 class="media-heading"><%= user.first_name %></h2>
+        <%= link_to "Visit Profile", user, class: "btn btn-link" %>
     </div>
   </div>
   <hr>
