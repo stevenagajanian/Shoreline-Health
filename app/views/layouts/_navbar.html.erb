@@ -8,12 +8,12 @@
 				<span class="icon-bar"></span>
 			</button>
 			<% if user_signed_in? %>
-				<%= link_to current_user, style: "padding-top: 16px; font-size: 18px;", class: "navbar-brand" do %>
-					<%= image_tag "HeartGroveNav.png", width: "160px;" %>
+				<%= link_to current_user, style: "padding-top: 26px; font-size: 18px;", class: "navbar-brand" do %>
+					Komodo
 				<% end %>
 			<% else %>
-				<%= link_to root_path, style: "padding-top: 16px; font-size: 18px;", class: "navbar-brand" do %>
-				<%= image_tag "HeartGroveLogo.png", width: "24px;" %>
+				<%= link_to root_path, style: "font-size: 18px;", class: "navbar-brand" do %>
+				Komodo
 				<% end %>
 			<% end %>
 		</div>
@@ -28,45 +28,45 @@
 						<table class="table table-responsive">
 	<tr>
 		<td>
-			<%= link_to user_heights_path(@user), class: "btn btn-block btn-default" do %>
+			<%= link_to user_heights_path(@user), class: "btn btn-block btn-primary" do %>
 			<i style="" class="fa fa-male fa-2x"></i><br>Height
 			<% end %>
 		</td>
 		<td>
-			<%= link_to user_weights_path(@user), class: "btn btn-block btn-default" do %>
+			<%= link_to user_weights_path(@user), class: "btn btn-block btn-primary" do %>
 			<i style="" class="fa fa-list fa-2x"></i><br>Weight
 			<% end %>
 		</td>
 		<td>
-			<%= link_to user_allergies_path(@user), class: "btn btn-block btn-default" do %>
+			<%= link_to user_allergies_path(@user), class: "btn btn-block btn-primary" do %>
 			<i style="" class="fa fa-leaf fa-2x"></i><br>Allergies
 			<% end %>
 		</td>
 
 		<td>
-			<%= link_to user_medications_path(@user), class: "btn btn-block btn-default" do %>
+			<%= link_to user_medications_path(@user), class: "btn btn-block btn-primary" do %>
 			<i style="" class="fa fa-medkit fa-2x"></i><br>Medications
 			<% end %> 
 		</td>
 	</tr>
 	<tr>
 		<td>
-			<%= link_to user_goals_path(@user), class: "btn btn-block btn-default" do %>
+			<%= link_to user_goals_path(@user), class: "btn btn-block btn-primary" do %>
 			<i style="" class="fa fa-star fa-2x"></i><br>Goals
 			<% end %> 
 		</td>
 		<td>
-			<%= link_to @user, class: "btn btn-block btn-default" do %>
+			<%= link_to @user, class: "btn btn-block btn-primary" do %>
 			<i style="" class="fa fa-cogs fa-2x"></i><br> Settings
 			<% end %>
 		</td>
 		<td>
-			<%= link_to user_path(@user), class: "btn btn-block btn-default" do %>
+			<%= link_to user_path(@user), class: "btn btn-block btn-primary" do %>
 			<i style="" class="fa fa-hospital-o fa-2x"></i><br>Emergency<br>Card
 			<% end %> 
 		</td>
 		<td>
-			<%= link_to user_conditions_path(@user), class: "btn btn-block btn-default" do %>
+			<%= link_to user_conditions_path(@user), class: "btn btn-block btn-primary" do %>
 			<i style="" class="fa fa-stethoscope fa-2x"></i><br>Conditions
 			<% end %>
 		</td>
@@ -92,12 +92,12 @@
 				<% if user_signed_in? %>
 				<li class="dropdown">
 					<%= link_to static_pages_about_path do %>
-						<i class="fa-2x fa fa-info"></i>
+						<i class="fa fa-info"></i>
 					<% end %>
 				</li>
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" style="" data-toggle="dropdown">
-						<i class="fa-2x fa fa-group"></i>
+						<i class="fa fa-group"></i>
 					</a>
 					<ul class="dropdown-menu">
 						<li>
@@ -111,7 +111,7 @@
 				
 				<li class="dropdown ">
 					<a href="#" class="dropdown-toggle" style="outline: none"data-toggle="dropdown">
-						<span style="padding-left: 5px; padding-top: 0px; padding-bottom: 0px; margin: 0px;"><i class="fa-2x fa fa-cogs"></i></span> 
+						<span style="padding-left: 5px; padding-top: 15px;"><i class="fa fa-cogs"></i></span> 
 					</a>
 					<ul class="dropdown-menu">
 						<li>
