@@ -18,7 +18,7 @@
 							
 					<%= f.date_select :date_of_birth, start_year: 1900 %>
 					<%= f.select :gender, gender: [:Male, :Female] %>
-					<%= f.select :doner?, donor: [:Yes, :No] %>
+					<%= f.select :doner?, doner: [:Yes, :No] %>
 					<%= f.select :bloodtype, bloodtype: ["Unknown", "O+", "O-", "A+", "A-", "B+", "B-", "AB+", "AB-"] %>
 					<%= f.text_area :address %>
 					<%= f.text_area :bio %>
