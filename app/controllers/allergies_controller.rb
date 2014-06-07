@@ -8,6 +8,7 @@ class AllergiesController < ApplicationController
 
   def show
     @allergy = Allergy.find(params[:id])
+    @user = @allergy.user
 
     respond_to do |format|
         format.html # show.html.erb

@@ -1,17 +1,36 @@
-<%= render "layouts/navbar" %>
-
 <div class="container">
+  <div class="panel panel-default">
+    <div class="panel-body">
+  <h1>Looking for someone?</h1>
+  <hr>
+  <p><i class="fa fa-lock"></i> <strong>Please note, we will never share your information with anyone. </strong>If you want another user to see any part of your information, you must connect with them directly and explicitly choose what information is shared with that person. 
+  </p>
 
-  <h1>Find A User</h1>
   <% @users.each do |user| %>
-  <div class="media">
-    <%= avatar_profile_link user, {height: 70}, class: "pull-left media-object" %>
-    <div class="media-body">s
-      <h4 class="media-heading"><%= user.first_name %></h4>
-        <%= link_to "Show", user, class: "btn btn-link" %>
+     <h4 class="media-heading">
+      <% if user.avatar.presence  %>
+      <%= avatar_profile_link user, {height: 70}, style: "margin: 0px; padding: 0px; padding-right: 14px;", class: "pull-left media-object" %>
+      <% else %>
+
+      <% end %><Strong><%= link_to user.full_name, user %></strong>
+    </h4>
+        <h3><%= link_to "Profile", user, class: "btn btn-sm btn-default" %> <a class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal"><i class="fa fa-hand"></i>Handshake</a></h3>
+  <hr>
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h3 class="modal-title" id="myModalLabel">Handshake</h3>
+        </div>
+        <div class="modal-body">
+          <h4>We apologize! We are still working to let you connect with other users. Check back soon!</h4>
+        </div>
+        
+      </div>
     </div>
   </div>
-  <hr>
   <% end %>
  
 </div>

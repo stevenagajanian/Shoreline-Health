@@ -1,0 +1,39 @@
+<div class="row">
+<div class="col-sm-4">
+<div class="panel panel-default panel-body">
+
+<h4 class="text-primary">Medical Conditions</h4>
+
+<% for condition in @user.conditions %>
+	<div class="row">
+		<div class="col-md-11 col-md-offset-1">
+			<p>
+				<%= condition.name %>
+			</p>
+		</div>
+	</div>
+<% end %>
+
+<br>
+<h4 class="text-primary">Medical Notes</h4>
+
+<br>
+<h4 class="text-primary">Allergies &amp; Reactions</h4>
+
+<% for allergy in @user.allergies %>
+	<div class="row">
+		<div class="col-md-11 col-md-offset-1">
+			<p>
+				<%= allergy.name %>
+			</p>
+		</div>
+	</div>
+<% end %>
+
+<br>
+<h4 class="text-primary">Medications</h4>
+
+
+</div>
+</div>
+</div>

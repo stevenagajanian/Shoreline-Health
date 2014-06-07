@@ -6,15 +6,15 @@
  *= require custom_bootstrap/custom_bootstrap
  *= require font-awesome
  *= require rails_bootstrap_forms
- *= require_tree .
+
 */
 
 @import url(http://fonts.googleapis.com/css?family=Varela+Round);
 
-
-
 body {
-	padding-top: 80px;
-	background: #eee;
+	padding-top: 80px;dsd
+	background: #eee
+	font-family: "Varela Round", sans-sarif, sarif;
 }
 
+font-family: "Varela Round", sans-sarif, sarif;
