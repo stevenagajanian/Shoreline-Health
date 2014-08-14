@@ -1,7 +1,8 @@
 Tabby::Application.routes.draw do
 
-  devise_for :admin_users, ActiveAdmin::Devise.config
-  ActiveAdmin.routes(self)
+  #devise_for :admin_users, ActiveAdmin::Devise.config
+  #ActiveAdmin.routes(self)
+  
   as :user do
     get '/register', to: 'devise/registrations#new', as: :register
     get '/login', to: 'devise/sessions#new', as: :login
@@ -27,8 +28,10 @@ Tabby::Application.routes.draw do
   resources :catalogs
   resources :statuses
   resources :documents
+  resources :pages
   resources :goal_posts
   resources :medications
+  resources :handshakes
   resources :conditions do
     resources :posts
   end
@@ -46,7 +49,9 @@ Tabby::Application.routes.draw do
   end
 
   resources :users do
+    resources :handshakes
     get 'apps'
+    get 'network'
     get 'ecard'
     resources :pictures
     resources :albums do

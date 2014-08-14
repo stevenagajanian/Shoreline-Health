@@ -26,7 +26,7 @@ class GoalsController < ApplicationController
 
   	def edit 
   		@goal = Goal.find(params[:id])
-
+  		@user = @goal.user
   	end
 
 	def show

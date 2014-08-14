@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140522091845) do
+ActiveRecord::Schema.define(version: 20140808175628) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -94,6 +94,14 @@ ActiveRecord::Schema.define(version: 20140522091845) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "page_id"
+  end
+
+  create_table "diagnoses", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "page_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "documents", force: true do |t|
@@ -117,6 +125,14 @@ ActiveRecord::Schema.define(version: 20140522091845) do
   end
 
   add_index "episodes", ["user_id"], name: "index_episodes_on_user_id", using: :btree
+
+  create_table "exercises", force: true do |t|
+    t.integer  "user_id"
+    t.text     "description"
+    t.string   "type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "features", force: true do |t|
     t.string   "name"
@@ -177,6 +193,19 @@ ActiveRecord::Schema.define(version: 20140522091845) do
     t.boolean  "completed"
   end
 
+  create_table "handshakes", force: true do |t|
+    t.string   "relationship_name"
+    t.string   "relationship_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "follower_id"
+    t.integer  "followed_id"
+  end
+
+  add_index "handshakes", ["followed_id"], name: "index_handshakes_on_followed_id", using: :btree
+  add_index "handshakes", ["follower_id", "followed_id"], name: "index_handshakes_on_follower_id_and_followed_id", unique: true, using: :btree
+  add_index "handshakes", ["follower_id"], name: "index_handshakes_on_follower_id", using: :btree
+
   create_table "heights", force: true do |t|
     t.integer  "user_id"
     t.float    "amount"
@@ -193,6 +222,14 @@ ActiveRecord::Schema.define(version: 20140522091845) do
   end
 
   add_index "medications", ["user_id"], name: "index_medications_on_user_id", using: :btree
+
+  create_table "pages", force: true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.string   "page_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "pictures", force: true do |t|
     t.integer  "album_id"
@@ -293,6 +330,7 @@ ActiveRecord::Schema.define(version: 20140522091845) do
     t.string   "doner"
     t.string   "bloodtype"
     t.text     "bio"
+    t.string   "role"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

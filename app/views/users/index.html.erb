@@ -3,7 +3,7 @@
     <div class="panel-body">
   <h1>Looking for someone?</h1>
   <hr>
-  <p><i class="fa fa-lock"></i> <strong>Please note, we will never share your information with anyone. </strong>If you want another user to see any part of your information, you must connect with them directly and explicitly choose what information is shared with that person. 
+  <p><i class="fa fa-lock"></i> <strong>Please note, Komodo will never share your information with anyone. </strong>If you want another user to see any part of your information, you must connect with them directly and explicitly choose what information is shared with that person. 
   </p>
 
   <% @users.each do |user| %>
@@ -14,10 +14,17 @@
 
       <% end %><Strong><%= link_to user.full_name, user %></strong>
     </h4>
-        <h3><%= link_to "Profile", user, class: "btn btn-sm btn-default" %> <a class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal"><i class="fa fa-hand"></i>Handshake</a></h3>
+        <h3>
+          <%= link_to "Profile", user, class: "btn btn-sm btn-default" %> 
+          <% if current_user.following?(user) %>
+          Following <%= link_to "Edit", user %>
+          <% else %>
+          <a class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal<%= user.id %>"><i class="fa fa-hand"></i>Handshake</a>
+          <% end %>
+        </h3>
   <hr>
 
-  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal fade" id="myModal<%= user.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -25,7 +32,16 @@
           <h3 class="modal-title" id="myModalLabel">Handshake</h3>
         </div>
         <div class="modal-body">
-          <h4>We apologize! We are still working to let you connect with other users. Check back soon!</h4>
+          <h4>How do you know <%= user.full_name %>?
+          <% unless current_user?(user) %>
+            <%= form_for(current_user.handshakes.build(followed_id: user.id)) do |f| %>
+              <%= f.hidden_field :followed_id %>
+              <%= f.select :relationship_type, relationship_type: [:Family, :Doctor, :Friend] %>
+              <%= f.submit "Handshake", class: "btn btn-primary" %>
+            <% end %>
+          <% end %>
+        </h4>
+          <h5>Please note, your information will still be private to <%= user.full_name%>. You can choose what information <%= user.full_name %> can see after connecting with them. </h5>
         </div>
         
       </div>

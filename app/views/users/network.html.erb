@@ -1,0 +1,57 @@
+<div class="container">
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<%= avatar_profile_link @user, {height: 40}, class: "pull-left media-object", style: "margin: 0px;  padding: 0px; padding-right: 10px;" %>
+			<ul class="nav pull-left">
+				<li>
+					<h3 style="margin: 6px;">
+						<%= @user.full_name %>
+					</h3>
+				</li>
+			</ul>
+			
+			<ul class="nav nav-pills pull-right">
+				<li>
+					<%= link_to "Profile", user_path(@user) %>
+				</li>
+				<li class="active">
+					<%= link_to "Network", user_network_path(@user) %>
+				</li>
+				<li class="">
+					<%= link_to "Data", user_apps_path(@user) %>
+				</li>
+				<li>
+					<%= link_to "Goals", user_goals_path(@user) %>
+				</li>
+				<li>
+					<%= link_to "Conditions", user_conditions_path(@user) %>
+				</li>
+			</ul>
+		</div>
+	</div>	
+</div>
+
+<div class="container"><div class="">
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<h2>Family</h2><hr>
+			Following <%= @user.followers.count %>
+			<br>
+			Followed: <p><%= @user.followed_users.count %></p>	
+			<% @user.followed_users.each do |f| %>
+			<h4><%= f.full_name %></h4>
+			<p>
+				<%= link_to "Profile", f %> | 
+				<%= link_to "Edit Relationship", f %> | 
+				<%= link_to "Message", f %>
+			</p>
+			<% end %>
+		</div>
+	</div>
+	<div class="panel col-sm- col-sm-offset- panel-default">
+		<div class="panel-body">
+			<h2>Caregivers</h2><hr>
+			
+		</div>
+	</div>
+</div>

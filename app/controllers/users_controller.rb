@@ -22,6 +22,19 @@ class UsersController < ApplicationController
 
 		if current_user.id == @user.id
 			render action: :apps
+		elsif current_user.following?(@user)
+			render action: :apps 
+		else
+			render file: 'public/denied'
+		end
+	end
+
+	def network
+		@user = User.find(params[:user_id])
+		#@unfinished_goals = @user.goals.get_unfinished
+
+		if current_user.id == @user.id
+			render action: :network
 		else
 			render file: 'public/denied'
 		end
@@ -33,6 +46,8 @@ class UsersController < ApplicationController
 
 		if current_user.id == @user.id
 			render action: :show
+		elsif current_user.following?(@user)
+			render action: :show 
 		else
 			render file: 'public/denied', formats: [:html]
 		end

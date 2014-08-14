@@ -15,7 +15,7 @@
 					<%= link_to "Profile", user_path(@user) %>
 				</li>
 				<li class="active">
-					<%= link_to "Apps", user_apps_path(@user) %>
+					<%= link_to "Data", user_apps_path(@user) %>
 				</li>
 				<li>
 					<%= link_to "Goals", user_goals_path(@user) %>
@@ -36,7 +36,7 @@
 		<div class="tab-pane active" id="apps">
 			<div class="panel panel-default">
 				<div class="panel-body">
-					<h2>My Apps</h2>
+					<h2>My Data</h2>
 					<%= render "layouts/apps" %>
 				</div>
 			</div>

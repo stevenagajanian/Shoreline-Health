@@ -3,7 +3,7 @@
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h2>
-				<%= link_to "Conditions", user_conditions_path(current_user), class: "" %> / <strong><%= @condition.name %></strong>
+				<%= link_to "Conditions", user_conditions_path(@user), class: "" %> / <strong><%= @condition.name %></strong>
 				<span class="pull-right"><button style="margin-left: 10px;" class="btn btn-default pull-" data-toggle="modal" data-target="#myModal">
 					+ Add Post
 				</button></span>
@@ -13,10 +13,14 @@
 						<span class="caret"></span>
 					</button>
 					<ul class="dropdown-menu">
-						<li><%= link_to "Delete", condition_path(@condition ), method: :delete, data: { confirm: "Are you sure?" } %></li>
+						<li><%= link_to "Delete", condition_path(@condition ), method: :delete  %></li>
 					</ul>
 				</span>
 			</h2>
+			<p>
+					<%= @condition.name %>
+					Name of shared condition: 	
+			</p>
 		</div>
 		<div class="panel-body">
 			<!-- Modal -->
@@ -28,7 +32,7 @@
 							<h3 class="modal-title" id="myModalLabel">New Information about <%= @condition.name %></h3>
 						</div>
 						<%= form_for [@condition, Post.new] do |f| %>
-						<div class="modal-body">
+						<div class="modal-body">	
 							<div>
 								<%= f.label :information %><br />
 								<%= f.text_area :description, class:"form-control" %>

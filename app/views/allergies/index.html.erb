@@ -21,6 +21,7 @@
 				<%= form_for Allergy.new do |f| %>
 				<div class="modal-body">
 					<div>
+						<%= f.select(:name, @user.allergies.all.collect {|a| [a.name, a.id]}) -%>
 						<%= f.label :name %><br />
 						<%= f.text_field :name, autofocus: true, class:"form-control" %>
 					</div>

@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+	ROLES = %w[patient doctor]
 	# Include default devise modules. Others available are:
 	# :confirmable, :lockable, :timeoutable and :omniauthable
 	devise :database_authenticatable, :registerable,
@@ -15,11 +16,20 @@ class User < ActiveRecord::Base
 	has_many :weights
 	has_many :episodes
 	has_many :heights
+	has_many :pages, through: :diagnoses
+	has_many :diagnoses
 	has_many :albums
+
+	has_many :handshakes, foreign_key: "follower_id", dependent: :destroy
+	has_many :followed_users, through: :handshakes, source: :followed
+	has_many :reverse_handshakes, foreign_key: "followed_id", class_name: "Handshake", dependent: :destroy
+	has_many :followers, through: :reverse_handshakes, source: :follower
+
 	has_many :conditions	
+	has_many :exercises
 
 	has_many :user_friendships
-
+	
 
 	has_many :friends, through: :user_friendships,
 	conditions: { user_friendships: { state: 'accepted' } }
@@ -46,8 +56,8 @@ accepts_nested_attributes_for :friends
 
 
 	has_attached_file :avatar, styles: {
-    large: "800x800>", medium: "300x200>", small: "260x180>", thumb: "80x80#"
-  }
+    		large: "800x800>", medium: "300x200>", small: "260x180>", thumb: "80x80#"
+  	}
 
 	validates :first_name, presence: true
 	validates :last_name, presence: true
@@ -56,6 +66,14 @@ accepts_nested_attributes_for :friends
 
 	def full_name
 		first_name + " " + last_name
+	end
+
+	def handshake!(other_user)
+		handshakes.create!(followed_id: other_user.id)
+	end
+
+	def following?(other_user)
+		handshakes.find_by_followed_id(other_user.id)
 	end
 
 	def gravatar_url
@@ -69,4 +87,9 @@ accepts_nested_attributes_for :friends
 	def has_blocked?(other_user)
 		blocked_friends.include?(other_user)
 	end
+
+	private
+		def create_remember_token
+     	 	self.remember_token = SecureRandom.urlsafe_base64
+   		 end
 end

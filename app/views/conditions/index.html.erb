@@ -55,6 +55,11 @@
 								<%= f.label :description %><br />
 								<%= f.text_area :description, class:"form-control" %>
 							</div>
+							<div>
+								<%= f.label :page %><br />
+								<%= f.collection_select( :page_id, Page.all, :id, :name, include_blank: "None") %><br />
+								<%= f.hidden_field :page_id %>
+							</div>
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -73,6 +78,7 @@
 						<%= link_to "View full history", condition_posts_path(condition), class: "btn btn-primary pull-right" %>
 					</h4>
 					<p><%= condition.created_at.strftime("%B %d, %Y") %> - Present</p><br />
+					<%=  %>
 				</div>
 			</div>
 			<hr>

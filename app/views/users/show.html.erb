@@ -18,7 +18,10 @@
 							<%= link_to "Profile", user_path(@user) %>
 						</li>
 						<li>
-							<%= link_to "Apps", user_apps_path(@user) %>
+							<%= link_to "Network", user_network_path(@user) %>
+						</li>
+						<li>
+							<%= link_to "Data", user_apps_path(@user) %>
 						</li>
 						<li>
 							<%= link_to "Goals", user_goals_path(@user) %>
@@ -36,8 +39,10 @@
 <div class="container">
 	<!-- Tab panes -->
 	<div class="tab-content">
-		<div class="tab-pane active" id="home">
-			<%= render "layouts/profile" %>
+		<div class="tab-pane active" id="home"><% if current_user.following?(@user) %>
+				<%= @user.full_name %> is family to you
+			<% end %>
+			<%= render "layouts/profile2" %>
 		</div>
 		<div class="tab-pane" id="apps">
 			<div class="panel panel-default">

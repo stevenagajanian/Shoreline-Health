@@ -7,6 +7,12 @@ class PostsController < ApplicationController
     @condition = Condition.find(params[:condition_id])
     @posts = @condition.posts.all
     @user = @condition.user
+
+    if current_user.id == @user.id
+      render action: :index
+    else
+      render file: 'public/denied'
+    end
   end
 
   def show
@@ -57,6 +63,10 @@ class PostsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def post_params
     params.require(:post).permit(:upload, :uplaod_file_name, :user_id, :title, :description)
+  end
+
+  def find_page
+    @page = Page.find(params[:page_id])
   end
 
   def find_condition
