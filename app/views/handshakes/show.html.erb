@@ -1,0 +1,12 @@
+<%= render partial: 'layouts/profile_nav', object: @user %>
+<div class="container">
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<%= link_to "View Full Network", user_network_path(current_user) %><br>
+		Showing relationship for <%= @handshake.follower.full_name %> and <%= @handshake.followed.full_name %>. 
+		<p>
+			What information is <%= @handshake.followed.full_name %> allowed to see of yours?
+		</p>
+		</div>
+	</div>
+</div>

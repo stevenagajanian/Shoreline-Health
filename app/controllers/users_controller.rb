@@ -78,7 +78,7 @@ class UsersController < ApplicationController
 	end
 
 	def user_params
-		params.require(:user).permit(:bio, :gender, :doner, :bloodtype, :address, :date_of_birth, :email, :profile_name, :first_name, :last_name, :avatar, goals_attributes: [:unfinished_goals, :user_id],allergies_attributes: [ :user_id, :name, :description ], pictures_attributes: [ :user_id, :album_id, :caption], albums_attributes: [ :user_id, pictures_attributes: [:user_id, :album_id]], friends_attributes: [ :email ] )
+		params.require(:user).permit(:bio, :gender, :doner, :bloodtype, :address, :date_of_birth, :email, :profile_name, :first_name, :last_name, :avatar, conditions_attributes: [:page_id], goals_attributes: [:unfinished_goals, :user_id], allergies_attributes: [ :user_id, :name, :description ], pictures_attributes: [ :user_id, :album_id, :caption], albums_attributes: [ :user_id, pictures_attributes: [:user_id, :album_id]], friends_attributes: [ :email ] )
 	end
 
 end

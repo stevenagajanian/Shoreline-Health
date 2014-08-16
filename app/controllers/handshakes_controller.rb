@@ -8,6 +8,16 @@ class HandshakesController < ApplicationController
 		end
 	end
 
+	def show
+		@handshake = Handshake.find(params[:id])
+		@user = current_user
+
+		respond_to do |format|
+	        format.html # show.html.erb
+	        format.json { render json: @handshake }
+	    end
+	end
+
 	private
 
 	def handshake_params

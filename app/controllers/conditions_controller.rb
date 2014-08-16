@@ -1,6 +1,6 @@
 class ConditionsController < ApplicationController
 before_filter :authenticate_user!
- before_filter :find_page, only: [:show, :new, :create]
+ #before_filter :find_page, only: [:show, :new, :create]
 
   def index
     @user = User.find(params[:user_id])
@@ -45,12 +45,12 @@ before_filter :authenticate_user!
   end
 
   def create
-    @page = Page.find(params[:page_id])
+    #@page = Page.find(params[:page_id])
     @condition = current_user.conditions.new( condition_params)
 
     respond_to do |format|
       if @condition.save
-        form  at.html { redirect_to user_conditions_path(@condition.user), notice: 'Status was successfully created.' }
+        format.html { redirect_to user_conditions_path(@condition.user), notice: 'Status was successfully created.' }
         format.json { render json: @condition, status: :created, location: @condition }
       else
         format.html { render action: "new" }
@@ -65,7 +65,7 @@ before_filter :authenticate_user!
   	params.require(:condition).permit(:name, :description, :page_id)
   end
 
-  def find_page
-    @page = Page.find(params[:page_id])
-  end
+  #def find_page
+  #  @page = Page.find(params[:page_id])
+ # end
 end

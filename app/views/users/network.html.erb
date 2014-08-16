@@ -42,7 +42,7 @@
 			<h4><%= f.full_name %></h4>
 			<p>
 				<%= link_to "Profile", f %> | 
-				<%= link_to "Edit Relationship", f %> | 
+				<%= link_to "Edit Relationship", current_user.find_handshake(f) %> | 
 				<%= link_to "Message", f %>
 			</p>
 			<% end %>

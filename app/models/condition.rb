@@ -1,7 +1,8 @@
 class Condition < ActiveRecord::Base
 	belongs_to :user
 	has_many :posts
-	has_one :page
+	belongs_to :page
+	#validates :page_id, presence: true
 
 	def self.search(search)
   		where('name LIKE?', "%#{search}%")

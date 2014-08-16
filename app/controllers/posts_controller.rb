@@ -5,7 +5,7 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     @condition = Condition.find(params[:condition_id])
-    @posts = @condition.posts.all
+    @posts = @condition.posts.order("created_at DESC")
     @user = @condition.user
 
     if current_user.id == @user.id

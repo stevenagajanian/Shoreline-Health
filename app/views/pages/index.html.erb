@@ -1,7 +1,7 @@
 <div class="container">
 	<div class="panel panel-default">
 		<div class="panel-body">
-			<h2><strong>Pages Index</strong><span class="pull-right"></span>
+			<h2><strong>All Conditions</strong><span class="pull-right"></span>
 				<a class="btn btn-default pull-right" data-toggle="modal" data-target="#myModal">
 					Add Page
 				</a>
@@ -45,6 +45,7 @@
 				<h4 class="">
 					<Strong><%= link_to page.name, page %></strong> - <%= page.page_type %>
 				</h4>
+				<%= page.users.count %> people are tracking this condition. 
 				<h3>
 					<%= link_to "Show", page, class: "btn btn-sm btn-default" %>
 				</h3>

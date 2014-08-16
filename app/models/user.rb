@@ -76,6 +76,10 @@ accepts_nested_attributes_for :friends
 		handshakes.find_by_followed_id(other_user.id)
 	end
 
+	def find_handshake(other_user)
+  		handshakes.find_by_followed_id(other_user.id)
+  	end
+
 	def gravatar_url
 		stripped_email = email.strip
 		downcased_email = stripped_email.downcase

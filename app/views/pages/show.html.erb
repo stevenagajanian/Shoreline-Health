@@ -2,13 +2,15 @@
 	<div class="panel panel-default">
 		<div class="panel-body">
 
-<p>
+<h3>
 <%= @page.name %>
+</h3>
+<p>
+<%= @page.users.count %> people are tracking this condition.
 </p>
 <p>
-Users with this condition:
-</p>
-<p>
-Top cures:
+	<%= link_to "Symptoms", @page, class: "btn btn-default btn-sm" %>
+	<%= link_to "Treatments", @page, class: "btn btn-default btn-sm" %>
+	<%= link_to "Tracking	", @page, class: "btn btn-default btn-sm" %>
 </p>
 <%= link_to "Back", pages_path %>
