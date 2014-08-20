@@ -3,13 +3,15 @@
  * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
  * the top of the compiled file, but it's generally better to create a new file per style scope.
  *= require_self
- *= require custom_bootstrap/custom_bootstrap
- *= require custom_bootstrap/mixins
- *= require custom_bootstrap/variables
+ * require custom_bootstrap/custom_bootstrap
+ * require custom_bootstrap/mixins
+ * require custom_bootstrap/variables
  *= require font-awesome
  *= require rails_bootstrap_forms
 */
-
+@import "bootswatch/lumen/variables";
+@import "bootstrap";
+@import "bootswatch/lumen/bootswatch";
 @import url(http://fonts.googleapis.com/css?family=Varela+Round);
 
 body {

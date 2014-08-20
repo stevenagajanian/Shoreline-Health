@@ -43,6 +43,7 @@ class UsersController < ApplicationController
 	def show
 		@user = User.find(params[:id])
 		@unfinished_goals = @user.goals.get_unfinished
+		@conditions = @user.conditions.order("created_at DESC")
 
 		if current_user.id == @user.id
 			render action: :show

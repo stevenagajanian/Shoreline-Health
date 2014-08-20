@@ -1,37 +1,46 @@
 <div class="row">
-	<div class="col-sm-4">
+	<div class="col-sm-3">
+		<div class="panel panel-default">
+			<div class="panel-body">
+		<%= link_to current_user, class: "btn btn-block btn-default" do %><i class="fa fa-plus"></i> Add Post<% end %>
+		<%= link_to current_user, class: "btn btn-block btn-default" do %><i class="fa fa-upload"></i> Upload<% end %>
+		</div></div>
 		<div class="panel panel-default panel-body">
-			<h4 class="text-primary">Medical Conditions</h4>
+			<h4 class="">Medical Conditions</h4>
 
 			<% for condition in @user.conditions %>
 			<div class="row">
 				<div class="col-md-11 col-md-offset-1">
 					<p>
-						<%= link_to condition.name, condition_posts_path(condition) %>
+						<% if condition.page.presence %>
+						<%= link_to condition.page.name, condition_posts_path(condition), class: "btn btn-default" %>
+						<% else %>
+						<%= link_to condition.name, condition_posts_path(condition), class: "btn btn-default" %>
+						<% end %>
 					</p>
 				</div>
 			</div>
 			<% end %>
 
-			<h4 class="text-primary">Allergies &amp; Reactions</h4>
+			<h4 class="">Allergies &amp; Reactions</h4>
 
 			<% for allergy in @user.allergies %>
 			<div class="row">
 				<div class="col-md-11 col-md-offset-1">
 					<p>
-						<%= allergy.name %>
+						<%= link_to allergy.name, allergy, class: "btn btn-default" %>
 					</p>
 				</div>
 			</div>
 			<% end %>
 
-			<h4 class="text-primary">Medications</h4>
+			<h4 class="">Medications</h4>
 
 			<% for allergy in @user.medications %>
 			<div class="row">
 				<div class="col-md-11 col-md-offset-1">
 					<p>
-						<%= allergy.name %>
+						<%= link_to allergy.name, allergy, class: "btn btn-default" %>
 					</p>
 				</div>
 			</div>
@@ -39,13 +48,13 @@
 		</div>
 		<div class="panel panel-default panel-body">
 
-			<h4 class="text-primary">Current Goals</h4>
+			<h4 class="">Current Goals</h4>
 
-			<% for condition in @user.goals.get_unfinished %>
+			<% for goal in @user.goals.get_unfinished %>
 			<div class="row">
 				<div class="col-md-11 col-md-offset-1">
 					<p>
-						<%= condition.name %>
+						<%= link_to goal.name, goal, class: "btn btn-success" %>
 					</p>
 				</div>
 			</div>
@@ -53,13 +62,33 @@
 
 		</div>
 	</div>
-	<div class="col-sm-8">
+	<div class="col-sm-9">
 		<div class="panel panel-default">
 			<div class="panel-body">
-				<h3>Weight</h3>
-				<%= line_chart @user.weights.group(:created_at).maximum(:amount) %>
-				<h3>Height</h3>
-				<%= line_chart @user.heights.group(:created_at).maximum(:amount) %>
+				<h2>Activity Feed</h2><hr>
+				<% @conditions.each do |f| %>
+					<% f.posts.each do |postX| %>
+						<div class="row">
+							<div class="col-sm-1">
+								<% if postX.user.presence %>
+									<%= avatar_profile_link3 postX.user, {height: 25}, class: "img-rounded media-object", style: "padding-left: 10px;" %>
+								<% end %>
+							</div>
+							<div class="col-sm-2">
+
+								<%= postX.user.full_name %><br>
+								<%= postX.created_at.strftime("%B %d, %Y") %> <br>
+								at <%= postX.created_at.strftime("%I:%M") %> 
+							</div>
+							<div class="col-md-9">
+								<h4><% if postX.title? %><%= postX.title %><br /><% end %>
+								<% if postX.description? %><%= postX.description %><br /><% end %></h4>
+								<%= link_to condition_posts_path(postX.condition), class: "pull-right" do %><%= postX.condition.name%><% end %>
+							</div>
+						</div>
+						<hr>
+					<% end %>
+				<% end %>
 			</div>
 		</div>
 	</div>

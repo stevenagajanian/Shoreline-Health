@@ -35,9 +35,6 @@
 	<div class="panel panel-default">
 		<div class="panel-body">
 			<h2>Family</h2><hr>
-			Following <%= @user.followers.count %>
-			<br>
-			Followed: <p><%= @user.followed_users.count %></p>	
 			<% @user.followed_users.each do |f| %>
 			<h4><%= f.full_name %></h4>
 			<p>

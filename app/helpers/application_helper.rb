@@ -8,7 +8,17 @@ module ApplicationHelper
 
 	def avatar_profile_link(user, image_options={}, html_options={})
 		avatar_url = user.avatar? ? user.avatar.url(:thumb) : nil
-		link_to(image_tag(avatar_url, image_options), user_path(user), html_options)
+		link_to(image_tag(avatar_url, {height: 40, class: "img-circle"}), user_path(user), html_options)
+	end
+
+	def avatar_profile_link2(user, image_options={}, html_options={})
+		avatar_url = user.avatar? ? user.avatar.url(:thumb) : nil
+		link_to(image_tag(avatar_url, {height: 55, class: "img-circle pull-left", style: ""}), user_path(user), html_options)
+	end
+
+	def avatar_profile_link3(user, image_options={}, html_options={})
+		avatar_url = user.avatar? ? user.avatar.url(:thumb) : nil
+		link_to(image_tag(avatar_url, {height: 35, class: "img-circle pull-left", style: ""}), user_path(user), html_options)
 	end
 
 	def flash_class(type)

@@ -5,11 +5,37 @@ class PagesController < ApplicationController
 
 	def show
 		@page = Page.find(params[:id])
+		@user = @page.user
+		#@conditions = @page.conditions
 
 		respond_to do |format|
 			format.html # show.html.erb
 			format.json { render json: @page }
 		end
+	end
+
+	def edit
+		@page = Page.find(params[:id])
+		@user = @page.user
+		#@conditions = @page.conditions
+
+		respond_to do |format|
+			format.html # show.html.erb
+			format.json { render json: @page }
+		end
+	end
+
+	def update
+		@page = Page.find(params[:id])
+		respond_to do |format|
+	      if @page.update(page_params)
+	        format.html { redirect_to @page, notice: 'Page was successfully updated.' }
+	        format.json { head :no_content }
+	      else
+	        format.html { render action: 'edit' }
+	        format.json { render json: @page.errors, status: :unprocessable_entity }
+	      end
+	    end
 	end
 
 	def new

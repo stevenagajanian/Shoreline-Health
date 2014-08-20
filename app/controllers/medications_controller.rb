@@ -15,6 +15,15 @@ class MedicationsController < ApplicationController
    end
   end
 
+  def edit
+    @medication = Medication.find(params[:id])
+
+    respond_to do |format|
+        format.html # show.html.erb
+        format.json { render json: @medication }
+   end
+  end
+
   def new
   	@medication = current_user.medications.new
 

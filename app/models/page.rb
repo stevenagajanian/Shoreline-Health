@@ -3,6 +3,6 @@ class Page < ActiveRecord::Base
 	belongs_to :user
 	#has_many :conditions
 
-	has_many :diagnoses
-	has_many :users, through: :diagnoses
+	has_many :conditions
+	has_many :users, through: :conditions
 end

@@ -74,7 +74,13 @@
 			<div class="row">
 				<div class="col-sm-12">
 					<h4>
-						<strong><%= condition.name %></strong> <%= condition.page_id %>
+						<strong>
+						<% if condition.page.presence %>
+							<%= link_to condition.page.name, condition_posts_path(condition) %>
+						<% else %>
+							<%= link_to condition.name, condition_posts_path(condition) %>
+						<% end %>
+						</strong>
 						<%= link_to "View", condition_posts_path(condition), class: "btn btn-primary pull-right" %>
 					</h4>
 					<p><%= condition.created_at.strftime("%B %d, %Y") %> - Present</p><br />

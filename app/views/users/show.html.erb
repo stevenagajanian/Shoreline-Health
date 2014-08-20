@@ -40,7 +40,7 @@
 	<!-- Tab panes -->
 	<div class="tab-content">
 		<div class="tab-pane active" id="home"><% if current_user.following?(@user) %>
-				<%= @user.full_name %> is family to you
+				<%= @user.full_name %> is family to you. <%= link_to "Modify your handshake.", current_user.find_handshake(@user) %>
 			<% end %>
 			<%= render "layouts/profile2" %>
 		</div>

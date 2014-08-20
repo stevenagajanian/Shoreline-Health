@@ -3,7 +3,7 @@
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h2>
-				<%= link_to "Conditions", user_conditions_path(@user), class: "" %> / <strong><%= @condition.name %></strong>
+				<%= link_to "Conditions", user_conditions_path(@user), class: "" %> / <strong><% if @condition.page.presence %><%= @condition.page.name %><% else %><%= @condition.name %></strong><% end %>
 				<span class="pull-right"><button style="margin-left: 10px;" class="btn btn-default pull-" data-toggle="modal" data-target="#myModal">
 					+ Add Post
 				</button></span>
@@ -27,8 +27,12 @@
 				</span>
 			</h2><% if @condition.page.presence %>
 			<p>
-					Name of shared condition: <%= link_to @condition.page.name, @condition.page %> 	
+					<i class="fa fa-globe"></i> <%= link_to @condition.page.name, @condition.page %> 	| <i class="fa fa-medkit"></i> Add Treatment?
 			</p><% end %>
+			Sort: <%= link_to "All", current_user, class: "btn btn-default" %>
+			 <%= link_to "Patient Notes", current_user, class: "btn btn-default" %>
+			 <%= link_to "Doctor Notes", current_user, class: "btn btn-default" %>
+			 <%= link_to "Test Results", current_user, class: "btn btn-default" %>
 		</div>
 		<div class="panel-body">
 			<!-- Modal -->
@@ -59,16 +63,20 @@
 
 			<% @posts.each do |post| %>
 			<div class="row">
+				<div class="col-sm-1">
+					<% if @user.presence %><%= avatar_profile_link2 @user, {height: 35}, class: "img-rounded media-object", style: "text-align: center; margin: 0px;  padding: 0px; padding-right: 10px;" %>
+				</div>
 				<div class="col-sm-2">
-					Posted on <%= post.user %> <br>
+					Posted by <%= @user.full_name %><% end %> <br>
 					<%= post.created_at.strftime("%B %d, %Y") %> <br>
-					at <%= post.created_at.strftime("%I:%M") %> by <%= post.user_id %>
+					at <%= post.created_at.strftime("%I:%M") %>
 				</div>
 				<div class="col-md-6">
 					
 					<h4><% if post.title? %><%= post.title %><br /><% end %>
 					<% if post.description? %><%= post.description %><br /><% end %></h4>
 				
+					<%= link_to "Edit", condition_post_path(@condition, post), method: :edit %> | 
 					<%= link_to "Delete", condition_post_path(@condition, post), method: :delete, data: { confirm: "Are you sure?" } %>
 				</div>
 			</div>
