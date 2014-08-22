@@ -34,6 +34,7 @@ Tabby::Application.routes.draw do
   resources :handshakes
   resources :conditions do
     resources :posts
+    resources :trackers
   end
   resources :episodes do
     resources :posts
@@ -50,6 +51,7 @@ Tabby::Application.routes.draw do
 
   resources :users do
     resources :handshakes
+    resources :trackers
     get 'apps'
     get 'network'
     get 'ecard'

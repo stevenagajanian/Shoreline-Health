@@ -27,7 +27,9 @@
 				</span>
 			</h2><% if @condition.page.presence %>
 			<p>
-					<i class="fa fa-globe"></i> <%= link_to @condition.page.name, @condition.page %> 	| <i class="fa fa-medkit"></i> Add Treatment?
+					<i class="fa fa-globe"></i> <%= link_to @condition.page.name, @condition.page, class: "btn" %> 	| <i class="fa fa-medkit"></i><a style="margin-s: 10px;" class=" pull-" data-toggle="modal" data-target="#newTreatment">
+					Add Treatment
+				</a>
 			</p><% end %>
 			Sort: <%= link_to "All", current_user, class: "btn btn-default" %>
 			 <%= link_to "Patient Notes", current_user, class: "btn btn-default" %>
@@ -35,8 +37,32 @@
 			 <%= link_to "Test Results", current_user, class: "btn btn-default" %>
 		</div>
 		<div class="panel-body">
+			<!-- Modal Treatment-->
+			<div class="modal fade" id="newTreatment" tabindex="-1" role="dialog" aria-labelledby="myMo	dalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h3 class="modal-title" id="myModalLabel">New Treatment for <%= @condition.name %></h3>
+						</div>  
+						
+						<%= form_for [@condition, Tracker.new], url: {user_id: current_user.id} do |f| %>
+						<div class="modal-body">	
+							<div>
+								<%= f.hidden_field :user_id %>
+								<%= f.collection_select( :medication_id, Page.all, :id, :name, include_blank: "None") %>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							<%= f.submit "Save New Treatment", class: "btn btn-primary" %>
+						</div>
+						<% end %>
+					</div>
+				</div>
+			</div>
 			<!-- Modal -->
-			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myMo	dalLabel" aria-hidden="true">
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
