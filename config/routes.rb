@@ -28,12 +28,14 @@ Tabby::Application.routes.draw do
   resources :catalogs
   resources :statuses
   resources :documents
+  resources :trackers
   resources :pages
   resources :goal_posts
   resources :medications
   resources :handshakes
   resources :conditions do
     resources :posts
+    get 'privacy'
     resources :trackers
   end
   resources :episodes do

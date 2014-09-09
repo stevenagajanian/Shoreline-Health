@@ -45,7 +45,7 @@ class MedicationsController < ApplicationController
 
     respond_to do |format|
       if @medication.save
-        format.html { redirect_to user_medications_path(@medication.user), notice: 'Status was successfully created.' }
+        format.html { redirect_to user_medications_path(@medication.user), notice: 'Medication was successfully created.' }
         format.json { render json: @medication, status: :created, location: @medication }
       else
         format.html { render action: "new" }

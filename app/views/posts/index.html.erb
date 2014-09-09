@@ -14,7 +14,7 @@
 					</button>
 					<ul class="dropdown-menu">
 						<li>
-							<%= link_to "Who can see these records?", condition_path(@condition) %>
+							<%= link_to "Who can see these records?", condition_privacy_path(@condition) %>
 						</li>
 						<li>
 							<%= link_to "Add Doctor", condition_path(@condition) %>
@@ -28,7 +28,7 @@
 			</h2><% if @condition.page.presence %>
 			<p>
 					<i class="fa fa-globe"></i> <%= link_to @condition.page.name, @condition.page, class: "btn" %> 	| <i class="fa fa-medkit"></i><a style="margin-s: 10px;" class=" pull-" data-toggle="modal" data-target="#newTreatment">
-					Add Treatment
+					Add Treatment<%= link_to "Treatments", condition_trackers_path(@condition) %>
 				</a>
 			</p><% end %>
 			Sort: <%= link_to "All", current_user, class: "btn btn-default" %>
@@ -46,11 +46,12 @@
 							<h3 class="modal-title" id="myModalLabel">New Treatment for <%= @condition.name %></h3>
 						</div>  
 						
-						<%= form_for [@condition, Tracker.new], url: {user_id: current_user.id} do |f| %>
+						<%= form_for [@condition, Tracker.new], controller: "tracker", url: {user_id: current_user.id, condition_id: @condition.id} do |f| %>
 						<div class="modal-body">	
 							<div>
 								<%= f.hidden_field :user_id %>
-								<%= f.collection_select( :medication_id, Page.all, :id, :name, include_blank: "None") %>
+								<%= f.hidden_field :condition_id %>
+								<%= f.collection_select( :medication_id, @user.medications.all, :id, :name, include_blank: "None") %>
 							</div>
 						</div>
 						<div class="modal-footer">

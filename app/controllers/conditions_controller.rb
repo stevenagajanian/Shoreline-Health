@@ -27,6 +27,11 @@ before_filter :authenticate_user!
 
   end
 
+  def privacy
+    @condition = Condition.find(params[:condition_id])
+    @user = @condition.user
+  end
+
   def new
      @page = Page.find(params[:page_id])
   	@condition = current_user.conditions.new

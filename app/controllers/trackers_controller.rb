@@ -1,7 +1,9 @@
 class TrackersController < ApplicationController
+	before_filter :find_condition, only: [:index, :new, :create]
+
 	def index
 		@condition = Condition.find(params[:condition_id])
-		@posts = @condition.posts.order("created_at DESC")
+		@trackers = @condition.trackers.order("created_at DESC")
 		@user = @condition.user
 
 		if current_user.id == @user.id
@@ -12,44 +14,45 @@ class TrackersController < ApplicationController
 	end
 
 	def show
-		@post = Post.find(params[:id])
+		@tracker = Tracker.find(params[:id])
+		@user = @tracker.condition.user
 		respond_to do |format|
 		format.html # show.html.erb
-		format.json { render json: @post }
+		format.json { render json: @tracker }
 		end
 	end
 
-	# GET /posts/new
+	# GET /trackers/new
 	def new
 		@condition = Condition.find(params[:condition_id])
 		@tracker = @condition.trackers.new
 		@user = @condition.user
 	end
 
-	# POST /posts
-	# POST /posts.json
+	# tracker /trackers
+	# tracker /trackers.json
 	def create
-		@post = @condition.posts.new( post_params)
+		@tracker = @condition.trackers.new( tracker_params)
 
 		respond_to do |format|
-		if @post.save
-			format.html { redirect_to condition_posts_path(@condition), notice: 'Post was successfully created.' }
-			format.json { render json: @post, status: :created, location: @post }
+		if @tracker.save
+			format.html { redirect_to condition_trackers_path(@condition), notice: 'Treatment was successfully added.' }
+			format.json { render json: @tracker, status: :created, location: @tracker }
 		else
 			format.html { render action: "new" }
-			format.json { render json: @post.errors, status: :unprocessable_entity }
+			format.json { render json: @tracker.errors, status: :unprocessable_entity }
 		end
 		end
 	end
 
 
-	# DELETE /posts/1
-	# DELETE /posts/1.json
+	# DELETE /trackers/1
+	# DELETE /trackers/1.json
 	def destroy
-		@post = Post.find(params[:id])
-		@post.destroy
+		@tracker = Tracker.find(params[:id])
+		@tracker.destroy
 		respond_to do |format|
-		format.html { redirect_to condition_posts_path(@post.condition) }
+		format.html { redirect_to condition_trackers_path(@tracker.condition) }
 		format.json { head :no_content }
 		end
 	end
@@ -57,7 +60,11 @@ class TrackersController < ApplicationController
 	private
 
 	# Never trust parameters from the scary internet, only allow the white list through.
-	def post_params
-		params.require(:post).permit(:upload, :uplaod_file_name, :user_id, :title, :description)
+	def tracker_params
+		params.require(:tracker).permit(:user_id, :condition_id, :medication_id)
+	end
+
+	def find_condition
+		@condition = Condition.find(params[:condition_id])
 	end
 end

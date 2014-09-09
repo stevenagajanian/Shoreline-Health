@@ -38,24 +38,15 @@
 
 <div class="container">
 	<!-- Tab panes -->
-	<div class="tab-content">
-		<div class="tab-pane active" id="home"><% if current_user.following?(@user) %>
-				<%= @user.full_name %> is family to you. <%= link_to "Modify your handshake.", current_user.find_handshake(@user) %>
+		<% if current_user.following?(@user) %>
+		<div class="panel panel-default panel-body" id="home">
+				<%= @user.full_name %> is connected to you. <%= link_to "Modify your handshake.", current_user.find_handshake(@user) %><p>Please note, the ability to view information from users in your network is a work in progress. Currently you may modify your handshake to choose what informaiton of yours <%= @user.full_name %> will be able to see once this feature is fully developed. </div>
 			<% end %>
-			<%= render "layouts/profile2" %>
+			<% if current_user?(@user) %>
+				<%= render "layouts/profile2" %>
+			<% end %>
 		</div>
-		<div class="tab-pane" id="apps">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h2>My Apps</h2>
-				</div>
-				<div class="panel-body">
-					<%= render "layouts/apps" %>
-				</div>
-			</div>
-		</div>
-		<div class="tab-pane" id="messages">...</div>
-		<div class="tab-pane" id="settings">...</div>
+		
 	</div>
 	
 </div>
