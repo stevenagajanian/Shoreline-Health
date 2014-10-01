@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.4'
+gem 'rails', '4.1'
 
 gem 'nifty-generators'
 gem 'bootswatch-rails'
@@ -18,7 +18,7 @@ gem 'passenger'
 gem 'bootstrap_form'
 gem 'font-awesome-rails'
 gem 'state_machine'
-gem 'simple_form'
+gem 'simple_form', github: 'plataformatec/simple_form'
 gem 'prawn_rails'
 gem 'cancan'
 gem 'devise_invitable'
@@ -31,12 +31,15 @@ gem 'groupdate'
 gem 'birthday'
 gem 'acts_as_commentable'
 gem 'activeadmin', github: 'gregbell/active_admin'
-
+gem 'nokogiri', '~> 1.6.1'
 # Use sqlite3 as the database for Active Record
 group :test do
 	gem 'sqlite3'
 end
-
+group :development do
+  # Use sqlite3 as the database for Active Record
+  gem 'sqlite3'
+end
 gem 'unicorn'
 
 # Use SCSS for stylesheets
@@ -58,12 +61,8 @@ gem 'jquery-rails'
 gem 'turbolinks'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 1.2'
-
-group :doc do
-  # bundle exec rake doc:rails generates the API under doc/api.
-  gem 'sdoc', require: false
-end
+gem 'jbuilder', '~> 2.0'
+gem 'sdoc', '~> 0.4.0',          group: :doc
 
 group :production do
   gem 'pg'
@@ -81,5 +80,5 @@ end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
-
+gem 'spring',        group: :development
 gem "mocha", group: :test

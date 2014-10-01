@@ -25,35 +25,24 @@ class User < ActiveRecord::Base
 	has_many :reverse_handshakes, foreign_key: "followed_id", class_name: "Handshake", dependent: :destroy
 	has_many :followers, through: :reverse_handshakes, source: :follower
 
-	has_many :conditions	
+  has_many :conditions
 	has_many :exercises
 
 	has_many :user_friendships
-	
-
-	has_many :friends, through: :user_friendships,
-	conditions: { user_friendships: { state: 'accepted' } }
-accepts_nested_attributes_for :friends
-	has_many :pending_user_friendships, class_name: 'UserFriendship',
-	foreign_key: :user_id,
-	conditions: { state: 'pending' }
-	has_many :pending_friends, through: :pending_user_friendships, source: :friend
-
-	has_many :requested_user_friendships, class_name: 'UserFriendship',
-	foreign_key: :user_id,
-	conditions: { state: 'requested' }
-	has_many :requested_friends, through: :requested_user_friendships, source: :friend
-
-	has_many :blocked_user_friendships, class_name: 'UserFriendship',
-	foreign_key: :user_id,
-	conditions: { state: 'blocked' }
-	has_many :blocked_friends, through: :blocked_user_friendships, source: :friend
-
-	has_many :accepted_user_friendships, class_name: 'UserFriendship',
-	foreign_key: :user_id,
-	conditions: { state: 'accepted' }
-	has_many :accepted_friends, through: :accepted_user_friendships, source: :friend
-
+  
+  has_many :friends, through: -> { where(user_friendships: { state: "accepted"}) }, :through => :user_friendships
+  
+  has_many :pending_user_friendships, class_name: 'UserFriendship', foreign_key: :user_id, through: -> { where(user_friendships: { state: "pending"}) }, :through => :user_friendships
+  has_many :pending_friends, through: :pending_user_friendships, source: :friend
+  
+  has_many :requested_user_friendships, class_name: 'UserFriendship', foreign_key: :user_id, through: -> { where(user_friendships: { state: "requested"}) }, :through => :user_friendships
+  has_many :requested_friends, through: :requested_user_friendships, source: :friend
+  
+  has_many :blocked_user_friendships, class_name: 'UserFriendship', foreign_key: :user_id, through: -> { where(user_friendships: { state: "blocked"}) }, :through => :user_friendships
+  has_many :blocked_friends, through: :blocked_user_friendships, source: :friend
+  
+  has_many :accepted_user_friendships, class_name: 'UserFriendship', foreign_key: :user_id, through: -> { where(user_friendships: { state: "accepted"}) }, :through => :user_friendships
+  has_many :accepted_friends, through: :accepted_user_friendships, source: :friend
 
 	has_attached_file :avatar, styles: {
     		large: "800x800>", medium: "300x200>", small: "260x180>", thumb: "80x80#"
