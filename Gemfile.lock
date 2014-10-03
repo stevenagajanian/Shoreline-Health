@@ -108,7 +108,7 @@ GEM
       request_store (~> 1.0.3)
     erubis (2.7.0)
     execjs (2.0.2)
-    font-awesome-rails (4.0.3.1)
+    font-awesome-rails (4.2.0.0)
       railties (>= 3.2, < 5.0)
     formtastic (2.3.0.rc3)
       actionpack (>= 3.0)

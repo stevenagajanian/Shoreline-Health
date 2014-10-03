@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140824101538) do
+ActiveRecord::Schema.define(version: 20141003184800) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -24,9 +27,9 @@ ActiveRecord::Schema.define(version: 20140824101538) do
     t.datetime "updated_at"
   end
 
-  add_index "active_admin_comments", ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id"
-  add_index "active_admin_comments", ["namespace"], name: "index_active_admin_comments_on_namespace"
-  add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
+  add_index "active_admin_comments", ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id", using: :btree
+  add_index "active_admin_comments", ["namespace"], name: "index_active_admin_comments_on_namespace", using: :btree
+  add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id", using: :btree
 
   create_table "admin_users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -43,8 +46,8 @@ ActiveRecord::Schema.define(version: 20140824101538) do
     t.datetime "updated_at"
   end
 
-  add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true
-  add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
+  add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
+  add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "albums", force: true do |t|
     t.integer  "user_id"
@@ -53,12 +56,24 @@ ActiveRecord::Schema.define(version: 20140824101538) do
     t.datetime "updated_at"
   end
 
-  add_index "albums", ["user_id"], name: "index_albums_on_user_id"
+  add_index "albums", ["user_id"], name: "index_albums_on_user_id", using: :btree
 
   create_table "allergies", force: true do |t|
     t.integer  "user_id"
     t.string   "name"
     t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "appointments", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "specialist_id"
+    t.string   "name"
+    t.text     "notes"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.string   "location"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -81,9 +96,9 @@ ActiveRecord::Schema.define(version: 20140824101538) do
     t.datetime "updated_at"
   end
 
-  add_index "comments", ["commentable_id"], name: "index_comments_on_commentable_id"
-  add_index "comments", ["commentable_type"], name: "index_comments_on_commentable_type"
-  add_index "comments", ["user_id"], name: "index_comments_on_user_id"
+  add_index "comments", ["commentable_id"], name: "index_comments_on_commentable_id", using: :btree
+  add_index "comments", ["commentable_type"], name: "index_comments_on_commentable_type", using: :btree
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
   create_table "conditions", force: true do |t|
     t.integer  "user_id"
@@ -119,7 +134,7 @@ ActiveRecord::Schema.define(version: 20140824101538) do
     t.datetime "attachment_updated_at"
   end
 
-  add_index "documents", ["user_id"], name: "index_documents_on_user_id"
+  add_index "documents", ["user_id"], name: "index_documents_on_user_id", using: :btree
 
   create_table "episodes", force: true do |t|
     t.integer  "user_id"
@@ -129,7 +144,7 @@ ActiveRecord::Schema.define(version: 20140824101538) do
     t.datetime "updated_at"
   end
 
-  add_index "episodes", ["user_id"], name: "index_episodes_on_user_id"
+  add_index "episodes", ["user_id"], name: "index_episodes_on_user_id", using: :btree
 
   create_table "exercises", force: true do |t|
     t.integer  "user_id"
@@ -166,7 +181,7 @@ ActiveRecord::Schema.define(version: 20140824101538) do
     t.string   "state"
   end
 
-  add_index "friendships", ["state"], name: "index_friendships_on_state"
+  add_index "friendships", ["state"], name: "index_friendships_on_state", using: :btree
 
   create_table "goal_posts", force: true do |t|
     t.integer  "user_id"
@@ -207,13 +222,20 @@ ActiveRecord::Schema.define(version: 20140824101538) do
     t.integer  "followed_id"
   end
 
-  add_index "handshakes", ["followed_id"], name: "index_handshakes_on_followed_id"
-  add_index "handshakes", ["follower_id", "followed_id"], name: "index_handshakes_on_follower_id_and_followed_id", unique: true
-  add_index "handshakes", ["follower_id"], name: "index_handshakes_on_follower_id"
+  add_index "handshakes", ["followed_id"], name: "index_handshakes_on_followed_id", using: :btree
+  add_index "handshakes", ["follower_id", "followed_id"], name: "index_handshakes_on_follower_id_and_followed_id", unique: true, using: :btree
+  add_index "handshakes", ["follower_id"], name: "index_handshakes_on_follower_id", using: :btree
 
   create_table "heights", force: true do |t|
     t.integer  "user_id"
     t.float    "amount"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "ko_medications", force: true do |t|
+    t.string   "name"
+    t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -226,7 +248,7 @@ ActiveRecord::Schema.define(version: 20140824101538) do
     t.datetime "updated_at"
   end
 
-  add_index "medications", ["user_id"], name: "index_medications_on_user_id"
+  add_index "medications", ["user_id"], name: "index_medications_on_user_id", using: :btree
 
   create_table "pages", force: true do |t|
     t.string   "name"
@@ -249,8 +271,8 @@ ActiveRecord::Schema.define(version: 20140824101538) do
     t.datetime "asset_updated_at"
   end
 
-  add_index "pictures", ["album_id"], name: "index_pictures_on_album_id"
-  add_index "pictures", ["user_id"], name: "index_pictures_on_user_id"
+  add_index "pictures", ["album_id"], name: "index_pictures_on_album_id", using: :btree
+  add_index "pictures", ["user_id"], name: "index_pictures_on_user_id", using: :btree
 
   create_table "posts", force: true do |t|
     t.string   "title"
@@ -273,7 +295,7 @@ ActiveRecord::Schema.define(version: 20140824101538) do
     t.integer  "document_id"
   end
 
-  add_index "statuses", ["user_id"], name: "index_statuses_on_user_id"
+  add_index "statuses", ["user_id"], name: "index_statuses_on_user_id", using: :btree
 
   create_table "taggings", force: true do |t|
     t.integer  "tag_id"
@@ -285,14 +307,14 @@ ActiveRecord::Schema.define(version: 20140824101538) do
     t.datetime "created_at"
   end
 
-  add_index "taggings", ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true
+  add_index "taggings", ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true, using: :btree
 
   create_table "tags", force: true do |t|
     t.string  "name"
     t.integer "taggings_count", default: 0
   end
 
-  add_index "tags", ["name"], name: "index_tags_on_name", unique: true
+  add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
 
   create_table "trackers", force: true do |t|
     t.integer  "user_id"
@@ -310,8 +332,8 @@ ActiveRecord::Schema.define(version: 20140824101538) do
     t.string   "state"
   end
 
-  add_index "user_friendships", ["state"], name: "index_user_friendships_on_state"
-  add_index "user_friendships", ["user_id", "friend_id"], name: "index_user_friendships_on_user_id_and_friend_id"
+  add_index "user_friendships", ["state"], name: "index_user_friendships_on_state", using: :btree
+  add_index "user_friendships", ["user_id", "friend_id"], name: "index_user_friendships_on_user_id_and_friend_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -346,11 +368,11 @@ ActiveRecord::Schema.define(version: 20140824101538) do
     t.string   "role"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["first_name"], name: "index_users_on_first_name"
-  add_index "users", ["last_name"], name: "index_users_on_last_name"
-  add_index "users", ["profile_name"], name: "index_users_on_profile_name"
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["first_name"], name: "index_users_on_first_name", using: :btree
+  add_index "users", ["last_name"], name: "index_users_on_last_name", using: :btree
+  add_index "users", ["profile_name"], name: "index_users_on_profile_name", using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "weights", force: true do |t|
     t.integer  "user_id"

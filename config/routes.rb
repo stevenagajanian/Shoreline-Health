@@ -1,5 +1,9 @@
 Tabby::Application.routes.draw do
 
+  resources :appointments
+
+  resources :ko_medications
+
   #devise_for :admin_users, ActiveAdmin::Devise.config
   #ActiveAdmin.routes(self)
   
