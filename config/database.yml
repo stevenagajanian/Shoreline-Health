@@ -5,7 +5,6 @@
 #   gem 'sqlite3'
 development:
   adapter: postgresql
-  encoding: unicode
   database: appname-dev
   pool: 5
   host: localhost
@@ -14,7 +13,6 @@ development:
 
 test:
   adapter: postgresql
-  encoding: unicode
   database: appname-test
   pool: 5
   host: localhost
@@ -23,6 +21,5 @@ test:
 
 production:
   adapter: postgresql
-  encoding: unicde
   database: tabbypostgresprod
   pool: 5
