@@ -1,6 +1,22 @@
 <div class="container">
   <div class="panel panel-default">
     <div class="panel-body">
+      <ul class="nav navbar-nav nav-">
+        <li class="pill">
+          <%= link_to users_path, class: "pill pill-justified" do %><i class="fa fa-users"></i>  Community <% end %>
+        </li>
+        <li>
+          <%= link_to "Conditions", users_path, class: "" %>
+        </li>
+        <li>
+          <%= link_to "Medication Reviews", users_path, class: "" %>
+        </li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="panel panel-default">
+    <div class="panel-body">
   <h1>Looking for someone?</h1>
   <hr>
   <p><i class="fa fa-lock"></i> <strong>Please note, Komodo will never share your information with anyone. </strong>If you want another user to see any part of your information, you must connect with them directly and explicitly choose what information is shared with that person. 
@@ -14,14 +30,13 @@
 
       <% end %><Strong><%= link_to user.full_name, user %></strong>
     </h4>
-        <h3>
           <%= link_to "Profile", user, class: "btn btn-sm btn-default" %> 
           <% if current_user.following?(user) %>
-          Following <%= link_to "Edit", user %>
+           <%= link_to "Edit Handshake", current_user.find_handshake(user), class: "btn btn-sm btn-primary" %>
           <% else %>
           <a class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal<%= user.id %>"><i class="fa fa-hand"></i>Handshake</a>
           <% end %>
-        </h3>
+
   <hr>
 
   <div class="modal fade" id="myModal<%= user.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

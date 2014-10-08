@@ -1,26 +1,23 @@
-<h1>Listing ko_medications</h1>
+<div class="container">
+	<div class="panel panel-default">
+		<div class="panel-body">
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<h1>All Medications</h1>
 
-  <tbody>
     <% @ko_medications.each do |ko_medication| %>
-      <tr>
-        <td><%= ko_medication.name %></td>
-        <td><%= ko_medication.description %></td>
+    <div class="row">
+      <div class="col-md-1">
+        <%= image_tag ko_medication.imageurl, width: 55 %>
+      </div>
+      <div class="col-md-11">
+        <h4><%= ko_medication.name %></h4>
+        <p><%= ko_medication.description %></p>
         <td><%= link_to 'Show', ko_medication %></td>
         <td><%= link_to 'Edit', edit_ko_medication_path(ko_medication) %></td>
         <td><%= link_to 'Destroy', ko_medication, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+      </div>
+    </div>
     <% end %>
-  </tbody>
-</table>
 
 <br>
 

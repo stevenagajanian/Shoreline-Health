@@ -34,7 +34,10 @@
 <div class="container"><div class="">
 	<div class="panel panel-default">
 		<div class="panel-body">
-			<h2>Family</h2><hr>
+      <h2>
+        <i style="text-shadow: 3px 2px 0px #fff, 5px 4px 0px rgba(0, 0, 0, 0.15);" class="text-primary fa fa-group fa-x"></i> Network
+      </h2><hr>
+      <% if @user.followed_users.any? %>
 			<% @user.followed_users.each do |f| %>
 			<h4><%= f.full_name %></h4>
 			<p>
@@ -43,12 +46,26 @@
 				<%= link_to "Message", f %>
 			</p>
 			<% end %>
+      <% else %><p class="lead">
+      Do you want to share your health information with family members, careproviders, or specialists?<br> <%= link_to "Click here to find them.", users_path %>
+      </p>
+      <% end %>
 		</div>
 	</div>
-	<div class="panel col-sm- col-sm-offset- panel-default">
+  <div class="panel panel-default">
 		<div class="panel-body">
-			<h2>Caregivers</h2><hr>
-			
+      <h2>
+        <i style="text-shadow: 3px 2px 0px #fff, 5px 4px 0px rgba(0, 0, 0, 0.15);" class="text-primary fa fa-lock fa-x"></i> Permissions
+      </h2><hr>
+      <%= form_for [@user, Permission.new] do |f| %>
+      <%= f.hidden_field :user_id, value: @user.id %>
+      <%= f.collection_select :condition_id, @user.conditions, :id, :id %>
+      <%= f.collection_select :permissible_user_id, @user.followed_users, :id, :full_name %>
+      <%= f.submit %>
+      <% end %>
+      <% @user.permissions.each do |f| %>
+      
+      <% end %>
 		</div>
 	</div>
 </div>

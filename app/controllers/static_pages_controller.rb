@@ -24,4 +24,8 @@ class StaticPagesController < ApplicationController
   def community_stats
   	@user = current_user
   end
+  
+  def roadmap
+    @user = current_user
+  end
 end

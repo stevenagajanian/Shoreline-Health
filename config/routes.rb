@@ -1,5 +1,9 @@
 Tabby::Application.routes.draw do
 
+  resources :permissions
+
+  resources :ko_medication_reviews
+
   resources :appointments
 
   resources :ko_medications
@@ -57,6 +61,7 @@ Tabby::Application.routes.draw do
 
   resources :users do
     resources :handshakes
+    resources :permissions
     resources :trackers
     get 'apps'
     get 'network'
@@ -99,6 +104,7 @@ Tabby::Application.routes.draw do
   get "static_pages/help"
   get "static_pages/community_stats"
   get "static_pages/search"
+  get "static_pages/roadmap"
 
   #Modals
   get "albums/form" => 'albums#form', as: :form

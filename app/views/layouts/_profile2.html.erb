@@ -1,19 +1,24 @@
+
 <div class="row">
 	<div class="col-sm-3">
 		<div class="panel panel-default">
 			<div class="panel-body">
-		<%= link_to current_user, class: "btn btn-block btn-default" do %><i class="fa fa-plus"></i> Add Post<% end %>
-		<%= link_to current_user, class: "btn btn-block btn-default" do %><i class="fa fa-upload"></i> Upload<% end %>
-		</div></div>
+        <strong>Birthday</strong> 
+        <%= current_user.date_of_birth.strftime("%B %d, %Y") %> (age <%= (Date.today - current_user.date_of_birth).to_i / 365 %>)<br>
+        <strong>Gender</strong> <%= current_user.gender %><br>
+        <strong>Bloodtype</strong> <%= current_user.bloodtype %><br>
+        <%= link_to edit_user_registration_path(current_user), class: "btn btn-block btn-sm btn-default" do %><i class="fa fa-gear"></i> Edit Info<% end %>
+		  </div>
+    </div>
 		<div class="panel panel-default panel-body">
 			<h4 class="">Medical Conditions</h4>
 
 			<% for condition in @user.conditions %>
 			<div class="row">
-				<div class="col-md-11 col-md-offset-1">
+				<div class="col-md-11 col-md-offset-">
 					<p>
 						<% if condition.page.presence %>
-						<%= link_to condition.page.name, condition_posts_path(condition), class: "btn btn-default" %>
+            <%= link_to condition.page.name, condition_posts_path(condition), class: " btn-lg" %>
 						<% else %>
 						<%= link_to condition.name, condition_posts_path(condition), class: "btn btn-default" %>
 						<% end %>
@@ -62,7 +67,8 @@
 
 		</div>
 	</div>
-	<div class="col-sm-9"><% if @user.medications.count > 133 %>
+	<div class="col-sm-9">
+    <% if @user.medications.count > 133 %>
 		<div class="alert alert-dismissable alert-info">
 			<button type="button" class="close" data-dismiss="alert">×</button>
 			
@@ -74,33 +80,37 @@
 					<%= link_to "Confirm", current_user, class: "btn-block pull-right btn btn-primary" %>
 				</div>
 			</div>
-		</div><% end %>
+		</div>
+    <% end %>
 		<div class="panel panel-default">
 			<div class="panel-body">
-				<h2>Activity Feed</h2><hr>
+        <% if @conditions.any? %>
+				<h2><i class="fa fa-heart text-danger fa-x"></i> Medical Journal</h2><hr>
 				<% @conditions.each do |f| %>
 					<% f.posts.each do |postX| %>
 						<div class="row">
-							<div class="col-sm-1">
-								<% if postX.user.presence %>
-									<%= avatar_profile_link3 postX.user, {height: 25}, class: "img-rounded media-object", style: "padding-left: 10px;" %>
-								<% end %>
-							</div>
-							<div class="col-sm-2">
-
-								<%= postX.user.full_name %><br>
-								<%= postX.created_at.strftime("%B %d, %Y") %> <br>
-								at <%= postX.created_at.strftime("%I:%M") %> 
-							</div>
 							<div class="col-md-9">
+                <%= postX.created_at.strftime("%B %d, %Y") %> | <%= time_ago_in_words(postX.created_at) %> ago<br>
 								<h4><% if postX.title? %><%= postX.title %><br /><% end %>
-								<% if postX.description? %><%= postX.description %><br /><% end %></h4>
-								<%= link_to condition_posts_path(postX.condition), class: "pull-right" do %><%= postX.condition.name%><% end %>
+								<% if postX.description? %><%= postX.description %><% end %> for 
+								<%= link_to condition_posts_path(postX.condition), class: "" do %>
+                <%= postX.condition.page.name %>
+                <% end %>
 							</div>
 						</div>
 						<hr>
 					<% end %>
 				<% end %>
+        <% else %>
+        <h2>Welcome to Komodo!</h2>
+              <p class="lead">This is your profile page. This is where you will see all of your medical updates and history of your health data.<br><br>
+                Here are a couple of things you can do to get started:<br>
+                <ol class="lead">
+                  <li>Add <%= link_to "conditions or issues", conditions_path %> to your profile</li>
+                  <li>Add health goals</li>
+              </ol>
+              </p>
+        <% end %>
 			</div>
 		</div>
 	</div>

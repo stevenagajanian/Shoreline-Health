@@ -18,6 +18,7 @@ class UsersController < ApplicationController
 
 	def apps
 		@user = User.find(params[:user_id])
+    @conditions = @user.conditions
 		@unfinished_goals = @user.goals.get_unfinished
 
 		if current_user.id == @user.id

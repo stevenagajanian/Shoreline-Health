@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141003184800) do
+ActiveRecord::Schema.define(version: 20141007205125) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -233,11 +233,23 @@ ActiveRecord::Schema.define(version: 20141003184800) do
     t.datetime "updated_at"
   end
 
+  create_table "ko_medication_reviews", force: true do |t|
+    t.string   "title"
+    t.text     "description"
+    t.integer  "user_id"
+    t.boolean  "is_anonymous"
+    t.integer  "rating"
+    t.integer  "condition_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "ko_medications", force: true do |t|
     t.string   "name"
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "imageurl"
   end
 
   create_table "medications", force: true do |t|
@@ -254,6 +266,15 @@ ActiveRecord::Schema.define(version: 20141003184800) do
     t.string   "name"
     t.text     "description"
     t.string   "page_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "permissions", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "permissible_user_id"
+    t.integer  "condition_id"
+    t.integer  "goal_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
