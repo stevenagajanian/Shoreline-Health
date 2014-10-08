@@ -109,4 +109,18 @@
 			</div>
 			<hr>
 			<% end %>
-
+    </div>
+  </div>
+<div class="panel panel-default">
+		<div class="panel-heading">
+      <h2>Who can see these records?</h2>
+      <hr>
+      <% @user.permissions.each do |f| %>
+      <h4>
+        <% if f.condition_id == @condition.id %>
+        <%= f.permissible_user.full_name %>
+        <% end %>
+      </h4>
+      <% end %>
+  </div>
+  </div>

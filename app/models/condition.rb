@@ -10,4 +10,9 @@ class Condition < ActiveRecord::Base
 	def self.search(search)
   		where('name LIKE?', "%#{search}%")
   	end
+  
+  def page_name
+    @page = Page.find(page_id)
+    return @page.name
+  end
 end
