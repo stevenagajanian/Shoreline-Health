@@ -57,7 +57,7 @@
       <h2>
         <i style="text-shadow: 3px 2px 0px #fff, 5px 4px 0px rgba(0, 0, 0, 0.15);" class="text-primary fa fa-lock fa-x"></i> Permissions
       </h2><hr>
-      <%= form_for [@user, Permission.new] do |f| %>
+      <% form_for [@user, Permission.new] do |f| %>
       <%= f.hidden_field :user_id, value: @user.id %>
       <%= f.collection_select :condition_id, @user.conditions, :id, :id %>
       <%= f.collection_select :permissible_user_id, @user.followed_users, :id, :full_name %>

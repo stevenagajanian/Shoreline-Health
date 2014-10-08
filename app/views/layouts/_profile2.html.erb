@@ -84,7 +84,7 @@
     <% end %>
 		<div class="panel panel-default">
 			<div class="panel-body">
-        <% if @conditions.any? %>
+        <% if @conditions.count >100 %>
 				<h2><i class="fa fa-heart text-danger fa-x"></i> Medical Journal</h2><hr>
 				<% @conditions.each do |f| %>
 					<% f.posts.each do |postX| %>
@@ -103,11 +103,11 @@
 				<% end %>
         <% else %>
         <h2>Welcome to Komodo!</h2>
-              <p class="lead">This is your profile page. This is where you will see all of your medical updates and history of your health data.<br><br>
+              <p class="lead">This is your profile page, where you will be able to see all of your medical updates and history of your health data.<br><br>
                 Here are a couple of things you can do to get started:<br>
                 <ol class="lead">
-                  <li>Add <%= link_to "conditions or issues", conditions_path %> to your profile</li>
-                  <li>Add health goals</li>
+                  <li>Add <%= link_to "conditions or issues", user_conditions_path(@user) %> to your profile</li>
+                  <li>Add <%= link_to "health goals", user_goals_path(@user) %></li>
               </ol>
               </p>
         <% end %>
