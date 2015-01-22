@@ -34,12 +34,12 @@
       </h2>
       <div class="row">
         <% for condition in @conditions %>
-        <div class="journal_nav col-md-4">
+        <div class="journal_nav col-md-6">
           <div class='well'>
             <h4>
               <strong>
                 <% if condition.page.presence %>
-                <%= link_to condition.page.name, condition_posts_path(condition) %>
+                <%= link_to condition.page.name, condition_posts_path(condition), class: 'btn btn-lg btn-primary' %>
                 <% else %>
                 <%= link_to condition.name, condition_posts_path(condition) %>
                 <% end %>

@@ -11,7 +11,7 @@
         <%= fa_icon "plus" %>  Add Record
       </button>
       <%= link_to edit_condition_path(@condition), class: "btn btn-raised btn-default" do %><i class="fa fa-pencil"></i> Edit<% end %>
-      <%= link_to edit_condition_path(@condition), class: "btn btn-raised btn-default" do %><i class="fa fa-trash-o"></i> Remove<% end %>
+      <%= link_to condition_path(@condition), class: "btn btn-raised btn-default", method: :delete, data: { confirm: "Are you sure?" }  do %><i class="fa fa-trash-o"></i> Remove<% end %>
       </p>
       <div class="collapse" id="collapseExample">
         <div class="well">
