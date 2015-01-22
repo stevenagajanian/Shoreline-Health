@@ -1,13 +1,13 @@
 == README
 
-Tabby - Health Catalogs
+Komodo
 
-Tabby lets you easily catalog and share information about your health. 
+Komodo lets you easily catalog and share information about your health. 
 
-* Upload files to store in the cloud
+* Store information in a secure, cloud server
 
-* For every piece of information, you choose who sees it
+* Discrete privacy controls for who sees which parts of your health record
 
 * Easily update your family members or doctors about your health information
 
-Tabby is currently being developed by James Steininger. It is a Ruby on Rails web-app, and the goal is to provide an open API for other developers to utilize Tabby as a hub for connecting personal health data, from running miletimes to genomic analysis. 
+Komodo is currently being developed by James Steininger. It is a Ruby on Rails web-app, and the goal is to provide an open API for other developers to utilize Tabby as a hub for connecting personal health data, from running miletimes to genomic analysis. 
