@@ -1,4 +1,4 @@
-== README
+![logo](/app/assets/images/ShorelineAltBig.png)
 
 (PREVIOUSLY KOMODO)
 
@@ -13,8 +13,6 @@ Shoreline lets you easily catalog and share information about your health.
 * Discrete privacy controls for who sees which parts of your health record
 
 * Easily update your family members or doctors about your health information
-
-![logo](/app/assets/images/ShorelineAltBig.png)
 
 #Development Status
 
