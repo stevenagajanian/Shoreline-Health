@@ -8,14 +8,26 @@
  * require custom_bootstrap/variables
  *= require font-awesome
  *= require rails_bootstrap_forms
+*= require bootstrap-typeahead-rails
 */
-@import "bootswatch/readable/variables";
+@import "bootswatch/lumen/variables";
+/*$brand-primary: #396BB8;
+$brand-secondary: #88B552;
+$brand-info: #88B552;
+$brand-warning: #E5BA47;
+$brand-danger: #C44432;
+
+$navbar-default-bg: $brand-primary;*/
+//$link-color: $brand-primary;
 @import "bootstrap";
-@import "bootswatch/readable/bootswatch";
+
+
+//@import "bootswatch/readable/bootswatch";
 @import url(http://fonts.googleapis.com/css?family=Varela+Round);
+
 body {
   font-family: 'Varela Round', sans-serif;
-	padding-top: 80px;
+	padding-top: 65px;
 
 }
 
@@ -23,3 +35,4 @@ h1, h2, h3, h4, h5, h6, p {
   font-family: 'Varela Round', sans-serif;
 }
 
+@import "bootswatch/lumen/bootswatch";

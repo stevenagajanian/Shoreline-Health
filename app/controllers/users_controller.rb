@@ -5,6 +5,10 @@ class UsersController < ApplicationController
 	def update
 
 	end
+  
+  def printable
+    @user = User.find(params[:user_id])
+  end
 
 	def destroy
 		@user = User.find(params[:id])
@@ -43,6 +47,7 @@ class UsersController < ApplicationController
 
 	def show
 		@user = User.find(params[:id])
+    @droplet = Droplet.new
 		@unfinished_goals = @user.goals.get_unfinished
 		@conditions = @user.conditions.order("created_at DESC")
 
@@ -80,7 +85,7 @@ class UsersController < ApplicationController
 	end
 
 	def user_params
-		params.require(:user).permit(:bio, :gender, :doner, :bloodtype, :address, :date_of_birth, :email, :profile_name, :first_name, :last_name, :avatar, conditions_attributes: [:page_id], goals_attributes: [:unfinished_goals, :user_id], allergies_attributes: [ :user_id, :name, :description ], pictures_attributes: [ :user_id, :album_id, :caption], albums_attributes: [ :user_id, pictures_attributes: [:user_id, :album_id]], friends_attributes: [ :email ] )
+    params.require(:user).permit(:imageurl, :bio, :gender, :doner, :bloodtype, :address, :date_of_birth, :email, :profile_name, :first_name, :last_name, :avatar, conditions_attributes: [:page_id], goals_attributes: [:unfinished_goals, :user_id], allergies_attributes: [ :user_id, :name, :description ], pictures_attributes: [ :user_id, :album_id, :caption], albums_attributes: [ :user_id, pictures_attributes: [:user_id, :album_id]], friends_attributes: [ :email ] )
 	end
 
 end

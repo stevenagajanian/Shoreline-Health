@@ -1,0 +1,62 @@
+<!-- The sidebar of the user profile. Contains personal info, lists of medications, allergies, conditions, goals, and links to printing or editing data. -->
+
+<!-- Basic health information -->
+<div class="panel panel-default">
+  <div class="panel-body">
+    <%= image_tag @user.imageurl, class: 'img-rounded', style: 'max-width: 100%; max-height: 232px;' %>
+    <h3><%= link_to @user.full_name, @user %>
+    </h3>
+    <% if @user.date_of_birth.presence %><strong>Birthday</strong> 
+    <%= current_user.date_of_birth.strftime("%B %d, %Y") %> (age <%= (Date.today - current_user.date_of_birth).to_i / 365 %>)<br><% end %>
+    <% if @user.gender.presence %><strong>Gender</strong> <%= current_user.gender %><br><% end %>
+    <% if @user.bloodtype.presence %> <strong>Bloodtype</strong> <%= current_user.bloodtype %><br><% end %>
+    <hr>
+    <%= link_to user_apps_path(@user) do %><%= fa_icon "database" %> Data<% end %> | 
+    <%= link_to user_goals_path(@user) do %><%= fa_icon "star" %> Goals<% end %>
+    <hr>
+    <h4 class="">Medical Conditions</h4>
+    <% for condition in @user.conditions %>
+    <p>
+      <% if condition.page.presence %>
+      <%= link_to condition_posts_path(condition) do %>
+      <%= condition.page.name %>
+      <% end %>
+      <% else %>
+      <%= link_to condition.name, condition_posts_path(condition) %>
+      <% end %>
+    </p>
+    <% end %>
+    <h4 class="">Allergies &amp; Reactions</h4>
+    <% if @user.allergies.none? %>
+    <%= link_to new_allergy_path do %>
+    No known allergies
+    <% end %>
+    <% end %>
+    <% for allergy in @user.allergies %>
+    <p>
+      <%= link_to allergy.name, allergy %>
+    </p>
+    <% end %>
+    <h4 class="">Medications</h4>
+    <% for medication in @user.medications %>
+    <p>
+      <%= link_to user_medications_path(@user) do %>
+      <%= medication.name %>
+      <% end %>
+    </p>
+    <% end %>
+    <h4>Current Goals</h4>
+    <% if @user.goals.none? %>
+    <%= link_to "None", user_goals_path(@user) %>
+    <% end %>
+    <% for goal in @user.goals.get_unfinished %>
+    <p>
+      <%= link_to goal.name, goal %>
+    </p>
+    <% end %>
+  </div>
+</div>
+<!-- Helpful stuff like printing your profile --> 
+<%= link_to edit_user_registration_path(current_user), class: "btn btn-raised btn-block btn-default" do %><i class="fa fa-gear"></i> Edit Personal Info<% end %>
+<%= link_to edit_user_registration_path(current_user), class: "btn btn-raised btn-block btn-success" do %><i class="fa fa-share"></i> Share My Record<% end %>
+<%= link_to user_printable_path(current_user), class: 'btn btn-raised  btn-block btn btn-primary' do %><i class="fa fa-print"></i> Print My Health Record<% end %>

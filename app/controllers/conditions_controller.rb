@@ -5,7 +5,8 @@ before_filter :authenticate_user!
   def index
     @user = User.find(params[:user_id])
     @conditions = @user.conditions
-
+    @condition = Condition.new
+    @autocomplete_pages = Page.all
     if current_user.id == @user.id
 			render action: :index
 		else
@@ -33,7 +34,8 @@ before_filter :authenticate_user!
   end
 
   def new
-     @page = Page.find(params[:page_id])
+    #@page = Page.find(params[:page_id])
+   
   	@condition = current_user.conditions.new
 
     respond_to do |format|
@@ -51,8 +53,10 @@ before_filter :authenticate_user!
 
   def create
     #@page = Page.find(params[:page_id])
+    @page = Page.where(name: params[:page_name]).first
     @condition = current_user.conditions.new( condition_params)
-
+    @condition.page_id = @page.id
+    
     respond_to do |format|
       if @condition.save
         format.html { redirect_to user_conditions_path(@condition.user), notice: 'Status was successfully created.' }

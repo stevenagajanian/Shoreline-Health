@@ -1,20 +1,25 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Komodo Care</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
-  <meta name="description" content="Komodo Care Health Medical Records Personal Catalog Tracking Tracker Share Doctor Caregiver Family Genomics" />
-  <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => false %>
-  <%= favicon_link_tag 'favicon.ico' %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-<%= render "layouts/navbar" %>
-<div class="container"><%= bootstrap_flash %></div>
-<%= yield %>
-
-</body>
+  <head>
+    <title>Shoreline - Health</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
+    <meta name="description" content="Komodo Care Health Medical Records Personal Catalog Tracking Tracker Share Doctor Caregiver Family Genomics" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.0/animate.min.css">
+    <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
+    <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
+    <%= javascript_include_tag "application", "data-turbolinks-track" => false %>
+    <%= favicon_link_tag 'favicon.ico' %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body style="background-color: #E1E8F0;">
+    <% if !current_page?(new_user_session_path) and !current_page?(edit_user_registration_path) and !current_page?(new_user_registration_path) %>
+    <%= render "layouts/navbar" %>
+    <% end %>
+    </div>
+    <div class="container-fluid"><%= bootstrap_flash %></div>
+    <%= yield %>
+    <hr>
+    <%= render 'layouts/footer' %>
+  </body>
 </html>

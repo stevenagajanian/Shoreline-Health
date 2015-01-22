@@ -1,5 +1,11 @@
 Tabby::Application.routes.draw do
 
+  resources :pharmacies
+
+  resources :notifications
+
+  resources :droplets
+
   resources :permissions
 
   resources :ko_medication_reviews
@@ -66,6 +72,7 @@ Tabby::Application.routes.draw do
     get 'apps'
     get 'network'
     get 'ecard'
+    get 'printable'
     resources :pictures
     resources :albums do
       resources :pictures

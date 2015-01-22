@@ -1,0 +1,10 @@
+<%= form_for [@condition, Post.new] do |f| %>
+<h4>New Record</h4>
+<div>
+  <%= f.hidden_field :user_id, value: current_user.id %>
+  <%= f.text_area :description, class:"form-control", placeholder: 'Write here about your progress...', rows: 3 %>
+</div>
+<br>
+<%= f.submit "Post", class: "btn btn-primary" %>
+
+<% end %>

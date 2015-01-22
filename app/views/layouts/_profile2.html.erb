@@ -1,4 +1,3 @@
-
 <div class="row">
 	<div class="col-sm-3">
 		<div class="panel panel-default">
@@ -7,7 +6,8 @@
         <%= current_user.date_of_birth.strftime("%B %d, %Y") %> (age <%= (Date.today - current_user.date_of_birth).to_i / 365 %>)<br><% end %>
         <% if @user.gender.presence %><strong>Gender</strong> <%= current_user.gender %><br><% end %>
        <% if @user.bloodtype.presence %> <strong>Bloodtype</strong> <%= current_user.bloodtype %><br><% end %>
-        <%= link_to edit_user_registration_path(current_user), class: "btn btn-block btn-sm btn-default" do %><i class="fa fa-gear"></i> Edit Info<% end %>
+        <%= link_to edit_user_registration_path(current_user), class: "btn btn-block btn-default" do %><i class="fa fa-gear"></i> Edit Info<% end %>
+        <%= link_to user_printable_path(current_user), class: 'btn btn-block btn btn-primary' do %><i class="fa fa-print"></i> Print<% end %>
 		  </div>
     </div>
 		<div class="panel panel-default panel-body">

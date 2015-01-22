@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @droplet.user_id %>
+</p>
+
+<p>
+  <strong>Page:</strong>
+  <%= @droplet.page_id %>
+</p>
+
+<p>
+  <strong>Body html:</strong>
+  <%= @droplet.body_html %>
+</p>
+
+<p>
+  <strong>Body:</strong>
+  <%= @droplet.body %>
+</p>
+
+<p>
+  <strong>Upvotes:</strong>
+  <%= @droplet.upvotes %>
+</p>
+
+<p>
+  <strong>Downvotes:</strong>
+  <%= @droplet.downvotes %>
+</p>
+
+<%= link_to 'Edit', edit_droplet_path(@droplet) %> |
+<%= link_to 'Back', droplets_path %>

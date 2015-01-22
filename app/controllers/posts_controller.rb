@@ -34,9 +34,10 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
       @post = @condition.posts.new( post_params)
-      
+      @user = @condition.user
       respond_to do |format|
         if @post.save
+     #     UserNotifier.send_signup_email(@user).deliver
           format.html { redirect_to condition_posts_path(@condition), notice: 'Post was successfully created.' }
           format.json { render json: @post, status: :created, location: @post }
         else
@@ -62,7 +63,7 @@ class PostsController < ApplicationController
    
   # Never trust parameters from the scary internet, only allow the white list through.
   def post_params
-    params.require(:post).permit(:upload, :uplaod_file_name, :user_id, :title, :description)
+    params.require(:post).permit(:condition_id, :upload, :uplaod_file_name, :user_id, :title, :description)
   end
 
   def find_page

@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @pharmacy.user_id %>
+</p>
+
+<p>
+  <strong>Medication:</strong>
+  <%= @pharmacy.medication_id %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @pharmacy.name %>
+</p>
+
+<p>
+  <strong>B current:</strong>
+  <%= @pharmacy.b_current %>
+</p>
+
+<%= link_to 'Edit', edit_pharmacy_path(@pharmacy) %> |
+<%= link_to 'Back', pharmacies_path %>

@@ -12,7 +12,11 @@ class Condition < ActiveRecord::Base
   	end
   
   def page_name
+    if (page_id)
     @page = Page.find(page_id)
     return @page.name
+    else
+      "none"
+    end
   end
 end

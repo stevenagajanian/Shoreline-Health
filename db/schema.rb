@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141007205125) do
+ActiveRecord::Schema.define(version: 20150113193538) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -135,6 +135,17 @@ ActiveRecord::Schema.define(version: 20141007205125) do
   end
 
   add_index "documents", ["user_id"], name: "index_documents_on_user_id", using: :btree
+
+  create_table "droplets", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "page_id"
+    t.text     "body_html"
+    t.text     "body"
+    t.integer  "upvotes"
+    t.integer  "downvotes"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "episodes", force: true do |t|
     t.integer  "user_id"
@@ -262,6 +273,16 @@ ActiveRecord::Schema.define(version: 20141007205125) do
 
   add_index "medications", ["user_id"], name: "index_medications_on_user_id", using: :btree
 
+  create_table "notifications", force: true do |t|
+    t.integer  "user_id"
+    t.boolean  "b_read"
+    t.string   "content"
+    t.string   "imageurl"
+    t.string   "notificationurl"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "pages", force: true do |t|
     t.string   "name"
     t.text     "description"
@@ -275,6 +296,15 @@ ActiveRecord::Schema.define(version: 20141007205125) do
     t.integer  "permissible_user_id"
     t.integer  "condition_id"
     t.integer  "goal_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "pharmacies", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "medication_id"
+    t.string   "name"
+    t.boolean  "b_current"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -387,6 +417,7 @@ ActiveRecord::Schema.define(version: 20141007205125) do
     t.string   "bloodtype"
     t.text     "bio"
     t.string   "role"
+    t.string   "imageurl"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

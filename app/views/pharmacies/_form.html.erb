@@ -1,0 +1,14 @@
+<%= simple_form_for(@pharmacy) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :user_id %>
+    <%= f.input :medication_id %>
+    <%= f.input :name %>
+    <%= f.input :b_current %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

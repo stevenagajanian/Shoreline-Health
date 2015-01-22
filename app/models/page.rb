@@ -5,4 +5,6 @@ class Page < ActiveRecord::Base
 
 	has_many :conditions
 	has_many :users, through: :conditions
+  
+  has_many :droplets
 end

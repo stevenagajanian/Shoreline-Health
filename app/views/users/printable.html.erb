@@ -1,0 +1,33 @@
+<div class="container-fluid">
+  <p>
+    <%= image_tag "ShorelineLogoColor.png", width: 30, style: 'margin-top: -4px;' %> Shoreline - Personal Health Summary - Printed <%= Time.now.strftime("%m/%d/%Y") %>
+  </p>
+  <h1>
+    <%= image_tag @user.imageurl, style: 'max-width: 100px; max-height: 100px;' %>
+    <%= @user.full_name %>
+  </h1>
+  <% if @user.date_of_birth.presence %><strong>Birthday</strong> 
+  <%= current_user.date_of_birth.strftime("%B %d, %Y") %> (age <%= (Date.today - current_user.date_of_birth).to_i / 365 %>)<br><% end %>
+  <% if @user.gender.presence %><strong>Gender</strong> <%= current_user.gender %><br><% end %>
+  <% if @user.bloodtype.presence %> <strong>Bloodtype</strong> <%= current_user.bloodtype %><br><% end %>
+  <h3>Conditions</h3>
+  <% @user.conditions.each do |f| %>
+  <p>
+    <% if f.page.presence %>
+    <%= f.page.name %>
+    <% else %>
+    <%= f.name  %>
+    <% end %>
+  </p>
+  <% end %>
+  <h3>Medications</h3>
+  <% @user.medications.each do |f| %>
+  <p>
+    <%= f.name %>
+  </p>
+  <% end %>
+  <h3>Known Drug Allergies</h3>
+  <p>
+    None
+  </p>
+</div>

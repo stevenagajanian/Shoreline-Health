@@ -1,0 +1,11 @@
+<%= simple_form_for(@droplet) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.text_area :body, rows: 8, id: 'auto_html_question_body', class: 'form-control' %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

@@ -20,6 +20,7 @@ class User < ActiveRecord::Base
 	has_many :pages, through: :diagnoses
 	has_many :diagnoses
 	has_many :albums
+  has_many :droplets
 
 	has_many :handshakes, foreign_key: "follower_id", dependent: :destroy
 	has_many :followed_users, through: :handshakes, source: :followed
@@ -53,6 +54,10 @@ class User < ActiveRecord::Base
 	validates :last_name, presence: true
 	validates :date_of_birth, presence: true
 	validates :email, presence: true
+  
+  def badmin? 
+    
+  end
 
 	def full_name
 		first_name + " " + last_name

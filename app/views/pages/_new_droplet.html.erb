@@ -1,0 +1,28 @@
+<% if user_signed_in? %>
+<h2>Post a Droplet</h2>
+<%= form_for(@droplet) do |f| %>
+<% if @droplet.errors.any? %>
+<div id="error_explanation">
+  <h2>
+    <%= pluralize(@droplet.errors.count, "error") %> prohibited this droplet from being saved:
+  </h2>
+  <ul>
+    <% @droplet.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+<%= f.hidden_field :user_id, value: current_user.id %>
+<%= f.hidden_field :page_id, value: @page.id %>
+Type your droplet here. You can also include links to YouTube videos or image URLs, and they will automatically be shown in your droplet. You can use <%= link_to "Imgur", "http://imgur.com/" %> to upload images.
+</p>
+<%= f.text_area :body, rows: 8, id: 'auto_html_question_body', class: 'form-control' %>
+<hr>
+<div class="actions">
+  <%= f.submit class: 'btn btn-primary btn-block' %>
+</div>
+<% end %>
+<% else %>
+<%= link_to "Sign up to post a droplet to this condition wiki.", new_user_registration_path %>
+<% end %>

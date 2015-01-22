@@ -1,0 +1,35 @@
+<h1>Listing droplets</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Page</th>
+      <th>Body html</th>
+      <th>Body</th>
+      <th>Upvotes</th>
+      <th>Downvotes</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @droplets.each do |droplet| %>
+      <tr>
+        <td><%= droplet.user_id %></td>
+        <td><%= droplet.page_id %></td>
+        <td><%= droplet.body_html %></td>
+        <td><%= droplet.body %></td>
+        <td><%= droplet.upvotes %></td>
+        <td><%= droplet.downvotes %></td>
+        <td><%= link_to 'Show', droplet %></td>
+        <td><%= link_to 'Edit', edit_droplet_path(droplet) %></td>
+        <td><%= link_to 'Destroy', droplet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Droplet', new_droplet_path %>

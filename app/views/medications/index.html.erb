@@ -1,22 +1,35 @@
-<%= render partial: 'layouts/profile_nav', object: @user %>
 <div class="container">
-	<h2><strong>Medications</strong> - <%= link_to @user.full_name, @user %></h2>
-	<hr>
-	<%= link_to new_medication_path, class: "btn btn-default pull-right" do %> New Medication <% end %>
-	<table class="table table-bordered">
-		<tr>
-			<th>Name</th>
-			<th>Description</th>
-		</tr>
-		<% for medication in @medications %>
-		<tr>
-			<td><%= medication.name %></td>
-			<td><%= medication.dosage %></td>
-			<td><%= link_to "Show", medication %></td>
-			<td><%= link_to "Edit", edit_medication_path(medication) %></td>
-			<td><%= link_to "Destroy", medication, :confirm => 'Are you sure?', :method => :delete %></td>
-		</tr>
-		<% end %>
-	</table>
-</div>
+  <div class="row">
+    <div class="col-md-3">
+      <%= render "users/sidebar" %>
+    </div>
+    <div class="col-md-9">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <h2>
+            <%= link_to new_medication_path, class: "btn btn-default pull-right" do %> New Medication <% end %>
+            <strong>Medications</strong> - <%= link_to @user.full_name, @user %>
+          </h2>
+          <hr>
+          <% for medication in @medications %>
+          <p class='lead'>
+            <%= medication.name %>
+            <%= link_to edit_medication_path(medication), class: "btn btn-primary tag-tooltip", data: {:toggle=>"tooltip"}, 'data-original-title' => "Edit " + medication.name, 'data-placement' => 'bottom'  do %>
+            <i class='fa fa-gear'></i> Edit
+            <% end %>
+            <%= link_to medication, class: "btn btn-danger tag-tooltip", data: {:toggle=>"tooltip"}, 'data-original-title' => "Remove " + medication.name, 'data-placement' => 'bottom', :confirm => 'Are you sure?', :method => :delete do %>
+            <i class='fa fa-trash-o'></i> Remove
+            <% end %>
+            <%= medication.dosage %>
+          </p>
+          <p>
+            <%= link_to "Add pharmacy?", new_pharmacy_path %>
+
+          </p>
+          <hr>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
