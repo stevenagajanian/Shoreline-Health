@@ -36,7 +36,7 @@ class HeightsController < ApplicationController
 
     respond_to do |format|
       if @height.save
-        format.html { redirect_to user_heights_path(@height.user), notice: 'Status was successfully created.' }
+        format.html { redirect_to user_metrics_path(@height.user), notice: 'Height was successfully added.' }
         format.json { render json: @height, status: :created, location: @height }
       else
         format.html { render action: "new" }

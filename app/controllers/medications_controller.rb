@@ -3,12 +3,12 @@ class MedicationsController < ApplicationController
 
   def index
     @user = User.find(params[:user_id])
+    @medication = current_user.medications.new
     @medications = @user.medications
   end
 
   def show
     @medication = Medication.find(params[:id])
-
     respond_to do |format|
         format.html # show.html.erb
         format.json { render json: @medication }

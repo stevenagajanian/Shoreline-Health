@@ -2,8 +2,8 @@ class PagesController < ApplicationController
 
   def index
     @pages = Page.all.order('name ASC')
-    @pages = Page.where(['name ILIKE ?', "%#{params[:search]}%"]).paginate(:page => params[:page], :per_page => 5)
-    @users = User.where(['email ILIKE ?', "%#{params[:search]}%"]).paginate(:page => params[:page], :per_page => 3)
+    @pages = Page.where(['name ILIKE ?', "%#{params[:search]}%"]).paginate(:page => params[:page], :per_page => 25).order('name ASC')
+  @users = User.where(['email ILIKE ?', "%#{params[:search]}%"]).paginate(:page => params[:page], :per_page => 3)
 end
 
 def show
@@ -62,7 +62,7 @@ def create
 
   respond_to do |format|
     if @page.save
-      format.html { redirect_to pages_path, notice: 'Success!' }
+      format.html { redirect_to @page, notice: 'Success!' }
       format.json { render json: @page, status: :created, location: @page }
     else
       format.html { render action: "new" }

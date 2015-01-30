@@ -1,11 +1,12 @@
 <body style="background-color: #EEEEEE;"><div class="container">
+ 
   <div class="panel panel-default">
     <div class="panel-body">
       <h2>
         <button class="btn pull-right btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-          New Droplet
+          <%= fa_icon "plus" %> New Information
         </button>
-        <%= @page.name %><% if current_user.badmin? %><%= link_to "Edit",  edit_page_path(@page), class: "btn pull-right " %><% end %>
+        <%= @page.name %> - Global Page<% if current_user.badmin? %><%= link_to "Edit",  edit_page_path(@page), class: "btn pull-right " %><% end %>
       </h2>      
     </div>
   </div>
@@ -17,6 +18,7 @@
   <div class="row">
     <div class="col-md-9">
       <% @page.droplets.each do |f| %>
+      <% if f.body.presence %>
       <div class="panel panel-default">
         <div class="panel-body">
           <p><i><b>Posted <%= f.created_at %> </b></i></p>
@@ -31,29 +33,22 @@
         <% end %>
       </div>
     </div>
-    <% end %>
-
-    <p>
-      <span class="badge"><%= @page.users.count %></span> people are tracking this condition.<br>
-      <% @page.users.each do |f| %>
-      <%= link_to f.full_name, f %>
-      <% end %>
-    </p>
-    <p>
-      <%= link_to "Symptoms", @page, class: "btn btn-default btn-sm" %>
-      <%= link_to "Treatments", @page, class: "btn btn-default btn-sm" %>
-      <%= link_to "Tracking	", @page, class: "btn btn-default btn-sm" %>
-    </p>
-  <%= link_to "Back", pages_path %>
+    <% end %> <% end %>
   </div>
 
   <div class="col-md-3">
+     <div class="alert alert-success" role="alert">Notice: This feature is under construction. This is intended to be a community page for gathering data about a medical condition. No data is made public here unless specifically authorized by an individual. </div>
+    <% if current_user.conditions.map(&:page_id).include?(@page.id) %>
+    You are tracking this condition in your health record. 
+    <% end %>
+    <%= link_to user_conditions_path(current_user), class: 'btn btn-primary btn-block' do %>
+    <%= fa_icon "plus" %> Add to my Health Record
+    <% end %><br>
     <%= link_to page_path(@page), class: 'btn btn-primary btn-block' do %>
-    <%= fa_icon "database" %> Public Records
+    <%= fa_icon "database" %> View Public Records
     <% end %><br>
     <div class="panel panel-default">
       <div class="panel-body">
-        <%= link_to "Edit", edit_page_path(@page) %><br>
         <%= @page.users.count %> people are tracking this condition.<br>
       </div>
     </div>

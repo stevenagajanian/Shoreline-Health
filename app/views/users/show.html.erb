@@ -1,13 +1,47 @@
+<% if @user.following?(current_user) %>
 <div class="container">
-  <% if current_user.following?(@user) %>
-  <div class="panel panel-default panel-body" id="home">
-    <%= @user.full_name %> is connected to you. <%= link_to "Modify your handshake.", current_user.find_handshake(@user) %>
-    <p>
-      Please note, the ability to view information from users in your network is a work in progress. Currently you may modify your handshake to choose what informaiton of yours <%= @user.full_name %> will be able to see once this feature is fully developed.
-    </p>
+  <div class="row">
+    <div class="col-md-3">
+      <%= render "users/shared_sidebar" %>
+    </div>
+    <div class="col-md-9">
+      <div class="alert alert-info" role="alert"><%= @user.full_name %> has you in their network and has allowed you to see these parts of their health data.  </div>
+      <p>
+        <% @user.permissions.each do |permission| %>
+        <% if Condition.exists?(permission.condition_id) and permission.permissible_user == current_user %>
+      <div class="panel panel-default panel-body">
+        <td><%= Condition.find(permission.condition_id).page_name %></td>
+        <p>
+          <% Condition.find(permission.condition_id).posts.each do |postX| %>
+        <div class="journal_nav panel panel-default">
+          <div class="panel-body">
+            <%= postX.created_at.strftime("%B %d, %Y") %> | <%= time_ago_in_words(postX.created_at) %> ago<br>
+            <h4>
+              <% if postX.title? %>
+              <%= postX.title %><br />
+              <% end %>
+              <% if postX.description? %>
+              <%= postX.description %>
+              <% end %> 
+              <%= link_to condition_posts_path(postX.condition), class: "" do %>
+              <% end %>
+            </h4>
+          </div>
+        </div>
+        <% end %>
+        </p>
+    </div>
     <% end %>
-  </div>
+    <% end %>
+    </p>
 </div>
+</div>
+</div>
+<% elsif !@user == current_user %><div class="container">
+<p>
+  This person has not yet added you to their network, or allowed you to see any of their health record. </p>
+</div>
+<% end %>
 <% if current_user?(@user) %>
 <div class="container">
   <div class="row">

@@ -36,7 +36,7 @@ class WeightsController < ApplicationController
 
     respond_to do |format|
       if @weight.save
-        format.html { redirect_to user_weights_path(@weight.user), notice: 'Status was successfully created.' }
+        format.html { redirect_to user_metrics_path(@weight.user), notice: 'Weight was successfully added.' }
         format.json { render json: @weight, status: :created, location: @weight }
       else
         format.html { render action: "new" }

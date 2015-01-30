@@ -1,0 +1,11 @@
+<%= form_for @medication do |f| %>
+<p>
+  <%= f.label :name %><br />
+  <%= f.text_field :name, class: 'form-control' %>
+</p>
+<p>
+  <%= f.label :dosage %><br />
+  <%= f.text_field :dosage, class: 'form-control' %>
+</p>
+<p><%= f.submit "Add Medication to Health Record", class: "btn btn-block btn-primary" %></p>
+<% end %>

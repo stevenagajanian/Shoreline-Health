@@ -1,0 +1,18 @@
+<%= form_for Condition.new do |f| %>
+<div id="the-condition-search-form">
+  <%= f.hidden_field :name, value: 'page' %>
+  <%= f.hidden_field :description, value: 'page' %>
+  <%= text_field_tag :page_name, params[:page_name], style: "width: 200%;", id: "inputLarge", class: "form-control typeahead", id: "auto_complete", :autofocus => true, placeholder: "Search for a Condition" %>
+</div>
+<br>
+<p><%= link_to "Don't see your condition here? Click here to add it.", new_page_path %></p>
+<%= javascript_tag "var autocomplete_pages = #{ @autocomplete_pages.pluck(:name).to_json };" %>
+<script type="text/javascript">
+  $('#the-condition-search-form .typeahead').typeahead({ hint: true, highlight: true, minLength: 2 },
+                                                       { name: 'conditions', displayKey: 'value', source: substringMatcher(autocomplete_pages), templates: {
+                                                         header: '<h3 style="padding-left: 10px;">Conditions</h3>'}
+                                                       });
+</script>
+<%= f.submit "Add This Condition", class: "btn btn-primary" %>
+
+<% end %>

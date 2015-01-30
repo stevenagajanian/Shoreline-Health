@@ -1,0 +1,9 @@
+
+<%= form_for Weight.new do |f| %>
+
+  <p>
+    <%= f.label :amount %> (lbs)<br />
+    <%= f.text_field :amount %>
+  </p>
+  <p><%= f.submit class: "btn btn-default" %></p>
+<% end %>

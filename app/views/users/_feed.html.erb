@@ -1,15 +1,24 @@
 <h2>
-  Profile
+  <%= @user.first_name %>'s Profile
 </h2>
 <p>
   <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
     <%= fa_icon "plus" %>  Add Record
   </button>
-  <%= link_to edit_user_registration_path(current_user), class: "btn btn-raised btn-primary" do %><i class="fa fa-share"></i> Share<% end %>
-  <%= link_to user_printable_path(current_user), class: 'btn btn-raised btn btn-primary' do %><i class="fa fa-print"></i> Print<% end %>
+  <button class="btn btn-default" type="button" data-toggle="collapse" data-target="#collapseShare" aria-expanded="false" aria-controls="collapseExample">
+    <%= fa_icon "share" %>  Share
+  </button>
+  <%= link_to user_printable_path(current_user), class: 'btn btn-raised btn btn-default' do %><i class="fa fa-print"></i> Print<% end %>
   <%= link_to edit_user_registration_path(current_user), class: "btn btn-raised btn-default" do %><i class="fa fa-gear"></i> Settings<% end %>
   <% if @conditions.count > 0 %>
 </p>
+
+<div class="collapse" id="collapseShare">
+  <div class="well">
+    <h4>Share Health Record</h4>
+    Use this link to invite your friends, family or doctors to your health record. Remember, they will still not see any of your data until you authorize specific permissions for those people, or unless your data is set to public. 
+  </div>
+</div>
 
 <div class="collapse" id="collapseExample">
   <div class="well">
@@ -22,9 +31,7 @@
 <div class="journal_nav panel panel-default">
   <div class="panel-body">
     <h4>
-      <span class="label label-primary">
-        <%= postX.condition.page.name %>
-      </span>
+      <%= link_to postX.condition.page.name, condition_posts_path(f), class: 'label label-primary' %>
     </h4>
     <%= postX.created_at.strftime("%B %d, %Y") %> | <%= time_ago_in_words(postX.created_at) %> ago<br>
     <h4>
@@ -42,7 +49,7 @@
 <% end %>
 <% end %>
 <% else %>
-<h2>Welcome to Komodo!</h2>
+<h2>Welcome to Shoreline!</h2>
 <p class="lead">This is your profile page, where you will be able to see all of your medical updates and history of your health data.<br><br>
   Here are a couple of things you can do to get started:<br>
 <ol class="lead">

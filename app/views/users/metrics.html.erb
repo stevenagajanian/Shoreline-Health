@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <%= render "users/sidebar" %>
+    </div>
+    <div class="col-md-9">
+      <h2>
+        <%= @user.first_name %>'s Metrics
+      </h2>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <h3>Height (inches) <button class="btn btn-primary btn-sm" type="button" data-toggle="collapse" data-target="#collapseHeight" aria-expanded="false" aria-controls="collapseExample">
+            <%= fa_icon "plus" %>  Add Record
+            </button></h3>
+          <div class="collapse" id="collapseHeight">
+            <div class="well">
+              <%= render 'heights/form' %>
+            </div>
+          </div>
+          <%= line_chart Height.group(:created_at).maximum(:amount) %>
+          <h3>Weight (lbs) <button class="btn btn-primary btn-sm" type="button" data-toggle="collapse" data-target="#collapseWeight" aria-expanded="false" aria-controls="collapseExample">
+            <%= fa_icon "plus" %>  Add Record
+            </button></h3>
+          <div class="collapse" id="collapseWeight">
+            <div class="well">
+              <%= render 'weights/form' %>
+            </div>
+          </div>
+          <%= line_chart Weight.group(:created_at).maximum(:amount) %>
+          <h3><b>Coming Soon:</b> Blood Pressure, Cholesterol, Custom Trackers, and more...</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

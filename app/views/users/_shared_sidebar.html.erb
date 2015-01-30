@@ -1,0 +1,11 @@
+<!-- The EDITED sidebar of the user profile, shown to NETWORK friends, family, or doctors. Contains personal info, lists of medications, allergies, conditions, goals, and links to printing or editing data BASED on PERMISSIONS. -->
+
+<!-- Basic health information -->
+<div class="panel panel-default">
+  <div class="panel-body">
+    <center>
+      <%= image_tag @user.imageurl, class: 'img-circle', style: 'max-width: 140px; max-height: 140px;' %>
+    </center>
+    <h3><%= link_to @user.full_name, @user %>
+  </div>
+</div>

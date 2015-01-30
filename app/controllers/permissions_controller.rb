@@ -49,7 +49,7 @@ before_filter :authenticate_user!
 
     respond_to do |format|
       if @permission.save
-        format.html { redirect_to user_network_path(@permission.user), notice: 'Status was successfully created.' }
+        format.html { redirect_to user_network_permissions_path(@permission.user), notice: 'Status was successfully created.' }
         format.json { render json: @permission, status: :created, location: @permission }
       else
         format.html { render action: "new" }

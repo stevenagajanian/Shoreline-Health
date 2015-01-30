@@ -12,14 +12,13 @@
     <%= favicon_link_tag 'favicon.ico' %>
     <%= csrf_meta_tags %>
   </head>
-  <body style="background-color: #E1E8F0;">
+  <body style="background-color: #DDD;">
     <% if !current_page?(new_user_session_path) and !current_page?(edit_user_registration_path) and !current_page?(new_user_registration_path) %>
     <%= render "layouts/navbar" %>
     <% end %>
     </div>
-    <div class="container-fluid"><%= bootstrap_flash %></div>
+    <div class="container"><%= bootstrap_flash %></div>
     <%= yield %>
-    <hr>
     <%= render 'layouts/footer' %>
   </body>
 </html>

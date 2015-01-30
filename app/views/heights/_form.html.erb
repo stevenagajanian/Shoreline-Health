@@ -1,0 +1,7 @@
+<%= form_for Height.new do |f| %>
+  <p>
+    <%= f.label :amount %> (inches)<br />
+    <%= f.text_field :amount %>
+  </p>
+  <p><%= f.submit class: "btn btn-default" %></p>
+<% end %>

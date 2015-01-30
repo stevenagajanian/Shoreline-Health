@@ -4,27 +4,36 @@
       <%= render "users/sidebar" %>
     </div>
     <div class="col-md-9">
+      <h2>
+        <%= @user.first_name %>'s Medications
+      </h2>
+      <p>
+        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseForm" aria-expanded="false" aria-controls="collapseExample">
+          <%= fa_icon "medkit" %>  Add Medication
+        </button>
+      </p>
+      <div class="collapse" id="collapseForm">
+        <div class="well">
+          <%= render 'medications/form' %>
+        </div>
+      </div>
       <div class="panel panel-default">
         <div class="panel-body">
-          <h2>
-            <%= link_to new_medication_path, class: "btn btn-default pull-right" do %> New Medication <% end %>
-            <strong>Medications</strong> - <%= link_to @user.full_name, @user %>
-          </h2>
-          <hr>
+          <% if @user.medications.none? %>
+          No medications listed
+          <% end %>
           <% for medication in @medications %>
           <p class='lead'>
-            <%= medication.name %>
-            <%= link_to edit_medication_path(medication), class: "btn btn-primary tag-tooltip", data: {:toggle=>"tooltip"}, 'data-original-title' => "Edit " + medication.name, 'data-placement' => 'bottom'  do %>
-            <i class='fa fa-gear'></i> Edit
-            <% end %>
-            <%= link_to medication, class: "btn btn-danger tag-tooltip", data: {:toggle=>"tooltip"}, 'data-original-title' => "Remove " + medication.name, 'data-placement' => 'bottom', :confirm => 'Are you sure?', :method => :delete do %>
-            <i class='fa fa-trash-o'></i> Remove
-            <% end %>
-            <%= medication.dosage %>
+            <strong><%= medication.name %></strong> - <%= medication.dosage %>
           </p>
           <p>
-            <%= link_to "Add pharmacy?", new_pharmacy_path %>
-
+            <%= link_to new_pharmacy_path, class: 'btn btn-sm btn-default' do %> <%= fa_icon "plus" %> Add Pharmacy<% end %>
+            <%= link_to edit_medication_path(medication), class: "btn btn-sm btn-default tag-tooltip", data: {:toggle=>"tooltip"}, 'data-original-title' => "Edit " + medication.name, 'data-placement' => 'bottom'  do %>
+            <i class='fa fa-gear'></i> Edit
+            <% end %>
+            <%= link_to medication, class: "btn btn-sm btn-danger tag-tooltip", data: {:toggle=>"tooltip"}, 'data-original-title' => "Remove " + medication.name, 'data-placement' => 'bottom', :confirm => 'Are you sure?', :method => :delete do %>
+            <i class='fa fa-trash-o'></i> Remove
+            <% end %>
           </p>
           <hr>
           <% end %>

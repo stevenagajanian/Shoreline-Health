@@ -5,7 +5,7 @@ before_filter :authenticate_user!
   def index
     @user = User.find(params[:user_id])
     @conditions = @user.conditions
-    @condition = Condition.new
+    @condition = current_user.conditions.new
     @autocomplete_pages = Page.all
     if current_user.id == @user.id
 			render action: :index

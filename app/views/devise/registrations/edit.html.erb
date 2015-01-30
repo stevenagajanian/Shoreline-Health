@@ -29,25 +29,21 @@
         <%= f.select :doner?, doner: [:Yes, :No] %>
         <%= f.select :bloodtype, bloodtype: ["Unknown", "O+", "O-", "A+", "A-", "B+", "B-", "AB+", "AB-"] %>
         <%= f.text_area :address %>
-        <%= f.text_area :bio %>
-
-        <%= f.file_field :avatar, as: :file, class: "form-control" %>
-        <% if f.object.avatar? %>
-        <%= avatar_profile_link f.object, {width: 130}  %>
-        <br>
-        <% end %>
 
         <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
         <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
         <% end %>
-        <br />
-
+<button class="btn btn-block btn-default" type="button" data-toggle="collapse" data-target="#collapseShare" aria-expanded="false" aria-controls="collapseExample">
+  <%= fa_icon "gear" %>  Change password?
+  </button><div class="collapse" id="collapseShare">
+  <div class="well">
         <i>New Password (leave blank if you don't want to change it)</i><br />
         <%= f.password_field :password, autocomplete: "off" %>
 
         <%= f.password_field :password_confirmation, autocomplete: "off"%>
-        <hr>
-        <i>Enter current password(we need your current password to confirm your changes)</i><br />
+         </div>
+</div><hr>
+      <i><b>Enter current password to make changes</b></i><br />
         <%= f.password_field :current_password, autocomplete: "off" %>
 
       <p><%= f.submit "Update Profile", class: "btn btn-lg btn-primary btn-block" %></p>

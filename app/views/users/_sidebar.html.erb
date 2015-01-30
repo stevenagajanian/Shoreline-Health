@@ -3,7 +3,9 @@
 <!-- Basic health information -->
 <div class="panel panel-default">
   <div class="panel-body">
-    <%= image_tag @user.imageurl, class: 'img-rounded', style: 'max-width: 100%; max-height: 232px;' %>
+    <center>
+      <%= image_tag @user.imageurl, class: 'img-circle', style: 'max-width: 140px; max-height: 140px;' %>
+    </center>
     <h3><%= link_to @user.full_name, @user %>
     </h3>
     <% if @user.date_of_birth.presence %><strong>Birthday</strong> 
@@ -11,10 +13,17 @@
     <% if @user.gender.presence %><strong>Gender</strong> <%= current_user.gender %><br><% end %>
     <% if @user.bloodtype.presence %> <strong>Bloodtype</strong> <%= current_user.bloodtype %><br><% end %>
     <hr>
-    <%= link_to user_apps_path(@user) do %><%= fa_icon "database" %> Data<% end %> | 
+    <%= link_to user_apps_path(@user) do %><%= fa_icon "database" %> All Data<% end %> | 
+    <%= link_to user_medications_path(@user) do %><%= fa_icon "medkit" %> Medications<% end %> <br>
+    <%= link_to user_metrics_path(@user) do %><%= fa_icon "bar-chart" %> Metrics<% end %> | 
     <%= link_to user_goals_path(@user) do %><%= fa_icon "star" %> Goals<% end %>
     <hr>
     <h4 class="">Medical Conditions</h4>
+    <% if @user.conditions.none? %>
+    <%= link_to user_conditions_path(@user) do %>
+    Add a condition?
+    <% end %>
+    <% end %>
     <% for condition in @user.conditions %>
     <p>
       <% if condition.page.presence %>
@@ -28,7 +37,7 @@
     <% end %>
     <h4 class="">Allergies &amp; Reactions</h4>
     <% if @user.allergies.none? %>
-    <%= link_to new_allergy_path do %>
+    <%= link_to user_allergies_path(@user) do %>
     No known allergies
     <% end %>
     <% end %>
@@ -38,6 +47,11 @@
     </p>
     <% end %>
     <h4 class="">Medications</h4>
+    <% if @user.medications.none? %>
+    <%= link_to user_medications_path(@user) do %>
+    Add a medication?
+    <% end %>
+    <% end %>
     <% for medication in @user.medications %>
     <p>
       <%= link_to user_medications_path(@user) do %>
@@ -47,7 +61,7 @@
     <% end %>
     <h4>Current Goals</h4>
     <% if @user.goals.none? %>
-    <%= link_to "None", user_goals_path(@user) %>
+    <%= link_to "Add a goal?", user_goals_path(@user) %>
     <% end %>
     <% for goal in @user.goals.get_unfinished %>
     <p>
@@ -57,6 +71,6 @@
   </div>
 </div>
 <!-- Helpful stuff like printing your profile --> 
-<%= link_to edit_user_registration_path(current_user), class: "btn btn-raised btn-block btn-default" do %><i class="fa fa-gear"></i> Edit Personal Info<% end %>
-<%= link_to edit_user_registration_path(current_user), class: "btn btn-raised btn-block btn-success" do %><i class="fa fa-share"></i> Share My Record<% end %>
-<%= link_to user_printable_path(current_user), class: 'btn btn-raised  btn-block btn btn-primary' do %><i class="fa fa-print"></i> Print My Health Record<% end %>
+<%= link_to edit_user_registration_path(current_user), class: "btn btn-block btn-default" do %><i class="fa fa-gear"></i> Edit Personal Info<% end %>
+<%= link_to edit_user_registration_path(current_user), class: "btn btn-block btn-default" do %><i class="fa fa-share"></i> Share My Record<% end %>
+<%= link_to user_printable_path(current_user), class: 'btn btn-block btn btn-default' do %><i class="fa fa-print"></i> Print My Health Record<% end %>

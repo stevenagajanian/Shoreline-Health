@@ -5,50 +5,36 @@
     </div>
     <div class="col-md-9">
       <h2>
-         Network
+        <% if current_user == @user %>My<% else %><%= @user.first_name %>'s<% end %> Network
       </h2>
-      <% if @user.followed_users.any? %>
-      <% @user.followed_users.each do |f| %>
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <h4><%= link_to f.full_name, f %></h4>
-          <div class="table-responsive">
-            <table class="table">
-              <% @user.permissions.each do |permission| %>
-              <% if Condition.exists?(permission.condition_id) and permission.permissible_user == f %>
-              <tr>
-                <td><%= link_to Condition.find(permission.condition_id).page_name, condition_posts_path(Condition.find(permission.condition_id)) %></td>
-                <td><%= fa_icon "eye" %> Can view</td> 
-                <td><%= link_to permission, class: "", method: :delete, data: { confirm: 'Are you sure?' } do %><%= fa_icon "remove" %><% end %></td>
-              </tr>
-              <% end %>
-              <% end %>
-            </table>
-          </div>
-        </div>
+      <p>
+      <div class="btn-group btn-group-justified">
+        <%= link_to 'Network', user_network_path(@user),class: "btn btn-primary" %>
+        <%= link_to 'Permissions', user_network_permissions_path(@user),class: "btn btn-default" %>
       </div>
-      <% end %>
-      <% else %>
-      <p class="lead">
-        Do you want to share your health information with family members, careproviders, or specialists?<br> <%= link_to "Click here to find them.", users_path %>
       </p>
-      <% end %>
-      <h2>
-        <i class="text-primary fa fa-lock fa-x"></i> Permissions
-      </h2>
-      <%= form_for [@user, Permission.new] do |f| %>
-      <%= f.hidden_field :user_id, value: @user.id %>
-      <div class="form-group col-md-3">
-        <%= f.collection_select :permissible_user_id, @user.followed_users, :id, :full_name, {prompt: "Select a person to share to"}, {class: "form-control col-lg-2"} %>
+    <% if @user.followed_users.any? %>
+    <% @user.handshakes.each do |f| %>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <p class="pull-right">
+          <%= link_to edit_handshake_path(f), class: "btn btn-sm btn-default tag-tooltip", data: {:toggle=>"tooltip"}, 'data-original-title' => "Edit " , 'data-placement' => 'bottom'  do %>
+          <i class='fa fa-gear'></i> Edit Relationship
+          <% end %>
+          <%= link_to "Remove", f, class: 'btn btn-sm  btn-default pull-', method: :delete %>
+        </p>
+        <h4>
+          <%= image_tag f.followed.imageurl, class: 'img-circle', style: 'padding: 0px; margin: 0px; max-width: 50px; max-height: 50px;' %> <%= link_to f.followed.full_name, f.followed %>
+        </h4>
       </div>
-      <div class="form-group col-md-1">
-        can see
-      </div>
-      <div class="form-group form-horizontal col-md-3">
-        <%= f.collection_select :condition_id, @user.conditions, :id, :page_name, {prompt: "Select something to share"}, {class: "form-control col-lg-2"} %>
-      </div>
-      <%= f.submit class: "form-contol btn btn-primary" %>
-      <% end %>
     </div>
+    <% end %>
+    <center>
+    <p>
+      <%= link_to "Click here to find family, friends, doctors or specialists to add to your network.", users_path %>
+    </p>
+    </center>
+    <% end %>
   </div>
+</div>
 </div>

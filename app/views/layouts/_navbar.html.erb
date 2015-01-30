@@ -11,7 +11,7 @@
           <span class="icon-bar"></span>
         </button>
         <%= link_to root_path, class: "navbar-brand" do %>
-        <%= image_tag "ShorelineLogoColor.png", style: 'margin-left: 5px; margin-top: -5px;', width: 20 %>
+        <%= fa_icon "life-ring" %> 
         Shoreline
         <% end %>
       </div>
@@ -43,11 +43,6 @@
               </li>
             </ul>
           </li>
-          <li>
-            <%= link_to current_user, class: "tag-tooltip", data: {:toggle=>"tooltip"}, 'data-original-title' => "Medication info, reviews, and more", 'data-placement' => 'bottom' do %>
-            <span class="text-default"><%= fa_icon "life-ring" %> Harbor</span>
-            <% end %>
-          </li>
           <li id="the-basics2">
             <%= form_tag(pages_path, :method => "get", id: "", style: "", class: 'form-inline navbar-form navbar-left') do %>
             <div class="form-group col-md-" id="">
@@ -58,7 +53,7 @@
             <% end %>
             <% end %>
           </li>
-
+          <%=  javascript_tag "var autocomplete_items = #{ (Page.all.pluck(:name) + User.all.pluck(:email)).to_json };" %>
           <%= javascript_tag "var autocomplete_items = #{ (Page.all.pluck(:name) + User.all.pluck(:email)).to_json };" %>
           <script type="text/javascript">
             $('#the-basics2 .typeahead').typeahead({ hint: true, highlight: true, minLength: 1},{ name: 'states', displayKey: 'value', source: substringMatcher(autocomplete_items),templates: { header: '<h4 style="padding-left: 10px;" class="league-name">Conditions</h4>'}}).on('typeahead:selected', function(e, data) {$("#the-basics2 form").submit();}).css();
@@ -93,6 +88,7 @@
               <li>
                 <%= link_to "Edit Profile", edit_registration_path(current_user) %>
               </li>  
+              <li><%= link_to "Print Profile", user_printable_path(current_user)  %></li>
               <li>
                 <%= link_to "Help", static_pages_about_path %>
               </li>  
