@@ -3,8 +3,9 @@
 <!-- Basic health information -->
 <div class="panel panel-default">
   <div class="panel-body">
-    <center>
+    <center><% if @user.imageurl.presence %>
       <%= image_tag @user.imageurl, class: 'img-circle', style: 'max-width: 140px; max-height: 140px;' %>
+      <% end %>
     </center>
     <h3><%= link_to @user.full_name, @user %>
     </h3>
