@@ -92,8 +92,8 @@
             </div>
           </div>
         </div>
-        <div class="col-md-4"><p>
-          <%= link_to @condition.page, class: 'btn btn-block btn-primary' do %><i class="fa fa-globe"></i> <%= @condition.page.name %> - Global Page<% end %></p><p>
+        <div class="col-md-4"><p> <% if @condition.page.presence %>
+          <%= link_to @condition.page, class: 'btn btn-block btn-primary' do %><i class="fa fa-globe"></i> <%= @condition.page.name %> - Global Page<% end %></p> <% end %><p>
           <%= link_to condition_posts_path(@condition), class: 'btn btn-block btn-default' do %><%= fa_icon "inbox" %>Turn on notifications? <% end %></p>
           
           <div class="panel panel-primary">
