@@ -86,44 +86,37 @@
 
                 <%= link_to  condition_post_path(@condition, post), method: :edit do %><i class="fa fa-pencil"></i> Edit<% end %> | 
                 <%= link_to  condition_post_path(@condition, post), method: :delete, data: { confirm: "Are you sure?" } do %><i class="fa fa-trash-o"></i> Remove<% end %></div>
-                <div class="col-md-0">
-
-
-                </div>
               </div>
               <hr>
               <% end %>
             </div>
           </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4"><p>
+          <%= link_to @condition.page, class: 'btn btn-block btn-primary' do %><i class="fa fa-globe"></i> <%= @condition.page.name %> - Global Page<% end %></p><p>
+          <%= link_to condition_posts_path(@condition), class: 'btn btn-block btn-default' do %><%= fa_icon "inbox" %>Turn on notifications? <% end %></p>
+          
           <div class="panel panel-primary">
-            <div class="panel-heading">
-              <% if @condition.page.presence %>
-              <h3 class="panel-title"><%= @condition.page.name %></h3>
-            </div>
             <div class="panel-body">
+              <% if @condition.page.presence %>
               <p>
-                <%= link_to @condition.page do %><i class="fa fa-globe"></i> <%= @condition.page.name %> - Global Page<% end %><br>
-                <!--<a data-toggle="modal" data-target="#newTreatment">
-                  <i class="fa fa-medkit"></i> Add Treatment
-                </a> <br>-->
                 <% link_to @condition.page do %><i class="fa fa-medkit"></i> Treatments<% end %>
               </p>
               <% end %>
               <p>
                 Tracked from: <%= @condition.created_at.strftime("%B %d, %Y") %> to Present
               </p>
-              <hr>
-              <h4>Who can see these records?</h4>
-              <% @user.permissions.each do |f| %>
-              <h5>
-                <% if f.condition_id == @condition.id %>
-                <%= link_to f.permissible_user.full_name, f.permissible_user %>
-                <% end %>
-              </h5>
-              <% end %>
             </div>
+          </div>
+          <div class='well'>
+            <h4>Who can see these records?</h4>
+            <% @user.permissions.each do |f| %>
+            <h5>
+              <% if f.condition_id == @condition.id %>
+              <%= link_to f.permissible_user.full_name, f.permissible_user %>
+              <% end %>
+            </h5>
+            <% end %>
           </div>
         </div>
       </div>

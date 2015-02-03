@@ -1,20 +1,21 @@
 <body style="background-color: #EEEEEE;"><div class="container">
- 
-  <div class="panel panel-default">
-    <div class="panel-body">
-      <h2>
+
+      <h1>
         <button class="btn pull-right btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-          <%= fa_icon "plus" %> New Information
+          <%= fa_icon "plus" %> Submit Information
         </button>
-        <%= @page.name %> - Global Page<% if current_user.badmin? %><%= link_to "Edit",  edit_page_path(@page), class: "btn pull-right " %><% end %>
-      </h2>      
-    </div>
-  </div>
+        <%= @page.name %><% if current_user.badmin? %><%= link_to "Edit",  edit_page_path(@page), class: "btn pull-right " %><% end %>
+      </h2>     
   <div class="collapse" id="collapseExample">
     <div class="well">
       <%= render 'pages/new_droplet' %>
     </div>
   </div>
+  <div class="btn-group btn-group-justified">
+    <%= link_to (@page),class: "btn btn-primary" do %><%= fa_icon 'medkit' %> Basic<% end %>
+    <%= link_to (@page),class: "btn btn-default" do %><%= fa_icon 'stethoscope' %> Symptoms<% end %>
+    <%= link_to (@page),class: "btn btn-default" do %><%= fa_icon 'medkit' %> Treatments<% end %>
+  </div><br>
   <div class="row">
     <div class="col-md-9">
       <% @page.droplets.each do |f| %>
@@ -27,9 +28,10 @@
             <%= f.body_html %>
           </div>
           </p>
-        <% if user_signed_in? and current_user.id == f.user_id %>
+        <%= link_to 'Upvote', f, class: 'btn btn-default' %> <%= link_to 'Downvote', f, class: 'btn btn-default' %>
+        <% if user_signed_in? and current_user.id == f.user_id %><p>
         <%= link_to 'Edit', edit_droplet_path(f) %> | 
-        <%= link_to 'Destroy', f, method: :delete, data: { confirm: 'Are you sure?' }, class: 'text-danger' %>
+        <%= link_to 'Destroy', f, method: :delete, data: { confirm: 'Are you sure?' }, class: 'text-danger' %></p>
         <% end %>
       </div>
     </div>
@@ -37,9 +39,9 @@
   </div>
 
   <div class="col-md-3">
-     <div class="alert alert-success" role="alert">Notice: This feature is under construction. This is intended to be a community page for gathering data about a medical condition. No data is made public here unless specifically authorized by an individual. </div>
+    <div class="alert alert-success" role="alert">Notice: This feature is under construction. This is intended to be a community page for gathering data about a medical condition. No data is made public here unless specifically authorized by an individual. </div>
     <% if current_user.conditions.map(&:page_id).include?(@page.id) %>
-    You are tracking this condition in your health record. 
+   <div class="alert alert-info" role="alert"> You are tracking this condition in your health record.  </div>
     <% end %>
     <%= link_to user_conditions_path(current_user), class: 'btn btn-primary btn-block' do %>
     <%= fa_icon "plus" %> Add to my Health Record

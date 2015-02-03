@@ -6,6 +6,14 @@ class UsersController < ApplicationController
 
   end
 
+  def mark_read 
+    @user = User.find(params[:user_id])
+    @user.notifications.each do |f|
+      f.update_attribute(:b_read, true)
+    end
+    redirect_to user_notifications_path(@user)
+  end
+
   def printable
     @user = User.find(params[:user_id])
   end
@@ -33,7 +41,7 @@ class UsersController < ApplicationController
       render file: 'public/denied'
     end
   end
-  
+
   def metrics
     @user = User.find(params[:user_id])
     if current_user.id == @user.id

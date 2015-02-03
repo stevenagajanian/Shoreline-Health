@@ -49,10 +49,11 @@
               </h4>
               <h5>Please note, your information will still be private to <%= user.full_name%>. You can choose what information <%= user.full_name %> can see after connecting with them. </h5>
             </div>
-
           </div>
         </div>
       </div>
       <% end %>
-      <%= will_paginate @users, class: 'pagination' %>
+      <%= will_paginate @users, class: 'pagination', renderer: BootstrapPagination::Rails %>
     </div>
+  </div>
+</div>

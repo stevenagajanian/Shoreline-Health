@@ -120,6 +120,7 @@ GEM
       activesupport (>= 3.0)
       request_store (~> 1.0.3)
     erubis (2.7.0)
+    excon (0.44.1)
     execjs (2.2.2)
     font-awesome-rails (4.2.0.0)
       railties (>= 3.2, < 5.0)
@@ -162,6 +163,13 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    mandrill-api (1.0.53)
+      excon (>= 0.16.0, < 1.0)
+      json (>= 1.7.7, < 2.0)
+    mandrill_mailer (0.5.1)
+      actionpack
+      activesupport
+      mandrill-api (~> 1.0.9)
     meta-tags (2.0.0)
       actionpack (>= 3.0.0)
     metaclass (0.0.4)
@@ -287,6 +295,8 @@ GEM
     warden (1.2.3)
       rack (>= 1.0)
     will_paginate (3.0.7)
+    will_paginate-bootstrap (1.0.1)
+      will_paginate (>= 3.0.3)
 
 PLATFORMS
   ruby
@@ -316,6 +326,8 @@ DEPENDENCIES
   js-routes
   less-rails
   less-rails-bootstrap
+  mandrill-api
+  mandrill_mailer
   meta-tags
   mocha
   newrelic_rpm
@@ -339,3 +351,4 @@ DEPENDENCIES
   uglifier (>= 1.3.0)
   unicorn
   will_paginate
+  will_paginate-bootstrap

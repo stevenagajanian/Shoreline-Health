@@ -1,5 +1,5 @@
 <% if  user_signed_in? and !current_page?(user_printable_path(current_user)) %>
-<center><br><%= image_tag "ShorelineLogoColor.png", width: 30 %><div class="container-fluid"></center>
+<center><br><%= image_tag "ShorelineTeal.png", width: 30 %><br><br><div class="container-fluid"></center>
   <center>Copright &copy; Shoreline Harbor, 2014 <br>
     <%= link_to "About", static_pages_about_path %> | <%= link_to "Updates", "https://twitter.com/ShorelineIO" %> | <%= link_to "Help", static_pages_help_path %> | <%= link_to "Roadmap", static_pages_roadmap_path %><br>Made with <i class="fa fa-heart text-danger"></i> by <%= link_to "James Steininger", "http://www.jamessteininger.info/about/" %><br>
     </div></div>

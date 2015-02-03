@@ -2,7 +2,7 @@
   <div class="panel panel-default">
     <div class="panel-body">
       <h2><a class="btn btn-default pull-right" data-toggle="modal" data-target="#myModal">
-          <%= fa_icon "plus" %> Add Condition
+        <%= fa_icon "plus" %> Add Condition
         </a>
         <strong>Conditions</strong><% render 'pages/search' %>
       </h2>
@@ -51,6 +51,8 @@
         <hr>
       </div>
       <% end %>
-      <%= will_paginate @pages, class: 'pagination' %>
-    </div> </div> 
+      <%= will_paginate @pages, class: 'pagination', renderer: BootstrapPagination::Rails %>
+    </div> 
+  </div> 
   <% end %>
+</div>

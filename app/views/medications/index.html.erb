@@ -23,15 +23,15 @@
           No medications listed
           <% end %>
           <% for medication in @medications %>
-          <p class='lead'>
+          <h4>
             <strong><%= medication.name %></strong> - <%= medication.dosage %>
-          </p>
+          </h4>
           <p>
             <%= link_to new_pharmacy_path, class: 'btn btn-sm btn-default' do %> <%= fa_icon "plus" %> Add Pharmacy<% end %>
             <%= link_to edit_medication_path(medication), class: "btn btn-sm btn-default tag-tooltip", data: {:toggle=>"tooltip"}, 'data-original-title' => "Edit " + medication.name, 'data-placement' => 'bottom'  do %>
             <i class='fa fa-gear'></i> Edit
             <% end %>
-            <%= link_to medication, class: "btn btn-sm btn-danger tag-tooltip", data: {:toggle=>"tooltip"}, 'data-original-title' => "Remove " + medication.name, 'data-placement' => 'bottom', :confirm => 'Are you sure?', :method => :delete do %>
+            <%= link_to medication, class: "btn btn-sm btn-default tag-tooltip", data: {:toggle=>"tooltip"}, 'data-original-title' => "Remove " + medication.name, 'data-placement' => 'bottom', :confirm => 'Are you sure?', :method => :delete do %>
             <i class='fa fa-trash-o'></i> Remove
             <% end %>
           </p>

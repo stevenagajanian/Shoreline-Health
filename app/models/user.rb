@@ -21,6 +21,7 @@ class User < ActiveRecord::Base
   has_many :diagnoses
   has_many :albums
   has_many :droplets
+  has_many :notifications
 
   has_many :handshakes, foreign_key: "follower_id", dependent: :destroy
   has_many :followed_users, through: :handshakes, source: :followed

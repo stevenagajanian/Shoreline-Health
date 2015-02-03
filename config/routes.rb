@@ -67,8 +67,10 @@ Tabby::Application.routes.draw do
 
   resources :users do
     resources :handshakes
+    resources :notifications
     resources :permissions
     resources :trackers
+    get 'mark_read'
     get 'apps'
     get 'network'
     get 'ecard'
