@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   has_many :statuses
   has_many :fitnesses
   has_many :goals
+  has_many :trackers
   has_many :pictures
   has_many :weights
   has_many :episodes
@@ -65,7 +66,11 @@ class User < ActiveRecord::Base
   end
 
   def handshake!(other_user)
-    handshakes.create!(followed_id: other_user.id)
+    handshakes.create!(followed_id: other_user.id, relationship_name: 'Friend')
+  end
+  
+  def send_notification(notification_message)
+    notifications.create!(content: notification_message)
   end
 
   def following?(other_user)

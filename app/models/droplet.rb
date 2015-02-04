@@ -8,7 +8,7 @@ class Droplet < ActiveRecord::Base
   
   auto_html_for :body do
     html_escape
-    image
+    sized_imagee
     youtube(:width => 400, :height => 250, :autoplay => false)
     link :target => "_blank", :rel => "nofollow"
     simple_format

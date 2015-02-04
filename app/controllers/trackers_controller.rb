@@ -1,5 +1,5 @@
 class TrackersController < ApplicationController
-	before_filter :find_condition, only: [:index, :new, :create]
+	#before_filter :find_condition, only: [:index, :new, :create]
 
 	def index
 		@condition = Condition.find(params[:condition_id])
@@ -32,11 +32,11 @@ class TrackersController < ApplicationController
 	# tracker /trackers
 	# tracker /trackers.json
 	def create
-		@tracker = @condition.trackers.new( tracker_params)
+    @tracker = current_user.trackers.new( tracker_params)
 
 		respond_to do |format|
 		if @tracker.save
-			format.html { redirect_to condition_trackers_path(@condition), notice: 'Treatment was successfully added.' }
+      format.html { redirect_to user_metrics_path(current_user), notice: 'Treatment was successfully added.' }
 			format.json { render json: @tracker, status: :created, location: @tracker }
 		else
 			format.html { render action: "new" }
@@ -61,7 +61,7 @@ class TrackersController < ApplicationController
 
 	# Never trust parameters from the scary internet, only allow the white list through.
 	def tracker_params
-		params.require(:tracker).permit(:user_id, :condition_id, :medication_id)
+    params.require(:tracker).permit(:name, :metric_id, :user_id, :condition_id, :medication_id)
 	end
 
 	def find_condition

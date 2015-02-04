@@ -11,29 +11,48 @@ class AllergiesController < ApplicationController
     @user = @allergy.user
 
     respond_to do |format|
-        format.html # show.html.erb
-        format.json { render json: @allergy }
-   end
-  end
-
-  def new
-  	@allergy = current_user.allergies.new
-
-    respond_to do |format|
-        format.html # new.html.erb
-        format.json { render json: @allergy }
+      format.html # show.html.erb
+      format.json { render json: @allergy }
     end
   end
 
+  def update
+    @allergy = Allergy.find(params[:id])
+    @allergy.update(allergy_params)
+
+    respond_to do |format|
+      format.html { redirect_to user_allergies_path(current_user), notice: 'Successfully updated!' }
+      format.json { head :no_content }
+    end
+  end
+
+  def new
+    @allergy = current_user.allergies.new
+
+    respond_to do |format|
+      format.html # new.html.erb
+      format.json { render json: @allergy }
+    end
+  end
+  
+  def edit
+    @allergy = Allergy.find(params[:id])
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @allergy }
+    end
+  end
+  
   def destroy
-  	@allergy = Allergy.find(params[:id])
-  	@user = @allergy.user
+    @allergy = Allergy.find(params[:id])
+    @user = @allergy.user
     @allergy.destroy
     redirect_to user_allergies_path(@allergy.user), :notice => "Successfully destroyed allergy."
   end
 
   def create
-   @allergy = current_user.allergies.new( allergy_params)
+    @allergy = current_user.allergies.new( allergy_params)
 
     respond_to do |format|
       if @allergy.save
@@ -49,6 +68,6 @@ class AllergiesController < ApplicationController
   private
 
   def allergy_params
-  	params.require(:allergy).permit(:user_id, :name, :description)
+    params.require(:allergy).permit(:user_id, :name, :description)
   end
 end

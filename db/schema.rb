@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150113193538) do
+ActiveRecord::Schema.define(version: 20150203222842) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -115,6 +115,9 @@ ActiveRecord::Schema.define(version: 20150113193538) do
     t.integer  "tracker_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
+    t.float    "amount"
+    t.string   "data_name"
   end
 
   create_table "diagnoses", force: true do |t|
@@ -373,6 +376,9 @@ ActiveRecord::Schema.define(version: 20150113193538) do
     t.integer  "medication_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "name"
+    t.integer  "metric_id"
+    t.boolean  "b_bar_chart"
   end
 
   create_table "user_friendships", force: true do |t|

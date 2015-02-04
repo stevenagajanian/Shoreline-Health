@@ -63,18 +63,21 @@
           <% if user_signed_in? %>
           <li>
             <%= link_to current_user, class: "tag-tooltip", data: {:toggle=>"tooltip"}, 'data-original-title' => "My Profile", 'data-placement' => 'bottom' do %>
-            <span class="text-primary"><%= fa_icon "user" %> Profile</span>
+            <span class="text-"><%= fa_icon "user" %> Profile</span>
             <% end %>
           </li>
           <li>
             <%= link_to user_network_path(current_user) , class: "tag-tooltip", data: {:toggle=>"tooltip"}, 'data-original-title' => "My Network", 'data-placement' => 'bottom' do %>
-            <span class="text-primary"><%= fa_icon "globe" %> Network</span>
+            <span class="text-"><%= fa_icon "globe" %> Network</span>
             <% end %>
           </li>
           <li>
             <%= link_to user_conditions_path(current_user) , class: "tag-tooltip", data: {:toggle=>"tooltip"}, 'data-original-title' => "My Conditions", 'data-placement' => 'bottom' do %>
-            <span class="text-primary"><%= fa_icon "medkit" %> Conditions</span>
+            <span class="text-"><%= fa_icon "medkit" %> Conditions</span>
             <% end %>
+          </li>
+          <li>
+            <%= link_to user_notifications_path(current_user) do %><%= fa_icon "inbox" %> Inbox <% if current_user.notifications.where("b_read IS null").count == 0 %><span class="label label-default label-as-badge"><% else %><span class="label label-primary label-as-badge"><% end %><%= current_user.notifications.where("b_read IS null").count %></span><% end %>
           </li>
 
           <li class="dropdown ">

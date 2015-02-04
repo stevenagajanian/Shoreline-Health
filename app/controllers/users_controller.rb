@@ -44,6 +44,7 @@ class UsersController < ApplicationController
 
   def metrics
     @user = User.find(params[:user_id])
+    @tracker = current_user.trackers.new
     if current_user.id == @user.id
       render action: :metrics
     else

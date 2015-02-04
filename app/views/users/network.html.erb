@@ -23,9 +23,9 @@
           <% end %>
           <%= link_to "Remove", f, class: 'btn btn-sm  btn-default pull-', method: :delete %>
         </p>
-        <h4>
-          <%= image_tag f.followed.imageurl, class: 'img-circle', style: 'padding: 0px; margin: 0px; max-width: 50px; max-height: 50px;' %> <%= link_to f.followed.full_name, f.followed %>
-        </h4>
+        <h3>
+          <%= image_tag f.followed.imageurl, class: 'img-circle', style: 'padding: 0px; margin: 0px; max-width: 50px; max-height: 50px;' %> <%= link_to f.followed.full_name, f.followed %> - <%= f.relationship_name %>
+        </h3>
       </div>
     </div>
     <% end %>

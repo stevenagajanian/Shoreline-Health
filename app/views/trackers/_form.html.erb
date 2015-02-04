@@ -1,0 +1,22 @@
+<%= form_for @tracker do |f| %>
+<%= f.hidden_field :user_id, value: current_user.id %>
+<p>
+  <%= f.label :name %><br />
+  <%= f.text_field :name, class: 'form-control' %>
+</p>
+<p>
+  <%= f.label :metric_id %><br />
+  <%= f.text_field :metric_id, class: 'form-control' %>
+</p>
+
+<p>
+  <%= f.label :medication_id %><br />
+  <%= f.text_field :medication_id, class: 'form-control' %>
+</p>
+
+<p>
+  <%= f.label :condition_id %><br />
+  <%= f.text_field :condition_id, class: 'form-control' %>
+</p>
+<p><%= f.submit "Add Medication to Health Record", class: "btn btn-block btn-primary" %></p>
+<% end %>

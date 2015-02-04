@@ -2,6 +2,7 @@ class HandshakesController < ApplicationController
   def create
     @user = User.find(params[:handshake][:followed_id])
     current_user.handshake!(@user)
+    @user.send_notification("You have been added to the network of " + current_user.full_name)
     respond_to do |f|
       f.html { redirect_to user_network_path(current_user) }
       f.js
@@ -18,6 +19,16 @@ class HandshakesController < ApplicationController
       format.json { render json: @handshake }
     end
   end 
+  
+  def update
+    @handshake = Handshake.find(params[:id])
+    @handshake.update(handshake_params)
+
+    respond_to do |format|
+      format.html { redirect_to user_network_path(current_user), notice: 'Relationship type was updated.' }
+      format.json { head :no_content }
+    end
+  end
 
   def show
     @handshake = Handshake.find(params[:id])
@@ -39,6 +50,6 @@ class HandshakesController < ApplicationController
   private
 
   def handshake_params
-    params.require(:handshake).permit(:followed_id)
+    params.require(:handshake).permit(:user_id, :followed_id, :relationship_name, :relationship_type)
   end
 end

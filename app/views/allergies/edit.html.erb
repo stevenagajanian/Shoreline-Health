@@ -1,14 +1,14 @@
 <div class="container">
-  <%= simple_form_for(@medication) do |f| %>
+  <%= simple_form_for(@allergy) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
     <%= f.input :name %>
-    <%= f.input :dosage %>
+    <%= f.input :description %>
   </div>
 
   <div class="form-actions">
     <%= f.button :submit %>
   </div>
-  <% end %>
+<% end %>
 </div>
