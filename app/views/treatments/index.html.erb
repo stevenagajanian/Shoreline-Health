@@ -1,0 +1,24 @@
+<div class="container">
+  <h1>Treaments</h1>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <tbody>
+        <% @treatments.each do |treatment| %>
+        <h4>
+        <tr>
+          <td><%= treatment.name %></td>
+        </h4><p>
+          <td><%= treatment.description %></td>
+          <td><%= link_to 'Edit', edit_treatment_path(treatment) %></td>
+          <td><%= link_to 'Destroy', treatment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      </p>
+        <% end %>
+      </tbody>
+      </table>
+
+    <br>
+
+    <%= link_to 'New Treatment', new_treatment_path %>
+  </div>
+</div>

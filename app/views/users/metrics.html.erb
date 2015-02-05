@@ -43,9 +43,10 @@
           </div>
           <%= line_chart Weight.group(:created_at).maximum(:amount) %>
           <% @user.trackers.each do |f| %>
-          <h3><%= f.name %> <button class="btn btn-primary btn-sm" type="button" data-toggle="collapse" data-target="#collapse<%= f.name %>" aria-expanded="false" aria-controls="collapseExample">
+          <h3><%= f.name %> <% if f.name == 'Walking' %><%= render 'trackers/custom', tracker: f %><% end %><button class="btn btn-primary btn-sm" type="button" data-toggle="collapse" data-target="#collapse<%= f.name %>" aria-expanded="false" aria-controls="collapseExample">
             <%= fa_icon "plus" %>  Add Record
             </button></h3>
+          <% f.datapoints.each do |d| %><%= d.amount %> | <% end %>
           <div class="collapse" id="collapse<%= f.name %>">
             <div class="well">
               <%= render 'heights/form' %>

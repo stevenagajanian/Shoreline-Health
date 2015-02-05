@@ -1,10 +1,13 @@
 Tabby::Application.routes.draw do
 
+  resources :treatments
+
   resources :pharmacies
 
   resources :notifications
 
   resources :droplets
+  resources :datapoints
 
   resources :permissions
 
@@ -69,7 +72,9 @@ Tabby::Application.routes.draw do
     resources :handshakes
     resources :notifications
     resources :permissions
-    resources :trackers
+    resources :trackers do
+      resources :datapoints
+    end
     get 'mark_read'
     get 'apps'
     get 'network'
