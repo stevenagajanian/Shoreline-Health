@@ -17,7 +17,7 @@
       </div>
       <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
-
+          <% if user_signed_in? %>
           <!-- PROFILE DROPDOWN -->
           <li>
             <%= link_to current_user, class: "tag-tooltip", data: {:toggle=>"tooltip"}, 'data-original-title' => "My Profile", 'data-placement' => 'bottom' do %>
@@ -64,24 +64,23 @@
                 <%= link_to user_conditions_path(current_user) do %><%= fa_icon "medkit" %> View All My Conditions <% end %>
               </li>
               <% current_user.conditions.each do |condition| %>
-              <% if condition.id.presence %>
-              <li>
-                <%= link_to condition_posts_path(condition) do %>
-                <%= fa_icon "file-text-o" %> My <%= if condition.page.presence then condition.page.name else condition.name end %>
-                <% end %>
-              </li>
+              <% if condition.id.presence %><li>
+              <%= link_to condition_posts_path(condition) do %>
+              <%= fa_icon "file-text-o" %> My <%= if condition.page.presence then condition.page.name else condition.name end %>
               <% end %>
+              </li>
+              <% end %> 
               <% end %>
             </ul>
           </li>
-
-          <!-- SEARCH SEARCH SEARCH SEARCH SEARCH SEARCH SEARCH  -->
+          <% end %>
+          <!-- SEARCH SEARCH SEARCH SEARCH SEARCH SEARCH SEARCH  --><% if !current_page?(root_path) %>
           <li id="the-basics2">
-            <%= form_tag(pages_path, :method => "get", id: "", style: "", class: 'form-inline navbar-form navbar-left') do %>
-            <div class="form-group col-md-" id="">
-              <%= text_field_tag :search, params[:search], style: '', class: "form-control typeahead", id: "auto_complete", placeholder: "Search the waters..." %>
+            <%= form_tag(pages_path, :method => "get", class: 'navbar-form navbar-left navbar-input-group') do %>
+            <div class="form-group">
+              <%= text_field_tag :search, params[:search], class: "form-control typeahead", id: "auto_complete", placeholder: "Search the waters..." %>
             </div>
-            <%= button_tag( :class => "btn btn-primary btn-")  do %>
+            <%= button_tag( :class => "btn btn-default")  do %>
             <i class="fa fa-search"></i>
             <% end %>
             <% end %>
@@ -91,6 +90,7 @@
           <script type="text/javascript">
             $('#the-basics2 .typeahead').typeahead({ hint: true, highlight: true, minLength: 1},{ name: 'states', displayKey: 'value', source: substringMatcher(autocomplete_items),templates: { header: '<h4 style="padding-left: 10px;" class="league-name">Conditions</h4>'}}).on('typeahead:selected', function(e, data) {$("#the-basics2 form").submit();}).css();
           </script>
+          <% end %>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <% if user_signed_in? %>
