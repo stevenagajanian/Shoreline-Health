@@ -7,7 +7,7 @@ Tabby::Application.routes.draw do
   resources :notifications
 
   resources :droplets
-  resources :datapoints
+  
 
   resources :permissions
 
@@ -113,6 +113,7 @@ Tabby::Application.routes.draw do
   end
   resources :pictures
   resources :posts
+  resources :datapoints
 
   root 'static_pages#home'
   get "static_pages/home"

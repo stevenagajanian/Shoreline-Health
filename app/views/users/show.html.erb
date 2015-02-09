@@ -1,10 +1,10 @@
 <% if @user.following?(current_user) %>
 <div class="container">
   <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-4">
       <%= render "users/shared_sidebar" %>
     </div>
-    <div class="col-md-9">
+    <div class="col-md-8">
       <div class="alert alert-info" role="alert"><%= @user.full_name %> has you in their network and has allowed you to see these parts of their health data.  </div>
       <p>
         <% @user.permissions.each do |permission| %>

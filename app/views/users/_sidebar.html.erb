@@ -14,65 +14,16 @@
     <% if @user.gender.presence %><strong>Gender</strong> <%= current_user.gender %><br><% end %>
     <% if @user.bloodtype.presence %> <strong>Bloodtype</strong> <%= current_user.bloodtype %><br><% end %>
     <hr>
-    <%= link_to user_apps_path(@user) do %><%= fa_icon "database" %> All Data<% end %> | 
+    <%= link_to user_allergies_path(@user) do %><%= fa_icon "heart" %> Summary<% end %> <br>
+    <%= link_to user_allergies_path(@user) do %><%= fa_icon "leaf" %> Allergies<% end %> <br>
     <%= link_to user_conditions_path(@user) do %><%= fa_icon "stethoscope" %> Conditions<% end %> <br>
-    <%= link_to user_medications_path(@user) do %><%= fa_icon "medkit" %> Medications<% end %> | 
+    <%= link_to user_medications_path(@user) do %><%= fa_icon "medkit" %> Medications<% end %> <br>
     <%= link_to user_goals_path(@user) do %><%= fa_icon "star" %> Goals<% end %><br>
-    <%= link_to user_metrics_path(@user) do %><%= fa_icon "bar-chart" %> Metrics<% end %> | 
+    <%= link_to user_metrics_path(@user) do %><%= fa_icon "bar-chart" %> Trackers<% end %> <br>
     <%= link_to user_network_path(@user) do %><%= fa_icon "group" %> Network<% end %>
-    <hr>
-    <h4 class="">Medical Conditions</h4>
-    <% if @user.conditions.none? %>
-    <%= link_to user_conditions_path(@user) do %>
-    Add a condition?
-    <% end %>
-    <% end %>
-    <% for condition in @user.conditions %>
-    <p>
-      <% if condition.page.presence %>
-      <%= link_to condition_posts_path(condition) do %>
-      <%= condition.page.name %>
-      <% end %>
-      <% else %>
-      <%= link_to condition.name, condition_posts_path(condition) %>
-      <% end %>
-    </p>
-    <% end %>
-    <h4 class="">Allergies &amp; Reactions</h4>
-    <% if @user.allergies.none? %>
-    <%= link_to user_allergies_path(@user) do %>
-    No known allergies
-    <% end %>
-    <% end %>
-    <% for allergy in @user.allergies %>
-    <p>
-      <%= link_to allergy.name, user_allergies_path(@user) %>
-    </p>
-    <% end %>
-    <h4 class="">Medications</h4>
-    <% if @user.medications.none? %>
-    <%= link_to user_medications_path(@user) do %>
-    Add a medication?
-    <% end %>
-    <% end %>
-    <% for medication in @user.medications %>
-    <p>
-      <%= link_to user_medications_path(@user) do %>
-      <%= medication.name %>
-      <% end %>
-    </p>
-    <% end %>
-    <h4>Current Goals</h4>
-    <% if @user.goals.none? %>
-    <%= link_to "Add a goal?", user_goals_path(@user) %>
-    <% end %>
-    <% for goal in @user.goals.get_unfinished %>
-    <p>
-      <%= link_to goal.name, goal %>
-    </p>
-    <% end %>
   </div>
-</div>
+</div
+  
 <!-- Helpful stuff like printing your profile --> 
-<%= link_to edit_user_registration_path(current_user), class: "btn btn-block btn-default" do %><i class="fa fa-gear"></i> Edit Personal Info<% end %>
-<%= link_to user_printable_path(current_user), class: 'btn btn-block btn btn-default' do %><i class="fa fa-print"></i> Print My Health Record<% end %>
+<% link_to edit_user_registration_path(current_user), class: "btn btn-block btn-default" do %><i class="fa fa-gear"></i> Profile Settings<% end %>
+<% link_to user_printable_path(current_user), class: 'btn btn-block btn btn-default' do %><i class="fa fa-print"></i> Print My Health Record<% end %>

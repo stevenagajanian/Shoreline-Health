@@ -1,0 +1,27 @@
+<div class="dropdown pull-right">
+  <a href="#" class="dropdown-toggle btn btn-default btn-sm pull-right" style="" data-toggle="dropdown">
+    <%= fa_icon "chevron-down" %>
+  </a>
+  <ul class="dropdown-menu pull-right">
+    <li>
+      <%= link_to tracker do %><%= fa_icon "list" %> View/edit all data as a list <% end %>
+    </li>
+    <li>
+      <%= link_to tracker do %><%= fa_icon "pencil" %> Edit tracker name &amp; description <% end %>
+    </li>
+    <li>
+      <%= link_to tracker do %><%= fa_icon "group" %> Change tracker network permissions <% end %>
+    </li>
+    <li>
+      <%= link_to tracker do %><%= fa_icon "trash-o" %> Remove tracker <% end %>
+    </li>
+  </ul>
+</div>
+<%= form_for tracker.datapoints.new, remote: true do |f| %>
+<%= f.hidden_field :user_id, value: current_user.id %>
+<%= f.hidden_field :tracker_id, value: tracker.id %>
+<%= f.hidden_field :amount, value: 60 %>
+<%= button_tag(type: "submit", class: "pull-right btn btn-default btn-sm") do %>
++ 1 cup of coffee
+<% end %>
+<% end %><%= tracker.name %> (mg)

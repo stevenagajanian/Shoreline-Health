@@ -2,14 +2,11 @@
   <%= @user.first_name %>'s Profile
 </h2>
 <p>
-  <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-    <%= fa_icon "plus" %>  Add Record
-  </button>
-  <button class="btn btn-default" type="button" data-toggle="collapse" data-target="#collapseShare" aria-expanded="false" aria-controls="collapseExample">
-    <%= fa_icon "share" %>  Share
-  </button>
-  <%= link_to user_printable_path(current_user), class: 'btn btn-raised btn btn-default' do %><i class="fa fa-print"></i> Print<% end %>
-  <%= link_to edit_user_registration_path(current_user), class: "btn btn-raised btn-default" do %><i class="fa fa-gear"></i> Settings<% end %>
+  <%= link_to edit_user_registration_path(current_user), class: "btn btn-default" do %><i class="fa fa-gear"></i> Settings<% end %>
+  <%= link_to user_printable_path(current_user), class: 'btn btn btn-default' do %><i class="fa fa-print"></i> Print<% end %>
+  <!-- <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+Add Record
+</button> -->
   <% if @conditions.count > 0 %>
 </p>
 
@@ -22,7 +19,7 @@
 
 <div class="collapse" id="collapseExample">
   <div class="well">
-    <%= render 'posts/new_post' %>
+    <% render 'posts/new_post' %>
   </div>
 </div>
 

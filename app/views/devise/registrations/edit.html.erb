@@ -1,58 +1,53 @@
-<div style="position: fixed;
-            top: 0px;
-            left: 0; background: url(/assets/Wetlands2.jpg) no-repeat center center fixed; 
-            -webkit-background-size: cover;
-            -moz-background-size: cover;
-            -o-background-size: cover;
-            background-size: cover;
-            width: 100%;
-            height: 100%;">
-</div>
 <div class="container">
-  <div class="col-md-8 col-md-offset-2">
-    <div class="well">
-    <center><%= image_tag "ShorelineLogoColor.png", width: 100 %><br><br></center>
-        <h1>Update Profile</h1>
-        <%= bootstrap_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <div class="row">
+    <div class="col-md-3">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <%= bootstrap_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+          <center>
+            <% if @user.imageurl.presence %>
+            <%= image_tag @user.imageurl, class: 'img-circle', style: 'max-width: 140px; max-height: 140px;' %>
+            <% end %>
+          </center>
+          <h3><%= f.text_field :first_name, autofocus: true %>
+            <%= f.text_field :last_name %>
+          </h3>
+          <%= f.email_field :email %>
+          <%= f.text_field :imageurl %>
+          <%= f.date_select :date_of_birth, start_year: 1900 %>
+          <%= f.select :gender, gender: [:Male, :Female] %>
+          <%= f.select :doner?, doner: [:Yes, :No] %>
+          <%= f.select :bloodtype, bloodtype: ["Unknown", "O+", "O-", "A+", "A-", "B+", "B-", "AB+", "AB-"] %>
+          <%= f.text_area :address %>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-9">
+      <h1>Update Profile</h1>
+      <p>
+        <button class="btn btn-default" type="button" data-toggle="collapse" data-target="#collapseShare" aria-expanded="false" aria-controls="collapseExample">
+          <%= fa_icon "gear" %>  Change password?
+        </button>
+      </p>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <%= devise_error_messages! %>
+          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+          <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+          <% end %>
+          <div class="collapse" id="collapseShare">
+            <div class="well">
+              <i>New Password (leave blank if you don't want to change it)</i>
+              <%= f.password_field :password, autocomplete: "off" %>
 
-        <%= devise_error_messages! %>
+              <%= f.password_field :password_confirmation, autocomplete: "off"%>
+            </div>
+          </div>
+          <%= f.password_field :enter_current_password_to_make_changes, autocomplete: "off", placeholder: "Current password..." %>
 
-        <h3>Personal Information</h3>
-        <%= f.collection_select :role, User::ROLES, :to_s, :humanize %>
-        <hr>
-        <%= f.text_field :first_name, autofocus: true %>
-        <%= f.text_field :last_name %>
-        <%= f.email_field :email %>
-        <%= f.text_field :imageurl %>
-        <%= f.date_select :date_of_birth, start_year: 1900 %>
-        <%= f.select :gender, gender: [:Male, :Female] %>
-        <%= f.select :doner?, doner: [:Yes, :No] %>
-        <%= f.select :bloodtype, bloodtype: ["Unknown", "O+", "O-", "A+", "A-", "B+", "B-", "AB+", "AB-"] %>
-        <%= f.text_area :address %>
-
-        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-        <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-        <% end %>
-<button class="btn btn-block btn-default" type="button" data-toggle="collapse" data-target="#collapseShare" aria-expanded="false" aria-controls="collapseExample">
-  <%= fa_icon "gear" %>  Change password?
-  </button><div class="collapse" id="collapseShare">
-  <div class="well">
-        <i>New Password (leave blank if you don't want to change it)</i><br />
-        <%= f.password_field :password, autocomplete: "off" %>
-
-        <%= f.password_field :password_confirmation, autocomplete: "off"%>
-         </div>
-</div><hr>
-      <i><b>Enter current password to make changes</b></i><br />
-        <%= f.password_field :current_password, autocomplete: "off" %>
-
-      <p><%= f.submit "Update Profile", class: "btn btn-lg btn-primary btn-block" %></p>
-        <% end %>
-
-      <%= link_to "Cancel Editing", current_user, class: "btn-block btn btn-default" %>
-        <center>
-          <br><%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: " text-danger" %>
-        </center>
+          <p><%= f.submit "Update Profile", class: "btn btn-lg btn-primary btn-block" %></p><p><%= link_to "Cancel Editing", current_user, class: "btn-block btn btn-default" %><br><%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "text-danger" %></p>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>

@@ -1,12 +1,13 @@
 class DatapointsController < ApplicationController
   before_filter :authenticate_user!
+  respond_to :html, :xml, :js
 
   def index
     @tracker = Tracker.find(params[:tracker_id])
     @datapoint = @tracker.datapoints.new
     @datapoints = @tracker.datapoints
   end
-
+  
   def show
     @datapoint = Datapoint.find(params[:id])
     respond_to do |format|
@@ -52,14 +53,17 @@ class DatapointsController < ApplicationController
   end
 
   def create
+    
   #  @tracker = Tracker.find(params[:tracker_id])
     @datapoint = Datapoint.new( datapoint_params)
-
+    @user = User.find(@datapoint.user_id)
     respond_to do |format|
       if @datapoint.save
-        format.html { redirect_to user_metrics_path(current_user), notice: 'Datapoint was successfully created.' }
+        format.js
+        format.html { redirect_to user_metrics_path(current_user), notice: 'Datapoint was successfully added.' }
         format.json { render json: @datapoint, status: :created, location: @datapoint }
       else
+        format.js
         format.html { render action: "new" }
         format.json { render json: @datapoint.errors, status: :unprocessable_entity }
       end
@@ -69,6 +73,6 @@ class DatapointsController < ApplicationController
   private
 
   def datapoint_params
-    params.require(:datapoint).permit(:user_id, :tracker_id, :amount, :data_name, :b_bar_chart)
+    params.require(:datapoint).permit(:created_at, :user_id, :tracker_id, :amount, :data_name, :b_bar_chart)
   end
 end

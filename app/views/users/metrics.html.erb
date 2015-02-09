@@ -8,7 +8,7 @@
         <button class="btn btn-primary pull-right btn-sm" type="button" data-toggle="collapse" data-target="#collapseMetric" aria-expanded="false" aria-controls="collapseExample">
           <%= fa_icon "plus" %> Add new metric type
         </button>
-        <%= @user.first_name %>'s Metrics
+        <%= @user.first_name %>'s Trackers
       </h2>
       <div class="collapse" id="collapseMetric">
         <div class="well">
@@ -24,6 +24,10 @@
       </div>
       <div class="panel panel-default">
         <div class="panel-body">
+          <div id="custom_tracker">
+            <%= render 'trackers/list' %>
+            
+          </div>
           <h3>Height (inches) <button class="btn btn-primary btn-sm" type="button" data-toggle="collapse" data-target="#collapseHeight" aria-expanded="false" aria-controls="collapseExample">
             <%= fa_icon "plus" %>  Add Record
             </button></h3>
@@ -42,18 +46,6 @@
             </div>
           </div>
           <%= line_chart Weight.group(:created_at).maximum(:amount) %>
-          <% @user.trackers.each do |f| %>
-          <h3><%= f.name %> <% if f.name == 'Walking' %><%= render 'trackers/custom', tracker: f %><% end %><button class="btn btn-primary btn-sm" type="button" data-toggle="collapse" data-target="#collapse<%= f.name %>" aria-expanded="false" aria-controls="collapseExample">
-            <%= fa_icon "plus" %>  Add Record
-            </button></h3>
-          <% f.datapoints.each do |d| %><%= d.amount %> | <% end %>
-          <div class="collapse" id="collapse<%= f.name %>">
-            <div class="well">
-              <%= render 'heights/form' %>
-            </div>
-          </div>
-          <%= line_chart Height.group(:created_at).maximum(:amount) %>
-          <% end %>
         </div>
       </div>
     </div>

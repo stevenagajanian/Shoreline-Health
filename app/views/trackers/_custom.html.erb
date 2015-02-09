@@ -1,12 +1,24 @@
-<button class="btn btn-primary btn-sm" type="button" data-toggle="collapse" data-target="#collapse" aria-expanded="false" aria-controls="collapseExample">
-            <%= fa_icon "plus" %>  30 Min
-            </button> <button class="btn btn-primary btn-sm" type="button" data-toggle="collapse" data-target="#collapse" aria-expanded="false" aria-controls="collapseExample">
-            <%= fa_icon "plus" %>  60 Min
-            </button> 
-<%= tracker.name %>
+<%= form_for tracker.datapoints.new do |f| %>
+<%= f.hidden_field :user_id, value: current_user.id %>
+<%= f.hidden_field :tracker_id, value: tracker.id %>
+<%= f.hidden_field :amount, value: 60 %>
+<%= button_tag(type: "submit", class: "pull-right btn btn-default btn-sm") do %>
++ 60 Min
+<% end %>
+<% end %>
 <%= form_for tracker.datapoints.new do |f| %>
 <%= f.hidden_field :user_id, value: current_user.id %>
 <%= f.hidden_field :tracker_id, value: tracker.id %>
 <%= f.hidden_field :amount, value: 30 %>
-<%= f.submit class: 'btn btn-primary btn-sm' %>
+<%= button_tag(type: "submit", class: "pull-right btn btn-default btn-sm") do %>
++ 30 Min
+<% end %>
+<% end %>
+<%= form_for tracker.datapoints.new do |f| %>
+<%= f.hidden_field :user_id, value: current_user.id %>
+<%= f.hidden_field :tracker_id, value: tracker.id %>
+<%= f.hidden_field :amount, value: 15 %>
+<%= button_tag(type: "submit", class: "pull-right btn btn-default btn-sm") do %>
++ 15 Min
+<% end %>
 <% end %>

@@ -2,6 +2,9 @@
 <h4>New Record</h4>
 <div>
   <%= f.hidden_field :user_id, value: current_user.id %>
+  <div class="form-group">
+    <%= f.collection_select :condition_id, @user.conditions, :id, :name %>
+      </div>
   <%= f.text_area :description, class:"form-control", placeholder: 'Write here about your progress...', rows: 3 %>
 </div>
 <br>
