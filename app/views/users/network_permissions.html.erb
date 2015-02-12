@@ -10,6 +10,7 @@
       <p>
       <div class="btn-group btn-group-justified">
         <%= link_to 'Network', user_network_path(@user),class: "btn btn-default" %>
+        <%= link_to 'Stream', user_network_feed_path(@user),class: "btn btn-default" %>
         <%= link_to 'Permissions', user_network_permissions_path(@user),class: "btn btn-primary" %>
       </div>
       </p>

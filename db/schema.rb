@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150205025808) do
+ActiveRecord::Schema.define(version: 20150211203824) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -379,6 +379,7 @@ ActiveRecord::Schema.define(version: 20150205025808) do
     t.string   "name"
     t.integer  "metric_id"
     t.boolean  "b_bar_chart"
+    t.string   "data_name"
   end
 
   create_table "treatments", force: true do |t|
@@ -431,6 +432,9 @@ ActiveRecord::Schema.define(version: 20150205025808) do
     t.text     "bio"
     t.string   "role"
     t.string   "imageurl"
+    t.boolean  "b_use_btn_labels"
+    t.string   "wallpaper_url"
+    t.boolean  "b_use_wallpaper"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

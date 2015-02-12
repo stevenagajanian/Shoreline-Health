@@ -61,7 +61,7 @@ class TrackersController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def tracker_params
-    params.require(:tracker).permit(:name, :metric_id, :user_id, :condition_id, :medication_id)
+    params.require(:tracker).permit(:name, :metric_id, :user_id, :condition_id, :medication_id, :data_name, :b_bar_chart)
   end
 
   def find_condition

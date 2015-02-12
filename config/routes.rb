@@ -7,7 +7,7 @@ Tabby::Application.routes.draw do
   resources :notifications
 
   resources :droplets
-  
+
 
   resources :permissions
 
@@ -79,9 +79,11 @@ Tabby::Application.routes.draw do
     get 'apps'
     get 'network'
     get 'ecard'
+    get 'network_feed'
     get 'network_permissions'
     get 'printable'
     get 'metrics'
+    get 'summary'
     resources :pictures
     resources :albums do
       resources :pictures
@@ -119,6 +121,7 @@ Tabby::Application.routes.draw do
   get "static_pages/home"
   get "static_pages/about"
   get "static_pages/help"
+  get "static_pages/company"
   get "static_pages/community_stats"
   get "static_pages/search"
   get "static_pages/roadmap"

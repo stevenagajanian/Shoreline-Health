@@ -51,6 +51,15 @@ class UsersController < ApplicationController
       render file: 'public/denied'
     end
   end
+  
+  def summary
+    @user = User.find(params[:user_id])
+    if current_user.id == @user.id
+      render action: :summary
+    else
+      render file: 'public/denied'
+    end
+  end
 
   def network
     @user = User.find(params[:user_id])
@@ -58,6 +67,17 @@ class UsersController < ApplicationController
 
     if current_user.id == @user.id
       render action: :network
+    else
+      render file: 'public/denied'
+    end
+  end
+  
+  def network_feed
+    @user = User.find(params[:user_id])
+    #@unfinished_goals = @user.goals.get_unfinished
+
+    if current_user.id == @user.id
+      render action: :network_feed
     else
       render file: 'public/denied'
     end
@@ -112,7 +132,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:imageurl, :bio, :gender, :doner, :bloodtype, :address, :date_of_birth, :email, :profile_name, :first_name, :last_name, :avatar, conditions_attributes: [:page_id], goals_attributes: [:unfinished_goals, :user_id], allergies_attributes: [ :user_id, :name, :description ], pictures_attributes: [ :user_id, :album_id, :caption], albums_attributes: [ :user_id, pictures_attributes: [:user_id, :album_id]], friends_attributes: [ :email ] )
+    params.require(:user).permit(:b_use_btn_labels, :b_use_wallpaper, :wallpaper_url, :imageurl, :bio, :gender, :doner, :bloodtype, :address, :date_of_birth, :email, :profile_name, :first_name, :last_name, :avatar, conditions_attributes: [:page_id], goals_attributes: [:unfinished_goals, :user_id], allergies_attributes: [ :user_id, :name, :description ] )
   end
 
 end

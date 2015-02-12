@@ -1,7 +1,7 @@
 <% if user_signed_in? and current_page?(user_printable_path(current_user)) %>
 <div style="background-color: #fff; margin-top: -65px;">
   <% else %>
-  <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -11,7 +11,7 @@
           <span class="icon-bar"></span>
         </button>
         <%= link_to root_path, class: "navbar-brand" do %>
-        <%= image_tag "ShorelineTeal.png", width: 23, style: 'margin-top: -3px;' %>
+        <%= image_tag "ShorelineLogoGrey.png", width: 23, style: 'margin-top: -3px;' %>
         Shoreline
         <% end %>
       </div>
@@ -20,19 +20,22 @@
           <% if user_signed_in? %>
           <!-- PROFILE DROPDOWN -->
           <li>
-            <%= link_to current_user, class: "tag-tooltip", data: {:toggle=>"tooltip"}, 'data-original-title' => "My Profile", 'data-placement' => 'bottom' do %>
-            <span class="text-"><%= fa_icon "user lg" %> <%= current_user.first_name %></span>
+            <%= link_to current_user, class: "tag-tooltisp", data: {:toggle=>"tooltip"}, 'data-original-title' => "My Profile", 'data-placement' => 'bottom' do %>
+            <span class="text-"><%= fa_icon "user lg" %> <%= btn_label(current_user.first_name) %></span>
             <% end %>
           </li>
 
           <!-- NETWORK DROPDOWN -->
           <li class="dropdown ">
             <a href="#" class="dropdown-toggle" style="outline: none"data-toggle="dropdown">
-              <span style="padding-top: 15px;"><%= fa_icon "globe lg" %> Network <%= fa_icon "caret-down" %></span> 
+              <span style="padding-top: 15px;"><%= fa_icon "globe lg" %><%= btn_label(" Network") %> <%= fa_icon "caret-down" %></span> 
             </a>
             <ul class="dropdown-menu">
               <li>
                 <%= link_to user_network_path(current_user) do %><%= fa_icon "group" %> My Network <% end %>
+              </li>
+              <li>
+                <%= link_to user_network_feed_path(current_user) do %><%= fa_icon "file-text" %> Network Stream <% end %>
               </li>
               <li>
                 <%= link_to user_network_permissions_path(current_user) do %><%= fa_icon "lock" %> My Network Permissions <% end %>
@@ -47,30 +50,32 @@
           <!-- CONDITIONS DROPDOWN -->
           <li class="dropdown ">
             <a href="#" class="dropdown-toggle" style="outline: none"data-toggle="dropdown">
-              <span style="padding-top: 15px;"><%= fa_icon "medkit lg" %> Conditions  <%= fa_icon "caret-down" %></span> 
+              <span style="padding-top: 15px;"><%= fa_icon "medkit lg" %><%= btn_label(" Conditions") %>  <%= fa_icon "caret-down" %></span> 
             </a>
             <ul class="dropdown-menu">
-              <li>
-                <%= link_to pages_path do %><%= fa_icon "search" %> Find a information about condition... <% end %>
-              </li>
-              <li>
-                <%= link_to treatments_path do %><%= fa_icon "search" %> Find treatment or procedure information... <% end %>
-              </li>
-              <li>
-                <%= link_to ko_medications_path do %><%= fa_icon "comments-o" %> Read medical reviews... <% end %>
-              </li>
-              <li class="divider"></li>
-              <li>
-                <%= link_to user_conditions_path(current_user) do %><%= fa_icon "medkit" %> View All My Conditions <% end %>
-              </li>
+              <li role="presentation" class="dropdown-header">My Conditions</li>
               <% current_user.conditions.each do |condition| %>
               <% if condition.id.presence %><li>
               <%= link_to condition_posts_path(condition) do %>
-              <%= fa_icon "file-text-o" %> My <%= if condition.page.presence then condition.page.name else condition.name end %>
+              <%= fa_icon "file-text" %> <%= if condition.page.presence then condition.page.name else condition.name end %>
               <% end %>
               </li>
               <% end %> 
               <% end %>
+              <li>
+                <%= link_to user_conditions_path(current_user) do %><%= fa_icon "list" %> View All <% end %>
+              </li>
+              <li class="divider"></li>
+              <li>
+                <%= link_to pages_path do %><%= fa_icon "search" %> Find a information about condition... <% end %>
+              </li>
+              <li>
+                <%= link_to treatments_path do %><%= fa_icon "medkit" %> Find treatment or procedure information... <% end %>
+              </li>
+              <li>
+                <%= link_to ko_medications_path do %><%= fa_icon "user-md" %> Read medical reviews... <% end %>
+              </li>
+
             </ul>
           </li>
           <% end %>
@@ -96,13 +101,13 @@
           <% if user_signed_in? %>
 
           <li>
-            <%= link_to user_notifications_path(current_user) do %><%= fa_icon "inbox lg" %> Inbox <% if current_user.notifications.where("b_read IS null").count == 0 %><span class="label label-default label-as-badge"><% else %><span class="label label-primary label-as-badge"><% end %><%= current_user.notifications.where("b_read IS null").count %></span><% end %>
+            <%= link_to user_notifications_path(current_user) do %><%= fa_icon "inbox lg" %><%= btn_label(" Inbox") %> <% if current_user.notifications.where("b_read IS null").count == 0 %><span class="label label-default label-as-badge"><% else %><span class="label label-primary label-as-badge"><% end %><%= current_user.notifications.where("b_read IS null").count %></span><% end %>
             </li>
 
             <!-- SETTINGS SETTINGS SETTINGS SETTINGS SETTINGS SETTINGS SETTINGS  -->
           <li class="dropdown ">
             <a href="#" class="dropdown-toggle" style="outline: none"data-toggle="dropdown">
-              <span style="padding-top: 15px;"><%= fa_icon "gears lg" %> Settings</span> 
+              <span style="padding-top: 15px;"><%= fa_icon "gears lg" %> <%= btn_label(" Settings") %></span> 
             </a>
             <ul class="dropdown-menu">
               <li>

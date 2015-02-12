@@ -1,0 +1,13 @@
+<% for allergy in @user.allergies %>
+<h4>
+  <strong><%= allergy.name %></strong> - <%= allergy.description %>
+</h4>
+<p>
+  <%= link_to edit_allergy_path(allergy), class: "btn btn-sm btn-default" do %>
+  <i class='fa fa-gear'></i> Edit
+  <% end %>
+  <%= link_to allergy, class: "btn btn-sm btn-default tag-tooltip", data: {:toggle=>"tooltip", :confirm => 'Are you sure?'}, 'data-original-title' => "Remove " + allergy.name, 'data-placement' => 'bottom', :method => :delete do %>
+  <i class='fa fa-trash-o'></i> Remove
+  <% end %>
+</p>
+<% end %>

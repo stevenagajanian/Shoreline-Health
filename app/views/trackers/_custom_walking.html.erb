@@ -4,6 +4,9 @@
   </a>
   <ul class="dropdown-menu pull-right">
     <li>
+      <%= link_to tracker do %><%= fa_icon "plus" %> Add Custom Amount <% end %>
+    </li>
+    <li>
       <%= link_to tracker do %><%= fa_icon "list" %> View/edit all data as a list <% end %>
     </li>
     <li>
@@ -13,7 +16,7 @@
       <%= link_to tracker do %><%= fa_icon "group" %> Change tracker network permissions <% end %>
     </li>
     <li>
-      <%= link_to tracker do %><%= fa_icon "trash-o" %> Remove tracker <% end %>
+      <%= link_to tracker, method: :delete do %><%= fa_icon "trash-o" %> Remove tracker <% end %>
     </li>
   </ul>
 </div>
@@ -40,4 +43,4 @@
 <%= button_tag(type: "submit", class: "pull-right btn btn-default btn-sm") do %>
 + 15 Min
 <% end %>
-<% end %><%= tracker.name %> (minutes)
+<% end %><%= fa_icon 'heartbeat' %> <%= tracker.name %> (minutes)

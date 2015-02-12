@@ -1,0 +1,90 @@
+<div class="row">
+  <div class="col-md-3">
+    <% if current_user.trackers.any?{|tracker| tracker.name == "Walking"} %>
+    <%= link_to '#', class: "btn btn-sm disabled btn-block btn-default tag-tooltip" do %>
+    Walking <br>(Already Tracking)
+    <% end %>
+    <% else %>
+    <%= form_for Tracker.new do |f| %>
+    <%= f.hidden_field :user_id, value: current_user.id %>
+    <%= f.hidden_field :name, value: "Walking" %>
+    <%= f.hidden_field :data_name, value: "minutes" %>
+    <%= f.hidden_field :b_bar_chart, value: false %>
+    <%= button_tag(type: "submit", class: "btn btn-block btn-primary btn-sm") do %>
+    Walking
+    <% end %>
+    <% end %>
+    <% end %>
+  </div>
+  <div class="col-md-3">
+    <% if current_user.trackers.any?{|tracker| tracker.name == "Running"} %>
+    <%= link_to '#', class: "btn btn-sm disabled btn-block btn-default tag-tooltip" do %>
+    Running <br>(Already Tracking)
+    <% end %>
+    <% else %>
+    <%= form_for Tracker.new do |f| %>
+    <%= f.hidden_field :user_id, value: current_user.id %>
+    <%= f.hidden_field :name, value: "Running" %>
+    <%= f.hidden_field :data_name, value: "minutes" %>
+    <%= f.hidden_field :b_bar_chart, value: false %>
+    <%= button_tag(type: "submit", class: "btn btn-block btn-primary btn-sm") do %>
+    Running
+    <% end %>
+    <% end %>
+    <% end %>
+  </div>
+  <div class="col-md-3">
+    <% if current_user.trackers.any?{|tracker| tracker.name == "Cycling"} %>
+    <%= link_to '#', class: "btn btn-sm disabled btn-block btn-default tag-tooltip" do %>
+    Cycling <br>(Already Tracking)
+    <% end %>
+    <% else %>
+    <%= form_for Tracker.new do |f| %>
+    <%= f.hidden_field :user_id, value: current_user.id %>
+    <%= f.hidden_field :name, value: "Cycling" %>
+    <%= f.hidden_field :data_name, value: "minutes" %>
+    <%= f.hidden_field :b_bar_chart, value: false %>
+    <%= button_tag(type: "submit", class: "btn btn-block btn-primary btn-sm") do %>
+    Cycling
+    <% end %>
+    <% end %>
+    <% end %>
+  </div>
+  <div class="col-md-3">
+    <% if current_user.trackers.any?{|tracker| tracker.name == "Water"} %>
+    <%= link_to '#', class: "btn btn-sm disabled btn-block btn-default tag-tooltip" do %>
+    Water <br>(Already Tracking)
+    <% end %>
+    <% else %>
+    <%= form_for Tracker.new do |f| %>
+    <%= f.hidden_field :user_id, value: current_user.id %>
+    <%= f.hidden_field :name, value: "Cycling" %>
+    <%= f.hidden_field :data_name, value: "minutes" %>
+    <%= f.hidden_field :b_bar_chart, value: true %>
+    <%= button_tag(type: "submit", class: "btn btn-block btn-primary btn-sm") do %>
+    Water
+    <% end %>
+    <% end %>
+    <% end %>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-md-3">
+    <% if current_user.trackers.any?{|tracker| tracker.name == "Caffeine"} %>
+    <%= link_to '#', class: "btn btn-sm disabled btn-block btn-default tag-tooltip" do %>
+    Caffeine <br>(Already Tracking)
+    <% end %>
+    <% else %>
+    <%= form_for Tracker.new do |f| %>
+    <%= f.hidden_field :user_id, value: current_user.id %>
+    <%= f.hidden_field :name, value: "Walking" %>
+    <%= f.hidden_field :data_name, value: "minutes" %>
+    <%= f.hidden_field :b_bar_chart, value: false %>
+    <%= button_tag(type: "submit", class: "btn btn-block btn-primary btn-sm") do %>
+    Caffeine
+    <% end %>
+    <% end %>
+    <% end %>
+  </div>
+</div>

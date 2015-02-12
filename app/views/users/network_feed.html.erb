@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <%= render "users/sidebar" %>
+    </div>
+    <div class="col-md-9">
+      <h2>
+        <% if current_user == @user %>My<% else %><%= @user.first_name %>'s<% end %> Network
+      </h2>
+      <p>
+      <div class="btn-group btn-group-justified">
+        <%= link_to 'Network', user_network_path(@user),class: "btn btn-default" %>
+        <%= link_to 'Stream', user_network_feed_path(@user),class: "btn btn-primary" %>
+        <%= link_to 'Permissions', user_network_permissions_path(@user),class: "btn btn-default" %>
+      </div>
+      </p>
+    <% if @user.followed_users.any? %>
+    <% @user.handshakes.each do |f| %>
+    <% f.followed.trackers.each do |t| %>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <h5>
+          <%= image_tag f.followed.imageurl, class: 'img-circle', style: 'padding: 0px; margin: 0px; max-width: 20px; max-height: 20px;' %> <%= link_to f.followed.full_name, f.followed %> - <%= f.relationship_name %>
+        </h5>
+        <p>
+          <%= t.name %>
+          <% t.datapoints.each do |d| %>
+          <%= d.amount %>
+          <% end %>
+        </p>
+      </div>
+    </div>
+    <% end %>
+    <% end %>
+    <% end %>
+    <center>
+      <p>
+        <%= link_to "Click here to find family, friends, doctors or specialists to add to your network.", users_path %>
+      </p>
+    </center>
+  </div>
+</div>

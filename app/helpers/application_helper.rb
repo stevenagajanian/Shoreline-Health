@@ -1,4 +1,10 @@
 module ApplicationHelper
+  def btn_label(text)
+    if current_user.b_use_btn_labels
+      return text
+    end
+  end
+  
 	def status_document_link(status)
 		if status.document && status.document.attachment?
 			content_tag(:span, "Attachment", class: "label label-info") +
