@@ -4,29 +4,18 @@
       <%= render "users/sidebar" %>
     </div>
     <div class="col-md-9">
-      <h1>Summary</h1>
       <div class="panel panel-default">
         <div class="panel-body">
-          <h2>Allergies</h2>
+          <h1 class='text-primary'><%= fa_icon "heart" %> Summary</h1>
+          <hr>
+          <h2><%= fa_icon "leaf" %> Allergies</h2>
           <%= render 'allergies/allergies' %>
-        </div>
-      </div>
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <h2>Medications</h2>
+          <h2><%= fa_icon "medkit" %> Medications</h2>
           <%= render 'medications/medications' %>
-        </div>
-      </div>
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <h2>Conditions</h2>
+          <h2><%= fa_icon "stethoscope" %> Conditions</h2>
           <%= render 'conditions/conditions' %>
-        </div>
-      </div>
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <h2>Trackers</h2>
-          <%= render 'trackers/trackers' %>
+          <h2><%= fa_icon "bar-chart" %> Immunizations</h2>
+          <%= render 'immunizations/immunizations' %>
         </div>
       </div>
     </div>

@@ -4,20 +4,19 @@
       <%= render "users/sidebar" %>
     </div>
     <div class="col-md-9">
-      <h2>
-        <% if current_user == @user %>My<% else %><%= @user.first_name %>'s<% end %> Network
-      </h2>
-      <p>
-      <div class="btn-group btn-group-justified">
-        <%= link_to 'Network', user_network_path(@user),class: "btn btn-primary" %>
-        <%= link_to 'Stream', user_network_feed_path(@user),class: "btn btn-default" %>
-        <%= link_to 'Permissions', user_network_permissions_path(@user),class: "btn btn-default" %>
-      </div>
-      </p>
-    <% if @user.followed_users.any? %>
-    <% @user.handshakes.each do |f| %>
-    <div class="panel panel-default">
-      <div class="panel-body">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <h1><%= fa_icon "users", class: 'text-primary' %> Network</h1>
+          <p>
+          <div class="btn-group btn-group-justified">
+            <%= link_to 'Network', user_network_path(@user),class: "btn btn-primary" %>
+            <%= link_to 'Stream', user_network_feed_path(@user),class: "btn btn-default" %>
+            <%= link_to 'Permissions', user_network_permissions_path(@user),class: "btn btn-default" %>
+          </div>
+          </p>
+        <% if @user.followed_users.any? %>
+        <% @user.handshakes.each do |f| %>
+
         <p class="pull-right">
           <%= link_to edit_handshake_path(f), class: "btn btn-sm btn-default tag-tooltip", data: {:toggle=>"tooltip"}, 'data-original-title' => "Edit " , 'data-placement' => 'bottom'  do %>
           <i class='fa fa-gear'></i> Edit Relationship
@@ -25,17 +24,18 @@
           <%= link_to "Remove", f, class: 'btn btn-sm  btn-default pull-', method: :delete %>
         </p>
         <h3>
-          <%= image_tag f.followed.imageurl, class: 'img-circle', style: 'padding: 0px; margin: 0px; max-width: 50px; max-height: 50px;' %> <%= link_to f.followed.full_name, f.followed %> - <%= f.relationship_name %>
+          <%= image_tag f.followed.imageurl, class: 'img-circle', style: 'padding: 0px; margin: 0px; max-width: 30px; max-height: 30px;' %> <%= link_to f.followed.full_name, f.followed %> - <%= f.relationship_name %>
         </h3>
+        <hr>
+        <% end %>
+        <% end %>
+
+        <center>
+          <p>
+            <%= link_to "Click here to find family, friends, doctors or specialists to add to your network.", users_path %>
+          </p>
+        </center>
       </div>
     </div>
-    <% end %>
-    <% end %>
-
-    <center>
-      <p>
-        <%= link_to "Click here to find family, friends, doctors or specialists to add to your network.", users_path %>
-      </p>
-    </center>
   </div>
 </div>

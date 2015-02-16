@@ -5,7 +5,7 @@
     </div>
     <div class="col-md-9">
       <h2>
-        <%= @user.first_name %>'s Allergies
+        <h1><%= fa_icon "leaf", class: 'text-primary' %> Allergies</center></h1>
       </h2>
       <p>
         <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseForm" aria-expanded="false" aria-controls="collapseExample">
@@ -19,20 +19,9 @@
       </div>
       <div class="panel panel-default">
         <div class="panel-body">
-          <% for allergy in @allergies %>
-          <h4>
-            <strong><%= allergy.name %></strong> - <%= allergy.description %>
-          </h4>
-          <p>
-            <%= link_to edit_allergy_path(allergy), class: "btn btn-sm btn-default" do %>
-            <i class='fa fa-gear'></i> Edit
-            <% end %>
-            <%= link_to allergy, class: "btn btn-sm btn-default tag-tooltip", data: {:toggle=>"tooltip", :confirm => 'Are you sure?'}, 'data-original-title' => "Remove " + allergy.name, 'data-placement' => 'bottom', :method => :delete do %>
-            <i class='fa fa-trash-o'></i> Remove
-            <% end %>
-          </p>
-          <% end %>
+          <%= render 'allergies/allergies' %>
         </div>
       </div>
     </div>
   </div>
+</div>

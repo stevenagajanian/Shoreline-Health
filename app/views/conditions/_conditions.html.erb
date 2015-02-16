@@ -1,0 +1,43 @@
+<% if @user.conditions.none? %>
+No conditions listed
+<% end %>
+<% for condition in @user.conditions %>
+<div class="pull-left">
+  <h4>
+    <strong>
+      <% if condition.page.presence %>
+      <%= link_to condition.page.name, condition_posts_path(condition), class: '' %>
+      <% else %>
+      <%= link_to condition.name, condition_posts_path(condition) %>
+      <% end %>
+    </strong>
+  </h4>
+  <p>
+    <% if condition.posts.any? %>
+    <%= condition.posts.first.description %>
+    <%= condition.posts.first.created_at.strftime("%B %d, %Y") %> 
+    at <%= condition.posts.first.created_at.strftime("%I:%M") %>
+    <% else %>
+    <% end %>
+  </p>
+</div>
+<div class="dropdown pull-right">
+  <a href="#" class="dropdown-toggle btn btn-default btn-sm pull-right" style="" data-toggle="dropdown">
+    <%= fa_icon "chevron-down" %>
+  </a>
+  <ul class="dropdown-menu pull-right">
+    <li>
+      <%= link_to edit_condition_path(condition) do %>
+      <i class='fa fa-gear'></i> Edit
+      <% end %>
+    </li>
+    <li>
+      <%= link_to condition, data: {:confirm => 'Are you sure?'}, 'data-original-title' => "Remove condition?", :method => :delete do %>
+      <i class='fa fa-trash-o'></i> Remove
+      <% end %>
+    </li>
+  </ul>
+</div>
+<br><br>
+<hr>
+<% end %>

@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   has_many :medications
   has_many :permissions
   has_many :statuses
+  has_many :immunizations
   has_many :fitnesses
   has_many :goals
   has_many :trackers

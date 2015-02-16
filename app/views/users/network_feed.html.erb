@@ -4,9 +4,7 @@
       <%= render "users/sidebar" %>
     </div>
     <div class="col-md-9">
-      <h2>
-        <% if current_user == @user %>My<% else %><%= @user.first_name %>'s<% end %> Network
-      </h2>
+      <h1><center><%= fa_icon "users" %> Network</center></h1>
       <p>
       <div class="btn-group btn-group-justified">
         <%= link_to 'Network', user_network_path(@user),class: "btn btn-default" %>

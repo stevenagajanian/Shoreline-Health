@@ -1,74 +1,161 @@
 <%= render "layouts/navbar" %>
-<div class="container">
-	<div class="jumbotron" style="position: relative; margin-top: -10px;">
-    <center>
-		<h1>Shoreline</h1>
-		<h2>Your health records - anywhere</h2>
-		<p><%= link_to "Get Started Today!", new_user_registration_path, class: "btn btn-lg btn-primary" %>
-		</p>
-    </center>
-	</div>
-  
-  <div class="panel panel-default">
-    <div class="panel-body">
-      <div class="row">
-        <div class="col-md-4">
-          <center>
-            <i style="text-shadow: 3px 2px 0px #fff, 7px 6px 0px rgba(0, 0, 0, 0.15);" class="text-primary fa fa-plus-square fa-5x"></i>
-            <h1>Medication Reviews</h1>
-            <p class="lead">Read reviews from people who have similar issues</p>
-          </center>
-        </div>
-        <div class="col-md-4">
-          <center>
-            <i  style="text-shadow: 3px 2px 0px #fff, 7px 6px 0px rgba(0, 0, 0, 0.15);" class="text-danger fa fa-medkit fa-5x"></i>
-            <h1>Comprehensive Catalogs</h1>
-            <p class="lead">Organize your health information in one secure place</p>
-          </center>
-        </div>
-        <div class="col-md-4">
-          <center>
-            <i  style="text-shadow: 3px 2px 0px #fff, 7px 6px 0px rgba(0, 0, 0, 0.15);" class="text-success fa fa-lock fa-5x"></i>
-            <h1>Private By Default &amp; HIPAA Compliant</h1>
-            <p class="lead">Your info will always be kept safe and private</p>
-          </center>
-        </div>
-      </div>
-      <hr>
-      <div class="row">
-        <div class="col-md-4">
-          <center>
-            <i  style="text-shadow: 3px 2px 0px #fff, 7px 6px 0px rgba(0, 0, 0, 0.15);" class="text-warning fa fa-eye-slash fa-5x"></i>
-            <h1>No Advertising</h1>
-            <p class="lead">We will never allow targeted advertising</p>
-          </center>
-        </div>
-        <div class="col-md-4">
-          <center>
-            <i  style="text-shadow: 3px 2px 0px #fff, 7px 6px 0px rgba(0, 0, 0, 0.15);" class="text-success fa fa-group fa-5x"></i>
-            <h1>Shared Catalogs</h1>
-            <p class="lead">Share what data you choose to whoever you want: doctors, family, or friends</p>
-          </center>
-        </div>
-        <div class="col-md-4">
-          <center>
-            <i  style="text-shadow: 3px 2px 0px #fff, 7px 6px 0px rgba(0, 0, 0, 0.15);" class="fa fa-bar-chart-o text-primary fa-5x"></i>
-            <h1>See Trends</h1>
-            <p class="lead">Analyze your health data by comparing data sets</p>
-          </center>
+<!-- Header -->
+<div class="intro-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="intro-message">
+          <%= image_tag "ShorelineTeal.png", width: 222, class: 'shadowedd' %><br>
+          <h1>Shoreline</h1>
+          <hr class="intro-divider">
+          <h3>Your health records - anywhere</h3>
+          <ul class="list-inline intro-social-buttons">
+            <li>
+              <%= link_to "Get Started Today!", new_user_registration_path, class: "network-name btn btn-lg btn-primary" %>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
+
   </div>
-
-	<div class="mastfoot">
-		<div class="inner">
-			<p>Komodo - Health Catalogs managed by <a class="btn-link" href="https://twitter.com/jamessteininger">@JamesSteininger</a>
-			</div>
-		</div>
-
-	</div>
+  <!-- /.container -->
 
 </div>
+<!-- /.intro-header -->
+
+<!-- Page Content -->
+
+<a  name="services"></a>
+<div class="content-section-a">
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-5 col-sm-6">
+        <hr class="section-heading-spacer">
+        <div class="clearfix"></div>
+        <h2 class="section-heading">The safest way to store your health records</h2>
+        <p class="lead">Shoreline sets all your data to private by default and is HIPAA compliant. Your info will always be kept safe and private.</p>
+      </div>
+      <div class="col-lg-5 col-lg-offset-2 col-sm-6">
+        <center>
+          <h1>
+            <i class="text-primary fa fa-lock fa-5x"></i>
+          </h1>
+        </center>
+      </div>
+    </div>
+
+  </div>
+  <!-- /.container -->
+
+</div>
+<!-- /.content-section-a -->
+
+<div class="content-section-b">
+
+  <div class="container">
+
+    <div class="row">
+      <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
+        <hr class="section-heading-spacer">
+        <div class="clearfix"></div>
+        <h2 class="section-heading">Comprehensive catalogs which belong to you, but are also sharable</h2>
+        <p class="lead">We leave you in complete control over your own data. We also know great healthcare is a team effort, so you can set precise permissions for who can see or add to your records.</p>
+      </div>
+      <div class="col-lg-5 col-sm-pull-6  col-sm-6">
+        <center>
+          <h1>
+            <p><i class="text-primary fa fa-file-o fa-3x"></i></p><p><i class="text-primary fa fa-arrows-v fa-3x"></i></p><p><i class="text-primary fa fa-users fa-3x"></i></p>
+          </h1>
+        </center>
+      </div>
+    </div>
+
+  </div>
+  <!-- /.container -->
+
+</div>
+<!-- /.content-section-b -->
+
+<div class="content-section-a">
+
+  <div class="container">
+
+    <div class="row">
+      <div class="col-lg-5 col-sm-6">
+        <hr class="section-heading-spacer">
+        <div class="clearfix"></div>
+        <h2 class="section-heading">The safest way to store your health records</h2>
+        <p class="lead">Shoreline sets all your data to private by default and is HIPAA compliant. Your info will always be kept safe and private.</p>
+      </div>
+      <div class="col-lg-5 col-lg-offset-2 col-sm-6">
+        <center>
+          <h1>
+            <i class="text-primary fa fa-lock fa-5x"></i>
+          </h1>
+        </center>
+      </div>
+    </div>
+
+  </div>
+  <!-- /.container -->
+
+</div>
+<!-- /.content-section-a -->
+
+
+<div class="content-section-b">
+
+  <div class="container">
+    <center>
+      <h1>Features</h1><br><br>
+      <div class="row">
+        <div class="col-md-2 col-md-offset-2">
+          <%= fa_icon "file-o 2x" %><h4><b>Catalog</b></h4><p>Organize your health information in one secure place.</p>
+        </div>
+        <div class="col-md-2">
+          <%= fa_icon "bar-chart-o 2x" %><h4><b>Tracking</b></h4><p>Share your lists with colleagues, friends and family.</p>
+        </div>
+        <div class="col-md-2">
+          <%= fa_icon "star 2x" %><h4><b>Medical Reviews</b></h4><p>Read reviews from people who have similar issues or take the same medications.</p>
+        </div>
+        <div class="col-md-2">
+          <%= fa_icon "print 2x" %><h4><b>Print</b></h4><p>Print wallet ID cards, health summaries to bring to your doctor, or your full catalog.</p>
+        </div>
+      </div>
+      <h1>Security</h1><br><br>
+      <div class="row">
+        <div class="col-md-2 col-md-offset-2">
+          <%= fa_icon "lock 2x" %><h4><b>Private By Default</b></h4><p>Share your lists with colleagues, friends and family.</p>
+        </div>
+
+        <div class="col-md-2">
+          <%= fa_icon "group 2x" %><h4><b>Team Based Care</b></h4><p>Share what data you choose to whoever you want: doctors, family, or friends.</p>
+        </div>
+        <div class="col-md-2">
+          <%= fa_icon "eye-slash 2x" %><h4><b>No Targeted Ads</b></h4><p>We will never allow targeted advertising to compromise your health.</p>
+        </div>
+        <div class="col-md-2">
+          <%= fa_icon "user-md 2x" %><h4><b>HIPAA Compliant</b></h4><p>Your health data will be managed safely and effectively.</p>
+        </div>
+      </div>
+      <h1>Data Types</h1><br><br>
+      <div class="row">
+        <div class="col-md-2 col-md-offset-2">
+          <%= fa_icon "bug 2x" %><h4><b>Immunizations</b></h4><p>Share your lists with colleagues, friends and family.</p>
+        </div>
+        <div class="col-md-2">
+          <%= fa_icon "stethoscope 2x" %><h4><b>Conditions</b></h4><p>Share your lists with colleagues, friends and family.</p>
+        </div>
+        <div class="col-md-2">
+          <%= fa_icon "leaf 2x" %><h4><b>Allergies</b></h4><p>Share your lists with colleagues, friends and family.</p>
+        </div>
+        <div class="col-md-2">
+          <%= fa_icon "medkit 2x" %><h4><b>Medications</b></h4><p>Share your lists with colleagues, friends and family.</p>
+        </div>
+      </div>
+    </center>
+  </div>
 
 </div>

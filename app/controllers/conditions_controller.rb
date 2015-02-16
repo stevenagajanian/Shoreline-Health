@@ -13,6 +13,15 @@ before_filter :authenticate_user!
 			render file: 'public/denied'
 		end
   end
+  
+  def edit
+    @condition = Condition.find(params[:id])
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @condition }
+    end
+  end
 
   def show
     @page = Page.find(params[:page_id])

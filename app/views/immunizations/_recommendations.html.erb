@@ -1,0 +1,42 @@
+<% if !current_user.immunizations.any?{|immunization| immunization.name == "Influenza vaccine"} %>
+<div class="alert alert-dismissible alert-default">
+  <button type="button" class="close" data-dismiss="alert">×</button>
+  <strong>Did you take your Flu Shot this year?</strong><br>
+  <%= form_for Immunization.new do |f| %>
+  <%= f.hidden_field :user_id, value: current_user.id %>
+  <%= f.hidden_field :name, value: "Influenza vaccine" %>
+  <%= f.hidden_field :description, value: "Flu virus, yearly outbreak" %>
+  <%= button_tag(type: "submit", class: 'btn btn-primary') do %>
+  Yes, I did.
+  <% end %>
+  <% end %>
+</div>
+<% end %>
+<% if !current_user.immunizations.any?{|immunization| immunization.name == "HPV"} %>
+<div class="alert alert-dismissible alert-default">
+  <button type="button" class="close" data-dismiss="alert">×</button>
+  <strong>Have you received the HPV vaccination?</strong><br>
+  <%= form_for Immunization.new do |f| %>
+  <%= f.hidden_field :user_id, value: current_user.id %>
+  <%= f.hidden_field :name, value: "HPV" %>
+  <%= f.hidden_field :description, value: "Human papillomavirus; causes genital warts, cancer" %>
+  <%= button_tag(type: "submit", class: 'btn btn-primary') do %>
+  Yes, I did.
+  <% end %>
+  <% end %>
+</div>
+<% end %>
+<% if !current_user.immunizations.any?{|immunization| immunization.name == "Meningococcal"} %>
+<div class="alert alert-dismissible alert-default">
+  <button type="button" class="close" data-dismiss="alert">×</button>
+  <strong>Have you received the Meningococcal vaccination?</strong><br>
+  <%= form_for Immunization.new do |f| %>
+  <%= f.hidden_field :user_id, value: current_user.id %>
+  <%= f.hidden_field :name, value: "Meningococcal" %>
+  <%= f.hidden_field :description, value: "Bacterial infection; causes meningitis, blood infection" %>
+  <%= button_tag(type: "submit", class: 'btn btn-primary') do %>
+  Yes, I did.
+  <% end %>
+  <% end %>
+</div>
+<% end %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150211203824) do
+ActiveRecord::Schema.define(version: 20150216045139) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -245,6 +245,17 @@ ActiveRecord::Schema.define(version: 20150211203824) do
     t.float    "amount"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "immunizations", force: true do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.text     "description"
+    t.boolean  "b_validated"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "validator_id"
+    t.string   "validation_url"
   end
 
   create_table "ko_medication_reviews", force: true do |t|

@@ -1,13 +1,27 @@
+<% if @user.allergies.none? %>
+No allergies listed
+<% end %>
 <% for allergy in @user.allergies %>
-<h4>
-  <strong><%= allergy.name %></strong> - <%= allergy.description %>
+<h4 class="pull-left">
+  <strong><%= allergy.name %></strong>  <%= allergy.description %>
 </h4>
-<p>
-  <%= link_to edit_allergy_path(allergy), class: "btn btn-sm btn-default" do %>
-  <i class='fa fa-gear'></i> Edit
-  <% end %>
-  <%= link_to allergy, class: "btn btn-sm btn-default tag-tooltip", data: {:toggle=>"tooltip", :confirm => 'Are you sure?'}, 'data-original-title' => "Remove " + allergy.name, 'data-placement' => 'bottom', :method => :delete do %>
-  <i class='fa fa-trash-o'></i> Remove
-  <% end %>
-</p>
+<div class="dropdown pull-right">
+  <a href="#" class="dropdown-toggle btn btn-default btn-sm pull-right" style="" data-toggle="dropdown">
+    <%= fa_icon "chevron-down" %>
+  </a>
+  <ul class="dropdown-menu pull-right">
+    <li>
+      <%= link_to edit_allergy_path(allergy) do %>
+      <i class='fa fa-gear'></i> Edit
+      <% end %>
+    </li>
+    <li>
+      <%= link_to allergy, data: {:confirm => 'Are you sure?'}, 'data-original-title' => "Remove allergy?", :method => :delete do %>
+      <i class='fa fa-trash-o'></i> Remove
+      <% end %>
+    </li>
+  </ul>
+</div>
+<br><br>
+<hr>
 <% end %>

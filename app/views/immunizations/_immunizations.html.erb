@@ -1,0 +1,42 @@
+<% if @user.immunizations.none? %>
+No immunizations listed
+<% else %>
+<table class='table table-striped table-hover table-responsive'>
+  <thead>
+    <tr class="info">
+      <td>Vaccination</td>
+      <td>To protect against</td>
+      <td></td>
+      <td>Date received</td>
+      <td></td>
+    </tr>
+  </thead>
+  <tbody>
+    <% for immunization in @user.immunizations %>
+    <tr>
+      <td><strong><%= immunization.name %></strong></td>
+      <td><%= immunization.description %></td>
+      <td><% if immunization.b_validated %><h4><span class="label label-success">Validated</span></h4><% end %></td>
+      <td><%= immunization.created_at.strftime("%B, %Y") %></td>
+      <td><div class="dropdown">
+        <a href="#" class="dropdown-toggle btn btn-default btn-sm pull-" style="" data-toggle="dropdown">
+          <%= fa_icon "chevron-down" %>
+        </a>
+        <ul class="dropdown-menu pull-right">
+          <li>
+            <%= link_to edit_immunization_path(immunization) do %>
+            <i class='fa fa-gear'></i> Edit
+            <% end %>
+          </li>
+          <li>
+            <%= link_to immunization, data: {:confirm => 'Are you sure?'}, 'data-original-title' => "Remove medication?", :method => :delete do %>
+            <i class='fa fa-trash-o'></i> Remove
+            <% end %>
+          </li>
+        </ul>
+        </div></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<% end %>

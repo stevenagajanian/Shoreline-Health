@@ -7,21 +7,21 @@
       <div class="panel panel-default">
         <div class="panel-body">
           <h2>
-            <h1><%= fa_icon "medkit", class: 'text-primary' %> Medications</center></h1>
+            <h1><%= fa_icon "bug", class: 'text-primary' %> Immunizations</center></h1>
           </h2>
+        <%= render 'immunizations/recommendations' %>
         <p>
           <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseForm" aria-expanded="false" aria-controls="collapseExample">
-            <%= fa_icon "medkit" %>  Add Medication
+            <%= fa_icon "medkit" %>  Add Immunization
           </button>
         </p>
         <div class="collapse" id="collapseForm">
           <div class="well">
-            <%= render 'medications/form' %>
+            <%= render 'immunizations/form' %>
           </div>
         </div>
-        <%= render 'medications/medications' %>
+        <%= render 'immunizations/immunizations' %>
       </div>
     </div>
   </div>
-</div>
 </div>

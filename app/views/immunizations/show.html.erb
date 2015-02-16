@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @immunization.user_id %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @immunization.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @immunization.description %>
+</p>
+
+<p>
+  <strong>B validated:</strong>
+  <%= @immunization.b_validated %>
+</p>
+
+<%= link_to 'Edit', edit_immunization_path(@immunization) %> |
+<%= link_to 'Back', immunizations_path %>

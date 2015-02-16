@@ -1,5 +1,7 @@
 Tabby::Application.routes.draw do
 
+  resources :immunizations
+
   resources :treatments
 
   resources :pharmacies
@@ -71,6 +73,7 @@ Tabby::Application.routes.draw do
   resources :users do
     resources :handshakes
     resources :notifications
+    resources :immunizations
     resources :permissions
     resources :trackers do
       resources :datapoints

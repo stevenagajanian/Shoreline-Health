@@ -1,13 +1,13 @@
 /*
- * This is a manifest file that'll automatically include all the stylesheets available in this directory
- * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
- * the top of the compiled file, but it's generally better to create a new file per style scope.
- *= require_self
- * require custom_bootstrap/custom_bootstrap
- * require custom_bootstrap/mixins
- * require custom_bootstrap/variables
- *= require font-awesome
- *= require rails_bootstrap_forms
+* This is a manifest file that'll automatically include all the stylesheets available in this directory
+* and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
+* the top of the compiled file, but it's generally better to create a new file per style scope.
+*= require_self
+* require custom_bootstrap/custom_bootstrap
+* require custom_bootstrap/mixins
+* require custom_bootstrap/variables
+*= require font-awesome
+*= require rails_bootstrap_forms
 *= require bootstrap-typeahead-rails
 */
 @import "bootswatch/lumen/variables";
@@ -27,7 +27,7 @@ $navbar-default-bg: $brand-primary;*/
 
 body {
   font-family: 'Varela Round', sans-serif;
-	padding-top: 65px;
+  padding-top: 65px;
 
 }
 
@@ -35,8 +35,107 @@ h1, h2, h3, h4, h5, h6, p {
   font-family: 'Varela Round', sans-serif;
 }
 
+.shadowed {
+-webkit-filter: drop-shadow(4px 4px 4px rgba(0,0,0,0.4));
+filter: drop-shadow(4px 4px 4px rgba(0,0,0,0.4));
+filter: url(shadow.svg#drop-shadow);
+-ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=4, OffY=4,
+Color='#444')";
+filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=4, OffY=4, Color='#444')";
+}
+
 @import "bootswatch/lumen/bootswatch";
 
 .label-as-badge {
-    border-radius: 1em;
+  border-radius: 1em;
+}
+
+.intro-header {
+  margin-top: -30px;
+  padding-bottom: 10px;
+  text-align: center;
+ // color: #fff;
+//  background: url(/assets/s.jpg) no-repeat center center;
+//  background-size: cover;
+}
+
+
+.intro-message {
+  position: relative;
+  padding-top: 5%;
+  padding-bottom: 5%;
+}
+
+.intro-message > h1 {
+  margin: 0;
+  //color: #fff;
+ // text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
+  font-size: 5em;
+}
+
+.intro-divider {
+  width: 400px;
+  border-top: 1px solid #f8f8f8;
+  border-bottom: 1px solid rgba(0,0,0,0.2);
+}
+
+.intro-message > h3 {
+  //color: #fff;
+ // text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
+}
+
+
+.network-name {
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 2px;
+}
+
+.content-section-a {
+  padding: 50px 0;
+  background-color: #f8f8f8;
+}
+
+.content-section-b {
+  padding: 50px 0;
+  border-top: 1px solid #e7e7e7;
+  border-bottom: 1px solid #e7e7e7;
+}
+
+.content-section-d {
+  padding: 100px 0;
+  background-color: #f8f8f8;
+}
+
+.section-heading {
+  margin-bottom: 30px;
+}
+
+.section-heading-spacer {
+  float: left;
+  width: 200px;
+  border-top: 3px solid #e7e7e7;
+}
+
+.banner {
+  padding: 100px 0;
+  color: #f8f8f8;
+  background: url(/assets/Wetlands2.jpg) no-repeat center center;
+  background-size: cover;
+}
+
+.banner h2 {color: #fff;
+  margin: 0;
+  text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
+  font-size: 3em;
+}
+
+.banner ul {color: #fff;
+  margin-bottom: 0;
+}
+
+.banner-social-buttons {
+  float: right;
+  margin-top: 0;
 }

@@ -5,26 +5,26 @@ No medications listed
 <h4 class="pull-left">
   <strong><%= medication.name %></strong> - <%= medication.dosage %>
 </h4>
- <div class="dropdown pull-right">
-    <a href="#" class="dropdown-toggle btn btn-default btn-sm pull-right" style="" data-toggle="dropdown">
-      <%= fa_icon "chevron-down" %>
-    </a>
-    <ul class="dropdown-menu pull-right">
-      <li>
-        <%= link_to new_pharmacy_path do %> <%= fa_icon "plus" %> Add Pharmacy<% end %>
-      </li>
-      <li>
-        <%= link_to edit_medication_path(medication) do %>
-        <i class='fa fa-gear'></i> Edit
-        <% end %>
-      </li>
-      <li>
-        <%= link_to medication, :method => :delete do %>
-        <i class='fa fa-trash-o'></i> Remove
-        <% end %>
-      </li>
-    </ul>
-  </div>
+<div class="dropdown pull-right">
+  <a href="#" class="dropdown-toggle btn btn-default btn-sm pull-right" style="" data-toggle="dropdown">
+    <%= fa_icon "chevron-down" %>
+  </a>
+  <ul class="dropdown-menu pull-right">
+    <li>
+      <%= link_to new_pharmacy_path do %> <%= fa_icon "plus" %> Add Pharmacy<% end %>
+    </li>
+    <li>
+      <%= link_to edit_medication_path(medication) do %>
+      <i class='fa fa-gear'></i> Edit
+      <% end %>
+    </li>
+    <li>
+      <%= link_to medication, data: {:confirm => 'Are you sure?'}, 'data-original-title' => "Remove medication?", :method => :delete do %>
+      <i class='fa fa-trash-o'></i> Remove
+      <% end %>
+    </li>
+  </ul>
+</div>
 <br><br>
 <hr>
 <% end %>

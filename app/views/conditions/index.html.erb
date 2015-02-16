@@ -4,52 +4,23 @@
       <%= render "users/sidebar" %>
     </div>
     <div class="col-md-9">
-      <h2>
-        <%= @user.first_name %>'s Ongoing Conditions
-      </h2>
-      <p>
-        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseForm" aria-expanded="false" aria-controls="collapseExample">
-          <%= fa_icon "medkit" %>  Add Condition
-        </button>
-      </p>
-      <div class="collapse" id="collapseForm">
-        <div class="well">
-          <%= render 'conditions/form' %>
-        </div>
-      </div>
       <div class="panel panel-default">
         <div class="panel-body">
-          <% for condition in @conditions %>
-          <h4>
-            <strong>
-              <% if condition.page.presence %>
-              <%= link_to condition.page.name, condition_posts_path(condition), class: '' %>
-              <% else %>
-              <%= link_to condition.name, condition_posts_path(condition) %>
-              <% end %>
-            </strong>
-          </h4>
-          <% if condition.posts.any? %>
-          <%= condition.posts.first.description %>
-          <%= condition.posts.first.created_at.strftime("%B %d, %Y") %> 
-          at <%= condition.posts.first.created_at.strftime("%I:%M") %>
-          <% else %>
-          <% end %>
+          <h2>
+            <h1><%= fa_icon "stethoscope", class: 'text-primary' %> Conditions</h1>
+          </h2>
           <p>
-            <%= link_to edit_condition_path(condition), class: "btn btn-sm btn-default tag-tooltip", data: {:toggle=>"tooltip"}, 'data-original-title' => "Edit ", 'data-placement' => 'bottom'  do %>
-            <i class='fa fa-gear'></i> Edit
-            <% end %>
-            <%= link_to condition, class: "btn btn-sm btn-default tag-tooltip", data: {:toggle=>"tooltip"}, 'data-original-title' => "Remove ", 'data-placement' => 'bottom', :confirm => 'Are you sure?', :method => :delete do %>
-            <i class='fa fa-trash-o'></i> Remove
-            <% end %>
+            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseForm" aria-expanded="false" aria-controls="collapseExample">
+              <%= fa_icon "medkit" %>  Add Condition
+            </button>
           </p>
-          <hr>
-          <% end %>
-        </div>
-      </div>
-      <h2>Past Conditions</h2>
-      <div class="panel panel-default">
-        <div class="panel-body">
+          <div class="collapse" id="collapseForm">
+            <div class="well">
+              <%= render 'conditions/form' %>
+            </div>
+          </div>
+
+          <%= render 'conditions/conditions' %>
         </div>
       </div>
     </div>

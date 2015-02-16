@@ -25,6 +25,7 @@
     <div class="col-md-9">
       <h1>Update Profile</h1>
       <p>
+        <%= f.check_box  :b_use_btn_labels %>
         <button class="btn btn-default" type="button" data-toggle="collapse" data-target="#collapseShare" aria-expanded="false" aria-controls="collapseExample">
           <%= fa_icon "gear" %>  Change password?
         </button>
@@ -43,7 +44,7 @@
               <%= f.password_field :password_confirmation, autocomplete: "off"%>
             </div>
           </div>
-          <%= f.password_field :enter_current_password_to_make_changes, autocomplete: "off", placeholder: "Current password..." %>
+          <%= f.password_field :current_password, autocomplete: "off", placeholder: "Current password..." %>
 
           <p><%= f.submit "Update Profile", class: "btn btn-lg btn-primary btn-block" %></p><p><%= link_to "Cancel Editing", current_user, class: "btn-block btn btn-default" %><br><%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "text-danger" %></p>
           <% end %>
