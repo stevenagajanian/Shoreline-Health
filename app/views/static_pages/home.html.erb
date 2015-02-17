@@ -13,6 +13,9 @@
             <li>
               <%= link_to "Get Started Today!", new_user_registration_path, class: "network-name btn btn-lg btn-primary" %>
             </li>
+            <li>
+              <%= link_to new_user_session_path, class: "network-name btn btn-lg btn-info" do %><%= fa_icon 'sign-in' %> Sign In <% end %>
+            </li>
           </ul>
         </div>
       </div>
@@ -78,34 +81,8 @@
 </div>
 <!-- /.content-section-b -->
 
+
 <div class="content-section-a">
-
-  <div class="container">
-
-    <div class="row">
-      <div class="col-lg-5 col-sm-6">
-        <hr class="section-heading-spacer">
-        <div class="clearfix"></div>
-        <h2 class="section-heading">The safest way to store your health records</h2>
-        <p class="lead">Shoreline sets all your data to private by default and is HIPAA compliant. Your info will always be kept safe and private.</p>
-      </div>
-      <div class="col-lg-5 col-lg-offset-2 col-sm-6">
-        <center>
-          <h1>
-            <i class="text-primary fa fa-lock fa-5x"></i>
-          </h1>
-        </center>
-      </div>
-    </div>
-
-  </div>
-  <!-- /.container -->
-
-</div>
-<!-- /.content-section-a -->
-
-
-<div class="content-section-b">
 
   <div class="container">
     <center>
@@ -158,4 +135,29 @@
     </center>
   </div>
 
+</div>
+
+<div class="content-section-b">
+  <div class="container">
+    <center>
+      <ul class="list-inline intro-social-buttons">
+        <li>
+          <%= link_to "Get Started Today!", new_user_registration_path, class: "network-name btn btn-lg btn-primary" %>
+        </li>
+        <li>
+          <%= link_to new_user_session_path, class: "network-name btn btn-lg btn-info" do %><%= fa_icon 'sign-in' %> Sign In <% end %>
+        </li>
+      </ul>
+    </center>
+  </div>
+</div>
+<div class="content-section-a">
+  <div class="container">
+    <center><br><%= image_tag "ShorelineTeal.png", width: 30 %><br><br><div class="container-fluid"></center>
+      <center>Copright &copy; Shoreline Harbor, 2014 <br>
+        <%= link_to "About Shoreline", static_pages_about_path %> | <%= link_to "Products", static_pages_company_path %>  | <%= link_to "Updates", "https://twitter.com/ShorelineIO" %> | <%= link_to "Help & Tutorials", static_pages_help_path %> | <%= link_to "Company Roadmap", static_pages_roadmap_path %><br>Made with <i class="fa fa-heart text-danger"></i> by <%= link_to "James Steininger", "http://www.jamessteininger.info/about/" %><br>
+        </div>
+      </div>
+
+  </div>
 </div>
