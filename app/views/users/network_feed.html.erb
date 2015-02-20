@@ -4,14 +4,11 @@
       <%= render "users/sidebar" %>
     </div>
     <div class="col-md-9">
-      <h1><center><%= fa_icon "users" %> Network</center></h1>
-      <p>
-      <div class="btn-group btn-group-justified">
-        <%= link_to 'Network', user_network_path(@user),class: "btn btn-default" %>
-        <%= link_to 'Stream', user_network_feed_path(@user),class: "btn btn-primary" %>
-        <%= link_to 'Permissions', user_network_permissions_path(@user),class: "btn btn-default" %>
-      </div>
-      </p>
+      <ul class="nav nav-tabs">
+        <li><%= link_to user_network_path(@user) do %><%= fa_icon "users", class: 'text-primary' %> Network <% end %></li>
+        <li><%= link_to user_network_permissions_path(@user) do %><%= fa_icon "lock", class: 'text-primary' %> Permissions <% end %></li>
+        <li class="active"><%= link_to user_network_feed_path(@user) do %><%= fa_icon "files-o", class: 'text-primary' %> Data Stream <% end %></li>
+      </ul>
     <% if @user.followed_users.any? %>
     <% @user.handshakes.each do |f| %>
     <% f.followed.trackers.each do |t| %>

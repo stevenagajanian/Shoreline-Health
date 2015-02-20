@@ -1,43 +1,69 @@
+<h2>
+  <%= fa_icon "stethoscope" %> Conditions
+  <div class="btn-group pull-right">
+    <button class="pull- btn-sm  btn btn-default" type="button" data-toggle="collapse" data-target="#collapseFormC" aria-expanded="false" aria-controls="collapseExample">
+      <%= fa_icon "plus" %> Add
+    </button> 
+    <%= link_to user_conditions_path(@user), class: 'btn  btn-sm btn-default' do %>
+      <%= fa_icon "book" %> History
+    <% end %>
+  </div>
+</h2>
+<div class="collapse" id="collapseFormC">
+  <%= render 'conditions/form' %>
+</div>
 <% if @user.conditions.none? %>
 No conditions listed
-<% end %>
-<% for condition in @user.conditions %>
-<div class="pull-left">
-  <h4>
-    <strong>
-      <% if condition.page.presence %>
-      <%= link_to condition.page.name, condition_posts_path(condition), class: '' %>
-      <% else %>
-      <%= link_to condition.name, condition_posts_path(condition) %>
-      <% end %>
-    </strong>
-  </h4>
-  <p>
-    <% if condition.posts.any? %>
-    <%= condition.posts.first.description %>
-    <%= condition.posts.first.created_at.strftime("%B %d, %Y") %> 
-    at <%= condition.posts.first.created_at.strftime("%I:%M") %>
-    <% else %>
+<% else %>
+<table class='table table-striped table-hover table-responsive'>
+  <thead>
+    <tr class="info">
+      <td>Name</td>
+      <td>Last Update</td>
+      <td></td>
+      <td></td>
+    </tr>
+  </thead>
+  <tbody>
+    <% for condition in @user.conditions %>
+    <tr>
+      <td><strong><% if condition.page.presence %>
+        <%= link_to condition.page.name, condition_posts_path(condition), class: '' %>
+        <% else %>
+        <%= link_to condition.name, condition_posts_path(condition) %>
+        <% end %></strong></td>
+      <td><% if condition.posts.any? %>
+        <%= condition.posts.first.description %>
+        <%= condition.posts.first.created_at.strftime("%B %d, %Y") %> 
+        at <%= condition.posts.first.created_at.strftime("%I:%M") %>
+        <% else %>
+        <% end %></td>
+      <td><strong><% if condition.page.presence %>
+        <%= link_to condition_posts_path(condition), class: 'btn btn-sm btn-info' do %><%= fa_icon 'pencil' %> Post <% end %>
+        <% else %>
+        <%= link_to 'View full history', condition_posts_path(condition) %>
+        <% end %></strong></td>
+      <td>
+        <div class="dropdown pull-right">
+          <a href="#" class="dropdown-toggle btn btn-default btn-sm pull-right" style="" data-toggle="dropdown">
+            <%= fa_icon "gear" %>
+          </a>
+          <ul class="dropdown-menu pull-right">
+            <li>
+              <%= link_to edit_condition_path(condition) do %>
+              <i class='fa fa-gear'></i> Edit
+              <% end %>
+            </li>
+            <li>
+              <%= link_to condition, data: {:confirm => 'Are you sure?'}, 'data-original-title' => "Remove condition?", :method => :delete do %>
+              <i class='fa fa-trash-o'></i> Remove
+              <% end %>
+            </li>
+          </ul>
+        </div>
+      </td>
+    </tr>
     <% end %>
-  </p>
-</div>
-<div class="dropdown pull-right">
-  <a href="#" class="dropdown-toggle btn btn-default btn-sm pull-right" style="" data-toggle="dropdown">
-    <%= fa_icon "chevron-down" %>
-  </a>
-  <ul class="dropdown-menu pull-right">
-    <li>
-      <%= link_to edit_condition_path(condition) do %>
-      <i class='fa fa-gear'></i> Edit
-      <% end %>
-    </li>
-    <li>
-      <%= link_to condition, data: {:confirm => 'Are you sure?'}, 'data-original-title' => "Remove condition?", :method => :delete do %>
-      <i class='fa fa-trash-o'></i> Remove
-      <% end %>
-    </li>
-  </ul>
-</div>
-<br><br>
-<hr>
+  </tbody>
+</table>
 <% end %>

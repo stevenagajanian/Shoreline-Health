@@ -1,30 +1,57 @@
+<h2>
+  <%= fa_icon "medkit" %> Medications
+  <div class="btn-group pull-right">
+    <button class="pull- btn-sm  btn btn-default" type="button" data-toggle="collapse" data-target="#collapseFormM" aria-expanded="false" aria-controls="collapseExample">
+      <%= fa_icon "plus" %> Add
+    </button> 
+    <%= link_to user_medications_path(@user), class: 'btn btn-sm  btn-default' do %>
+      <%= fa_icon "book" %> History
+    <% end %>
+  </div>
+</h2>
+<div class="collapse" id="collapseFormM">
+  <%= render 'medications/form' %>
+</div>
 <% if @user.medications.none? %>
 No medications listed
-<% end %>
-<% for medication in @user.medications %>
-<h4 class="pull-left">
-  <strong><%= medication.name %></strong> - <%= medication.dosage %>
-</h4>
-<div class="dropdown pull-right">
-  <a href="#" class="dropdown-toggle btn btn-default btn-sm pull-right" style="" data-toggle="dropdown">
-    <%= fa_icon "chevron-down" %>
-  </a>
-  <ul class="dropdown-menu pull-right">
-    <li>
-      <%= link_to new_pharmacy_path do %> <%= fa_icon "plus" %> Add Pharmacy<% end %>
-    </li>
-    <li>
-      <%= link_to edit_medication_path(medication) do %>
-      <i class='fa fa-gear'></i> Edit
-      <% end %>
-    </li>
-    <li>
-      <%= link_to medication, data: {:confirm => 'Are you sure?'}, 'data-original-title' => "Remove medication?", :method => :delete do %>
-      <i class='fa fa-trash-o'></i> Remove
-      <% end %>
-    </li>
-  </ul>
-</div>
-<br><br>
-<hr>
+<% else %>
+<table class='table table-striped table-hover table-responsive'>
+  <thead>
+    <tr class="info">
+      <td>Medication</td>
+      <td>Dosage</td>
+      <td></td>
+    </tr>
+  </thead>
+  <tbody>
+    <% for medication in @user.medications %>
+    <tr>
+      <td><strong><%= medication.name %></strong></td>
+      <td><%= medication.dosage %></td>
+      <td>
+        <div class="dropdown pull-right">
+          <a href="#" class="dropdown-toggle btn btn-default btn-sm pull-right" style="" data-toggle="dropdown">
+            <%= fa_icon "gear" %>
+          </a>
+          <ul class="dropdown-menu pull-right">
+            <li>
+              <%= link_to new_pharmacy_path do %> <%= fa_icon "plus" %> Add Pharmacy<% end %>
+            </li>
+            <li>
+              <%= link_to edit_medication_path(medication) do %>
+              <i class='fa fa-gear'></i> Edit
+              <% end %>
+            </li>
+            <li>
+              <%= link_to medication, data: {:confirm => 'Are you sure?'}, 'data-original-title' => "Remove medication?", :method => :delete do %>
+              <i class='fa fa-trash-o'></i> Remove
+              <% end %>
+            </li>
+          </ul>
+        </div>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
 <% end %>

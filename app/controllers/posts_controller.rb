@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_filter :find_condition, only: [:index, :new, :create]
+  # before_filter :find_condition, only: [:index, :new, :create]
 
   # GET /posts
   # GET /posts.json
@@ -18,9 +18,9 @@ class PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     respond_to do |format|
-        format.html # show.html.erb
-        format.json { render json: @post }
-      end
+      format.html # show.html.erb
+      format.json { render json: @post }
+    end
   end
 
   # GET /posts/new
@@ -33,18 +33,19 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-      @post = @condition.posts.new( post_params)
-      @user = @condition.user
-      respond_to do |format|
-        if @post.save
-     #     UserNotifier.send_signup_email(@user).deliver
-          format.html { redirect_to condition_posts_path(@condition), notice: 'Post was successfully created.' }
-          format.json { render json: @post, status: :created, location: @post }
-        else
-          format.html { render action: "new" }
-          format.json { render json: @post.errors, status: :unprocessable_entity }
-        end
+    @condition = Condition.find(post_params[:condition_id])
+    @post = @condition.posts.new( post_params)
+    @user = @condition.user
+    respond_to do |format|
+      if @post.save
+        #     UserNotifier.send_signup_email(@user).deliver
+        format.html { redirect_to condition_posts_path(@condition), notice: 'Post was successfully created.' }
+        format.json { render json: @post, status: :created, location: @post }
+      else
+        format.html { render action: "new" }
+        format.json { render json: @post.errors, status: :unprocessable_entity }
       end
+    end
   end
 
 
@@ -60,7 +61,7 @@ class PostsController < ApplicationController
   end
 
   private
-   
+
   # Never trust parameters from the scary internet, only allow the white list through.
   def post_params
     params.require(:post).permit(:condition_id, :upload, :uplaod_file_name, :user_id, :title, :description)

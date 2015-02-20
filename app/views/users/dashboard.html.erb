@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <%= render "users/sidebar" %>
+    </div>
+    <div class="col-md-9">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <h1><%= fa_icon "dashboard", class: 'text-primary' %> Dashboard</h1>
+          <%= render 'posts/dashboard_post' %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

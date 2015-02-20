@@ -69,7 +69,7 @@ class User < ActiveRecord::Base
   def handshake!(other_user)
     handshakes.create!(followed_id: other_user.id, relationship_name: 'Friend')
   end
-  
+
   def send_notification(notification_message)
     notifications.create!(content: notification_message)
   end

@@ -4,24 +4,9 @@
       <%= render "users/sidebar" %>
     </div>
     <div class="col-md-9">
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <h2>
-            <h1><%= fa_icon "medkit", class: 'text-primary' %> Medications</center></h1>
-          </h2>
-        <p>
-          <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseForm" aria-expanded="false" aria-controls="collapseExample">
-            <%= fa_icon "medkit" %>  Add Medication
-          </button>
-        </p>
-        <div class="collapse" id="collapseForm">
-          <div class="well">
-            <%= render 'medications/form' %>
-          </div>
-        </div>
-        <%= render 'medications/medications' %>
-      </div>
+      <%= render 'layouts/panel_head' %>
+      <%= render 'medications/medications' %>
+      <%= render 'layouts/panel_foot' %>
     </div>
   </div>
-</div>
 </div>

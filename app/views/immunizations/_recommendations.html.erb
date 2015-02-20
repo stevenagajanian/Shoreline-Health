@@ -1,42 +1,28 @@
-<% if !current_user.immunizations.any?{|immunization| immunization.name == "Influenza vaccine"} %>
-<div class="alert alert-dismissible alert-default">
-  <button type="button" class="close" data-dismiss="alert">×</button>
-  <strong>Did you take your Flu Shot this year?</strong><br>
-  <%= form_for Immunization.new do |f| %>
-  <%= f.hidden_field :user_id, value: current_user.id %>
-  <%= f.hidden_field :name, value: "Influenza vaccine" %>
-  <%= f.hidden_field :description, value: "Flu virus, yearly outbreak" %>
-  <%= button_tag(type: "submit", class: 'btn btn-primary') do %>
-  Yes, I did.
-  <% end %>
-  <% end %>
-</div>
-<% end %>
-<% if !current_user.immunizations.any?{|immunization| immunization.name == "HPV"} %>
-<div class="alert alert-dismissible alert-default">
-  <button type="button" class="close" data-dismiss="alert">×</button>
-  <strong>Have you received the HPV vaccination?</strong><br>
-  <%= form_for Immunization.new do |f| %>
-  <%= f.hidden_field :user_id, value: current_user.id %>
-  <%= f.hidden_field :name, value: "HPV" %>
-  <%= f.hidden_field :description, value: "Human papillomavirus; causes genital warts, cancer" %>
-  <%= button_tag(type: "submit", class: 'btn btn-primary') do %>
-  Yes, I did.
-  <% end %>
-  <% end %>
-</div>
-<% end %>
-<% if !current_user.immunizations.any?{|immunization| immunization.name == "Meningococcal"} %>
-<div class="alert alert-dismissible alert-default">
-  <button type="button" class="close" data-dismiss="alert">×</button>
-  <strong>Have you received the Meningococcal vaccination?</strong><br>
-  <%= form_for Immunization.new do |f| %>
-  <%= f.hidden_field :user_id, value: current_user.id %>
-  <%= f.hidden_field :name, value: "Meningococcal" %>
-  <%= f.hidden_field :description, value: "Bacterial infection; causes meningitis, blood infection" %>
-  <%= button_tag(type: "submit", class: 'btn btn-primary') do %>
-  Yes, I did.
-  <% end %>
-  <% end %>
-</div>
-<% end %>
+<h3>Recommendations</h3>
+<table class='table table-striped table-hover table-responsive'>
+  <thead>
+    <tr class="info">
+      <td>Name</td>
+      <td>Protects against</td>
+      <td>Doses/Age</td>
+      <td></td>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render 'immunizations/recommendation_template', rec_template_name: 'Influenza', rec_template_desc: 'Flu virus, yearly outbreak', doses: 'Every year', rec_template_age: 'All Ages' %>
+    <%= render 'immunizations/recommendation_template', rec_template_name: 'HPV', rec_template_desc: 'Human papillomavirus; causes genital warts, cancer', doses: '2', rec_template_age: 'Ages 11-16* **' %>
+    <%= render 'immunizations/recommendation_template', rec_template_name: 'Meningococcal', rec_template_desc: 'Bacterial infection; causes meningitis, blood infection', doses: '2', rec_template_age: 'Ages 11-16***' %>
+    <%= render 'immunizations/recommendation_template', rec_template_name: 'HepB', rec_template_desc: 'Hepatitis B viral infection of the liver', doses: '3', rec_template_age: 'By Age 2***' %>
+    <%= render 'immunizations/recommendation_template', rec_template_name: 'RV', rec_template_desc: 'Rotavirus infection; causes severe diarrhea', doses: '2-3', rec_template_age: 'By Age 2' %>
+    <%= render 'immunizations/recommendation_template', rec_template_name: 'Hib', rec_template_desc: 'Hib bacterial infection; causes meningitis', doses: '3-4', rec_template_age: 'By Age 2***' %>
+    <%= render 'immunizations/recommendation_template', rec_template_name: 'PCV13', rec_template_desc: 'Pneumococcal disease; causes ear infection, pneumonia', doses: '4', rec_template_age: 'By Age 2***' %>
+    <%= render 'immunizations/recommendation_template', rec_template_name: 'HepA', rec_template_desc: 'Hepatitis A viral infection of the liver', doses: '2', rec_template_age: 'By Age 2***' %>
+    <%= render 'immunizations/recommendation_template', rec_template_name: 'DTaP', rec_template_desc: 'Diphtheria (respiratory disease); tetanus (lockjaw); pertussis (whooping cough)', doses: '5', rec_template_age: 'By Age 7**' %>
+    <%= render 'immunizations/recommendation_template', rec_template_name: 'IPV', rec_template_desc: 'Polio viral infection; causes meningitis, paralysis', doses: '4', rec_template_age: 'By Age 7' %>
+    <%= render 'immunizations/recommendation_template', rec_template_name: 'MMR', rec_template_desc: 'Measles, mumps, and rubella', doses: '2', rec_template_age: 'By Age 7**' %>
+    <%= render 'immunizations/recommendation_template', rec_template_name: 'Varicella', rec_template_desc: 'Chickenpox rash, blisters', doses: '2', rec_template_age: 'By Age 7**' %>
+    <%= render 'immunizations/recommendation_template', rec_template_name: 'Tdap', rec_template_desc: 'Diphtheria, tetanus, pertussis', doses: '1', rec_template_age: 'Ages 11-16' %>
+    <%= render 'immunizations/recommendation_template', rec_template_name: 'Herpes Zoster', rec_template_desc: 'Shingles rash', doses: '1', rec_template_age: 'Ages 60+' %>
+    <%= render 'immunizations/recommendation_template', rec_template_name: 'Td', rec_template_desc: 'Tetanus, diphtheria booster', doses: 'Every 10 years', rec_template_age: 'All Ages' %>
+  </tbody>
+</table>

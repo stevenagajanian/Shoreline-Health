@@ -1,0 +1,12 @@
+<%= form_for [@condition, Post.new] do |f| %>
+<div>
+  <%= f.hidden_field :user_id, value: current_user.id %>
+  <div class="form-group">
+    <%= f.collection_select :condition_id, @user.conditions, :id, :page_name, {prompt: "Choose a condition"}, {class: "form-control col-lg-2"} %>
+      </div>
+  <%= f.text_area :description, class:"form-control", placeholder: 'Write here about your progress...', rows: 3 %>
+</div>
+<br>
+<%= f.submit "Post", class: "btn btn-primary" %>
+
+<% end %>

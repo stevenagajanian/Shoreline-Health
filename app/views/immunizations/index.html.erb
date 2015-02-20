@@ -4,24 +4,15 @@
       <%= render "users/sidebar" %>
     </div>
     <div class="col-md-9">
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <h2>
-            <h1><%= fa_icon "bug", class: 'text-primary' %> Immunizations</center></h1>
-          </h2>
-        <%= render 'immunizations/recommendations' %>
-        <p>
-          <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseForm" aria-expanded="false" aria-controls="collapseExample">
-            <%= fa_icon "medkit" %>  Add Immunization
-          </button>
-        </p>
-        <div class="collapse" id="collapseForm">
-          <div class="well">
-            <%= render 'immunizations/form' %>
-          </div>
-        </div>
-        <%= render 'immunizations/immunizations' %>
-      </div>
+      <%= render 'layouts/panel_head' %>
+      <%= render 'immunizations/immunizations' %>
+      <%= render 'immunizations/recommendations' %>
+      <hr>
+      <p>*Recommended up to age 26</p>
+      <p>**Recommended for adults if not given during childhood</p>
+      <p>***Recommended for adults with certain risk factors if not given during childhood</p>
+      <p>Recommendations Source: Centers for Disease Control and Prevention</p>
+      <%= render 'layouts/panel_foot' %>
     </div>
   </div>
 </div>

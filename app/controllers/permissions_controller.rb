@@ -61,6 +61,6 @@ before_filter :authenticate_user!
   private
 
   def permission_params
-    params.require(:permission).permit(:user_id, :permissible_user_id, :condition_id, :goal_id)
+    params.require(:permission).permit(:b_full_view_access, :b_write_access, :tracker_id, :medication_id, :album_id, :allergy_id, :b_full_write_access, :user_id, :permissible_user_id, :condition_id, :goal_id)
   end
 end

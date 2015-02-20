@@ -4,36 +4,49 @@
       <%= render "users/sidebar" %>
     </div>
     <div class="col-md-9">
-      <h1><center><%= fa_icon "users" %> Network</center></h1>
-      <p>
-      <div class="btn-group btn-group-justified">
-        <%= link_to 'Network', user_network_path(@user),class: "btn btn-default" %>
-        <%= link_to 'Stream', user_network_feed_path(@user),class: "btn btn-default" %>
-        <%= link_to 'Permissions', user_network_permissions_path(@user),class: "btn btn-primary" %>
-      </div>
-      </p>
-    <div class="panel panel-default">
-      <div class="panel-body">
-        <%= form_for [@user, Permission.new] do |f| %>
-        <%= f.hidden_field :user_id, value: @user.id %>
-        <div class="form-group col-md-3">
-          <%= f.collection_select :permissible_user_id, @user.followed_users, :id, :full_name, {prompt: "Select a person to share to"}, {class: "form-control col-lg-2"} %>
+      <ul class="nav nav-tabs">
+        <li><%= link_to user_network_path(@user) do %><%= fa_icon "users", class: 'text-primary' %> Network <% end %></li>
+        <li class="active"><%= link_to user_network_permissions_path(@user) do %><%= fa_icon "lock", class: 'text-primary' %> Permissions <% end %></li>
+        <li><%= link_to user_network_feed_path(@user) do %><%= fa_icon "files-o", class: 'text-primary' %> Data Stream <% end %></li>
+      </ul>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <p>
+            <%= form_for [@user, Permission.new] do |f| %>
+            <%= f.hidden_field :user_id, value: @user.id %>
+          <div class="form-group col-md-3">
+            <%= f.collection_select :permissible_user_id, @user.followed_users, :id, :full_name, {prompt: "Select a person to share to"}, {class: "form-control col-lg-2"} %>
+          </div>
+          <div class="form-group col-md-1">
+            can see
+          </div>
+          <div class="form-group form-horizontal col-md-3">
+            <%= f.collection_select :condition_id, @user.conditions, :id, :page_name, {prompt: "Select something to share"}, {class: "form-control col-lg-2"} %>
+          </div>
+          <%= f.submit class: "form-contol btn btn-primary" %>
+          <% end %>
+          </p>
+        <% if @user.followed_users.any? %>
+        <% @user.followed_users.each do |f| %>
+        <h4><%= image_tag f.imageurl, class: 'img-rounded', style: 'max-width: 60px; max-height: 60px;' %> <%= link_to f.full_name, f %> <% if @user.permissions.any?{|permission| permission.permissible_user_id == f.id and permission.b_full_write_access == true}  %>Full Write Access <% end %></h4>
+        <div class="row">
+          <div class="col-md-3">
+            <%= form_for [@user, Permission.new] do |p| %>
+            <%= p.hidden_field :user_id, value: @user.id %>
+            <%= p.hidden_field :permissible_user_id, value: f.id %>
+            <%= p.hidden_field :b_full_write_access, value: true %>
+            <%= p.submit "Give Full Write Access", class: "form-contol btn-block btn-sm btn btn-default" %>
+            <% end %>
+          </div>
+          <div class="col-md-3">
+            <%= form_for [@user, Permission.new] do |p| %>
+            <%= p.hidden_field :permissible_user_id, value: f.id %>
+            <%= p.hidden_field :user_id, value: @user.id %>
+            <%= p.hidden_field :b_full_view_access, value: true %>
+            <%= p.submit "Give Full View Access", class: "form-contol btn-block btn-sm btn btn-default" %>
+            <% end %>
+          </div>
         </div>
-        <div class="form-group col-md-1">
-          can see
-        </div>
-        <div class="form-group form-horizontal col-md-3">
-          <%= f.collection_select :condition_id, @user.conditions, :id, :page_name, {prompt: "Select something to share"}, {class: "form-control col-lg-2"} %>
-        </div>
-        <%= f.submit class: "form-contol btn btn-primary" %>
-        <% end %>
-      </div>
-    </div>
-    <% if @user.followed_users.any? %>
-    <% @user.followed_users.each do |f| %>
-    <div class="panel panel-default">
-      <div class="panel-body">
-        <h4><%= image_tag f.imageurl, class: 'img-rounded', style: 'max-width: 60px; max-height: 60px;' %> <%= link_to f.full_name, f %></h4>
         <div class="table-responsive">
           <table class="table">
             <% @user.permissions.each do |permission| %>
@@ -47,14 +60,14 @@
             <% end %>
           </table>
         </div>
+        <hr>
+        <% end %>
+        <% else %>
+        <p class="lead">
+          Do you want to share your health information with family members, careproviders, or specialists?<br> <%= link_to "Click here to find them.", users_path %>
+        </p>
+        <% end %>
       </div>
     </div>
-    <% end %>
-    <% else %>
-    <p class="lead">
-      Do you want to share your health information with family members, careproviders, or specialists?<br> <%= link_to "Click here to find them.", users_path %>
-    </p>
-    <% end %>
   </div>
-</div>
-</div>
+  

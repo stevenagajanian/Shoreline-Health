@@ -1,27 +1,54 @@
+<h2>
+  <%= fa_icon "leaf" %> Allergies
+  <div class="btn-group pull-right">
+    <button class="pull- btn btn-sm btn-default" type="button" data-toggle="collapse" data-target="#collapseForm" aria-expanded="false" aria-controls="collapseExample">
+      <%= fa_icon "plus" %> Add
+    </button> 
+    <%= link_to user_allergies_path(@user), class: 'btn btn-sm  btn-default' do %>
+      <%= fa_icon "book" %> History
+    <% end %>
+  </div>
+</h2>
+<div class="collapse" id="collapseForm">
+  <%= render 'allergies/form' %>
+</div>
 <% if @user.allergies.none? %>
 No allergies listed
-<% end %>
-<% for allergy in @user.allergies %>
-<h4 class="pull-left">
-  <strong><%= allergy.name %></strong>  <%= allergy.description %>
-</h4>
-<div class="dropdown pull-right">
-  <a href="#" class="dropdown-toggle btn btn-default btn-sm pull-right" style="" data-toggle="dropdown">
-    <%= fa_icon "chevron-down" %>
-  </a>
-  <ul class="dropdown-menu pull-right">
-    <li>
-      <%= link_to edit_allergy_path(allergy) do %>
-      <i class='fa fa-gear'></i> Edit
-      <% end %>
-    </li>
-    <li>
-      <%= link_to allergy, data: {:confirm => 'Are you sure?'}, 'data-original-title' => "Remove allergy?", :method => :delete do %>
-      <i class='fa fa-trash-o'></i> Remove
-      <% end %>
-    </li>
-  </ul>
-</div>
-<br><br>
-<hr>
+<% else %>
+<table class='table table-striped table-hover table-responsive'>
+  <thead>
+    <tr class="info">
+      <td>Name</td>
+      <td>Notes</td>
+      <td></td>
+    </tr>
+  </thead>
+  <tbody>
+    <% for allergy in @user.allergies %>
+    <tr>
+      <td><strong><%= allergy.name %></strong></td>
+      <td><%= allergy.description %></td>
+      <td>
+        <div class="dropdown pull-right">
+          <a href="#" class="dropdown-toggle btn btn-default btn-sm pull-right" style="" data-toggle="dropdown">
+            <%= fa_icon "gear" %>
+          </a>
+          <ul class="dropdown-menu pull-right">
+            <li>
+              <%= link_to edit_allergy_path(allergy) do %>
+              <i class='fa fa-gear'></i> Edit
+              <% end %>
+            </li>
+            <li>
+              <%= link_to allergy, data: {:confirm => 'Are you sure?'}, 'data-original-title' => "Remove allergy?", :method => :delete do %>
+              <i class='fa fa-trash-o'></i> Remove
+              <% end %>
+            </li>
+          </ul>
+        </div>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
 <% end %>

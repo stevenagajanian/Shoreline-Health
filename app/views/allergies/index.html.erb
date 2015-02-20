@@ -4,24 +4,9 @@
       <%= render "users/sidebar" %>
     </div>
     <div class="col-md-9">
-      <h2>
-        <h1><%= fa_icon "leaf", class: 'text-primary' %> Allergies</center></h1>
-      </h2>
-      <p>
-        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseForm" aria-expanded="false" aria-controls="collapseExample">
-          <%= fa_icon "medkit" %>  Add Allergy
-        </button>
-      </p>
-      <div class="collapse" id="collapseForm">
-        <div class="well">
-          <%= render 'allergies/form' %>
-        </div>
-      </div>
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <%= render 'allergies/allergies' %>
-        </div>
-      </div>
+      <%= render 'layouts/panel_head' %>
+      <%= render 'allergies/allergies' %>
+      <%= render 'layouts/panel_foot' %>
     </div>
   </div>
 </div>

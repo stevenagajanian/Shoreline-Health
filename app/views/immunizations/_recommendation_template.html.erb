@@ -1,0 +1,19 @@
+<% if !current_user.immunizations.any?{|immunization| immunization.name == rec_template_name} %>
+<tr>
+  <td><strong><%= rec_template_name %></strong></td>
+  <td><%= rec_template_desc %></td>
+  <td><%= doses %>/<%= rec_template_age %></td>
+  <td>
+    <%= form_for Immunization.new do |f| %>
+    <%= f.hidden_field :user_id, value: current_user.id %>
+    <%= f.hidden_field :name, value: rec_template_name %>
+    <%= f.hidden_field :description, value: rec_template_desc %>
+    <%= f.hidden_field :rec_age, value: rec_template_age %>
+    <%= f.hidden_field :rec_dose, value: doses %>
+    <%= button_tag(type: "submit", class: 'btn btn-sm pull-right btn-primary') do %>
+    Add to health record
+    <% end %>
+    <% end %>
+  </td>
+</tr>
+<% end %>

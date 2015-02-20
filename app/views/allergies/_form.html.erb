@@ -1,9 +1,7 @@
 <%= form_for Allergy.new do |f| %>
 <p>
-  <%= f.label :name %><br />
-  <%= f.text_field :name, autofocus: true, class:"form-control" %>
-  <%= f.label :description %><br />
-  <%= f.text_area :description, class:"form-control" %>
-  <%= f.submit "Save Allergy", class: "btn btn-primary" %>
+  <%= f.text_field :name, autofocus: true, placeholder: 'Name', class:"form-control" %><br>
+  <%= f.text_area :description, placeholder: 'Describe symptoms, severity, or other notes', class:"form-control" %><br>
+  <%= f.submit "Add Allergy to health record", class: "btn btn-block btn-primary" %>
 </p>
 <% end %>

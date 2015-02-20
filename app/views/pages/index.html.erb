@@ -40,19 +40,22 @@
     </div>
   </div>
   <% if @pages.any? %>
-  <div class="panel panel-default">
-    <div class="panel-body">
-      <% @pages.each do |page| %>
-      <div>
-        <h4 class="">
-          <Strong><%= link_to page.name, page %></strong> - <%= page.page_type %>
-        </h4>
-        <%= page.conditions.count %> people are tracking this condition. 
-        <hr>
+  <div class="row">
+    <% @pages.each do |page| %>
+    <div class="col-md-4">
+      <div class="panel panel-primary">
+        <div class="panel-body">
+          <center>
+            <h3><%= link_to page.name, page %> <%= fa_icon 'group', class: 'text-primary' %> <%= page.conditions.count %></h3>
+            <hr>
+          </center>
+          <%= link_to "Join Community", page, class: 'btn btn-sm btn-default btn-block' %>
+          <h4></h4>
+        </div>
       </div>
-      <% end %>
-      <%= will_paginate @pages, class: 'pagination', renderer: BootstrapPagination::Rails %>
-    </div> 
-  </div> 
+    </div>
+    <% end %>
+  </div>
+  <%= will_paginate @pages, class: 'pagination', renderer: BootstrapPagination::Rails %>
   <% end %>
 </div>

@@ -67,6 +67,6 @@ class ImmunizationsController < ApplicationController
   private
 
   def immunization_params
-    params.require(:immunization).permit(:user_id, :name, :description, :b_validated)
+    params.require(:immunization).permit(:rec_age, :rec_dose, :date_taken, :user_id, :name, :description, :b_validated)
   end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150216045139) do
+ActiveRecord::Schema.define(version: 20150220002914) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -256,6 +256,9 @@ ActiveRecord::Schema.define(version: 20150216045139) do
     t.datetime "updated_at"
     t.integer  "validator_id"
     t.string   "validation_url"
+    t.string   "rec_age"
+    t.string   "rec_dose"
+    t.date     "date_taken"
   end
 
   create_table "ko_medication_reviews", force: true do |t|
@@ -312,6 +315,13 @@ ActiveRecord::Schema.define(version: 20150216045139) do
     t.integer  "goal_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "b_write_access"
+    t.boolean  "b_full_write_access"
+    t.boolean  "b_full_view_access"
+    t.integer  "tracker_id"
+    t.integer  "allergy_id"
+    t.integer  "album_id"
+    t.integer  "medication_id"
   end
 
   create_table "pharmacies", force: true do |t|

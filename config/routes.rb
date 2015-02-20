@@ -85,6 +85,7 @@ Tabby::Application.routes.draw do
     get 'network_feed'
     get 'network_permissions'
     get 'printable'
+    get 'dashboard'
     get 'metrics'
     get 'summary'
     resources :pictures

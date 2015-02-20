@@ -52,8 +52,18 @@ class UsersController < ApplicationController
     end
   end
   
+  def dashboard
+    @user = User.find(params[:user_id])
+    if current_user.id == @user.id
+      render action: :dashboard
+    else
+      render file: 'public/denied'
+    end
+  end
+  
   def summary
     @user = User.find(params[:user_id])
+    @autocomplete_pages = Page.all
     if current_user.id == @user.id
       render action: :summary
     else

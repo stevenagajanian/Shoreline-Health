@@ -26,26 +26,11 @@
           </li>
 
           <!-- NETWORK DROPDOWN -->
-          <li class="dropdown ">
-            <a href="#" class="dropdown-toggle" style="outline: none"data-toggle="dropdown">
-              <span style="padding-top: 15px;"><%= fa_icon "globe lg" %><%= btn_label(" Network") %> <%= fa_icon "caret-down" %></span> 
-            </a>
-            <ul class="dropdown-menu">
-              <li>
-                <%= link_to user_network_path(current_user) do %><%= fa_icon "group" %> My Network <% end %>
-              </li>
-              <li>
-                <%= link_to user_network_feed_path(current_user) do %><%= fa_icon "file-text" %> Network Stream <% end %>
-              </li>
-              <li>
-                <%= link_to user_network_permissions_path(current_user) do %><%= fa_icon "lock" %> My Network Permissions <% end %>
-              </li>  
-              <li>
-                <%= link_to users_path do %><%= fa_icon "user" %> Find a person... <% end %>
-              </li>
-            </ul>
+          <li>
+            <%= link_to user_network_path(current_user), class: "tag-tooltisp", data: {:toggle=>"tooltip"}, 'data-original-title' => "My Network", 'data-placement' => 'bottom' do %>
+            <span class="text-"><%= fa_icon "globe lg" %> <%= btn_label(" Network") %></span>
+            <% end %>
           </li>
-
 
           <!-- CONDITIONS DROPDOWN -->
           <li class="dropdown ">
