@@ -1,14 +1,13 @@
 <% if user_signed_in? and current_page?(user_printable_path(current_user)) %>
-<div style="background-color: #fff; margin-top: -65px;">
+<div style="background-color: #fff; margin-top: -0px;">
   <% else %>
   <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container">
+    <div class="container-fluid">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
+          <%= fa_icon 'gear' %>
+        </button>
+        <button type="button" class="navbar-toggle pull- " data-toggle="offcanvas"><%= fa_icon 'bars' %>
         </button>
         <%= link_to root_path, class: "navbar-brand" do %>
         <%= image_tag "ShorelineTeal.png", width: 23, style: 'margin-top: -3px;' %>
@@ -102,7 +101,7 @@
               </li>  
               <li class="divider"></li>
               <li>
-                <%= link_to  logout_path, :method => :delete do %><span class="glyphicon glyphicon-log-out"></span> Log out<% end %>
+                <%= link_to  logout_path, :method => :delete do %><%= fa_icon 'power-off' %> Log out<% end %>
               </li>
             </ul>
           </li>

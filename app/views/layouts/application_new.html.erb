@@ -23,21 +23,17 @@
       <div class="row-offcanvas row-offcanvas-left">
         <div id="sidebar" class="sidebar-offcanvas">
           <div class="col-md-12">
-            <br>
             <ul class="nav nav-pills nav-stacked">
-              <li class="active"><a href="#" class="btn-block "><center><%= fa_icon 'btn btn-justified home 2x' %><br>Home</center></a>
+              <li class="active"><a href="#" class="btn-block "><center><%= fa_icon 'btn btn-justified home 2x' %></center></a>
               </li>
-              <li><a href="#" class="btn-block"><center><%= fa_icon 'btn-justified  user 2x' %><br>Profile</center></a>
+              <li><a href="#" class="btn-block"><center><%= fa_icon 'btn-justified  user 2x' %></center></a>
               </li>
-              <li><a href="#" class="btn-block"><center><%= fa_icon 'search 2x' %><br>Search</center></a>
+              <li><a href="#" class="btn-block"><center><%= fa_icon 'medkit 2x' %></center></a>
               </li>
-              <li><a href="#" class="btn-block"><center><%= fa_icon 'users 2x' %><br>Network</center></a>
+              <li><a href="#" class="btn-block"><center><%= fa_icon 'users 2x' %></center></a>
               </li>
-              <li><%= link_to pages_path do %><center><%= fa_icon 'stethoscope 2x' %><br>Wiki</center><% end %>
+              <li><a href="#" class="btn-block"><center><%= fa_icon 'stethoscope 2x' %></center></a>
               </li>
-              <li><a href="#" class="btn-block"><center><%= fa_icon 'inbox 2x' %><br>Inbox</center></a>
-              </li>
-              <li><a href="#" class="btn-block"><center><%= fa_icon 'gear 2x' %><br>Settings</center></a>
               </li>
             </ul>
         </div>
@@ -46,18 +42,46 @@
 
       <div id="main" class="">
         <div class="col-md-12">
-          <div class="container">
+          <p class="visible-xs">
+            <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas"><i class="glyphicon glyphicon-chevron-left"></i>
+            </button>
+          </p>
           <%= bootstrap_flash %>
           <%= yield %>
+
           <%= render 'layouts/footer' %>
         </div>
       </div>
       </div>
-    <script>$(document).ready(function() {
-  $('[data-toggle=offcanvas]').click(function() {
-    $('.row-offcanvas').toggleClass('active');
-  });
-});
+    <script>
+      // Closes the sidebar menu
+      $("#menu-close").click(function(e) {
+        e.preventDefault();
+        $("#sidebar-wrapper").toggleClass("active");
+      });
+
+      // Opens the sidebar menu
+      $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#sidebar-wrapper").toggleClass("active");
+      });
+
+      // Scrolls to the selected menu item on the page
+      $(function() {
+        $('a[href*=#]:not([href=#])').click(function() {
+          if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') || location.hostname == this.hostname) {
+
+            var target = $(this.hash);
+            target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+            if (target.length) {
+              $('html,body').animate({
+                scrollTop: target.offset().top
+              }, 1000);
+              return false;
+            }
+          }
+        });
+      });
     </script>
   </body>
 </html>

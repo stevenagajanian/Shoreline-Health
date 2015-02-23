@@ -25,9 +25,14 @@ $navbar-default-bg: $brand-primary;*/
 //@import "bootswatch/readable/bootswatch";
 @import url(http://fonts.googleapis.com/css?family=Varela+Round);
 
+body,html,.row-offcanvas {
+  height:100%;
+}
+
+
 body {
   font-family: 'Varela Round', sans-serif;
-  padding-top: 65px;
+  padding-top: 60px;
 
 }
 
@@ -35,13 +40,61 @@ h1, h2, h3, h4, h5, h6, p {
   font-family: 'Varela Round', sans-serif;
 }
 
+#sidebar {
+  width: inherit;
+  min-width: 90px;
+  max-width: 220px;
+  height: calc(100% - 10px);
+  background-color: #EEE;
+  float: left;
+  position:relative;
+  overflow-y:auto;
+  overflow-x:hidden;
+  margin-top: -10px;
+}
+
+#main {
+  height:100%;
+  overflow:auto;
+}
+
+
+/*
+ * off Canvas sidebar
+ * --------------------------------------------------
+ */
+@media screen and (max-width: 768px) {
+  .row-offcanvas {
+    position: relative;
+    -webkit-transition: all 0.25s ease-out;
+    -moz-transition: all 0.25s ease-out;
+    transition: all 0.25s ease-out;
+    width:calc(100% + 220px);
+  }
+    
+  .row-offcanvas-left
+  {
+    left: -220px;
+  }
+
+  .row-offcanvas-left.active {
+    left: 0;
+  }
+
+  .sidebar-offcanvas {
+    position: absolute;
+    top: 0;
+  }
+}
+
+// Shadowed
 .shadowed {
--webkit-filter: drop-shadow(4px 4px 4px rgba(0,0,0,0.4));
-filter: drop-shadow(4px 4px 4px rgba(0,0,0,0.4));
-filter: url(shadow.svg#drop-shadow);
--ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=4, OffY=4,
-Color='#444')";
-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=4, OffY=4, Color='#444')";
+  -webkit-filter: drop-shadow(4px 4px 4px rgba(0,0,0,0.4));
+  filter: drop-shadow(4px 4px 4px rgba(0,0,0,0.4));
+  filter: url(shadow.svg#drop-shadow);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=4, OffY=4,
+    Color='#444')";
+    filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=4, OffY=4, Color='#444')";
 }
 
 @import "bootswatch/lumen/bootswatch";
@@ -54,9 +107,9 @@ filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=4, OffY=4, Color='#44
   margin-top: -30px;
   padding-bottom: 10px;
   text-align: center;
- // color: #fff;
-//  background: url(/assets/s.jpg) no-repeat center center;
-//  background-size: cover;
+  // color: #fff;
+  //  background: url(/assets/s.jpg) no-repeat center center;
+  //  background-size: cover;
 }
 
 
@@ -69,7 +122,7 @@ filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=4, OffY=4, Color='#44
 .intro-message > h1 {
   margin: 0;
   //color: #fff;
- // text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
+  // text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
   font-size: 5em;
 }
 
@@ -81,7 +134,7 @@ filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=4, OffY=4, Color='#44
 
 .intro-message > h3 {
   //color: #fff;
- // text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
+  // text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
 }
 
 
