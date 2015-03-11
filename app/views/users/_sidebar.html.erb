@@ -1,32 +1,26 @@
+
+<%= render 'layouts/panel_head' %>
+
 <!-- The sidebar of the user profile. Contains personal info, lists of medications, allergies, conditions, goals, and links to printing or editing data. -->
 
 <!-- Basic health information -->
-<%= render 'layouts/panel_head' %>
-<center><% if @user.imageurl.presence %>
-  <%= image_tag @user.imageurl, class: 'img-circle', style: 'max-width: 140px; max-height: 140px;' %>
-  <% end %>
-
+<% if @user.imageurl.presence %>
+<%= image_tag @user.imageurl, class: 'img-circle', style: 'max-width: 140px; max-height: 140px;' %>
+<% end %>
 <h3>
   <%= link_to @user.full_name, user_dashboard_path(@user) %>
 </h3>
-<% if @user.date_of_birth.presence %><strong>Birthday</strong> 
+<% if @user.date_of_birth.presence %><%= fa_icon 'birthday-cake ' %> <strong>Birthday</strong>
 <%= @user.date_of_birth.strftime("%B %d, %Y") %> (age <%= (Date.today - @user.date_of_birth).to_i / 365 %>)<br><% end %>
-<% if @user.gender.presence %><strong>Gender</strong> <%= @user.gender %><br><% end %>
-<% if @user.bloodtype.presence %> <strong>Bloodtype</strong> <%= @user.bloodtype %><br><% end %></center>
-<hr>
-<ul class="nav nav-pills nav-">
-  <li class="<%= 'active' if current_page?(user_summary_path(@user)) %>"><%= link_to user_summary_path(@user) do %><%= fa_icon "heart lg" %> Summary<% end %> </li>
-  <li class="<%= 'active' if current_page?(user_allergies_path(@user)) %>"><%= link_to user_allergies_path(@user) do %><%= fa_icon "leaf lg " %> Allergies<% end %> </li>
-  <li class="<%= 'active' if current_page?(user_conditions_path(@user)) %>"><%= link_to user_conditions_path(@user) do %><%= fa_icon "stethoscope  lg" %> Conditions<% end %> </li>
-  <li class="<%= 'active' if current_page?(user_medications_path(@user)) %>"><%= link_to user_medications_path(@user) do %><%= fa_icon "medkit lg " %> Medications<% end %> </li>
-  <li class="<%= 'active' if current_page?(user_albums_path(@user)) %>"><%= link_to user_albums_path(@user) do %><%= fa_icon "files-o lg " %> Files<% end %></li>
-  <li class="<%= 'active' if current_page?(user_goals_path(@user)) %>"> <%= link_to user_goals_path(@user) do %><%= fa_icon "star lg " %> Goals<% end %></li>
-  <li class="<%= 'active' if current_page?(user_immunizations_path(@user)) %>"><%= link_to user_immunizations_path(@user) do %><%= fa_icon "bug lg " %> Immunizations<% end %> </li>
-  <li class="<%= 'active' if current_page?(user_metrics_path(@user)) %>"><%= link_to user_metrics_path(@user) do %><%= fa_icon "bar-chart lg " %> Trackers<% end %> </li>
-  <li class="<%= 'active' if current_page?(user_network_path(@user)) %>"> <%= link_to user_network_path(@user) do %><%= fa_icon "group  lg" %> Network<% end %></li>
-</ul>
-<%= render 'layouts/panel_foot' %>
+<% if @user.gender.presence %><%= fa_icon 'male ' %> <strong>Gender</strong> <%= @user.gender %><br><% end %>
+<% if @user.bloodtype.presence %><%= fa_icon 'plus-square ' %> <strong>Bloodtype</strong> <%= @user.bloodtype %><br><% end %>
+<br>
 
-<!-- Helpful stuff like printing your profile --> 
-<% link_to edit_user_registration_path(current_user), class: "btn btn-block btn-default" do %><i class="fa fa-gear"></i> Profile Settings<% end %>
-<% link_to user_printable_path(current_user), class: 'btn btn-block btn btn-default' do %><i class="fa fa-print"></i> Print My Health Record<% end %>
+<%= render 'layouts/panel_foot' %>
+<div class="btn-group-vertical btn-block">
+  <%= link_to user_conditions_path(current_user), class: 'btn btn-primary btn-sm btn-block' do %><i class="fa fa-stethoscope fa-2x"></i> Conditions<% end %><br>
+  <%= link_to user_albums_path(current_user), class: 'btn btn-primary btn-sm btn-' do %><i class="fa fa-files-o fa-2x"></i> Documents &amp; Files<% end %><br>
+  <%= link_to user_goals_path(current_user), class: 'btn btn-primary btn-sm btn-' do %><i class="fa fa-star fa-2x"></i> Goals<% end %><br>
+  <%= link_to user_printable_path(current_user), class: 'btn btn-primary btn-sm btn-' do %><i class="fa fa-print fa-2x"></i> Print My Health Record<% end %><br>
+  
+</div>

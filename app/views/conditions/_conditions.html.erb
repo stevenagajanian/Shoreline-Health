@@ -39,7 +39,7 @@ No conditions listed
         <% else %>
         <% end %></td>
       <td><strong><% if condition.page.presence %>
-        <%= link_to condition_posts_path(condition), class: 'btn btn-sm btn-info' do %><%= fa_icon 'pencil' %> Post <% end %>
+        <%= link_to condition_posts_path(condition), class: 'btn btn-sm btn-info' do %><%= fa_icon 'pencil' %> Add Event <% end %>
         <% else %>
         <%= link_to 'View full history', condition_posts_path(condition) %>
         <% end %></strong></td>

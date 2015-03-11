@@ -6,16 +6,16 @@
     </button>
     <%= @page.name %><% if current_user.badmin? %><%= link_to "Edit",  edit_page_path(@page), class: "btn pull-right " %><% end %>
     </h2>     
-  <div class="collapse" id="collapseExample">
-    <div class="well">
-      <%= render 'pages/new_droplet' %>
-    </div>
-  </div>
   <div class="btn-group btn-group-justified">
     <%= link_to (@page),class: "btn btn-primary" do %><%= fa_icon 'medkit' %> Basic<% end %>
     <%= link_to (@page),class: "btn btn-default" do %><%= fa_icon 'stethoscope' %> Symptoms<% end %>
     <%= link_to (@page),class: "btn btn-default" do %><%= fa_icon 'medkit' %> Treatments<% end %>
   </div><br>
+  <div class="collapse" id="collapseExample">
+    <div class="well">
+      <%= render 'pages/new_droplet' %>
+    </div>
+  </div>
   <div class="row">
     <div class="col-md-9">
       <% @page.droplets.each do |f| %>

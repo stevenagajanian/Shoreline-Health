@@ -18,46 +18,48 @@
     <body style="background-color: #EEE;">
       <% end %>
       <% if !current_page?(new_user_session_path) and !current_page?(new_user_registration_path) %>
-      <%= render "layouts/navbar" %>
+      <%= render "layouts/navbar2" %>
 
+      <% if user_signed_in? %>
       <div class="row-offcanvas row-offcanvas-left">
         <div id="sidebar" class="sidebar-offcanvas">
           <div class="col-md-12">
             <br>
             <ul class="nav nav-pills nav-stacked">
-              <li class="active"><a href="#" class="btn-block "><center><%= fa_icon 'btn btn-justified home 2x' %><br>Home</center></a>
+              <li class=" <%= 'active success text-' if current_page?(user_summary_path(current_user)) %>"><%= link_to user_summary_path(current_user), class: 'btn-default' do %><center><%= fa_icon 'btn btn-justified user 2x' %><br>Summary</center><% end %>
               </li>
-              <li><a href="#" class="btn-block"><center><%= fa_icon 'btn-justified  user 2x' %><br>Profile</center></a>
+              <li class="<%= 'active' if current_page?(user_metrics_path(current_user)) %>"><%= link_to user_metrics_path(current_user), class: 'btn-default btn-' do %><center><span style="font-size: 28pt;">&#9784;</span><br>Trackers</center><% end %>
               </li>
-              <li><a href="#" class="btn-block"><center><%= fa_icon 'search 2x' %><br>Search</center></a>
+              <li class="<%= 'active' if current_page?(user_apps_path(current_user)) %>"><%= link_to user_apps_path(current_user), class: 'btn-default' do %><center><%= fa_icon 'th-large 2x' %><br>Apps</center><% end %>
               </li>
-              <li><a href="#" class="btn-block"><center><%= fa_icon 'users 2x' %><br>Network</center></a>
+              <li class="<%= 'active' if current_page?(user_network_path(current_user)) %>"><%= link_to user_network_path(current_user), class: 'btn-default' do %><center><%= fa_icon 'users 2x' %><br>People</center><% end %>
               </li>
-              <li><%= link_to pages_path do %><center><%= fa_icon 'stethoscope 2x' %><br>Wiki</center><% end %>
+              <li><%= link_to user_network_path(current_user), class: 'btn-default' do %><center><%= fa_icon 'search 2x' %><br>Search</center><% end %>
               </li>
-              <li><a href="#" class="btn-block"><center><%= fa_icon 'inbox 2x' %><br>Inbox</center></a>
-              </li>
-              <li><a href="#" class="btn-block"><center><%= fa_icon 'gear 2x' %><br>Settings</center></a>
+              <li class="<%= 'active' if current_page?(user_notifications_path(current_user)) %>"><%= link_to user_notifications_path(current_user), class: 'btn-default' do %><center><%= fa_icon 'inbox 2x' %><br>Inbox <% if current_user.notifications.where("b_read IS null").count == 0 %><span class="label label-default label-as-badge"><% else %><span class="label label-primary label-as-badge"><% end %><%= current_user.notifications.where("b_read IS null").count %></span></center><% end %>
+                </li>
+              <li class="<%= 'active' if current_page?(edit_registration_path(current_user)) %>"><%= link_to edit_registration_path(current_user), class: 'btn-default' do %><center><%= fa_icon "gear 2x" %><br>Settings</center><% end %>
               </li>
             </ul>
+          </div>
         </div>
-      </div>
-      <% end %>
+        <% end %>
+        <% end %>
 
-      <div id="main" class="">
-        <div class="col-md-12">
-          <div class="container">
-          <%= bootstrap_flash %>
-          <%= yield %>
-          <%= render 'layouts/footer' %>
+        <div id="main" class="">
+          <div class="col-md-12">
+            <div class="container-fluid pull-">
+              <%= bootstrap_flash %>
+              <%= yield %>
+              <%= render 'layouts/footer' %>
+            </div>
+          </div>
         </div>
-      </div>
-      </div>
-    <script>$(document).ready(function() {
+        <script>$(document).ready(function() {
   $('[data-toggle=offcanvas]').click(function() {
     $('.row-offcanvas').toggleClass('active');
   });
 });
-    </script>
-  </body>
-</html>
+        </script>
+        </body>
+      </html>

@@ -5,6 +5,10 @@ class StaticPagesController < ApplicationController
   		@user = current_user
   	end
   end
+  
+  def ecard
+  	@user = current_user
+  end
 
   def search
   	@user = current_user

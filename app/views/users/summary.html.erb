@@ -1,20 +1,12 @@
-<%= render "users/sidebar" %>
-<hr>
-<%= render 'allergies/allergies' %>
-<hr>
-<%= render 'medications/medications' %>
-<hr>
-<%= render 'conditions/conditions' %>
-<hr>
-<%= render 'immunizations/immunizations' %>
-
-<div class="container">
+<div class="container-fluid">
   <div class="row">
     <div class="col-md-3">
       <%= render "users/sidebar" %>
     </div>
     <div class="col-md-9">
       <%= render 'layouts/panel_head' %>
+      <center><h1>Health Summary</h1></center>
+      <hr>
       <%= render 'allergies/allergies' %>
       <hr>
       <%= render 'medications/medications' %>

@@ -125,6 +125,7 @@ Tabby::Application.routes.draw do
   get "static_pages/home"
   get "static_pages/about"
   get "static_pages/help"
+  get 'static_pages/ecard'
   get "static_pages/company"
   get "static_pages/community_stats"
   get "static_pages/search"

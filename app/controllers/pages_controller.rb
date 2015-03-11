@@ -62,7 +62,7 @@ def create
 
   respond_to do |format|
     if @page.save
-      format.html { redirect_to @page, notice: 'Success!' }
+      format.html { redirect_to @page, notice: 'Successly made a new App called ' + @page.name + '!' }
       format.json { render json: @page, status: :created, location: @page }
     else
       format.html { render action: "new" }

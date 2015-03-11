@@ -1,0 +1,137 @@
+<% if user_signed_in? and current_page?(user_printable_path(current_user)) %>
+<div style="background-color: #fff; margin-top: -0px;">
+  <% else %>
+  <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <%= fa_icon 'gear' %>
+        </button>
+        <button type="button" class="navbar-toggle pull- " data-toggle="offcanvas"><%= fa_icon 'bars' %>
+        </button>
+        <%= link_to root_path, class: "navbar-brand" do %>
+        <%= image_tag "ShorelineTeal.png", width: 23, style: 'margin-top: -3px;' %>
+        Shoreline
+        <% end %>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <% if user_signed_in? %>
+          <!-- PROFILE DROPDOWN -->
+          <li>
+            <%= link_to current_user, class: "tag-tooltisp", data: {:toggle=>"tooltip"}, 'data-original-title' => "My Profile", 'data-placement' => 'bottom' do %>
+            <span class="text-"><%= fa_icon "user lg" %> <%= btn_label(current_user.first_name) %></span>
+            <% end %>
+          </li>
+
+          <!-- NETWORK DROPDOWN -->
+          <li>
+            <%= link_to user_network_path(current_user), class: "tag-tooltisp", data: {:toggle=>"tooltip"}, 'data-original-title' => "My Network", 'data-placement' => 'bottom' do %>
+            <span class="text-"><%= fa_icon "globe lg" %> <%= btn_label(" Network") %></span>
+            <% end %>
+          </li>
+
+          <!-- CONDITIONS DROPDOWN -->
+          <li class="dropdown ">
+            <a href="#" class="dropdown-toggle" style="outline: none"data-toggle="dropdown">
+              <span style="padding-top: 15px;"><%= fa_icon "medkit lg" %><%= btn_label(" Conditions") %>  <%= fa_icon "caret-down" %></span> 
+            </a>
+            <ul class="dropdown-menu">
+              <li role="presentation" class="dropdown-header">My Conditions</li>
+              <% current_user.conditions.each do |condition| %>
+              <% if condition.id.presence %><li>
+              <%= link_to condition_posts_path(condition) do %>
+              <%= fa_icon "file-text" %> <%= if condition.page.presence then condition.page.name else condition.name end %>
+              <% end %>
+              </li>
+              <% end %> 
+              <% end %>
+              <li>
+                <%= link_to user_conditions_path(current_user) do %><%= fa_icon "list" %> View All <% end %>
+              </li>
+              <li class="divider"></li>
+              <li>
+                <%= link_to pages_path do %><%= fa_icon "search" %> Find a information about condition... <% end %>
+              </li>
+              <li>
+                <%= link_to treatments_path do %><%= fa_icon "medkit" %> Find treatment or procedure information... <% end %>
+              </li>
+              <li>
+                <%= link_to ko_medications_path do %><%= fa_icon "user-md" %> Read medical reviews... <% end %>
+              </li>
+            </ul>
+          </li>
+          <% end %>
+          <!-- SEARCH SEARCH SEARCH SEARCH SEARCH SEARCH SEARCH  --><% if !current_page?(root_path) %>
+          <li id="the-basics2">
+            <%= form_tag(pages_path, :method => "get", class: 'navbar-form navbar-left navbar-input-group') do %>
+            <div class="form-group">
+              <%= text_field_tag :search, params[:search], class: "form-control typeahead", id: "auto_complete", placeholder: "Search the waters..." %>
+            </div>
+            <%= button_tag( :class => "btn btn-default")  do %>
+            <i class="fa fa-search"></i>
+            <% end %>
+            <% end %>
+          </li>
+          <%=  javascript_tag "var autocomplete_items = #{ (Page.all.pluck(:name) + User.all.pluck(:email)).to_json };" %>
+          <%= javascript_tag "var autocomplete_items = #{ (Page.all.pluck(:name) + User.all.pluck(:email)).to_json };" %>
+          <script type="text/javascript">
+            $('#the-basics2 .typeahead').typeahead({ hint: true, highlight: true, minLength: 1},{ name: 'states', displayKey: 'value', source: substringMatcher(autocomplete_items),templates: { header: '<h4 style="padding-left: 10px;" class="league-name">Conditions</h4>'}}).on('typeahead:selected', function(e, data) {$("#the-basics2 form").submit();}).css();
+          </script>
+          <% end %>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <% if user_signed_in? %>
+
+          <li>
+            <%= link_to user_notifications_path(current_user) do %><%= fa_icon "inbox lg" %><%= btn_label(" Inbox") %> <% if current_user.notifications.where("b_read IS null").count == 0 %><span class="label label-default label-as-badge"><% else %><span class="label label-primary label-as-badge"><% end %><%= current_user.notifications.where("b_read IS null").count %></span><% end %>
+            </li>
+
+            <!-- SETTINGS SETTINGS SETTINGS SETTINGS SETTINGS SETTINGS SETTINGS  -->
+          <li class="dropdown ">
+            <a href="#" class="dropdown-toggle" style="outline: none"data-toggle="dropdown">
+              <span style="padding-top: 15px;"><%= fa_icon "gears lg" %> <%= btn_label(" Settings") %></span> 
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <%= link_to edit_registration_path(current_user) do %><%= fa_icon "pencil" %> Edit Profile <% end %>
+              </li>  
+              <li>
+                <%= link_to static_pages_about_path do %><%= fa_icon "question-circle" %> Help &amp; Tutorials <% end %>
+              </li>  
+              <li class="divider"></li>
+              <li>
+                <%= link_to  logout_path, :method => :delete do %><%= fa_icon 'power-off' %> Log out<% end %>
+              </li>
+            </ul>
+          </li>
+
+
+
+          <% else %>
+
+          <!-- IF NOT LOGGED IN -->
+          <!-- IF NOT LOGGED IN -->
+          <!-- IF NOT LOGGED IN -->
+
+
+          <li>
+            <%= link_to "Home", root_path, class: "" %>
+          </li>
+          <li>
+            <%= link_to "About", static_pages_about_path, class: "" %>
+          </li>
+          <li>
+            <%= link_to "Sign Up", new_user_registration_path, class: "" %>
+          </li>
+          <li>
+            <%= link_to "Sign In", new_user_session_path %>
+          </li>
+          <% end %>
+
+        </ul>
+      </div><!--/.nav-collapse -->
+    </div>
+  </div>
+  <% end %>
+</div>

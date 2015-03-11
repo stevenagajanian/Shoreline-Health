@@ -107,9 +107,9 @@ class UsersController < ApplicationController
     @droplet = Droplet.new
     @unfinished_goals = @user.goals.get_unfinished
     @conditions = @user.conditions.order("created_at DESC")
-
+    
     if current_user.id == @user.id
-      render action: :show
+      redirect_to user_summary_path(@user)
     elsif current_user.following?(@user)
       render action: :show 
     else

@@ -1,39 +1,46 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-3">
-      <%= render "users/sidebar" %>
-    </div>
-    <div class="col-md-9">
-      <ul class="nav nav-tabs">
-        <li class="active"><%= link_to user_network_path(@user) do %><%= fa_icon "users", class: 'text-primary' %> Network <% end %></li>
-        <li><%= link_to user_network_permissions_path(@user) do %><%= fa_icon "lock", class: 'text-primary' %> Permissions <% end %></li>
-        <li><%= link_to user_network_feed_path(@user) do %><%= fa_icon "files-o", class: 'text-primary' %> Data Stream <% end %></li>
-      </ul>
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <% if @user.followed_users.any? %>
-          <% @user.handshakes.each do |f| %>
-
-          <p class="pull-right">
-            <%= link_to edit_handshake_path(f), class: "btn btn-sm btn-default tag-tooltip", data: {:toggle=>"tooltip"}, 'data-original-title' => "Edit " , 'data-placement' => 'bottom'  do %>
-            <i class='fa fa-gear'></i> Edit Relationship
-            <% end %>
-            <%= link_to "Message", f, class: 'btn btn-sm  btn-default pull-' %>
-            <%= link_to "Remove", f, class: 'btn btn-sm  btn-default pull-', method: :delete %>
-          </p>
-          <p>
-            <%= image_tag f.followed.imageurl, class: 'img-circle pull-left', style: 'padding: 0px; margin: 0px; padding-right: 10px; max-width: 55px; max-height: 55px;' %> <%= link_to f.followed.full_name, f.followed %> <br><%= f.relationship_name %>
-          </p>
-          <hr>
-          <% end %>
-          <% end %>
-
-          <center>
-            <p>
-              <%= link_to "Click here to find family, friends, doctors or specialists to add to your network.", users_path %>
-            </p>
-          </center>
-        </div>
-      </div>
-    </div>
+<div class="container-fluid"><div class="row">
+  <div class="col-md-3">
+    <%= render "users/sidebar" %>
   </div>
+  <div class="col-md-9">
+    <%= render 'layouts/panel_head' %>
+    <h1><center><%= fa_icon "users x", class: ' ' %> Network</center></h1>
+    <hr>
+    <% if @user.followed_users.any? %>
+    <% @user.handshakes.each do |f| %>
+    <p>
+
+    <div class="dropdown pull-right">
+      <a href="#" class="dropdown-toggle btn btn-default btn-sm pull-" style="" data-toggle="dropdown">
+        <%= fa_icon "gear" %>
+      </a>
+      <ul class="dropdown-menu pull-">
+        <li>
+          <%= link_to edit_handshake_path(f) do %>
+          <i class='fa fa-'></i> Select Relationship
+          <% end %>
+        </li>
+        <li>
+          <%= link_to f do %>
+          <i class='fa fa-envelope-o'></i> Message
+          <% end %>
+        </li>
+        <li>
+          <%= link_to "Remove", f, class: 'btn btn-sm  btn-default pull-', data: {:confirm => 'Are you sure?'}, 'data-original-title' => "Remove?", method: :delete %>
+        </li>
+      </ul>
+    </div>
+    <%= image_tag f.followed.imageurl, class: 'img-circle pull-left', style: 'padding: 0px; margin: 0px; padding-right: 10px; max-width: 55px; max-height: 55px;' %> <p class='lead'><%= link_to f.followed.full_name, f.followed %> </p><%= f.relationship_name %>
+    </p>
+  <% end %>
+  <% end %><hr>
+<center>
+  <p>
+    <%= link_to "Click here to find family, friends, doctors or specialists to add to your network.", users_path %>
+  </p>
+</center>
+<%= render 'layouts/panel_foot' %>
+
+</div>
+</div>
+</div>

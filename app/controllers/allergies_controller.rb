@@ -21,7 +21,7 @@ class AllergiesController < ApplicationController
     @allergy.update(allergy_params)
 
     respond_to do |format|
-      format.html { redirect_to user_allergies_path(current_user), notice: 'Successfully updated!' }
+      format.html { redirect_to user_summary_path(current_user), notice: 'Successfully updated!' }
       format.json { head :no_content }
     end
   end
@@ -48,7 +48,7 @@ class AllergiesController < ApplicationController
     @allergy = Allergy.find(params[:id])
     @user = @allergy.user
     @allergy.destroy
-    redirect_to user_allergies_path(@allergy.user), :notice => "Successfully destroyed allergy."
+    redirect_to user_summary_path(@allergy.user), :notice => "Successfully destroyed allergy."
   end
 
   def create
@@ -56,7 +56,7 @@ class AllergiesController < ApplicationController
 
     respond_to do |format|
       if @allergy.save
-        format.html { redirect_to user_allergies_path(@allergy.user), notice: 'Allergy was successfully created.' }
+        format.html { redirect_to user_summary_path(@allergy.user), notice: 'Allergy was successfully created.' }
         format.json { render json: @allergy, status: :created, location: @allergy }
       else
         format.html { render action: "new" }

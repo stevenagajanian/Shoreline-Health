@@ -1,0 +1,11 @@
+<%= render 'layouts/panel_head' %>
+<%= link_to 'Back', album_pictures_path(@picture.album) %>
+<center>
+  <%= image_tag(@picture.asset.url(:large)) %>
+  <p>
+    <% if @picture.caption? %>Caption: <%= @picture.caption %><br /><% end %>
+    <%= link_to "Edit", edit_picture_path(@picture) %>
+    <%= link_to "Delete", picture_path(@picture), method: :delete, data: { confirm: "Are you sure?" } %>
+  </p>
+</center>
+<%= render 'layouts/panel_foot' %>

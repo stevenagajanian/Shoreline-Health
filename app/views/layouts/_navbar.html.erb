@@ -2,7 +2,7 @@
 <div style="background-color: #fff; margin-top: -0px;">
   <% else %>
   <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container-fluid">
+    <div class="container">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
           <%= fa_icon 'gear' %>
@@ -62,7 +62,7 @@
             </ul>
           </li>
           <% end %>
-          <!-- SEARCH SEARCH SEARCH SEARCH SEARCH SEARCH SEARCH  --><% if !current_page?(root_path) %>
+          <!-- SEARCH SEARCH SEARCH SEARCH SEARCH SEARCH SEARCH  --><% if !current_page?(url_for(:controller => 'static_pages', :action => 'ecard'))  and  !current_page?(root_path) %>
           <li id="the-basics2">
             <%= form_tag(pages_path, :method => "get", class: 'navbar-form navbar-left navbar-input-group') do %>
             <div class="form-group">

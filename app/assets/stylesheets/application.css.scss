@@ -40,12 +40,14 @@ h1, h2, h3, h4, h5, h6, p {
   font-family: 'Varela Round', sans-serif;
 }
 
+
+
 #sidebar {
   width: inherit;
   min-width: 90px;
   max-width: 220px;
   height: calc(100% - 10px);
-  background-color: #EEE;
+  background-color: #FFF;
   float: left;
   position:relative;
   overflow-y:auto;
