@@ -36,14 +36,25 @@
     <% end %><p class='lead'><%= link_to f.followed.full_name, f.followed %> - <%= f.relationship_name %></p>
     </p>
   <% end %>
-  <% end %><hr>
-<center>
-  <p>
-    <%= link_to users_path, class: 'btn btn-primary' do %><%= fa_icon 'search' %> Find family, friends, doctors or specialists to add to your network.<% end %>
-  </p>
-</center>
-<%= render 'layouts/panel_foot' %>
+  <% end %>
+  <hr>
+  <button class="btn btn-default" type="button" data-toggle="collapse" data-target="#collapseShare" aria-expanded="false" aria-controls="collapseExample">
+    <%= fa_icon "plus" %>  Add person
+  </button>
+  <div class="collapse" id="collapseShare"><br><p>Enter in the email address of someone you would like to give access to. When they sign up for Shoreline Health using that email address they will automatically be given access to your health records.</p>
+    <input type="text" placeholder="Enter a person's email address..." class="form-control"></input><br>
+  <button class="btn btn-block btn-success" type="button" data-toggle="collapse" data-target="#collapseShare" aria-expanded="false" aria-controls="collapseExample">
+    <%= fa_icon "check" %>  Add person
+  </button>
+  </div>
+  <hr>
+  <center>
+    <p>
+      <%= link_to users_path, class: 'btn btn-primary' do %><%= fa_icon 'search' %> Find family, friends, doctors or specialists to add to your network.<% end %>
+    </p>
+  </center>
+  <%= render 'layouts/panel_foot' %>
 
-</div>
+  </div>
 </div>
 </div>

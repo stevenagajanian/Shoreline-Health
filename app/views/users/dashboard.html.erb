@@ -1,8 +1,6 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-2">
-    </div>
-    <div class="col-md-8">
+    <div class="col-md-6 col-md-offset-3">
       <%= render "users/sidebar" %>
       <div class="btn-group btn-group-justified" role="group" aria-label="...">
         <%= link_to user_dashboard_path(current_user), class: 'btn btn-primary btn-justified' do %> Timeline <% end %>
@@ -13,33 +11,54 @@
       <%= render 'layouts/panel_head' %>
       <% if f.is_a? Medication %>
       <%= link_to 'Edit', edit_medication_path(f), class: 'pull-right' %>
-      <% if f.id.presence %><h4><span class="label label-primary"><%= fa_icon 'medkit' %> <strong>Medication</strong></span> <span class="label label-default"><%= f.created_at.strftime("%B %d, %Y at %I:%M %p") %></span></h4><% end %>
-      Started taking <%= f.name %>
+      <% if f.id.presence %><h4><span class="label label-primary"><%= fa_icon 'medkit' %> <strong>Medication</strong></span></h4><% end %>
+      <h5><%= f.created_at.strftime("%B %d, %Y at %I:%M %p") %></h5>
+      <h4>
+        Started taking <b><%= f.name %></b>
+        </h4>
+
       <% elsif f.is_a? DoctorVisit %>
-      <%= link_to 'Edit', edit_doctor_visit_path(f), class: 'pull-right' %>
-      <h4><span class="label label-danger"><strong><%= fa_icon 'user-md' %> Doctor Visit</strong></span> <span class="label label-default"><%= f.created_at.strftime("%B %d, %Y at %I:%M %p") %></span></h4>
-      Visited <%= if f.has_attribute?(:doctor) then f.doctor end %> for <b><i><%= f.reason %></i></b> at <b><%= f.location %></b><br><br><b>Notes: </b>
-      <%= f.notes %>
+      <span class="pull-right">
+        <%= link_to  edit_doctor_visit_path(f) do %><%= fa_icon 'pencil' %><% end %>
+        <%= link_to  edit_doctor_visit_path(f) do %> <%= fa_icon 'trash' %><% end %> 
+      </span>
+      <h4>
+        <span class="label label-danger"><strong><%= fa_icon 'user-md' %> Doctor Visit</strong></span>
+      </h4>
+      <h5><%= f.created_at.strftime("%B %d, %Y at %I:%M %p") %></h5>
+      <h4>
+        <b>Reason: </b>Visited <%= if f.has_attribute?(:doctor) then f.doctor end %> for <b><i><%= f.reason %></i></b> at <b><%= f.location %></b><br>
+        <b>Notes: </b><%= f.notes %>
+      </h4>
+
       <% elsif f.is_a? Immunization %>
       <%= link_to 'Edit', edit_immunization_path(f), class: 'pull-right' %><%= link_to 'Delete', f, method: :delete, class: 'pull-right' %>
-      <h4><span class="label label-warning"><strong><%= fa_icon 'bug' %> Immunization</strong></span> <span class="label label-default"><%= f.created_at.strftime("%B %d, %Y at %I:%M %p") %></span></h4>
-      <%= f.name %>
+      <h4><span class="label label-warning"><strong><%= fa_icon 'bug' %> Immunization</strong></span></h4>
+      <h5><%= f.created_at.strftime("%B %d, %Y at %I:%M %p") %></h5>
+      <h4><%= f.name %></h4>
+
       <% elsif f.is_a? Symptom %>
       <%= link_to 'Edit', edit_immunization_path(f), class: 'pull-right' %><%= link_to 'Delete', f, method: :delete, class: 'pull-right' %>
-      <h4><span class="label label-primary"><strong><%= fa_icon 'heartbeat' %> Symptom</strong></span> <span class="label label-default"><%= f.created_at.strftime("%B %d, %Y at %I:%M %p") %></span></h4>
-      <%= f.description %>
+      <h4><span class="label label-primary"><strong><%= fa_icon 'heartbeat' %> Symptom</strong></span></h4>
+      <h5><%= f.created_at.strftime("%B %d, %Y at %I:%M %p") %></h5>
+      <h4><%= f.description %></h4>
+
       <% elsif f.is_a? Condition %>
       <%= link_to 'Edit', edit_immunization_path(f), class: 'pull-right' %><%= link_to 'Delete', f, method: :delete, class: 'pull-right' %>
-      <h4><span class="label label-info"><strong><%= fa_icon 'stethoscope' %> Diagnosis/Condition</strong></span> <span class="label label-default"><%= f.created_at.strftime("%B %d, %Y at %I:%M %p") %></span></h4>
-      <%= f.name %>
+      <h4><span class="label label-info"><strong><%= fa_icon 'stethoscope' %> Diagnosis/Condition</strong></span></h4>
+      <h5><%= f.created_at.strftime("%B %d, %Y at %I:%M %p") %></h5>
+      <h4><%= f.name %></h4>
+
       <% elsif f.is_a? Allergy %>
       <%= link_to 'Edit', edit_allergy_path(f), class: 'pull-right' %>
-      <h4><span class="label label-success"><%= fa_icon 'leaf' %> <strong>Allergy</strong></span> <span class="label label-default"><%= f.created_at.strftime("%B %d, %Y at %I:%M %p") %></span></h4>
-      <p>
+      <h4><span class="label label-success"><%= fa_icon 'leaf' %> <strong>Allergy</strong></span></h4>
+      <h5><%= f.created_at.strftime("%B %d, %Y at %I:%M %p") %></h5>
+      <h4>
         <b>Allergy: </b><%= f.name %>
-      </p><p>
-      <b>Notes: </b><%= f.description %>
-      </p>
+        <br>
+        <b>Notes: </b><%= f.description %>
+      </h4>
+
       <% end %>
       <%= render 'layouts/panel_foot' %>
       <% end %>

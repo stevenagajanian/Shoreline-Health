@@ -25,18 +25,43 @@
         <div id="sidebar" class="sidebar-offcanvas">
           <div class="col-md-12">
             <br>
-            <ul class="nav nav-pills nav-stacked">
-              <li class=" <%= 'active success text-' if current_page?(user_dashboard_path(current_user)) %>"><%= link_to user_dashboard_path(current_user), class: 'btn-default' do %><center><%= fa_icon 'btn btn-justified user 2x' %><br>Profile</center><% end %>
+            <ul class="sidebar-nav">
+              <li class=" <%= 'sidebar-active success text-' if current_page?(user_dashboard_path(current_user)) %>">
+                <%= link_to user_dashboard_path(current_user), class: '-default' do %>
+                <center><%= fa_icon 'user 2x', style: 'margin-left: -15px;' %><br>Profile</center>
+                <% end %>
               </li>
-              <li class="<%= 'active' if current_page?(user_metrics_path(current_user)) %>"><%= link_to user_metrics_path(current_user), class: 'btn-default btn-' do %><center><span style="font-size: 28pt;">&#9784;</span><br>Dashboard</center><% end %>
+              <li class="<%= 'sidebar-active' if current_page?(user_network_path(current_user)) %>">
+                <%= link_to user_network_path(current_user), class: '' do %>
+                <center><%= fa_icon 'users 2x', style: 'margin-left: -15px;' %><br>People</center>
+                <% end %>
               </li>
-              <li class="<%= 'active' if current_page?(user_network_path(current_user)) %>"><%= link_to user_network_path(current_user), class: 'btn-default' do %><center><%= fa_icon 'users 2x' %><br>People</center><% end %>
+              <li class="<%= 'sidebar-active' if current_page?(user_metrics_path(current_user)) %>">
+                <%= link_to user_metrics_path(current_user), class: '' do %>
+                <center><%= fa_icon 'bar-chart 2x', style: 'margin-left: -15px;' %><br>Trackers</center>
+                <% end %>
               </li>
-              <li><%= link_to user_network_path(current_user), class: 'btn-default' do %><center><%= fa_icon 'search 2x' %><br>Search</center><% end %>
+              <li class="<%= 'sidebar-active' if current_page?(static_pages_search_path) %>">
+                <%= link_to static_pages_search_path, class: '-default' do %>
+                <center><%= fa_icon 'search 2x', style: 'margin-left: -15px;' %><br>Search</center>
+                <% end %>
               </li>
-              <li class="<%= 'active' if current_page?(user_notifications_path(current_user)) %>"><%= link_to user_notifications_path(current_user), class: 'btn-default' do %><center><%= fa_icon 'inbox 2x' %><br>Inbox <% if current_user.notifications.where("b_read IS null").count == 0 %><span class="label label-default label-as-badge"><% else %><span class="label label-primary label-as-badge"><% end %><%= current_user.notifications.where("b_read IS null").count %></span></center><% end %>
-                </li>
-              <li class="<%= 'active' if current_page?(edit_registration_path(current_user)) %>"><%= link_to edit_registration_path(current_user), class: 'btn-default' do %><center><%= fa_icon "gear 2x" %><br>Settings</center><% end %>
+              <li class="<%= 'sidebar-active' if current_page?(user_notifications_path(current_user)) %>">
+                <%= link_to user_notifications_path(current_user), class: '-default' do %>
+                <center>
+                  <%= fa_icon 'inbox 2x', style: 'margin-left: -15px;' %><br>Inbox
+                  <% if current_user.notifications.where("b_read IS null").count == 0 %><span class="label label-default label-as-badge">
+                  <% else %><span class="label label-primary label-as-badge">
+                  <% end %>
+                  <%= current_user.notifications.where("b_read IS null").count %></span>
+                  </span>
+                </center>
+                <% end %>
+              </li>
+              <li class="<%= 'sidebar-active' if current_page?(edit_registration_path(current_user)) %>">
+                <%= link_to edit_registration_path(current_user), class: '-default' do %>
+                <center><%= fa_icon "gear 2x", style: 'margin-left: -15px;' %><br>Settings</center>
+                <% end %>
               </li>
             </ul>
           </div>
