@@ -40,18 +40,28 @@
           <% if user_signed_in? %>
 
 
-            <!-- SETTINGS SETTINGS SETTINGS SETTINGS SETTINGS SETTINGS SETTINGS  -->
-          <li class="dropdown ">
+          <!-- SETTINGS SETTINGS SETTINGS SETTINGS SETTINGS SETTINGS SETTINGS  -->
+          <li class="dropdown">
             <a href="#" class="dropdown-toggle" style="outline: none"data-toggle="dropdown">
-              <span style="padding-top: 15px;"><%= current_user.full_name %> <%= fa_icon 'chevron-down  ' %></span> 
+              <span style="padding-top: 0px;"><%= current_user.full_name %> <%= fa_icon 'chevron-down  ' %></span> 
             </a>
-            <ul class="dropdown-menu">
+            <ul class="dropdown-menu dropdown-menu-left" style="margin-top: -5px">
               <li>
                 <%= link_to edit_registration_path(current_user) do %><%= fa_icon "pencil" %> Edit Profile <% end %>
               </li>  
               <li>
                 <%= link_to static_pages_about_path do %><%= fa_icon "question-circle" %> Help &amp; Tutorials <% end %>
               </li>  
+              <li class="divider"></li>
+              <li>
+                <%= link_to user_goals_path(current_user) do %><%= fa_icon "star" %> Goals <% end %>
+              </li>
+              <li>
+                <%= link_to user_metrics_path(current_user) do %><%= fa_icon "bar-chart" %> Trackers <% end %>
+              </li>
+              <li>
+                <%= link_to user_conditions_path(current_user) do %><%= fa_icon "pencil" %> Conditions <% end %>
+              </li>
               <li class="divider"></li>
               <li>
                 <%= link_to  logout_path, :method => :delete do %><%= fa_icon 'power-off' %> Log out<% end %>
