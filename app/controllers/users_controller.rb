@@ -53,7 +53,20 @@ class UsersController < ApplicationController
   end
   
   def dashboard
+    require 'will_paginate/array'
     @user = User.find(params[:user_id])
+    @medications = @user.medications.order('created_at ASC')
+    @allergies = @user.allergies.order('created_at DESC')
+    @doctor_visits = @user.doctor_visits.order('created_at DESC')
+    @conditions = @user.conditions.order('created_at DESC')
+    @immunizations = @user.immunizations.order('created_at DESC')
+    @symptoms = @user.symptoms.order('created_at DESC')
+    #@things = (@medications + @allergies + @doctor_visits).paginate(:page => params[:page], :per_page => 25)
+    @things = (@medications + @doctor_visits).sort{|a,b| a.created_at <=> b.created_at }.reverse
+    @things = (@things + @conditions)
+    @things = (@things + @immunizations)
+    @things = (@things + @symptoms)
+    @things = (@things + @allergies).sort{|a,b| a.created_at <=> b.created_at }.reverse
     if current_user.id == @user.id
       render action: :dashboard
     else
@@ -109,7 +122,7 @@ class UsersController < ApplicationController
     @conditions = @user.conditions.order("created_at DESC")
     
     if current_user.id == @user.id
-      redirect_to user_summary_path(@user)
+      redirect_to user_dashboard_path(@user)
     elsif current_user.following?(@user)
       render action: :show 
     else

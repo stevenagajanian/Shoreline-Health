@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   
   def configure_permitted_parameters
   	devise_parameter_sanitizer.for(:sign_up) do |u|
-      u.permit(:b_use_btn_labels, :b_use_wallpaper, :wallpaper_url, :imageurl, :role, :date_of_birth, :avatar, :first_name, :last_name, :username, :email, :password, :password_confirmation, :current_password)
+      u.permit(:b_use_btn_labels, :b_use_wallpaper, :wallpaper_url, :role, :date_of_birth, :avatar, :first_name, :last_name, :username, :email, :password, :password_confirmation, :current_password)
   	end
   	devise_parameter_sanitizer.for(:account_update) do |u|
       u.permit(:b_use_btn_labels, :b_use_wallpaper, :wallpaper_url, :imageurl, :role, :bio, :gender, :doner, :bloodtype, :address, :date_of_birth, :avatar, :first_name, :last_name, :username, :email, :password, :password_confirmation, :current_password)

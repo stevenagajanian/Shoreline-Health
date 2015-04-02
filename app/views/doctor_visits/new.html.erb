@@ -1,0 +1,19 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-4 col-md-offset-4">
+      <h1>Add a Doctor or Clinic Visit to your Health Record</h1>
+      <h4>
+        <span class="label label-primary"><%= fa_icon 'pencil' %> Fill out as much information as you can.</span>
+      </h4>
+      <%= bootstrap_form_for @doctor_visit do |f| %>
+      <%= f.text_field :reason %>
+      <%= f.hidden_field :user_id, value: current_user.id %>
+      <%= f.text_area :notes %>
+      <%= f.text_field :doctor %> 
+      <%= f.text_field :location %>
+      <% f.text_field :album_id %>
+      <%= render 'layouts/form_footer' %>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -2,6 +2,7 @@
 <p>
   <%= f.text_field :name, autofocus: true, placeholder: 'Name', class:"form-control" %><br>
   <%= f.text_area :description, placeholder: 'Describe symptoms, severity, or other notes', class:"form-control" %><br>
-  <%= f.submit "Add Allergy to health record", class: "btn btn-block btn-primary" %>
+  
 </p>
+<%= render 'layouts/form_footer' %>
 <% end %>

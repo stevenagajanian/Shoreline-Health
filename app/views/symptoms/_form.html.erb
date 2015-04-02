@@ -1,0 +1,16 @@
+<%= bootstrap_form_for @symptom do |f| %>
+
+<div class="form-inputs">
+  <%= f.hidden_field :user_id, value: @user.id %>
+  <%= f.text_area :description %>
+  <p>
+    <button class="btn btn-default" type="button" data-toggle="collapse" data-target="#collapseShare" aria-expanded="false" aria-controls="collapseExample">
+      <%= fa_icon "calendar" %>  Specify a date of occurence
+    </button>
+  <div class="collapse" id="collapseShare">
+    <%= f.date_select :date_occured %>
+  </div>
+  </p>
+</div>
+<%= render 'layouts/form_footer' %>
+<% end %>

@@ -10,7 +10,7 @@
 *= require rails_bootstrap_forms
 *= require bootstrap-typeahead-rails
 */
-@import "bootswatch/lumen/variables";
+@import "bootswatch/readable/variables";
 /*$brand-primary: #396BB8;
 $brand-secondary: #88B552;
 $brand-info: #88B552;
@@ -32,32 +32,42 @@ body,html,.row-offcanvas {
 
 body {
   font-family: 'Varela Round', sans-serif;
-  padding-top: 60px;
+  padding-top: 75px;
 
 }
 
 h1, h2, h3, h4, h5, h6, p {
   font-family: 'Varela Round', sans-serif;
+  font-weight: 100;
 }
 
-
+.user-sidebar-container {
+  margin-top: 0px;
+  padding-top: 0px;
+  background-color: #333333;
+}
 
 #sidebar {
   width: inherit;
   min-width: 90px;
   max-width: 220px;
-  height: calc(100% - 10px);
+  height: calc(100% + 20px);
   background-color: #FFF;
   float: left;
   position:relative;
   overflow-y:auto;
   overflow-x:hidden;
-  margin-top: -10px;
+  margin-top: -20px;
 }
 
 #main {
   height:100%;
   overflow:auto;
+}
+
+.label-condition {
+    background-color: #46C4E0;
+    color: white;
 }
 
 
@@ -99,8 +109,11 @@ h1, h2, h3, h4, h5, h6, p {
     filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=4, OffY=4, Color='#444')";
 }
 
-@import "bootswatch/lumen/bootswatch";
+@import "bootswatch/readable/bootswatch";
 
+h6 {
+  font-color: #abc;
+}
 .label-as-badge {
   border-radius: 1em;
 }
@@ -141,7 +154,6 @@ h1, h2, h3, h4, h5, h6, p {
 
 
 .network-name {
-  text-transform: uppercase;
   font-size: 14px;
   font-weight: 400;
   letter-spacing: 2px;

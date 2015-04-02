@@ -1,15 +1,21 @@
-
-<div class="container">
-
-<%= form_for @medication do |f| %>
-
-  <p>
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </p>
-  <p>
-    <%= f.label :dosage %><br />
-    <%= f.text_area :dosage %>
-  </p>
-  <p><%= f.submit class: "btn btn-default" %></p>
-<% end %>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-4 col-md-offset-4">
+      <h1>Add a Medication</h1>
+      <h4>
+        <span class="label label-primary"><%= fa_icon 'info-circle' %> Fill out as much as you can. You can also make edits later.</span>
+      </h4>
+      <%= bootstrap_form_for @medication do |f| %>
+      <%= f.hidden_field :user_id, value: current_user.id %>
+      <%= f.text_field :name %>
+      <%= f.text_area :dosage %>
+      <%= f.date_select :start_date %>
+      <%= f.date_select :end_date %>
+      <%= f.check_box :finished, label: 'Check this box to indicate an ongoing issue', value: false %>
+      <%= f.text_field :prescribed_by %>
+      <%= f.text_field :filled_by %>
+      <%= render 'layouts/form_footer' %>
+      <% end %>
+    </div>
+  </div>
+</div>

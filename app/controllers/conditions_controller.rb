@@ -63,13 +63,15 @@ class ConditionsController < ApplicationController
 
   def create
     #@page = Page.find(params[:page_id])
-    @page = Page.where(name: params[:page_name]).first
+    if params[:page_name] then
+      @page = Page.where(name: params[:page_name]).first
+      @condition.page_id = @page.id
+    end
     @condition = current_user.conditions.new( condition_params)
-    @condition.page_id = @page.id
 
     respond_to do |format|
       if @condition.save
-        format.html { redirect_to user_conditions_path(@condition.user), notice: 'Status was successfully created.' }
+        format.html { redirect_to user_dashboard_path(@condition.user), notice: 'Status was successfully created.' }
         format.json { render json: @condition, status: :created, location: @condition }
       else
         format.html { render action: "new" }

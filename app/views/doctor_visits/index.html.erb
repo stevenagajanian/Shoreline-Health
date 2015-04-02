@@ -1,0 +1,35 @@
+<h1>Listing doctor_visits</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Notes</th>
+      <th>Doctor</th>
+      <th>Location</th>
+      <th>Reason</th>
+      <th>Album</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @doctor_visits.each do |doctor_visit| %>
+      <tr>
+        <td><%= doctor_visit.user_id %></td>
+        <td><%= doctor_visit.notes %></td>
+        <td><%= doctor_visit.doctor_id %></td>
+        <td><%= doctor_visit.location %></td>
+        <td><%= doctor_visit.reason %></td>
+        <td><%= doctor_visit.album_id %></td>
+        <td><%= link_to 'Show', doctor_visit %></td>
+        <td><%= link_to 'Edit', edit_doctor_visit_path(doctor_visit) %></td>
+        <td><%= link_to 'Destroy', doctor_visit, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Doctor visit', new_doctor_visit_path %>

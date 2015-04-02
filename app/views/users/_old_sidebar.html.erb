@@ -83,3 +83,12 @@
 <!-- Helpful stuff like printing your profile --> 
 <%= link_to edit_user_registration_path(current_user), class: "btn btn-block btn-default" do %><i class="fa fa-gear"></i> Edit Personal Info<% end %>
 <%= link_to user_printable_path(current_user), class: 'btn btn-block btn btn-default' do %><i class="fa fa-print"></i> Print My Health Record<% end %>
+
+
+
+<div class="btn-group-vertical btn-block">
+  <% link_to user_conditions_path(current_user), class: 'btn btn-primary btn-sm btn-block' do %><i class="fa fa-stethoscope fa-2x"></i> Conditions<% end %><br>
+  <% link_to user_albums_path(current_user), class: 'btn btn-primary btn-sm btn-' do %><i class="fa fa-files-o fa-2x"></i> Documents &amp; Files<% end %><br>
+  <% link_to user_goals_path(current_user), class: 'btn btn-primary btn-sm btn-' do %><i class="fa fa-star fa-2x"></i> Goals<% end %><br>
+  <% link_to user_printable_path(current_user), class: 'btn btn-primary btn-sm btn-' do %><i class="fa fa-print fa-2x"></i> Print My Health Record<% end %><br>
+</div>

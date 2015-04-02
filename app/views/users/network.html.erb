@@ -1,10 +1,9 @@
 <div class="container-fluid"><div class="row">
   <div class="col-md-3">
-    <%= render "users/sidebar" %>
   </div>
-  <div class="col-md-9">
+  <div class="col-md-6">
     <%= render 'layouts/panel_head' %>
-    <h1><center><%= fa_icon "users x", class: ' ' %> Network</center></h1>
+    <h1><center><%= fa_icon "users x", class: ' ' %> Community of Care</center></h1>
     <hr>
     <% if @user.followed_users.any? %>
     <% @user.handshakes.each do |f| %>
@@ -17,7 +16,7 @@
       <ul class="dropdown-menu pull-">
         <li>
           <%= link_to edit_handshake_path(f) do %>
-          <i class='fa fa-'></i> Select Relationship
+          <i class='fa fa-pencil'></i> Edit Relation
           <% end %>
         </li>
         <li>
@@ -30,13 +29,17 @@
         </li>
       </ul>
     </div>
-    <%= image_tag f.followed.imageurl, class: 'img-circle pull-left', style: 'padding: 0px; margin: 0px; padding-right: 10px; max-width: 55px; max-height: 55px;' %> <p class='lead'><%= link_to f.followed.full_name, f.followed %> </p><%= f.relationship_name %>
+    <% if f.followed.imageurl.presence %>
+    <%= image_tag f.followed.imageurl, class: 'img-circle pull-left', style: 'padding: 0px; margin: 0px; padding-right: 10px; max-width: 55px; max-height: 55px;' %> 
+    <% else %>
+    <%= fa_icon 'user 2x', class: 'img-circle pull-left' %>
+    <% end %><p class='lead'><%= link_to f.followed.full_name, f.followed %> - <%= f.relationship_name %></p>
     </p>
   <% end %>
   <% end %><hr>
 <center>
   <p>
-    <%= link_to "Click here to find family, friends, doctors or specialists to add to your network.", users_path %>
+    <%= link_to users_path, class: 'btn btn-primary' do %><%= fa_icon 'search' %> Find family, friends, doctors or specialists to add to your network.<% end %>
   </p>
 </center>
 <%= render 'layouts/panel_foot' %>

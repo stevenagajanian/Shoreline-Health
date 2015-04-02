@@ -1,22 +1,16 @@
 Tabby::Application.routes.draw do
 
+  resources :symptoms
+  resources :doctor_visits
   resources :immunizations
-
   resources :treatments
-
   resources :pharmacies
-
   resources :notifications
-
   resources :droplets
-
-
   resources :permissions
-
   resources :ko_medication_reviews
-
   resources :appointments
-
+  resources :symptoms
   resources :ko_medications
 
   #devise_for :admin_users, ActiveAdmin::Devise.config
@@ -74,6 +68,7 @@ Tabby::Application.routes.draw do
     resources :handshakes
     resources :notifications
     resources :immunizations
+    resources :symptoms
     resources :permissions
     resources :trackers do
       resources :datapoints

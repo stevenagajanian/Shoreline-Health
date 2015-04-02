@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @doctor_visit.user_id %>
+</p>
+
+<p>
+  <strong>Notes:</strong>
+  <%= @doctor_visit.notes %>
+</p>
+
+<p>
+  <strong>Doctor:</strong>
+  <%= @doctor_visit.doctor_id %>
+</p>
+
+<p>
+  <strong>Location:</strong>
+  <%= @doctor_visit.location %>
+</p>
+
+<p>
+  <strong>Reason:</strong>
+  <%= @doctor_visit.reason %>
+</p>
+
+<p>
+  <strong>Album:</strong>
+  <%= @doctor_visit.album_id %>
+</p>
+
+<%= link_to 'Edit', edit_doctor_visit_path(@doctor_visit) %> |
+<%= link_to 'Back', doctor_visits_path %>

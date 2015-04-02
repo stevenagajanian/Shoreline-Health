@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150220002914) do
+ActiveRecord::Schema.define(version: 20150402082308) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -125,6 +125,18 @@ ActiveRecord::Schema.define(version: 20150220002914) do
     t.integer  "page_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "doctor_visits", force: true do |t|
+    t.integer  "user_id"
+    t.text     "notes"
+    t.integer  "doctor_id"
+    t.string   "location"
+    t.string   "reason"
+    t.integer  "album_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "doctor"
   end
 
   create_table "documents", force: true do |t|
@@ -247,6 +259,16 @@ ActiveRecord::Schema.define(version: 20150220002914) do
     t.datetime "updated_at"
   end
 
+  create_table "identities", force: true do |t|
+    t.integer  "user_id"
+    t.string   "provider"
+    t.string   "uid"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "identities", ["user_id"], name: "index_identities_on_user_id", using: :btree
+
   create_table "immunizations", force: true do |t|
     t.integer  "user_id"
     t.string   "name"
@@ -286,6 +308,12 @@ ActiveRecord::Schema.define(version: 20150220002914) do
     t.text     "dosage"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.boolean  "finished"
+    t.string   "prescribed_by"
+    t.string   "filled_by"
+    t.string   "notes"
   end
 
   add_index "medications", ["user_id"], name: "index_medications_on_user_id", using: :btree
@@ -372,6 +400,14 @@ ActiveRecord::Schema.define(version: 20150220002914) do
 
   add_index "statuses", ["user_id"], name: "index_statuses_on_user_id", using: :btree
 
+  create_table "symptoms", force: true do |t|
+    t.integer  "user_id"
+    t.text     "description"
+    t.date     "date_occured"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "taggings", force: true do |t|
     t.integer  "tag_id"
     t.integer  "taggable_id"
@@ -434,34 +470,29 @@ ActiveRecord::Schema.define(version: 20150220002914) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "avatar_file_name"
-    t.string   "avatar_content_type"
-    t.integer  "avatar_file_size"
-    t.datetime "avatar_updated_at"
+    t.string   "name"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "unconfirmed_email"
+    t.string   "provider"
+    t.string   "uid"
     t.string   "first_name"
     t.string   "last_name"
-    t.string   "profile_name"
-    t.string   "language"
-    t.string   "ethnicity"
-    t.text     "address"
-    t.datetime "birthday"
-    t.date     "date_of_birth"
-    t.string   "phone_number"
-    t.string   "gender"
-    t.string   "doner"
-    t.string   "bloodtype"
-    t.text     "bio"
-    t.string   "role"
-    t.string   "imageurl"
     t.boolean  "b_use_btn_labels"
-    t.string   "wallpaper_url"
     t.boolean  "b_use_wallpaper"
+    t.string   "wallpaper_url"
+    t.string   "gender"
+    t.boolean  "doner"
+    t.string   "address"
+    t.boolean  "avatar"
+    t.string   "profile_name"
+    t.string   "imageurl"
+    t.date     "date_of_birth"
+    t.string   "bloodtype"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["first_name"], name: "index_users_on_first_name", using: :btree
-  add_index "users", ["last_name"], name: "index_users_on_last_name", using: :btree
-  add_index "users", ["profile_name"], name: "index_users_on_profile_name", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "weights", force: true do |t|

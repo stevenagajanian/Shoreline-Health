@@ -1,0 +1,29 @@
+<h1>Listing symptoms</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Description</th>
+      <th>Date occured</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @symptoms.each do |symptom| %>
+      <tr>
+        <td><%= symptom.user_id %></td>
+        <td><%= symptom.description %></td>
+        <td><%= symptom.date_occured %></td>
+        <td><%= link_to 'Show', symptom %></td>
+        <td><%= link_to 'Edit', edit_symptom_path(symptom) %></td>
+        <td><%= link_to 'Destroy', symptom, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Symptom', new_symptom_path %>

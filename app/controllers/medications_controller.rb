@@ -20,7 +20,7 @@ class MedicationsController < ApplicationController
     @medication.update(medication_params)
 
     respond_to do |format|
-      format.html { redirect_to user_summary_path(current_user), notice: 'Successfully updated!' }
+      format.html { redirect_to user_dashboard_path(current_user), notice: 'Successfully updated!' }
       format.json { head :no_content }
     end
   end
@@ -47,7 +47,7 @@ class MedicationsController < ApplicationController
     @medication = Medication.find(params[:id])
     @user = @medication.user
     @medication.destroy
-    redirect_to user_summary_path(@medication.user), flash: { info: "Successfully destroyed medication."}
+    redirect_to user_dashboard_path(@medication.user), flash: { info: "Successfully destroyed medication."}
   end
 
   def create
@@ -55,7 +55,7 @@ class MedicationsController < ApplicationController
 
     respond_to do |format|
       if @medication.save
-        format.html { redirect_to user_summary_path(@medication.user), notice: 'Medication was successfully created.' }
+        format.html { redirect_to user_dashboard_path(@medication.user), notice: 'Medication was successfully created.' }
         format.json { render json: @medication, status: :created, location: @medication }
       else
         format.html { render action: "new" }
@@ -67,6 +67,6 @@ class MedicationsController < ApplicationController
   private
 
   def medication_params
-    params.require(:medication).permit(:user_id, :name, :dosage)
+    params.require(:medication).permit(:filled_by, :prescribed_by, :start_date, :end_date, :finished, :notes, :user_id, :name, :dosage)
   end
 end

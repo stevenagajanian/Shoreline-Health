@@ -1,16 +1,13 @@
-<%= render "layouts/navbar" %>
-
-<div class="container">
-
-<%= form_for @allergy do |f| %>
-
-  <p>
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </p>
-  <p>
-    <%= f.label :description %><br />
-    <%= f.text_area :description %>
-  </p>
-  <p><%= f.submit class: "btn btn-default" %></p>
-<% end %>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-4 col-md-offset-4">
+      <h1>Add Allergy</h1>
+      <%= bootstrap_form_for @allergy do |f| %>
+      <%= f.hidden_field :user_id, value: current_user.id %>
+      <%= f.text_field :name %>
+      <%= f.text_area :description %>
+      <%= render 'layouts/form_footer' %>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -10,10 +10,12 @@ class User < ActiveRecord::Base
   has_many :allergies
   has_many :medications
   has_many :permissions
+  has_many :symptoms
   has_many :statuses
   has_many :immunizations
   has_many :fitnesses
   has_many :goals
+  has_many :doctor_visits
   has_many :trackers
   has_many :pictures
   has_many :weights
@@ -49,10 +51,6 @@ class User < ActiveRecord::Base
   has_many :accepted_user_friendships, class_name: 'UserFriendship', foreign_key: :user_id, through: -> { where(user_friendships: { state: "accepted"}) }, :through => :user_friendships
   has_many :accepted_friends, through: :accepted_user_friendships, source: :friend
 
-  has_attached_file :avatar, styles: {
-    large: "800x800>", medium: "300x200>", small: "260x180>", thumb: "80x80#"
-    }
-
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :date_of_birth, presence: true
@@ -63,7 +61,9 @@ class User < ActiveRecord::Base
   end
 
   def full_name
-    first_name + " " + last_name
+    if first_name.presence
+      first_name + " " + last_name
+    end
   end
 
   def handshake!(other_user)

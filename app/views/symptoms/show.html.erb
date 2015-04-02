@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @symptom.user_id %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @symptom.description %>
+</p>
+
+<p>
+  <strong>Date occured:</strong>
+  <%= @symptom.date_occured %>
+</p>
+
+<%= link_to 'Edit', edit_symptom_path(@symptom) %> |
+<%= link_to 'Back', symptoms_path %>

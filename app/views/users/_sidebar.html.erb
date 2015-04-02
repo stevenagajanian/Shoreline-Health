@@ -1,26 +1,63 @@
-
 <%= render 'layouts/panel_head' %>
-
 <!-- The sidebar of the user profile. Contains personal info, lists of medications, allergies, conditions, goals, and links to printing or editing data. -->
-
 <!-- Basic health information -->
 <% if @user.imageurl.presence %>
-<%= image_tag @user.imageurl, class: 'img-circle', style: 'max-width: 140px; max-height: 140px;' %>
+<%= image_tag @user.imageurl, class: 'img-circle pull-left', style: 'margin-right: 15px; max-width: 140px; max-height: 140px;' %>
 <% end %>
 <h3>
+  <div class="dropdown pull-right">
+    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+      <%= fa_icon 'plus' %> Add to Record
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+      <li>
+        <%= link_to new_user_symptom_path(@user), class: ' text-' do %>
+        <%= fa_icon 'heartbeat' %> Symptom/Event
+        <% end %>
+      </li>
+      <li>
+        <%= link_to new_condition_path, class: '' do %>
+        <%= fa_icon 'stethoscope' %> Diagnosis/Condition
+        <% end %>
+      </li>
+      <li>
+        <%= link_to new_medication_path, class: '' do %>
+        <%= fa_icon 'medkit' %> Medication
+        <% end %>
+      </li>
+      <li>
+        <%= link_to new_allergy_path, class: ' text-' do %>
+        <%= fa_icon 'bug' %> Allergy
+        <% end %>
+      </li>
+      <li>
+        <%= link_to new_doctor_visit_path do %>
+        <%= fa_icon 'user-md' %> Doctor/Clinic Visit
+        <% end %>
+      </li>
+      <li>
+        <%= link_to user_immunizations_path(@user) do %>
+        <%= fa_icon 'bug' %> Immunization
+        <% end %>
+      </li>
+      <li>
+        <%= link_to user_metrics_path(current_user) do %>
+        <%= fa_icon 'bicycle' %> Fitness Event/Data
+        <% end %>
+      </li>
+      <li>
+        <%= link_to user_metrics_path(current_user) do %>
+        <%= fa_icon 'photo' %> Photo Upload
+        <% end %>
+      </li>
+    </ul>
+  </div>
   <%= link_to @user.full_name, user_dashboard_path(@user) %>
 </h3>
 <% if @user.date_of_birth.presence %><%= fa_icon 'birthday-cake ' %> <strong>Birthday</strong>
 <%= @user.date_of_birth.strftime("%B %d, %Y") %> (age <%= (Date.today - @user.date_of_birth).to_i / 365 %>)<br><% end %>
-<% if @user.gender.presence %><%= fa_icon 'male ' %> <strong>Gender</strong> <%= @user.gender %><br><% end %>
+<% if @user.gender.presence and @user.gender == 'Male' %><%= fa_icon 'male ' %> <strong>Gender</strong> <%= @user.gender %><br><% elsif @user.gender.presence and @user.gender =='Female' %><%= fa_icon 'female ' %> <strong>Gender</strong> <%= @user.gender %><br><% end %>
 <% if @user.bloodtype.presence %><%= fa_icon 'plus-square ' %> <strong>Bloodtype</strong> <%= @user.bloodtype %><br><% end %>
-<br>
 
 <%= render 'layouts/panel_foot' %>
-<div class="btn-group-vertical btn-block">
-  <%= link_to user_conditions_path(current_user), class: 'btn btn-primary btn-sm btn-block' do %><i class="fa fa-stethoscope fa-2x"></i> Conditions<% end %><br>
-  <%= link_to user_albums_path(current_user), class: 'btn btn-primary btn-sm btn-' do %><i class="fa fa-files-o fa-2x"></i> Documents &amp; Files<% end %><br>
-  <%= link_to user_goals_path(current_user), class: 'btn btn-primary btn-sm btn-' do %><i class="fa fa-star fa-2x"></i> Goals<% end %><br>
-  <%= link_to user_printable_path(current_user), class: 'btn btn-primary btn-sm btn-' do %><i class="fa fa-print fa-2x"></i> Print My Health Record<% end %><br>
-  
-</div>
