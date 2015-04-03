@@ -7,7 +7,7 @@
       <hr>
       <% @users.each do |user| %>
       <h3 class="media-heading">
-        <% if user.avatar.presence  %>
+        <% if user.has_attribute?(:presence) %>
         <%= avatar_profile_link user, {height: 70}, style: "margin: 0px; padding: 0px; padding-right: 14px;", class: "pull-left media-object" %>
         <% else %>
 
