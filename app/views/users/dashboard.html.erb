@@ -7,60 +7,95 @@
         <%= link_to "Summary", user_summary_path(current_user), class: 'btn btn-default btn-justified' %>
       </div>
       <br>
-      <% @things.each do |f| %>
-      <%= render 'layouts/panel_head' %>
+      <% @things_month.sort.reverse.each do |month, things| %>
+      <h2><b><%= month.strftime('%B') %> <%= month.strftime('%Y') %></b></h2>
+      <% for f in things %>
+
       <% if f.is_a? Medication %>
-      <%= link_to 'Edit', edit_medication_path(f), class: 'pull-right' %>
-      <% if f.id.presence %><h4><span class="label label-primary"><%= fa_icon 'medkit' %> <strong>Medication</strong></span></h4><% end %>
-      <h5><%= f.created_at.strftime("%B %d, %Y at %I:%M %p") %></h5>
-      <h4>
-        Started taking <b><%= f.name %></b>
-        </h4>
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <a href="#" class="pull-right btn btn-primary btn-sm" style="margin-top: -5px; margin-left: 10px;"><%= fa_icon 'gear' %></a>
+          <span class="pull-right"><%= f.created_at.strftime("%B %d, %Y at %I:%M %p") %></span>
+          <%= fa_icon 'medkit' %> <strong>Medication</strong>
+        </div>
+        <div class="panel-body">
+          Started taking <b><%= f.name %></b>
+        </div>
+      </div>
+
 
       <% elsif f.is_a? DoctorVisit %>
-      <span class="pull-right">
-        <%= link_to  edit_doctor_visit_path(f) do %><%= fa_icon 'pencil' %><% end %>
-        <%= link_to  edit_doctor_visit_path(f) do %> <%= fa_icon 'trash' %><% end %> 
-      </span>
-      <h4>
-        <span class="label label-danger"><strong><%= fa_icon 'user-md' %> Doctor Visit</strong></span>
-      </h4>
-      <h5><%= f.created_at.strftime("%B %d, %Y at %I:%M %p") %></h5>
-      <h4>
-        <b>Reason: </b>Visited <%= if f.has_attribute?(:doctor) then f.doctor end %> for <b><i><%= f.reason %></i></b> at <b><%= f.location %></b><br>
-        <b>Notes: </b><%= f.notes %>
-      </h4>
+      <div class="panel panel-danger">
+        <div class="panel-heading">
+          <a href="#" class="pull-right btn btn-danger btn-sm" style="margin-top: -5px; margin-left: 10px;"><%= fa_icon 'gear' %></a>
+          <span class="pull-right"><%= f.created_at.strftime("%B %d, %Y at %I:%M %p") %></span>
+          <strong><%= fa_icon 'user-md' %> Doctor Visit</strong>
+        </div>
+        <div class="panel-body">
+          <h5><%= f.created_at.strftime("%B %d, %Y at %I:%M %p") %></h5>
+          <h4>
+            <b>Reason: </b>Visited <%= if f.has_attribute?(:doctor) then f.doctor end %> for <b><i><%= f.reason %></i></b> at <b><%= f.location %></b><br>
+            <b>Notes: </b><%= f.notes %>
+          </h4>
+          <h6>
+            <%= link_to  edit_doctor_visit_path(f) do %><%= fa_icon 'pencil' %> Edit<% end %> | 
+            <%= link_to  edit_doctor_visit_path(f) do %> <%= fa_icon 'trash' %> Delete<% end %> 
+          </h6>
+        </div>
+      </div>
 
       <% elsif f.is_a? Immunization %>
-      <%= link_to 'Edit', edit_immunization_path(f), class: 'pull-right' %><%= link_to 'Delete', f, method: :delete, class: 'pull-right' %>
-      <h4><span class="label label-warning"><strong><%= fa_icon 'bug' %> Immunization</strong></span></h4>
-      <h5><%= f.created_at.strftime("%B %d, %Y at %I:%M %p") %></h5>
-      <h4><%= f.name %></h4>
+      <div class="panel panel-warning">
+        <div class="panel-heading" style="color: black;">
+          <a href="#" class="pull-right btn btn-warning btn-sm" style="margin-top: -5px; margin-left: 10px;"><%= fa_icon 'gear' %></a>
+          <span class="pull-right"><%= f.created_at.strftime("%B %d, %Y at %I:%M %p") %></span>
+          <strong><%= fa_icon 'bug' %> Immunization</strong>
+        </div>
+        <div class="panel-body">
+          <%= f.name %>
+        </div>
+      </div>
 
       <% elsif f.is_a? Symptom %>
-      <%= link_to 'Edit', edit_immunization_path(f), class: 'pull-right' %><%= link_to 'Delete', f, method: :delete, class: 'pull-right' %>
-      <h4><span class="label label-primary"><strong><%= fa_icon 'heartbeat' %> Symptom</strong></span></h4>
-      <h5><%= f.created_at.strftime("%B %d, %Y at %I:%M %p") %></h5>
-      <h4><%= f.description %></h4>
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <a href="#" class="pull-right btn btn-primary btn-sm" style="margin-top: -5px; margin-left: 10px;"><%= fa_icon 'gear' %></a>
+          <span class="pull-right"><%= f.created_at.strftime("%B %d, %Y at %I:%M %p") %></span>
+          <strong><%= fa_icon 'heartbeat' %> Symptom</strong>
+        </div>
+        <div class="panel-body">
+          <%= f.description %>
+        </div>
+      </div>
 
       <% elsif f.is_a? Condition %>
-      <%= link_to 'Edit', edit_immunization_path(f), class: 'pull-right' %><%= link_to 'Delete', f, method: :delete, class: 'pull-right' %>
-      <h4><span class="label label-info"><strong><%= fa_icon 'stethoscope' %> Diagnosis/Condition</strong></span></h4>
-      <h5><%= f.created_at.strftime("%B %d, %Y at %I:%M %p") %></h5>
-      <h4><%= f.name %></h4>
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <a href="#" class="pull-right btn btn-info btn-sm" style="margin-top: -5px; margin-left: 10px;"><%= fa_icon 'gear' %></a>
+          <span class="pull-right"><%= f.created_at.strftime("%B %d, %Y at %I:%M %p") %></span>
+          <strong><%= fa_icon 'stethoscope' %> Diagnosis/Condition</strong>
+        </div>
+        <div class="panel-body">
+          <%= f.name %>
+        </div>
+      </div>
 
       <% elsif f.is_a? Allergy %>
-      <%= link_to 'Edit', edit_allergy_path(f), class: 'pull-right' %>
-      <h4><span class="label label-success"><%= fa_icon 'leaf' %> <strong>Allergy</strong></span></h4>
-      <h5><%= f.created_at.strftime("%B %d, %Y at %I:%M %p") %></h5>
-      <h4>
-        <b>Allergy: </b><%= f.name %>
-        <br>
-        <b>Notes: </b><%= f.description %>
-      </h4>
+      <div class="panel panel-success">
+        <div class="panel-heading">
+          <a href="#" class="pull-right btn btn-success btn-sm" style="margin-top: -5px; margin-left: 10px;"><%= fa_icon 'gear' %></a>
+          <span class="pull-right"><%= f.created_at.strftime("%B %d, %Y at %I:%M %p") %></span>
+          <%= fa_icon 'leaf' %> <strong>Allergy</strong>
+        </div>
+        <div class="panel-body">
+          <b>Allergy: </b><%= f.name %>
+          <br>
+          <b>Notes: </b><%= f.description %>
+        </div>
+      </div>
 
       <% end %>
-      <%= render 'layouts/panel_foot' %>
+      <% end %>
       <% end %>
     </div>
     <div class="col-md-3">

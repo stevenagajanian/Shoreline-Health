@@ -52,7 +52,7 @@ h1, h2, h3, h4, h5, h6, p {
   min-width: 90px;
   max-width: 90px;
   height: calc(100% + 00px);
-  background-color: $brand-primary;
+  background-color: #333;
   float: left;
   position:relative;
   overflow-y:auto;
@@ -98,7 +98,7 @@ h1, h2, h3, h4, h5, h6, p {
 .sidebar-nav li a:hover {
   text-decoration: none;
   color: #FFF;
-  background: rgba(0,0,0,0.15);
+  background: rgba($brand-primary,0.85);
   -o-transition:.5s;
   -ms-transition:.5s;
   -moz-transition:.5s;
@@ -131,7 +131,7 @@ h1, h2, h3, h4, h5, h6, p {
 
 .sidebar-nav > .sidebar-active a {
   color: #FFF;
-  background: rgba(0,0,0,0.3);
+  background: $brand-primary;
 }
 
 
