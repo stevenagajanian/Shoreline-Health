@@ -65,8 +65,8 @@ class UsersController < ApplicationController
     @things = (@medications + @doctor_visits).sort{|a,b| a.created_at <=> b.created_at }.reverse
     @things = (@things + @conditions)
     @things = (@things + @immunizations)
-    @things = (@things + @symptoms)
     @things = (@things + @allergies).sort{|a,b| a.created_at <=> b.created_at }.reverse
+    @things = (@things + @symptoms).sort{|a,b| a.created_at <=> b.created_at }.reverse
     @things_month = @things.group_by { |t| t.created_at.beginning_of_month }
     if current_user.id == @user.id
       render action: :dashboard

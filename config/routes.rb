@@ -1,5 +1,7 @@
 Tabby::Application.routes.draw do
 
+  resources :galleries
+
   resources :symptoms
   resources :doctor_visits
   resources :immunizations
@@ -121,6 +123,7 @@ Tabby::Application.routes.draw do
   get "static_pages/about"
   get "static_pages/help"
   get 'static_pages/ecard'
+  get 'static_pages/features'
   get "static_pages/company"
   get "static_pages/community_stats"
   get "static_pages/search"

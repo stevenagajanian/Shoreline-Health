@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @gallery.user_id %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @gallery.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @gallery.description %>
+</p>
+
+<p>
+  <strong>Doctor visit:</strong>
+  <%= @gallery.doctor_visit_id %>
+</p>
+
+<p>
+  <strong>Post:</strong>
+  <%= @gallery.post_id %>
+</p>
+
+<p>
+  <strong>Symptom:</strong>
+  <%= @gallery.symptom_id %>
+</p>
+
+<p>
+  <strong>Lab result:</strong>
+  <%= @gallery.lab_result %>
+</p>
+
+<%= link_to 'Edit', edit_gallery_path(@gallery) %> |
+<%= link_to 'Back', galleries_path %>

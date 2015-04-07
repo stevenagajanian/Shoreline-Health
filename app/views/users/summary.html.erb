@@ -5,17 +5,15 @@
     <div class="col-md-6">
       <%= render "users/sidebar" %>
       <div class="btn-group btn-group-justified" role="group" aria-label="...">
-        <%= link_to user_dashboard_path(current_user), class: 'btn btn-default btn-justified' do %> Timeline <% end %>
-        <%= link_to "Summary", user_summary_path(current_user), class: 'btn btn-primary btn-justified' %>
+        <%= link_to user_dashboard_path(current_user), class: 'btn btn-default btn-justified' do %><%= fa_icon "list-alt" %> Timeline <% end %>
+        <%= link_to user_summary_path(current_user), class: 'btn btn-primary btn-justified' do %><%= fa_icon "file-text-o" %> Summary <% end %>
       </div>
-      <br>
-      <center><h1>Health Summary</h1></center>
       <hr>
-      <%= render 'allergies/allergies' %>
+      <%= render 'conditions/conditions' %>
       <hr>
       <%= render 'medications/medications' %>
       <hr>
-      <%= render 'conditions/conditions' %>
+      <%= render 'allergies/allergies' %>
       <hr>
       <%= render 'immunizations/immunizations' %>
       <%= render 'layouts/panel_foot' %>
