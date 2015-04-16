@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150407070929) do
+ActiveRecord::Schema.define(version: 20150416084100) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,6 +64,7 @@ ActiveRecord::Schema.define(version: 20150407070929) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.date     "date_occured"
   end
 
   create_table "appointments", force: true do |t|
@@ -73,6 +74,16 @@ ActiveRecord::Schema.define(version: 20150407070929) do
     t.text     "notes"
     t.datetime "start_date"
     t.datetime "end_date"
+    t.string   "location"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "blood_pressures", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "author_id"
+    t.integer  "systolic"
+    t.integer  "diastolic"
     t.string   "location"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -108,6 +119,7 @@ ActiveRecord::Schema.define(version: 20150407070929) do
     t.datetime "updated_at"
     t.integer  "page_id"
     t.boolean  "make_public"
+    t.date     "date_occured"
   end
 
   create_table "datapoints", force: true do |t|
@@ -137,6 +149,7 @@ ActiveRecord::Schema.define(version: 20150407070929) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "doctor"
+    t.date     "date_occured"
   end
 
   create_table "documents", force: true do |t|
@@ -293,6 +306,7 @@ ActiveRecord::Schema.define(version: 20150407070929) do
     t.string   "rec_age"
     t.string   "rec_dose"
     t.date     "date_taken"
+    t.date     "date_occured"
   end
 
   create_table "ko_medication_reviews", force: true do |t|
@@ -326,6 +340,8 @@ ActiveRecord::Schema.define(version: 20150407070929) do
     t.string   "prescribed_by"
     t.string   "filled_by"
     t.string   "notes"
+    t.date     "date_occured"
+    t.string   "other_dosage"
   end
 
   add_index "medications", ["user_id"], name: "index_medications_on_user_id", using: :btree
@@ -371,6 +387,24 @@ ActiveRecord::Schema.define(version: 20150407070929) do
     t.boolean  "b_current"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "photos", force: true do |t|
+    t.integer  "gallery_id"
+    t.string   "image"
+    t.string   "gallery_token"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "doctor_visit_id"
+    t.integer  "symptom_id"
+    t.integer  "medication_id"
+    t.integer  "immunization"
+    t.integer  "allergy"
   end
 
   create_table "pictures", force: true do |t|

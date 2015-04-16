@@ -1,0 +1,18 @@
+<%= simple_form_for(@photo) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :gallery_id %>
+    <%= f.input :image %>
+    <%= f.input :gallery_token %>
+    <%= f.input :image_file_name %>
+    <%= f.input :image_content_type %>
+    <%= f.input :image_file_size %>
+    <%= f.input :image_updated_at %>
+    <%= f.input :description %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

@@ -14,7 +14,7 @@ class SymptomsController < ApplicationController
       format.json { render json: @symptom }
     end
   end
-  
+
   def update
     @symptom = Symptom.find(params[:id])
     @symptom.update(symptom_params)
@@ -53,9 +53,16 @@ class SymptomsController < ApplicationController
 
   def create
     @symptom = current_user.symptoms.new( symptom_params)
+    @user = User.find(@symptom.user_id)
 
     respond_to do |format|
       if @symptom.save
+        if params[:images]
+          #===== The magic is here ;)
+          params[:images].each { |image|
+            @symptom.photos.create(image: image)
+            }
+        end
         format.html { redirect_to user_dashboard_path(@symptom.user), notice: 'symptom was successfully created.' }
         format.json { render json: @symptom, status: :created, location: @symptom }
       else

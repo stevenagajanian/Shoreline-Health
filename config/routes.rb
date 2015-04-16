@@ -1,5 +1,9 @@
 Tabby::Application.routes.draw do
 
+  resources :blood_pressures
+
+  resources :photos
+
   resources :galleries
 
   resources :symptoms

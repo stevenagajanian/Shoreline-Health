@@ -37,6 +37,21 @@
     </p>
   <% end %>
   <% end %>
+  <h2><center>Requests</center></h2>
+  <% Handshake.where(followed_id: @user.id).each do |f| %>
+  <p>
+    <%= if f.follower then f.follower.full_name end %>
+    <% if f.follower != nil %>
+    <%= form_for(current_user.handshakes.build(followed_id: f.follower.id, relationship_name: 'Friend'), class: 'form-inline') do |f| %>
+    <%= f.hidden_field :followed_id %><%= f.hidden_field :relationship_name, value: 'Friend' %>
+    <%= button_tag(type: "submit", class: "btn btn-default btn-sm") do %>
+    <%= fa_icon "plus" %> Add to Network
+    <% end %>
+    <% end %>
+    <% end %>
+  </p>
+  <% end %>
+  <% if Handshake.where(followed_id: @user.id).where(follower_id: current_user.id) %><p><center>None</center></p><% end %>
   <hr>
   <button class="btn btn-default" type="button" data-toggle="collapse" data-target="#collapseShare" aria-expanded="false" aria-controls="collapseExample">
     <%= fa_icon "plus" %>  Add person
@@ -55,6 +70,6 @@
   </center>
   <%= render 'layouts/panel_foot' %>
 
-  </div>
+</div>
 </div>
 </div>

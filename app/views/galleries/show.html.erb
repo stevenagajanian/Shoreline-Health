@@ -37,3 +37,18 @@
 
 <%= link_to 'Edit', edit_gallery_path(@gallery) %> |
 <%= link_to 'Back', galleries_path %>
+<div class="row">
+  <% @gallery.photos.each do |picture| %>
+            <div class="col-md-3">
+              <%= link_to image_tag(picture.image.url, class: 'img-responsive'), picture %>
+              <br />
+              <div class="caption">
+
+
+                <%= link_to "Edit", edit_picture_path(picture) %>
+                <%= link_to "Delete", album_path(picture), method: :delete, data: { confirm: "Are you sure?" } %>
+
+              </div>
+            </div>
+            <% end %>
+          </div>

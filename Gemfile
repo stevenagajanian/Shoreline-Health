@@ -45,6 +45,9 @@ gem 'activeadmin', github: 'gregbell/active_admin'
 group :test, :development do
 	gem 'sqlite3'
 end
+group :development, :test do
+  gem 'foreman'
+end
 gem 'unicorn'
 
 # Use SCSS for stylesheets

@@ -51,30 +51,35 @@ class UsersController < ApplicationController
       render file: 'public/denied'
     end
   end
-  
+
   def dashboard
     require 'will_paginate/array'
     @user = User.find(params[:user_id])
-    @medications = @user.medications.order('created_at ASC')
-    @allergies = @user.allergies.order('created_at DESC')
-    @doctor_visits = @user.doctor_visits.order('created_at DESC')
-    @conditions = @user.conditions.order('created_at DESC')
-    @immunizations = @user.immunizations.order('created_at DESC')
-    @symptoms = @user.symptoms.order('created_at DESC')
+    @medications = @user.medications
+    @allergies = @user.allergies
+    @doctor_visits = @user.doctor_visits
+    @conditions = @user.conditions
+    @immunizations = @user.immunizations
+    @symptoms = @user.symptoms
     #@things = (@medications + @allergies + @doctor_visits).paginate(:page => params[:page], :per_page => 25)
-    @things = (@medications + @doctor_visits).sort{|a,b| a.created_at <=> b.created_at }.reverse
+    @things = (@medications + @doctor_visits)
+    @things = (@things + @symptoms)
     @things = (@things + @conditions)
     @things = (@things + @immunizations)
-    @things = (@things + @allergies).sort{|a,b| a.created_at <=> b.created_at }.reverse
-    @things = (@things + @symptoms).sort{|a,b| a.created_at <=> b.created_at }.reverse
-    @things_month = @things.group_by { |t| t.created_at.beginning_of_month }
+    @things = (@things + @allergies)
+    @things_month = @things
+    @things_month.sort! { |a,b| b.date.to_date <=> a.date.to_date }
+    @things_month = @things.group_by { |t| t.date.beginning_of_month }
+    #  @things_month.sort_by(&:date)
     if current_user.id == @user.id
+      render action: :dashboard
+    elsif current_user.following?(@user)
       render action: :dashboard
     else
       render file: 'public/denied'
     end
   end
-  
+
   def summary
     @user = User.find(params[:user_id])
     @autocomplete_pages = Page.all
@@ -95,7 +100,7 @@ class UsersController < ApplicationController
       render file: 'public/denied'
     end
   end
-  
+
   def network_feed
     @user = User.find(params[:user_id])
     #@unfinished_goals = @user.goals.get_unfinished
@@ -121,11 +126,11 @@ class UsersController < ApplicationController
     @droplet = Droplet.new
     @unfinished_goals = @user.goals.get_unfinished
     @conditions = @user.conditions.order("created_at DESC")
-    
+
     if current_user.id == @user.id
       redirect_to user_dashboard_path(@user)
     elsif current_user.following?(@user)
-      render action: :show 
+      redirect_to user_dashboard_path(@user)
     else
       render file: 'public/denied', formats: [:html]
     end

@@ -12,8 +12,17 @@
       <%= f.text_field :doctor %> 
       <%= f.text_field :location %>
       <% f.text_field :album_id %>
-      <%= render 'layouts/form_footer' %>
-      <% end %>
-    </div>
+      <p>
+        <button class="btn btn-default" type="button" data-toggle="collapse" data-target="#collapseShare" aria-expanded="false" aria-controls="collapseExample">
+          <%= fa_icon "calendar" %>  Specify a date of occurence
+        </button> 
+        <span class="btn btn-default btn-file"><%= fa_icon 'files-o' %> Attach Files<%= file_field_tag "images[]", type: :file, multiple: true, class: '' %></span>
+      <div class="collapse" id="collapseShare">
+        <%= f.date_select :date_occured, start_year: 1890, end_year: 2015 %>
+      </div>
+      </p>
+    <%= render 'layouts/form_footer' %>
+    <% end %>
   </div>
+</div>
 </div>

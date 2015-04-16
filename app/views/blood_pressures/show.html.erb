@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @blood_pressure.user_id %>
+</p>
+
+<p>
+  <strong>Author:</strong>
+  <%= @blood_pressure.author_id %>
+</p>
+
+<p>
+  <strong>Systolic:</strong>
+  <%= @blood_pressure.systolic %>
+</p>
+
+<p>
+  <strong>Diastolic:</strong>
+  <%= @blood_pressure.diastolic %>
+</p>
+
+<p>
+  <strong>Location:</strong>
+  <%= @blood_pressure.location %>
+</p>
+
+<%= link_to 'Edit', edit_blood_pressure_path(@blood_pressure) %> |
+<%= link_to 'Back', blood_pressures_path %>
