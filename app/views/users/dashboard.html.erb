@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-sm-8 col-sm-offset-2">
+    <div class="col-sm-6 col-sm-offset-3">
       <%= render "users/sidebar" %>
       <div class="btn-group btn-group-justified" role="group" aria-label="...">
         <%= link_to user_dashboard_path(current_user), class: 'btn btn-primary btn-justified' do %><%= fa_icon "list-alt" %> Timeline <% end %>
@@ -65,8 +65,8 @@
         </div>
         <div class="panel-body">
           <%= f.description %>
-          <%= f.photos.each do |p| %>aaaaaad
-          <%= image_tag p.image.url %>dsad
+          <% f.photos.each do |p| %>aaaaaad
+          <% image_tag p.image.url %>dsad
           <% end %>
         </div>
       </div>

@@ -26,8 +26,8 @@
         <%= f.text_field :filled_by, placeholder: 'Enter the name of a pharmacy...' %>
       </div>
       <div class="collapse" id="collapseShare">
-        <%= f.date_select :start_date, start_year: 1890, end_year: 2015 %>
-        <%= f.date_select :end_date, start_year: 1890, end_year: 2015 %>
+        <%= f.date_select :start_date, start_year: 1890, end_year: 2015, add_month_numbers: true %>
+        <%= f.date_select :end_date, start_year: 1890, end_year: 2015, add_month_numbers: true %>
         <%= f.check_box :finished, label: 'Or check this box to indicate an ongoing issue', value: false %>
       </div>
       </p>

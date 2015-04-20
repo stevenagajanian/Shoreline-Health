@@ -83,6 +83,7 @@ class UsersController < ApplicationController
   def summary
     @user = User.find(params[:user_id])
     @autocomplete_pages = Page.all
+    @medication = @user.medications.new
     if current_user.id == @user.id
       render action: :summary
     else

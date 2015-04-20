@@ -60,5 +60,7 @@
 <% if @user.gender.presence and @user.gender == 'Male' %><%= fa_icon 'male ' %> <strong>Gender</strong> <%= @user.gender %><br><% elsif @user.gender.presence and @user.gender =='Female' %><%= fa_icon 'female ' %> <strong>Gender</strong> <%= @user.gender %><br><% end %>
 <% if @user.bloodtype.presence %><%= fa_icon 'plus-square ' %> <strong>Bloodtype</strong> <%= @user.bloodtype %><br><% end %>
 <% if @user.address.presence %><%= fa_icon 'home ' %> <strong>Address</strong> <%= @user.address %><br><% end %>
+<b>Height</b> <% if @user.heights.any? %><%= @user.heights.order("created_at").last.amount %>in<% else %><%= link_to 'Enter', user_metrics_path(@user)%><% end %>
+<b>Weight</b> <% if @user.weights.any? %><%= @user.weights.order("created_at").last.amount %>lbs<% else %><%= link_to 'Enter', user_metrics_path(@user)%><% end %>
 
 <%= render 'layouts/panel_foot' %>

@@ -38,8 +38,10 @@ No medications listed
               <%= link_to new_pharmacy_path do %> <%= fa_icon "plus" %> Add Pharmacy<% end %>
             </li>
             <li>
+              <% if medication.id.presence %>
               <%= link_to edit_medication_path(medication) do %>
               <i class='fa fa-gear'></i> Edit
+              <% end %>
               <% end %>
             </li>
             <li>

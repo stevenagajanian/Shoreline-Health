@@ -1,55 +1,41 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-2">
-    </div>
-    <div class="col-md-8">
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <h1><%= fa_icon "bar-chart", class: 'text-primary' %> Trackers</h1>
-          <h2>
-            <button class="btn btn-info pull- btn-sm" style="margin-left: 5px;" type="button" data-toggle="collapse" data-target="#collapseMakeMetric" aria-expanded="false" aria-controls="collapseExample">
-              <%= fa_icon "plus" %> Make Custom Tracker
-            </button> 
-            <button class="btn btn-primary pull- btn-sm" type="button" data-toggle="collapse" data-target="#collapseMetric" aria-expanded="false" aria-controls="collapseExample">
-              <%= fa_icon "plus" %> Add Tracker
-            </button>
+<div class="container-fluid">
+  <h1><%= fa_icon "bar-chart" %> Trackers</h1>
+  <hr>
+  <button class="btn btn-info pull-right btn-sm" style="margin-left: 5px;" type="button" data-toggle="collapse" data-target="#collapseMakeMetric" aria-expanded="false" aria-controls="collapseExample">
+    <%= fa_icon "plus" %> Make Custom Tracker
+  </button> 
+  <button class="btn btn-primary pull- btn-sm" type="button" data-toggle="collapse" data-target="#collapseMetric" aria-expanded="false" aria-controls="collapseExample">
+    <%= fa_icon "plus" %> Add Tracker
+  </button>
 
-          </h2>
-          <div class="collapse" id="collapseMakeMetric">
-            <div class="well">
-              <%= render 'trackers/form' %>
-            </div>
-          </div>
-          <div class="collapse" id="collapseMetric">
-            <div class="well">
-              <%= render 'trackers/template_forms' %>
-            </div>
-          </div>
+  </h2>
+<div class="collapse" id="collapseMakeMetric">
+  <div class="well">
+    <%= render 'trackers/form' %>
+  </div>
+</div>
+<div class="collapse" id="collapseMetric">
+  <div class="well">
+    <%= render 'trackers/template_forms' %>
+  </div>
+</div>
 
-          <div id="custom_tracker">
-            <%= render 'trackers/list' %>
-
-          </div>
-          <h3>Height (inches) <button class="btn btn-primary btn-sm" type="button" data-toggle="collapse" data-target="#collapseHeight" aria-expanded="false" aria-controls="collapseExample">
-            <%= fa_icon "plus" %>  Add Record
-            </button></h3>
-          <div class="collapse" id="collapseHeight">
-            <div class="well">
-              <%= render 'heights/form' %>
-            </div>
-          </div>
-          <%= line_chart Height.group(:created_at).maximum(:amount) %>
-          <h3>Weight (lbs) <button class="btn btn-primary btn-sm" type="button" data-toggle="collapse" data-target="#collapseWeight" aria-expanded="false" aria-controls="collapseExample">
-            <%= fa_icon "plus" %>  Add Record
-            </button></h3>
-          <div class="collapse" id="collapseWeight">
-            <div class="well">
-              <%= render 'weights/form' %>
-            </div>
-          </div>
-          <%= line_chart Weight.group(:created_at).maximum(:amount) %>
-        </div>
-      </div>
-    </div>
+<div id="custom_tracker">
+  <%= render 'trackers/table_list' %>
+</div>
+<h3>Height (inches) <button class="btn btn-primary btn-sm" type="button" data-toggle="collapse" data-target="#collapseHeight" aria-expanded="false" aria-controls="collapseExample">
+  <%= fa_icon "plus" %>  Add Record
+  </button></h3>
+<div class="collapse" id="collapseHeight">
+  <div class="well">
+    <%= render 'heights/form' %>
+  </div>
+</div>
+<h3>Weight (lbs) <button class="btn btn-primary btn-sm" type="button" data-toggle="collapse" data-target="#collapseWeight" aria-expanded="false" aria-controls="collapseExample">
+  <%= fa_icon "plus" %>  Add Record
+  </button></h3>
+<div class="collapse" id="collapseWeight">
+  <div class="well">
+    <%= render 'weights/form' %>
   </div>
 </div>

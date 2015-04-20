@@ -20,7 +20,7 @@ class SymptomsController < ApplicationController
     @symptom.update(symptom_params)
 
     respond_to do |format|
-      format.html { redirect_to user_dashboard_path(current_user), notice: 'Successfully updated!' }
+      format.html { redirect_to user_dashboard_path(User.find(@sympyom.user_id)), notice: 'Successfully updated!' }
       format.json { head :no_content }
     end
   end
@@ -52,8 +52,8 @@ class SymptomsController < ApplicationController
   end
 
   def create
-    @symptom = current_user.symptoms.new( symptom_params)
-    @user = User.find(@symptom.user_id)
+    @user = User.find(symptom_params[:user_id])
+    @symptom = @user.symptoms.new( symptom_params)
 
     respond_to do |format|
       if @symptom.save
@@ -62,6 +62,9 @@ class SymptomsController < ApplicationController
           params[:images].each { |image|
             @symptom.photos.create(image: image)
             }
+        end
+        if @user.id != current_user.id
+          @user.send_notification("A symptom/event has been added to your record by " + current_user.full_name)
         end
         format.html { redirect_to user_dashboard_path(@symptom.user), notice: 'symptom was successfully created.' }
         format.json { render json: @symptom, status: :created, location: @symptom }

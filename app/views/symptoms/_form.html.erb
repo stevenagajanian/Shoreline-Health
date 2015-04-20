@@ -9,7 +9,7 @@
     </button> 
     <span class="btn btn-default btn-file"><%= fa_icon 'files-o' %> Attach Files<%= file_field_tag "images[]", type: :file, multiple: true, class: '' %></span>
   <div class="collapse" id="collapseShare">
-    <%= f.date_select :date_occured, start_year: 1890, end_year: 2015 %>
+    <%= f.date_select :date_occured, start_year: 1890, end_year: 2015, add_month_numbers: true %>
   </div>
   </p>
 </div>

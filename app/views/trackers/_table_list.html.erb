@@ -11,7 +11,7 @@
 <% if f.name == 'Caffeine' %>
 <%= render 'trackers/custom_caffeine', tracker: f %>
 </h3><p>Had <%= f.datapoints.where('created_at >= ?', 1.day.ago).sum("amount").to_i / 60 %> cups of coffee (<%= f.datapoints.where('created_at >= ?', 1.day.ago).sum("amount") %> mg) today.</p><h3>
-<% end %>
+  <% end %>
 <% if f.name == 'Cycling' %>
 <%= render 'trackers/custom_cycling', tracker: f %>
 </h3><p>Cycled for <%= f.datapoints.where('created_at >= ?', 1.day.ago).sum("amount").to_i %> minutes today.</p><h3>
@@ -19,12 +19,11 @@
 <% if f.name == 'Water' %>
 <%= render 'trackers/custom_water', tracker: f %>
 </h3><p>Had <%= f.datapoints.where('created_at >= ?', 1.day.ago).sum("amount").to_i / 8 %> glasses of water (<%= f.datapoints.where('created_at >= ?', 1.day.ago).sum("amount") %> oz) today.</p><h3>
-<% end %>
+  <% end %>
 </h3>
 <div class="collapse" id="collapse<%= f.name %>">
   <div class="well">
     <%= render 'heights/form' %>
   </div>
 </div>
-<%= line_chart f.datapoints.where('created_at >= ?', 1.week.ago).group_by_day(:created_at , format: "%B %d, %Y").sum(:amount), library: { tooltip: { pointFormat: 'Minutes: <b>{point.y}</b>'}}, height: "200px" %>
 <% end %>

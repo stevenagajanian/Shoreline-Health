@@ -1,12 +1,28 @@
-<%= form_for Medication.new do |f| %>
-<%= f.hidden_field :user_id, value: @user.id %>
+<%= bootstrap_form_for @medication do |f| %>
+<%= f.hidden_field :user_id, value: current_user.id %>
+<%= f.text_field :name, placeholder: 'Ex. Tylenol, Miralax, etc...'%>
+<div class="row">
+  <div class="col-md-12">
+    <%= f.text_field :dosage, placeholder: 'Ex. 2 pills, 600mg, 1 cup, etc...' %>
+  </div>
+</div>
 <p>
-  <%= f.label :name %><br />
-  <%= f.text_field :name, class: 'form-control' %>
-</p>
-<p>
-  <%= f.label :dosage %><br />
-  <%= f.text_field :dosage, class: 'form-control' %>
+  <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseShare2" aria-expanded="false" aria-controls="collapseExample">
+    <%= fa_icon "calendar" %> Add Prescription
+  </button> 
+  <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseShare" aria-expanded="false" aria-controls="collapseExample">
+    <%= fa_icon "calendar" %> Add Start or End Date
+  </button> 
+  <span class="btn btn-default btn-file"><%= fa_icon 'files-o' %> Attach Files<%= file_field_tag "images[]", type: :file, multiple: true, class: '' %></span>
+<div class="collapse" id="collapseShare2">
+  <%= f.text_field :prescribed_by, placeholder: 'Enter the name of a doctor or specialist...' %>
+  <%= f.text_field :filled_by, placeholder: 'Enter the name of a pharmacy...' %>
+</div>
+<div class="collapse" id="collapseShare">
+  <%= f.date_select :start_date, start_year: 1890, end_year: 2015, add_month_numbers: true %>
+  <%= f.date_select :end_date, start_year: 1890, end_year: 2015, add_month_numbers: true %>
+  <%= f.check_box :finished, label: 'Or check this box to indicate an ongoing issue', value: false %>
+</div>
 </p>
 <%= render 'layouts/form_footer' %>
 <% end %>
