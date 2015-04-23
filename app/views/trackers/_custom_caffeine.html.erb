@@ -13,15 +13,9 @@
       <%= link_to tracker do %><%= fa_icon "group" %> Change tracker network permissions <% end %>
     </li>
     <li>
-      <%= link_to tracker do %><%= fa_icon "trash-o" %> Remove tracker <% end %>
+      <%= link_to tracker, method: :delete do %><%= fa_icon "trash-o" %> Remove tracker <% end %>
     </li>
   </ul>
 </div>
-<%= form_for tracker.datapoints.new, remote: true do |f| %>
-<%= f.hidden_field :user_id, value: current_user.id %>
-<%= f.hidden_field :tracker_id, value: tracker.id %>
-<%= f.hidden_field :amount, value: 60 %>
-<%= button_tag(type: "submit", class: "pull-right btn btn-default btn-sm") do %>
-+ 1 cup of coffee
-<% end %>
+<%= form_for tracker.datapoints.new, remote: true do |f| %><%= f.hidden_field :user_id, value: current_user.id %><%= f.hidden_field :tracker_id, value: tracker.id %><%= f.hidden_field :amount, value: 60 %><%= button_tag(type: "submit", class: "pull-right btn btn-default btn-sm") do %>+ 1 cup of coffee<% end %>
 <% end %><%= fa_icon 'coffee' %> <%= tracker.name %> (mg)

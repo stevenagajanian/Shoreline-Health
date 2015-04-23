@@ -13,7 +13,7 @@
       <%= link_to tracker do %><%= fa_icon "group" %> Change tracker network permissions <% end %>
     </li>
     <li>
-      <%= link_to tracker do %><%= fa_icon "trash-o" %> Remove tracker <% end %>
+      <%= link_to tracker, method: :delete do %><%= fa_icon "trash-o" %> Remove tracker <% end %>
     </li>
   </ul>
 </div>
@@ -40,4 +40,4 @@
 <%= button_tag(type: "submit", class: "pull-right btn btn-default btn-sm") do %>
 + 15 Min
 <% end %>
-<% end %><%= fa_icon 'bicycle' %> <%= tracker.name %> (minutes)
+<% end %><%= fa_icon 'bicycle' %> <%= tracker.name %>

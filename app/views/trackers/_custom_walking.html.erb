@@ -1,8 +1,8 @@
 <div class="dropdown pull-right">
-  <a href="#" class="dropdown-toggle btn btn-default btn-sm pull-right" style="" data-toggle="dropdown">
+  <a href="#" class="dropdown-toggle btn btn-default btn-sm pull-" style="margin-left: 5px;" data-toggle="dropdown">
     <%= fa_icon "chevron-down" %>
   </a>
-  <ul class="dropdown-menu pull-right">
+  <ul class="dropdown-menu pull-">
     <li>
       <%= link_to tracker do %><%= fa_icon "plus" %> Add Custom Amount <% end %>
     </li>
@@ -20,27 +20,4 @@
     </li>
   </ul>
 </div>
-<%= form_for tracker.datapoints.new, remote: true do |f| %>
-<%= f.hidden_field :user_id, value: current_user.id %>
-<%= f.hidden_field :tracker_id, value: tracker.id %>
-<%= f.hidden_field :amount, value: 60 %>
-<%= button_tag(type: "submit", class: "pull-right btn btn-default btn-sm") do %>
-+ 60 Min
-<% end %>
-<% end %>
-<%= form_for tracker.datapoints.new, remote: true do |f| %>
-<%= f.hidden_field :user_id, value: current_user.id %>
-<%= f.hidden_field :tracker_id, value: tracker.id %>
-<%= f.hidden_field :amount, value: 30 %>
-<%= button_tag(type: "submit", class: "pull-right btn btn-default btn-sm") do %>
-+ 30 Min
-<% end %>
-<% end %>
-<%= form_for tracker.datapoints.new, remote: true do |f| %>
-<%= f.hidden_field :user_id, value: current_user.id %>
-<%= f.hidden_field :tracker_id, value: tracker.id %>
-<%= f.hidden_field :amount, value: 15 %>
-<%= button_tag(type: "submit", class: "pull-right btn btn-default btn-sm") do %>
-+ 15 Min
-<% end %>
-<% end %><%= fa_icon 'heartbeat' %> <%= tracker.name %> (minutes)
+<%= fa_icon 'heartbeat' %> <%= tracker.name %>

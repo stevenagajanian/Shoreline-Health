@@ -50,9 +50,10 @@ class TrackersController < ApplicationController
   # DELETE /trackers/1.json
   def destroy
     @tracker = Tracker.find(params[:id])
+    @user = @tracker.user
     @tracker.destroy
     respond_to do |format|
-      format.html { redirect_to condition_trackers_path(@tracker.condition) }
+      format.html { redirect_to user_metrics_path(@user)}
       format.json { head :no_content }
     end
   end

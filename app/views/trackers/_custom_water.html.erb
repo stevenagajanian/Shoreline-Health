@@ -13,7 +13,7 @@
       <%= link_to tracker do %><%= fa_icon "group" %> Change tracker network permissions <% end %>
     </li>
     <li>
-      <%= link_to tracker do %><%= fa_icon "trash-o" %> Remove tracker <% end %>
+      <%= link_to tracker, method: :delete do %><%= fa_icon "trash-o" %> Remove tracker <% end %>
     </li>
   </ul>
 </div>
@@ -32,4 +32,4 @@
 <%= button_tag(type: "submit", class: "pull-right btn btn-default btn-sm") do %>
 + 1 glass (8oz)
 <% end %>
-<% end %><%= fa_icon 'heartbeat' %><%= tracker.name %> (oz)
+<% end %><%= fa_icon 'heartbeat' %><%= tracker.name %>

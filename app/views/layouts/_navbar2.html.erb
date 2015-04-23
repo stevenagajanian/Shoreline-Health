@@ -1,7 +1,7 @@
 <% if user_signed_in? and current_page?(user_printable_path(current_user)) %>
 <div style="background-color: #fff; margin-top: -0px;">
   <% else %>
-  <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+  <div class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container-fluid">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -11,7 +11,7 @@
         </button>
         <%= link_to root_path, class: "navbar-brand" do %>
         <%= image_tag "ShorelineLogoColor.png", width: 23, style: 'margin-top: -3px;' %>
-        Shoreline Health - <span class='text-primary'>Beta</span>
+        Shoreline<span class='text-primary'></span>
         <% end %>
       </div>
       <div class="navbar-collapse collapse">
@@ -43,7 +43,7 @@
           <!-- SETTINGS SETTINGS SETTINGS SETTINGS SETTINGS SETTINGS SETTINGS  -->
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" style="outline: none"data-toggle="dropdown">
-              <span style="padding-top: 0px;"><%= current_user.full_name %> <%= fa_icon 'chevron-down  ' %></span> 
+              <%= image_tag current_user.imageurl, class: 'img-circle', style: 'padding: 0px;  margin: 0px; max-width: 23px; max-height: 23px;' %> <span style="  margin: 0px; padding-top: 0px;"><%= current_user.full_name %> <%= fa_icon 'chevron-down  ' %></span> 
             </a>
             <ul class="dropdown-menu dropdown-menu-left" style="margin-top: -5px">
               <li>

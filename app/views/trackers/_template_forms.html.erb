@@ -58,8 +58,8 @@
     <% else %>
     <%= form_for Tracker.new do |f| %>
     <%= f.hidden_field :user_id, value: current_user.id %>
-    <%= f.hidden_field :name, value: "Cycling" %>
-    <%= f.hidden_field :data_name, value: "minutes" %>
+    <%= f.hidden_field :name, value: "Water" %>
+    <%= f.hidden_field :data_name, value: "cups" %>
     <%= f.hidden_field :b_bar_chart, value: true %>
     <%= button_tag(type: "submit", class: "btn btn-block btn-primary btn-sm") do %>
     Water
@@ -78,8 +78,8 @@
     <% else %>
     <%= form_for Tracker.new do |f| %>
     <%= f.hidden_field :user_id, value: current_user.id %>
-    <%= f.hidden_field :name, value: "Walking" %>
-    <%= f.hidden_field :data_name, value: "minutes" %>
+    <%= f.hidden_field :name, value: "Caffeine" %>
+    <%= f.hidden_field :data_name, value: "mg" %>
     <%= f.hidden_field :b_bar_chart, value: false %>
     <%= button_tag(type: "submit", class: "btn btn-block btn-primary btn-sm") do %>
     Caffeine

@@ -7,21 +7,20 @@
   <button class="btn btn-primary pull- btn-sm" type="button" data-toggle="collapse" data-target="#collapseMetric" aria-expanded="false" aria-controls="collapseExample">
     <%= fa_icon "plus" %> Add Tracker
   </button>
-
   </h2>
-<div class="collapse" id="collapseMakeMetric">
+<div class="collapse" id="collapseMakeMetric"><br><div class="row"><div class="col-md-6 col-md-offset-3">
   <div class="well">
     <%= render 'trackers/form' %>
   </div>
-</div>
-<div class="collapse" id="collapseMetric">
+</div></div></div>
+<div class="collapse" id="collapseMetric"><br><div class="row"><div class="col-md-6 col-md-offset-3">
   <div class="well">
     <%= render 'trackers/template_forms' %>
   </div>
-</div>
+</div></div></div>
 
 <div id="custom_tracker">
-  <%= render 'trackers/table_list' %>
+  <%= render 'trackers/grid_list' %>
 </div>
 <h3>Height (inches) <button class="btn btn-primary btn-sm" type="button" data-toggle="collapse" data-target="#collapseHeight" aria-expanded="false" aria-controls="collapseExample">
   <%= fa_icon "plus" %>  Add Record

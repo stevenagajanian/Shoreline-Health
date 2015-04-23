@@ -7,6 +7,7 @@
       <div class="btn-group btn-group-justified" role="group" aria-label="...">
         <%= link_to user_dashboard_path(current_user), class: 'btn btn-default btn-justified' do %><%= fa_icon "list-alt" %> Timeline <% end %>
         <%= link_to user_summary_path(current_user), class: 'btn btn-primary btn-justified' do %><%= fa_icon "file-text-o" %> Summary <% end %>
+        <%= link_to user_metrics_path(current_user), class: 'btn btn-default btn-justified' do %><%= fa_icon "bar-chart" %> Trackers <% end %>
       </div>
       <hr>
       <%= render 'conditions/conditions' %>
