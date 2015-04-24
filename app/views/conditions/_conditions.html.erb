@@ -41,7 +41,7 @@ No conditions listed
       <td><strong><% if condition.page.presence %>
         <%= link_to condition_posts_path(condition), class: 'btn btn-sm btn-info' do %><%= fa_icon 'pencil' %> Add Event <% end %>
         <% else %>
-        <%= link_to 'View full history', condition_posts_path(condition) %>
+        <%= link_to 'Update Progress', condition_posts_path(condition), class: 'btn btn-sm btn-default' %>
         <% end %></strong></td>
       <td>
         <div class="dropdown pull-right">

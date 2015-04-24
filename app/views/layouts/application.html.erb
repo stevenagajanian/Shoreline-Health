@@ -31,7 +31,7 @@
             </li>
             <li class=" <%= 'sidebar-active success text-' if current_page?(user_network_path(current_user)) %>">
               <%= link_to user_network_path(current_user) do %>
-              <%= fa_icon 'users lg', class: 'text-success' %> People
+              <%= fa_icon 'users lg', class: 'text-success' %> Network
               <% end %>
             </li>
             <li class=" <%= 'sidebar-active success text-danger' if current_page?(user_metrics_path(current_user)) %>">
