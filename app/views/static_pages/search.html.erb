@@ -1,8 +1,28 @@
-<div class="container">
-  <h1>Roadmap:</h1>
-  <h2>Search bar</h2>
+<div class="container-fluid">
+  <div id="the-basics22">
+    <%= form_tag(static_pages_search_path, :method => "get", style: 'width: 100%;', class: 'navbar-form navbar-left navbar-input-group') do %>
+    <div class="form-group" >
+      <%= text_field_tag :search, params[:search], style: 'width: 100%;', class: "form-control typeahead",  id: "auto_complete", placeholder: "Search..." %>
+    </div>
+    <%= button_tag( :class => "btn btn-default")  do %>
+    <i class="fa fa-search"></i>
+    <% end %>
+    <% end %>
+  </div><script type="text/javascript">$('#the-basics22 .typeahead').typeahead(
+  { hint: true, highlight: true, minLength: 1},
+  { name: 'states', displayKey: 'value', source: substringMatcher(autocomplete_pages),templates: { header: '<h4 style="padding-left: 10px;" class="league-name">Conditions</h4>'}},
+  { name: 'states', displayKey: 'value', source: substringMatcher(autocomplete_users),templates: { header: '<h4 style="padding-left: 10px;" class="league-name">People</h4>'}}
+).on('typeahead:selected',
+     function(e, data) {$("#the-basics22 form").submit();}).css();
+  </script>
+
+  <h2>People</h2>
+  <% @users.each do |f| %>
+  <div class="well">
+    <h3><%= link_to f.full_name, f %></h3>
+  </div>
+  <% end %>
   <h2>My results (in my data)</h2>
   <h2>Network results</h2>
-  <h2>All users results</h2>
   <h2>Results in public pages (asthma global page, tylenol global page, etc)</h2>
 </div>

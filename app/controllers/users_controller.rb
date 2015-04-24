@@ -57,6 +57,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:user_id])
     @medications = @user.medications
     @allergies = @user.allergies
+    @autocomplete_pages = Page.all
     @doctor_visits = @user.doctor_visits
     @conditions = @user.conditions
     @immunizations = @user.immunizations
@@ -70,6 +71,7 @@ class UsersController < ApplicationController
     @things_month = @things
     @things_month.sort! { |a,b| b.date.to_date <=> a.date.to_date }
     @things_month = @things.group_by { |t| t.date.beginning_of_month }
+    @medication = @user.medications.new
     #  @things_month.sort_by(&:date)
     if current_user.id == @user.id
       render action: :dashboard

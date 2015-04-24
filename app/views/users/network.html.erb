@@ -1,66 +1,79 @@
-<div class="container-fluid"><div class="row">
-  <div class="col-md-3">
-  </div>
-  <div class="col-md-6">
-    <%= render 'layouts/panel_head' %>
-    <h1><center><%= fa_icon "users x", class: ' ' %> Community of Care</center></h1>
-    <hr>
-    <% if @user.followed_users.any? %>
-    <% @user.handshakes.each do |f| %>
-    <p>
-
-    <div class="dropdown pull-right">
-      <a href="#" class="dropdown-toggle btn btn-default btn-sm pull-" style="" data-toggle="dropdown">
-        <%= fa_icon "gear" %>
-      </a>
-      <ul class="dropdown-menu pull-">
-        <li>
-          <%= link_to edit_handshake_path(f) do %>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <%= render 'layouts/panel_head' %>
+      <h1><%= fa_icon "users x", class: ' ' %> Community of Care</h1>
+      <hr>
+      <% if @user.followed_users.any? %>
+      <% @user.handshakes.each do |f| %>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <p>
+          <div class="dropdown pull-right">
+            <a href="#" class="dropdown-toggle btn btn-default btn-sm pull-" style="" data-toggle="dropdown">
+              <%= fa_icon "gear" %>
+            </a>
+            <ul class="dropdown-menu pull-">
+              <li>
+                <%= link_to edit_handshake_path(f) do %>
+                <i class='fa fa-pencil'></i> Edit Relation
+                <% end %>
+              </li>
+              <li>
+                <%= link_to f do %>
+                <i class='fa fa-envelope-o'></i> Message
+                <% end %>
+              </li>
+              <li>
+                <%= link_to "Remove", f, class: 'btn btn-sm  btn-default pull-', data: {:confirm => 'Are you sure?'}, 'data-original-title' => "Remove?", method: :delete %>
+              </li>
+            </ul>
+          </div>
+          <% if f.followed.imageurl.presence %>
+          <%= image_tag f.followed.imageurl, class: 'img-circle pull-left', style: 'padding: 0px; margin: 0px; padding-right: 10px; max-width: 55px; max-height: 55px;' %> 
+          <% else %>
+          <%= fa_icon 'user 2x', class: 'img-circle pull-left' %>
+          <% end %><p class='lead'><%= link_to f.followed.full_name, f.followed %> - <%= f.relationship_name %></p>
+          </p>
+        <p>
+          <%= link_to edit_handshake_path(f), class: 'btn btn-default' do %>
           <i class='fa fa-pencil'></i> Edit Relation
           <% end %>
-        </li>
-        <li>
-          <%= link_to f do %>
-          <i class='fa fa-envelope-o'></i> Message
+          <%= link_to edit_handshake_path(f), class: 'btn btn-default' do %>
+          <i class='fa fa-pencil'></i> Edit Relation
           <% end %>
-        </li>
-        <li>
-          <%= link_to "Remove", f, class: 'btn btn-sm  btn-default pull-', data: {:confirm => 'Are you sure?'}, 'data-original-title' => "Remove?", method: :delete %>
-        </li>
-      </ul>
+          <%= link_to edit_handshake_path(f), class: 'btn btn-default' do %>
+          <i class='fa fa-pencil'></i> Edit Relation
+          <% end %>
+        </p>
+      </div>
     </div>
-    <% if f.followed.imageurl.presence %>
-    <%= image_tag f.followed.imageurl, class: 'img-circle pull-left', style: 'padding: 0px; margin: 0px; padding-right: 10px; max-width: 55px; max-height: 55px;' %> 
-    <% else %>
-    <%= fa_icon 'user 2x', class: 'img-circle pull-left' %>
-    <% end %><p class='lead'><%= link_to f.followed.full_name, f.followed %> - <%= f.relationship_name %></p>
+    <% end %>
+    <% end %>
+    <h2>Requests</h2>
+    <% Handshake.where(followed_id: @user.id).each do |f| %>
+    <p>
+      <%= if f.follower then f.follower.full_name end %>
+      <% if f.follower != nil %>
+      <%= form_for(current_user.handshakes.build(followed_id: f.follower.id, relationship_name: 'Friend'), class: 'form-inline') do |f| %>
+      <%= f.hidden_field :followed_id %><%= f.hidden_field :relationship_name, value: 'Friend' %>
+      <%= button_tag(type: "submit", class: "btn btn-default btn-sm") do %>
+      <%= fa_icon "plus" %> Add to Network
+      <% end %>
+      <% end %>
+      <% end %>
     </p>
-  <% end %>
-  <% end %>
-  <h2><center>Requests</center></h2>
-  <% Handshake.where(followed_id: @user.id).each do |f| %>
-  <p>
-    <%= if f.follower then f.follower.full_name end %>
-    <% if f.follower != nil %>
-    <%= form_for(current_user.handshakes.build(followed_id: f.follower.id, relationship_name: 'Friend'), class: 'form-inline') do |f| %>
-    <%= f.hidden_field :followed_id %><%= f.hidden_field :relationship_name, value: 'Friend' %>
-    <%= button_tag(type: "submit", class: "btn btn-default btn-sm") do %>
-    <%= fa_icon "plus" %> Add to Network
     <% end %>
-    <% end %>
-    <% end %>
-  </p>
-  <% end %>
-  <% if Handshake.where(followed_id: @user.id).where(follower_id: current_user.id) %><p><center>None</center></p><% end %>
-  <hr>
-  <button class="btn btn-default" type="button" data-toggle="collapse" data-target="#collapseShare" aria-expanded="false" aria-controls="collapseExample">
-    <%= fa_icon "plus" %>  Add person
-  </button>
-  <div class="collapse" id="collapseShare"><br><p>Enter in the email address of someone you would like to give access to. When they sign up for Shoreline Health using that email address they will automatically be given access to your health records.</p>
-    <input type="text" placeholder="Enter a person's email address..." class="form-control"></input><br>
-  <button class="btn btn-block btn-success" type="button" data-toggle="collapse" data-target="#collapseShare" aria-expanded="false" aria-controls="collapseExample">
-    <%= fa_icon "check" %>  Add person
-  </button>
+    <% if Handshake.where(followed_id: @user.id).where(follower_id: current_user.id) %><p><center>None</center></p><% end %>
+    <hr>
+    <button class="btn btn-default" type="button" data-toggle="collapse" data-target="#collapseShare" aria-expanded="false" aria-controls="collapseExample">
+      <%= fa_icon "plus" %>  Add person
+    </button>
+    <div class="collapse" id="collapseShare"><br><p>Enter in the email address of someone you would like to give access to. When they sign up for Shoreline Health using that email address they will automatically be given access to your health records.</p>
+      <input type="text" placeholder="Enter a person's email address..." class="form-control"></input><br>
+    <button class="btn btn-block btn-success" type="button" data-toggle="collapse" data-target="#collapseShare" aria-expanded="false" aria-controls="collapseExample">
+      <%= fa_icon "check" %>  Add person
+    </button>
   </div>
   <hr>
   <center>

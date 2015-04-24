@@ -1,14 +1,10 @@
 <% if user_signed_in? and current_page?(user_printable_path(current_user)) %>
 <div style="background-color: #fff; margin-top: -0px;">
   <% else %>
-  <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container-fluid">
       <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-          <%= fa_icon 'gear' %>
-        </button>
-        <button type="button" class="navbar-toggle pull- " data-toggle="offcanvas"><%= fa_icon 'bars' %>
-        </button>
+        <a href="#menu-toggle" class="btn-default navbar-toggle" id="menu-toggle"><%= fa_icon 'bars' %> Menu</a>
         <%= link_to root_path, class: "navbar-brand" do %>
         <%= image_tag "ShorelineLogoColor.png", width: 23, style: 'margin-top: -3px;' %>
         Shoreline<span class='text-primary'></span>
@@ -20,19 +16,24 @@
           <% end %>
           <!-- SEARCH SEARCH SEARCH SEARCH SEARCH SEARCH SEARCH  --><% if  !current_page?(root_path) %>
           <li id="the-basics2">
-            <%= form_tag(pages_path, :method => "get", class: 'navbar-form navbar-left navbar-input-group') do %>
+            <%= form_tag(static_pages_search_path, :method => "get", class: 'navbar-form navbar-left navbar-input-group') do %>
             <div class="form-group">
-              <%= text_field_tag :search, params[:search], class: "form-control typeahead", id: "auto_complete", placeholder: "Search the waters..." %>
+              <%= text_field_tag :search, params[:search], class: "form-control typeahead", id: "auto_complete", placeholder: "Search..." %>
             </div>
             <%= button_tag( :class => "btn btn-default")  do %>
             <i class="fa fa-search"></i>
             <% end %>
             <% end %>
           </li>
-          <%=  javascript_tag "var autocomplete_items = #{ (Page.all.pluck(:name) + User.all.pluck(:email)).to_json };" %>
-          <%= javascript_tag "var autocomplete_items = #{ (Page.all.pluck(:name) + User.all.pluck(:email)).to_json };" %>
+          <%= javascript_tag "var autocomplete_pages = #{ (Page.all.pluck(:name)).to_json };" %>
+          <%= javascript_tag "var autocomplete_users = #{ (User.all.pluck(:email)).to_json };" %>
           <script type="text/javascript">
-            $('#the-basics2 .typeahead').typeahead({ hint: true, highlight: true, minLength: 1},{ name: 'states', displayKey: 'value', source: substringMatcher(autocomplete_items),templates: { header: '<h4 style="padding-left: 10px;" class="league-name">Conditions</h4>'}}).on('typeahead:selected', function(e, data) {$("#the-basics2 form").submit();}).css();
+            $('#the-basics2 .typeahead').typeahead(
+              { hint: true, highlight: true, minLength: 1},
+              { name: 'states', displayKey: 'value', source: substringMatcher(autocomplete_pages),templates: { header: '<h4 style="padding-left: 10px;" class="league-name">Conditions</h4>'}},
+              { name: 'states', displayKey: 'value', source: substringMatcher(autocomplete_users),templates: { header: '<h4 style="padding-left: 10px;" class="league-name">People</h4>'}}
+            ).on('typeahead:selected',
+                 function(e, data) {$("#the-basics2 form").submit();}).css();
           </script>
           <% end %>
         </ul>

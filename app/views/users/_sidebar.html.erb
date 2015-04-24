@@ -1,10 +1,7 @@
 <%= render 'layouts/panel_head' %>
 <!-- The sidebar of the user profile. Contains personal info, lists of medications, allergies, conditions, goals, and links to printing or editing data. -->
 <!-- Basic health information -->
-<% if @user.imageurl.presence %>
-<%= image_tag @user.imageurl, class: 'img-circle pull-left', style: 'margin-right: 15px; max-width: 140px; max-height: 140px;' %>
-<% end %>
-<h3>
+<h3 style="padding-top: 0px;">
   <div class="dropdown pull-right">
     <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
       <%= fa_icon 'plus' %> Add to Record
@@ -53,7 +50,10 @@
       </li>
     </ul>
   </div>
-  <%= link_to @user.full_name, user_dashboard_path(@user) %>
+  
+<% if @user.imageurl.presence %>
+  <%= image_tag @user.imageurl, class: 'img-circle pull-', style: 'margin-top: 0px; padding-top: 0px; margin-right: 5px; max-width: 40px; max-height: 40px;' %>
+<% end %> <%= link_to @user.full_name, user_dashboard_path(@user) %>
 </h3>
 <% if @user.date_of_birth.presence %><%= fa_icon 'birthday-cake ' %> <strong>Birthday</strong>
 <%= @user.date_of_birth.strftime("%B %d, %Y") %> (age <%= (Date.today - @user.date_of_birth).to_i / 365 %>)<br><% end %>

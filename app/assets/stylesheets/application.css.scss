@@ -16,8 +16,8 @@ $brand-secondary: #88B552;
 $brand-info: #88B552;
 $brand-warning: #E5BA47;
 $brand-danger: #C44432;
-
-$navbar-default-bg: $brand-primary;*/
+*/
+//$navbar-inverse-bg: $brand-primary;
 //$link-color: $brand-primary;
 @import "bootstrap";
 
@@ -30,29 +30,29 @@ body,html,.row-offcanvas {
 }
 
 .btn-file {
-    position: relative;
-    overflow: hidden;
+  position: relative;
+  overflow: hidden;
 }
 .btn-file input[type=file] {
-    position: absolute;
-    top: 0;
-    right: 0;
-    min-width: 100%;
-    min-height: 100%;
-    font-size: 100px;
-    text-align: right;
-    filter: alpha(opacity=0);
-    opacity: 0;
-    outline: none;
-    background: white;
-    cursor: inherit;
-    display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 100%;
+  min-height: 100%;
+  font-size: 100px;
+  text-align: right;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  outline: none;
+  background: white;
+  cursor: inherit;
+  display: block;
 }
 
 
 body {
   font-family: 'Varela Round', sans-serif;
-  padding-top: 75px;
+  padding-top: 60px;
 
 }
 
@@ -61,34 +61,59 @@ h1, h2, h3, h4, h5, h6, p {
   font-weight: 100;
 }
 
-.user-sidebar-container {
+
+
+
+
+/*!
+* Start Bootstrap - Simple Sidebar HTML Template (http://startbootstrap.com)
+* Code licensed under the Apache License v2.0.
+* For details, see http://www.apache.org/licenses/LICENSE-2.0.
+*/
+
+/* Toggle Styles */
+
+#wrapper {
+  padding-left: 0;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+#wrapper.toggled {
+  padding-left: 250px;
+}
+
+#sidebar-wrapper {
+  z-index: 1000;
+  position: fixed;
+  left: 250px;
+  width: 0;
   margin-top: 0px;
-  padding-top: 0px;
-  background-color: #333333;
+  height: 100%;
+  margin-left: -250px;
+  overflow-y: auto;
+  background: #333;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
 }
 
-#sidebar {
-  width: inherit;
-  min-width: 90px;
-  max-width: 90px;
-  height: calc(100% + 00px);
-  background-color: #333;
-  float: left;
-  position:relative;
-  overflow-y:auto;
-  overflow-x:hidden;
-  margin-top: -10px;
-  margin-left: 0px;
+#wrapper.toggled #sidebar-wrapper {
+  width: 250px;
 }
 
-#main {
-  height:100%;
-  overflow:auto;
+#page-content-wrapper {
+  width: 100%;
+  position: absolute;
+  padding: 15px;
 }
 
-.label-condition {
-  background-color: #46C4E0;
-  color: white;
+#wrapper.toggled #page-content-wrapper {
+  position: absolute;
+  margin-right: -250px;
 }
 
 /* Sidebar Styles */
@@ -96,42 +121,36 @@ h1, h2, h3, h4, h5, h6, p {
 .sidebar-nav {
   position: absolute;
   top: 0;
-  left: 0;
-  width: 90px;
+  width: 250px;
+  margin: 0;
   padding: 0;
   list-style: none;
 }
 
 .sidebar-nav li {
-  text-indent: 10px;
-  line-height: 26px;
-  font-size: 14px;
+  text-indent: 12px;
+  line-height: 60px;    // LINE HEIGHT OF SIDEBAR LI           LINE HEIGHT OF SIDEBAR LI      LINE HEIGHT OF SIDEBAR LI
 }
 
 .sidebar-nav li a {
   display: block;
   text-decoration: none;
-  padding: 10px;
-  color: #CCC;
+  color: #BBB;
 }
 
 .sidebar-nav li a:hover {
   text-decoration: none;
-  color: #FFF;
-  background: rgba($brand-primary,0.85);
-  -o-transition:.5s;
-  -ms-transition:.5s;
-  -moz-transition:.5s;
-  -webkit-transition:.5s;
-  /* ...and now for the proper property */
-  transition:.5s;
+  color: #fff;
+  background: rgba(255,255,255,0.2);
 }
-
 
 .sidebar-nav li a:active,
 .sidebar-nav li a:focus {
   text-decoration: none;
-  //color: #FFF;
+  color: #fff;
+  .lg {
+    color: #fff;
+  }
 }
 
 .sidebar-nav > .sidebar-brand {
@@ -145,43 +164,77 @@ h1, h2, h3, h4, h5, h6, p {
 }
 
 .sidebar-nav > .sidebar-brand a:hover {
+  color: #fff;
+  background: none;
+}
+
+@media(min-width:768px) {
+  #wrapper {
+    padding-left: 250px;
+  }
+
+  #wrapper.toggled {
+    padding-left: 0;
+  }
+
+  #sidebar-wrapper {
+    width: 250px;
+  }
+
+  #wrapper.toggled #sidebar-wrapper {
+    width: 0;
+  }
+
+  #page-content-wrapper {
+    padding: 20px;
+    position: relative;
+  }
+
+  #wrapper.toggled #page-content-wrapper {
+    position: relative;
+    margin-right: 0;
+  }
+}
+
+
+
+
+.sidebar-nav li a:hover {
+  text-decoration: none;
+  color: #111;
+  border-right: medium solid #BBB;
+  // background: rgba($brand-primary,0.85);
+  background: #EEE;
+  -o-transition:.5s;
+  -ms-transition:.5s;
+  -moz-transition:.5s;
+  -webkit-transition:.5s;
+  /* ...and now for the proper property */
+  transition:.5s;
+}
+
+
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus {
+  text-decoration: none;
+}
+
+.sidebar-nav > .sidebar-brand a {
+  color: #999999;
+}
+
+.sidebar-nav > .sidebar-brand a:hover {
   color: #FFF;
   background: none;
 }
 
 .sidebar-nav > .sidebar-active a {
-  color: #FFF;
-  background: $brand-primary;
+  color: #111;
+  border-right: medium solid #CCC;
+  //background: $brand-primary;
+  background: #FFF;
 }
 
-
-/*
-* off Canvas sidebar
-* --------------------------------------------------
-*/
-@media screen and (max-width: 768px) {
-  .row-offcanvas {
-    position: relative;
-    -webkit-transition: all 0.25s ease-out;
-    -moz-transition: all 0.25s ease-out;
-    transition: all 0.25s ease-out;
-    width:calc(100% + 90px);
-  }
-
-  .row-offcanvas-left
-  {
-    left: -90px;
-  }
-
-  .row-offcanvas-left.active {
-    left: 0;
-  }
-
-  .sidebar-offcanvas {
-    position: absolute;
-    top: 0;
-  }
-}
 
 // Shadowed
 .shadowed {
@@ -325,7 +378,7 @@ h6 {
   background-color: #f44;
   box-shadow: 0 0 0 2px #f44, 1.5em 0 0 2px #9b3, 3em 0 0 2px #fb5;
 }
-    
+
 .browser-mockup > * {
   display: block;
 }

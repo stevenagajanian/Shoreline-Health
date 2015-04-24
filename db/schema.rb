@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150416084100) do
+ActiveRecord::Schema.define(version: 20150423225312) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(version: 20150416084100) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.date     "date_occured"
+    t.integer  "author_id"
   end
 
   create_table "appointments", force: true do |t|
@@ -77,6 +78,7 @@ ActiveRecord::Schema.define(version: 20150416084100) do
     t.string   "location"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "author_id"
   end
 
   create_table "blood_pressures", force: true do |t|
@@ -120,6 +122,7 @@ ActiveRecord::Schema.define(version: 20150416084100) do
     t.integer  "page_id"
     t.boolean  "make_public"
     t.date     "date_occured"
+    t.integer  "author_id"
   end
 
   create_table "datapoints", force: true do |t|
@@ -137,6 +140,7 @@ ActiveRecord::Schema.define(version: 20150416084100) do
     t.integer  "page_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "author_id"
   end
 
   create_table "doctor_visits", force: true do |t|
@@ -150,6 +154,7 @@ ActiveRecord::Schema.define(version: 20150416084100) do
     t.datetime "updated_at"
     t.string   "doctor"
     t.date     "date_occured"
+    t.integer  "author_id"
   end
 
   create_table "documents", force: true do |t|
@@ -232,6 +237,7 @@ ActiveRecord::Schema.define(version: 20150416084100) do
     t.integer  "lab_result"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "author_id"
   end
 
   create_table "goal_posts", force: true do |t|
@@ -307,6 +313,7 @@ ActiveRecord::Schema.define(version: 20150416084100) do
     t.string   "rec_dose"
     t.date     "date_taken"
     t.date     "date_occured"
+    t.integer  "author_id"
   end
 
   create_table "ko_medication_reviews", force: true do |t|
@@ -342,6 +349,7 @@ ActiveRecord::Schema.define(version: 20150416084100) do
     t.string   "notes"
     t.date     "date_occured"
     t.string   "other_dosage"
+    t.integer  "author_id"
   end
 
   add_index "medications", ["user_id"], name: "index_medications_on_user_id", using: :btree
@@ -405,6 +413,7 @@ ActiveRecord::Schema.define(version: 20150416084100) do
     t.integer  "medication_id"
     t.integer  "immunization"
     t.integer  "allergy"
+    t.integer  "author_id"
   end
 
   create_table "pictures", force: true do |t|
@@ -452,6 +461,7 @@ ActiveRecord::Schema.define(version: 20150416084100) do
     t.date     "date_occured"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "author_id"
   end
 
   create_table "taggings", force: true do |t|
@@ -490,6 +500,7 @@ ActiveRecord::Schema.define(version: 20150416084100) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "author_id"
   end
 
   create_table "user_friendships", force: true do |t|

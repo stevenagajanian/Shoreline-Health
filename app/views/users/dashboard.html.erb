@@ -1,17 +1,12 @@
 <div class="container-fluid">
-  <div class="row">
-    <div class="col-sm-6 col-sm-offset-3">
-      <%= render "users/sidebar" %>
-      <div class="btn-group btn-group-justified" role="group" aria-label="...">
-        <%= link_to user_dashboard_path(current_user), class: 'btn btn-primary btn-justified' do %><%= fa_icon "list-alt" %> Timeline <% end %>
-        <%= link_to user_summary_path(current_user), class: 'btn btn-default btn-justified' do %><%= fa_icon "file-text-o" %> Summary <% end %>
-        <%= link_to user_metrics_path(current_user), class: 'btn btn-default btn-justified' do %><%= fa_icon "bar-chart" %> Trackers <% end %>
-      </div>
-      <br>
-      <div class="btn-group btn-block">
-        <a href="#" class="dropdown-toggle  btn-block btn btn-raised btn-default" data-toggle="dropdown">
-          <i class="fa fa-bars pull-left" style="margin-left: 10px;"></i> Sort</i>
-        </a>
+  <div class="btn-group btn-group-justified" role="group" aria-label="...">
+    <%= link_to user_dashboard_path(current_user), class: 'btn btn-primary btn-justified' do %><%= fa_icon "list-alt" %> Timeline <% end %>
+    <%= link_to user_summary_path(current_user), class: 'btn btn-default btn-justified' do %><%= fa_icon "file-text-o" %> Summary <% end %>
+    <%= link_to user_metrics_path(current_user), class: 'btn btn-default btn-justified' do %><%= fa_icon "bar-chart" %> Trackers <% end %>
+    <div class="btn-group btn-block">
+      <a href="#" class="dropdown-toggle  btn-block btn btn-raised btn-default" data-toggle="dropdown">
+        <i class="fa fa-bars pull-left" style="margin-left: 10px;"></i> Sort
+      </a>
       <ul class="dropdown-menu">
         <li><%= link_to "Allergies", user_dashboard_path(@user), class: 'text-primary' %></li>
         <li><%= link_to "Conditions", user_dashboard_path(@user), class: 'text-success' %></li>
@@ -21,111 +16,23 @@
         <li><%= link_to "Immunization", user_dashboard_path(@user), class: 'text-warning' %></li>
       </ul>
     </div>
-    <% @things_month.each do |month, things| %><hr>
-    <h2><b><center><%= month.strftime('%B') %> <%= month.strftime('%Y') %></center></b></h2>
-    <hr>
-    <% for f in things %>
-
-    <% if f.is_a? Medication %>
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <%= link_to edit_medication_path(f), class: 'btn btn-default btn-sm pull-right', style: 'margin-top: -5px; margin-left: 10px' do %><%= fa_icon 'pencil' %> Edit<% end %>
-        <span class="pull-right"><%= f.created_at.strftime("%B %d, %Y at %I:%M %p") %></span>
-        <%= fa_icon 'medkit' %> <strong>Medication</strong>
-      </div>
-      <div class="panel-body">
-        <p class="lead">
-          Started taking <b><%= f.name %></b>
-        </p>
-      </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6">
+      <%= render 'users/timeline' %>
     </div>
-
-
-    <% elsif f.is_a? DoctorVisit %>
-    <div class="panel panel-danger">
-      <div class="panel-heading">
-        <%= link_to edit_doctor_visit_path(f), class: 'btn btn-default btn-sm pull-right', style: 'margin-top: -5px; margin-left: 10px' do %><%= fa_icon 'pencil' %> Edit<% end %>
-        <span class="pull-right"><%= f.created_at.strftime("%B %d, %Y at %I:%M %p") %></span>
-        <strong><%= fa_icon 'user-md' %> Doctor Visit</strong>
-      </div>
-      <div class="panel-body">
-        <p>
-          <%= f.created_at.strftime("%B %d, %Y at %I:%M %p") %> | Visited <b><i><%= if f.has_attribute?(:doctor) then f.doctor end %></i></b> for <b><i><%= f.reason %></i></b> @ <b><i><%= f.location %></i></b>
-        </p>
-        <p class="lead">
-          <%= f.notes %>
-        </p>
+    <div class="col-md-6">
+      
+  <%= render "users/sidebar" %>
+      <%= render 'conditions/conditions' %>
+      <hr>
+      <%= render 'medications/medications' %>
+      <hr>
+      <%= render 'allergies/allergies' %>
+      <hr>
+      <%= render 'immunizations/immunizations' %>
+      <%= render 'layouts/panel_foot' %>
     </div>
   </div>
-
-  <% elsif f.is_a? Immunization %>
-  <div class="panel panel-warning">
-    <div class="panel-heading" style="color: black;">
-      <%= link_to edit_immunization_path(f), class: 'btn btn-default btn-sm pull-right', style: 'margin-top: -5px; margin-left: 10px' do %><%= fa_icon 'pencil' %> Edit<% end %>
-      <span class="pull-right"><%= f.created_at.strftime("%B %d, %Y at %I:%M %p") %></span>
-      <strong><%= fa_icon 'bug' %> Immunization</strong>
-    </div>
-    <div class="panel-body">
-      <p class="lead">
-        <%= f.name %>
-      </p>
-    </div>
-  </div>
-
-  <% elsif f.is_a? Symptom %>
-  <div class="panel panel-primary">
-    <div class="panel-heading">
-      <%= link_to edit_symptom_path(f), class: 'btn btn-default btn-sm pull-right', style: 'margin-top: -5px; margin-left: 10px' do %><%= fa_icon 'pencil' %> Edit<% end %>
-      <span class="pull-right"><%= f.date_occured.strftime("%B %d, %Y at %I:%M %p") %></span>
-      <strong><%= fa_icon 'heartbeat' %> Symptom/Event</strong>
-    </div>
-    <div class="panel-body">
-      <p class="lead">
-        <%= f.description %>
-        <% f.photos.each do |p| %>aaaaaad
-        <% image_tag p.image.url %>dsad
-        <% end %>
-      </p>
-    </div>
-  </div>
-
-  <% elsif f.is_a? Condition %>
-  <div class="panel panel-info">
-    <div class="panel-heading" style="color: black;">
-      <%= link_to edit_condition_path(f), class: 'btn btn-default btn-sm pull-right', style: 'margin-top: -5px; margin-left: 10px' do %><%= fa_icon 'pencil' %> Edit<% end %>
-      <span class="pull-right"><%= f.created_at.strftime("%B %d, %Y at %I:%M %p") %></span>
-      <strong><%= fa_icon 'stethoscope' %> Diagnosis/Condition</strong>
-    </div>
-    <div class="panel-body">
-      <p class="lead">
-        <%= f.name %>
-      </p>
-    </div>
-  </div>
-
-  <% elsif f.is_a? Allergy %>
-  <div class="panel panel-success">
-    <div class="panel-heading">
-      <%= link_to edit_allergy_path(f), class: 'btn btn-default btn-sm pull-right', style: 'margin-top: -5px; margin-left: 10px' do %><%= fa_icon 'pencil' %> Edit<% end %>
-      <span class="pull-right"><%= f.created_at.strftime("%B %d, %Y at %I:%M %p") %></span>
-      <%= fa_icon 'leaf' %> <strong>Allergy</strong>
-    </div>
-    <div class="panel-body">
-      <p class="lead">
-        <b>Allergy: </b><%= f.name %>
-        <br>
-        <b>Notes: </b><%= f.description %>
-      </p>
-    </div>
-  </div>
-
-  <% end %>
-  <% end %>
-  <% end %>
-</div>
-<div class="col-md-3">
-
-</div>
-</div>
 </div>
 

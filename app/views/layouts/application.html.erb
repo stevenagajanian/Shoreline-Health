@@ -19,70 +19,83 @@
       <% end %>
       <% if !current_page?(new_user_session_path) and !current_page?(new_user_registration_path) %>
       <%= render "layouts/navbar2" %>
-
       <% if user_signed_in? %>
-      <div class="row-offcanvas row-offcanvas-left">
-        <div id="sidebar" class="sidebar-offcanvas">
-          <div class="col-md-12">
-            <br>
-            <ul class="sidebar-nav">
-              <li class=" <%= 'sidebar-active success text-' if current_page?(user_dashboard_path(current_user)) %>">
-                <%= link_to user_dashboard_path(current_user), class: '-default' do %>
-                <center><%= fa_icon 'user 2x', style: 'margin-left: -15px;' %><br>Profile</center>
-                <% end %>
-              </li>
-              <li class="<%= 'sidebar-active' if current_page?(user_network_path(current_user)) %>">
-                <%= link_to user_network_path(current_user), class: '' do %>
-                <center><%= fa_icon 'users 2x', style: 'margin-left: -15px;' %><br>People</center>
-                <% end %>
-              </li>
-              <li class="<%= 'sidebar-active' if current_page?(user_metrics_path(current_user)) %>">
-                <%= link_to user_metrics_path(current_user), class: '' do %>
-                <center><%= fa_icon 'bar-chart 2x', style: 'margin-left: -15px;' %><br>Trackers</center>
-                <% end %>
-              </li>
-              <li class="<%= 'sidebar-active' if current_page?(static_pages_search_path) %>">
-                <%= link_to static_pages_search_path, class: '-default' do %>
-                <center><%= fa_icon 'search 2x', style: 'margin-left: -15px;' %><br>Search</center>
-                <% end %>
-              </li>
-              <li class="<%= 'sidebar-active' if current_page?(user_notifications_path(current_user)) %>">
-                <%= link_to user_notifications_path(current_user), class: '-default' do %>
-                <center>
-                  <%= fa_icon 'inbox 2x', style: 'margin-left: -15px;' %><br>Inbox
-                  <% if current_user.notifications.where("b_read IS null").count == 0 %><span class="label label-default label-as-badge">
-                  <% else %><span class="label label-primary label-as-badge">
-                  <% end %>
-                  <%= current_user.notifications.where("b_read IS null").count %></span>
-                  </span>
-                </center>
-                <% end %>
-              </li>
-              <li class="<%= 'sidebar-active' if current_page?(edit_registration_path(current_user)) %>">
-                <%= link_to edit_registration_path(current_user), class: '-default' do %>
-                <center><%= fa_icon "gear 2x", style: 'margin-left: -15px;' %><br>Settings</center>
-                <% end %>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <% end %>
-        <% end %>
+      <div id="wrapper">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+          <ul class="sidebar-nav">
+            <li class="<%= 'sidebar-active success text-' if current_page?(user_dashboard_path(current_user)) %>">
+              <%= link_to user_dashboard_path(current_user) do %>
+              <%= fa_icon 'user lg', class: 'text-primary' %> Profile
+              <% end %>
+            </li>
+            <li class=" <%= 'sidebar-active success text-' if current_page?(user_network_path(current_user)) %>">
+              <%= link_to user_network_path(current_user) do %>
+              <%= fa_icon 'users lg', class: 'text-success' %> People
+              <% end %>
+            </li>
+            <li class=" <%= 'sidebar-active success text-danger' if current_page?(user_metrics_path(current_user)) %>">
+              <%= link_to user_metrics_path(current_user) do %>
+              <%= fa_icon 'bar-chart lg', class: 'text-warning' %> Trackers
+              <% end %>
+            </li>
+            <li class=" <%= 'sidebar-active success text-danger' if current_page?(user_conditions_path(current_user)) %>">
+              <%= link_to user_conditions_path(current_user) do %>
+              <%= fa_icon 'heartbeat lg', class: 'text-danger' %> Conditions
+              <% end %>
+            </li>
+            <li class=" <%= 'sidebar-active success text-danger' if current_page?(user_notifications_path(current_user)) %>">
+              <%= link_to user_notifications_path(current_user) do %>
+              <%= fa_icon 'inbox lg', class: 'text-success' %> Notifications <% if current_user.notifications.where("b_read IS null").count == 0 %>
+              <% else %><span class="label label-primary label-as-badge">
+              <%= current_user.notifications.where("b_read IS null").count %></span>
+              <% end %>
+          <% end %>
+          </li>
+        <li class=" <%= 'sidebar-active success text-' if current_page?(static_pages_search_path) %>">
+          <%= link_to static_pages_search_path do %>
+          <%= fa_icon 'search lg', class: 'text-info' %> Search
+          <% end %>
+        </li>
+        <hr>
+        <li class=" <%= 'sidebar-active success text-' if current_page?(user_printable_path(current_user)) %>">
+          <%= link_to user_printable_path(current_user) do %>
+          <%= fa_icon 'print lg', class: 'text-default' %> Print
+          <% end %>
+        </li>
+        <li class=" <%= 'sidebar-active success text-' if current_page?(user_printable_path(current_user)) %>">
+          <%= link_to user_printable_path(current_user) do %>
+          <%= fa_icon 'share lg', class: 'text-default' %> Share
+          <% end %>
+        </li>
+        <li class=" <%= 'sidebar-active success text-' if current_page?(edit_registration_path(current_user)) %>">
+          <%= link_to edit_registration_path(current_user) do %>
+          <%= fa_icon 'gears lg', class: 'text-default' %> Settings
+          <% end %>
+        </li>
+        </ul>
+      </div>
+    <!-- /#sidebar-wrapper -->
 
-        <div id="main" class="">
-          <div class="col-md-12">
-            <div class="container-fluid pull-">
-              <%= bootstrap_flash %>
-              <%= yield %>
-              <%= render 'layouts/footer' %>
-            </div>
-          </div>
-        </div>
-        <script>$(document).ready(function() {
-  $('[data-toggle=offcanvas]').click(function() {
-    $('.row-offcanvas').toggleClass('active');
-  });
-});
-        </script>
-        </body>
-      </html>
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+      <% end %>
+      <% end %>
+      <div class="container-fluid">
+        <%= bootstrap_flash %>
+        <%= yield %>
+        <%= render 'layouts/footer' %>
+      </div>
+    </div>
+    </div>
+  <!-- Menu Toggle Script -->
+  <script>
+    $("#menu-toggle").click(function(e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+    });
+  </script>
+
+  </body>
+</body>
+</html>
