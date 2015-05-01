@@ -17,5 +17,4 @@
     </li>
   </ul>
 </div>
-<%= form_for tracker.datapoints.new, remote: true do |f| %><%= f.hidden_field :user_id, value: current_user.id %><%= f.hidden_field :tracker_id, value: tracker.id %><%= f.hidden_field :amount, value: 60 %><%= button_tag(type: "submit", class: "pull-right btn btn-default btn-sm") do %>+ 1 cup of coffee<% end %>
-<% end %><%= fa_icon 'coffee' %> <%= tracker.name %> (mg)
+<%= fa_icon 'coffee' %> <%= tracker.name %> (mg)

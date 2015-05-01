@@ -1,71 +1,73 @@
 <div class="row">
   <% @user.trackers.each do |f| %>
-  <div class="col-md-3">
-    <h3>
+  <div class="col-md-4">
+    <h4>
       <% if f.name == 'Walking' %>
       <%= render 'trackers/custom_walking', tracker: f %>
-      <span class="label label-success pull-right">Today: <%= f.datapoints.where('created_at >= ?', 1.day.ago).sum("amount").to_i %> min</span>
+      <br><span class="label label-success ">Today: <%= f.datapoints.where('created_at >= ?', 1.day.ago).sum("amount").to_i %> min</span>
       <p>
-        <%= area_chart  f.datapoints.group_by_day(:created_at , format: "%B %d, %Y").maximum(:amount), height: "160px" %>
+        <%= column_chart  f.datapoints.group_by_day(:created_at , format: "%B %d, %Y").maximum(:amount), height: "160px" %>
         <%= form_for f.datapoints.new, remote: true do |datapoint| %><%= datapoint.hidden_field :user_id, value: current_user.id %><%= datapoint.hidden_field :tracker_id, value: f.id %>
         <%= datapoint.text_field :amount, placeholder: "Enter minutes walked..", class: 'form-control' %>
       </p>
       <%= button_tag(type: "submit", class: "btn btn-primary btn-block") do %> <%= fa_icon 'check ' %> Add Record<% end %><% end %>
       <% end %>
-    </h3>
+    </h4>
 
-    <h3>
+    <h4>
       <% if f.name == 'Running' %>
       <%= render 'trackers/custom_running', tracker: f %>
-      <span class="label label-success pull-right">Today: <%= f.datapoints.where('created_at >= ?', 1.day.ago).sum("amount").to_i %> min</span>
+      <br><span class="label label-success ">Today: <%= f.datapoints.where('created_at >= ?', 1.day.ago).sum("amount").to_i %> min</span>
       <p>
-        <%= area_chart  f.datapoints.group_by_day(:created_at , format: "%B %d, %Y").maximum(:amount), height: "160px" %>
+        <%= column_chart  f.datapoints.group_by_day(:created_at , format: "%B %d, %Y").maximum(:amount), height: "160px" %>
         <%= form_for f.datapoints.new, remote: true do |datapoint| %><%= datapoint.hidden_field :user_id, value: current_user.id %><%= datapoint.hidden_field :tracker_id, value: f.id %>
         <%= datapoint.text_field :amount, placeholder: "Enter minutes walked..", class: 'form-control' %>
       </p>
       <%= button_tag(type: "submit", class: "btn btn-primary btn-block") do %> <%= fa_icon 'check ' %> Add Record<% end %><% end %>
       <% end %>
-    </h3>
+    </h4>
 
-    <h3>
+    <h4>
       <% if f.name == 'Caffeine' %>
       <%= render 'trackers/custom_caffeine', tracker: f %>
-      <span class="label label-success pull-right">Today: <%= f.datapoints.where('created_at >= ?', 1.day.ago).sum("amount").to_i / 60 %> cups(<%= f.datapoints.where('created_at >= ?', 1.day.ago).sum("amount") %> mg)</span>
+      <br><span class="label label-success ">Today: <%= f.datapoints.where('created_at >= ?', 1.day.ago).sum("amount").to_i / 60 %> cups(<%= f.datapoints.where('created_at >= ?', 1.day.ago).sum("amount") %> mg)</span>
   <p>
-  <%= area_chart  f.datapoints.group_by_day(:created_at , format: "%B %d, %Y").maximum(:amount), height: "160px" %>
-        <%= form_for f.datapoints.new, remote: true do |datapoint| %><%= datapoint.hidden_field :user_id, value: current_user.id %><%= datapoint.hidden_field :tracker_id, value: f.id %>
-        <%= datapoint.text_field :amount, placeholder: "Enter minutes walked..", class: 'form-control' %>
-        </p>
+  <%= column_chart  f.datapoints.group_by_day(:created_at , format: "%B %d, %Y").maximum(:amount), height: "160px" %>
+      <%= form_for f.datapoints.new, remote: true do |datapoint| %><%= datapoint.hidden_field :user_id, value: current_user.id %><%= datapoint.hidden_field :tracker_id, value: f.id %>
+      <%= datapoint.text_field :amount, placeholder: "Enter minutes walked..", class: 'form-control' %>
+      </p>
       <%= button_tag(type: "submit", class: "btn btn-primary btn-block") do %> <%= fa_icon 'check ' %> Add Record<% end %><% end %>
       <% end %>
-    </h3>
+    </h4>
 
-    <h3>
+    <h4>
       <% if f.name == 'Cycling' %>
       <%= render 'trackers/custom_cycling', tracker: f %>
-      <span class="label label-success pull-right">Today: <%= f.datapoints.where('created_at >= ?', 1.day.ago).sum("amount").to_i %> minutes today.</span>
+      <br><span class="label label-success ">Today: <%= f.datapoints.where('created_at >= ?', 1.day.ago).sum("amount").to_i %> minutes today.</span>
       <p>
-        <%= area_chart  f.datapoints.group_by_day(:created_at , format: "%B %d, %Y").maximum(:amount), height: "160px" %>
+        <%= column_chart  f.datapoints.group_by_day(:created_at , format: "%B %d, %Y").maximum(:amount), height: "160px" %>
+        
         <%= form_for f.datapoints.new, remote: true do |datapoint| %><%= datapoint.hidden_field :user_id, value: current_user.id %><%= datapoint.hidden_field :tracker_id, value: f.id %>
         <%= datapoint.text_field :amount, placeholder: "Enter minutes walked..", class: 'form-control' %>
       </p>
-      <%= button_tag(type: "submit", class: "btn btn-primary btn-block") do %> <%= fa_icon 'check ' %> Add Record<% end %><% end %>
-      <% end %>
-    </h3>
+      
+        <%= button_tag(type: "submit", class: "btn btn-primary btn-justified") do %> <%= fa_icon 'check ' %> Add Record<% end %><% end %>
+        <% end %>
+    </h4>
 
 
-    <h3>
+    <h4>
       <% if f.name == 'Water' %>
       <%= render 'trackers/custom_water', tracker: f %>
-      <span class="label label-success pull-right">Today: <%= f.datapoints.where('created_at >= ?', 1.day.ago).sum("amount").to_i / 8 %> glasses of water (<%= f.datapoints.where('created_at >= ?', 1.day.ago).sum("amount") %> oz) today.</span>
- <p>
-        <%= area_chart  f.datapoints.group_by_day(:created_at , format: "%B %d, %Y").maximum(:amount), height: "160px" %>
-        <%= form_for f.datapoints.new, remote: true do |datapoint| %><%= datapoint.hidden_field :user_id, value: current_user.id %><%= datapoint.hidden_field :tracker_id, value: f.id %>
-        <%= datapoint.text_field :amount, placeholder: "Enter minutes walked..", class: 'form-control' %>
+      <br><span class="label label-success ">Today: <%= f.datapoints.where('created_at >= ?', 1.day.ago).sum("amount").to_i / 8 %> glasses of water (<%= f.datapoints.where('created_at >= ?', 1.day.ago).sum("amount") %> oz) today.</span>
+  <p>
+  <%= column_chart  f.datapoints.group_by_day(:created_at , format: "%B %d, %Y").maximum(:amount), height: "160px" %>
+      <%= form_for f.datapoints.new, remote: true do |datapoint| %><%= datapoint.hidden_field :user_id, value: current_user.id %><%= datapoint.hidden_field :tracker_id, value: f.id %>
+      <%= datapoint.text_field :amount, placeholder: "Enter minutes walked..", class: 'form-control' %>
       </p>
       <%= button_tag(type: "submit", class: "btn btn-primary btn-block") do %> <%= fa_icon 'check ' %> Add Record<% end %><% end %>
       <% end %>
-    </h3>
+    </h4>
 
     <div class="collapse" id="collapse<%= f.name %>">
       <div class="well">
