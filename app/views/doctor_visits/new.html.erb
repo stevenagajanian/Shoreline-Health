@@ -1,11 +1,11 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-4 col-md-offset-4">
+    <div class="col-lg-6 col-sm-offset-3">
       <h1>Add a Doctor or Clinic Visit to your Health Record</h1>
       <h4>
         <span class="label label-primary"><%= fa_icon 'pencil' %> Fill out as much information as you can.</span>
       </h4>
-      <%= bootstrap_form_for @doctor_visit do |f| %>
+      <%= bootstrap_form_for @doctor_visit, :html => { :multipart => true }  do |f| %>
       <%= f.text_field :reason %>
       <%= f.hidden_field :user_id, value: current_user.id %>
       <%= f.text_area :notes %>
@@ -16,7 +16,7 @@
         <button class="btn btn-default" type="button" data-toggle="collapse" data-target="#collapseShare" aria-expanded="false" aria-controls="collapseExample">
           <%= fa_icon "calendar" %>  Specify a date of occurence
         </button> 
-        <span class="btn btn-default btn-file"><%= fa_icon 'files-o' %> Attach Files<%= file_field_tag "images[]", type: :file, multiple: true, class: '' %></span>
+        <span class="btn btn-default btn-file"><%= fa_icon 'files-o' %> Attach Files<%= file_field_tag "photos[]", type: :file, multiple: true %></span>
       <div class="collapse" id="collapseShare">
         <%= f.date_select :date_occured, start_year: 1890, end_year: 2015 %>
       </div>

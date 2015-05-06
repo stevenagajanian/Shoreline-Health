@@ -8,6 +8,7 @@
         <%= link_to user_metrics_path(current_user), class: 'btn btn-default btn-justified' do %><%= fa_icon "bar-chart" %> Trackers <% end %>
       </div>
       <hr>
+      <%= render 'layouts/panel_head' %>
       <%= render 'conditions/conditions' %>
       <hr>
       <%= render 'medications/medications' %>

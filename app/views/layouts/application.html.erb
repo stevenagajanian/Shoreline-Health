@@ -13,9 +13,9 @@
     <%= csrf_meta_tags %>
   </head>
   <% if user_signed_in? and current_user.b_use_btn_labels == false %>
-  <body style="background-color: #DDD;">
+  <body style="background-color: #EEE;">
     <% else %>
-    <body style="background-color: #DDD;">
+    <body style="background-color: #EEE;">
       <% end %>
       <% if !current_page?(new_user_session_path) and !current_page?(new_user_registration_path) %>
       <%= render "layouts/navbar2" %>

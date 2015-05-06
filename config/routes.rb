@@ -1,5 +1,7 @@
 Tabby::Application.routes.draw do
 
+  resources :conversations
+
   resources :blood_pressures
 
   resources :photos
@@ -9,6 +11,8 @@ Tabby::Application.routes.draw do
   resources :symptoms
   resources :doctor_visits
   resources :immunizations
+  resources :conversations
+  resources :messages
   resources :treatments
   resources :pharmacies
   resources :notifications

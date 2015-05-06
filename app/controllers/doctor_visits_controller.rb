@@ -34,7 +34,7 @@ class DoctorVisitsController < ApplicationController
       format.json { render json: @doctor_visit }
     end
   end
-  
+
   def edit
     @doctor_visit = DoctorVisit.find(params[:id])
 
@@ -43,12 +43,12 @@ class DoctorVisitsController < ApplicationController
       format.json { render json: @doctor_visit }
     end
   end
-  
+
   def destroy
     @doctor_visit = DoctorVisit.find(params[:id])
     @user = @doctor_visit.user
     @doctor_visit.destroy
-    redirect_to user_summary_path(@doctor_visit.user), :notice => "Successfully destroyed doctor_visit."
+    redirect_to user_dashboard_path(@doctor_visit.user), :notice => "Successfully destroyed doctor_visit."
   end
 
   def create
@@ -56,6 +56,12 @@ class DoctorVisitsController < ApplicationController
 
     respond_to do |format|
       if @doctor_visit.save
+        if params[:photos]
+          #===== The magic is here ;)
+          params[:photos].each { |photo|
+            @doctor_visit.photos.create(image: photo)
+            }
+        end
         format.html { redirect_to user_dashboard_path(@doctor_visit.user), notice: 'doctor_visit was successfully created.' }
         format.json { render json: @doctor_visit, status: :created, location: @doctor_visit }
       else

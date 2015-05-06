@@ -1,3 +1,5 @@
+<%= render 'layouts/panel_head' %>
+<h1>Change relationship type</h1>
 <%= simple_form_for(@handshake) do |f| %>
 <%= f.error_notification %>
 <%= @handshake.followed.full_name %> is a...
@@ -9,3 +11,12 @@
 </div>
 <% end %>
 <%= link_to 'Cancel and go back to network', user_network_path(current_user) %>
+<%= render 'layouts/panel_foot' %>
+
+<%= render 'layouts/panel_head' %>
+<h1>Edit Permissions</h1>
+<%= @handshake.followed.full_name %> can see these sections of my health record
+<% current_user.conditions.each do |f| %>
+<h3><%= if f.name.presence then f.name end %></h3>
+<% end %>
+<%= render 'layouts/panel_foot' %>

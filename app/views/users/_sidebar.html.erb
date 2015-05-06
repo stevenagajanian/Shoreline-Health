@@ -2,19 +2,30 @@
 <!-- The sidebar of the user profile. Contains personal info, lists of medications, allergies, conditions, goals, and links to printing or editing data. -->
 <!-- Basic health information -->
 <h3 style="padding-top: 0px;">
-
-
   <% if @user.imageurl.presence %>
   <%= image_tag @user.imageurl, class: 'img-circle pull-', style: 'margin-top: 0px; padding-top: 0px; margin-right: 5px; max-width: 40px; max-height: 40px;' %>
   <% end %> <%= link_to @user.full_name, user_dashboard_path(@user) %>
 </h3>
-<% if @user.date_of_birth.presence %><%= fa_icon 'birthday-cake ' %> <strong>Birthday</strong>
-<%= @user.date_of_birth.strftime("%B %d, %Y") %> (age <%= (Date.today - @user.date_of_birth).to_i / 365 %>)
-<% end %> 
-<% if @user.gender.presence and @user.gender == 'Male' %><%= fa_icon 'male ' %> <strong>Gender</strong> <%= @user.gender %> <% elsif @user.gender.presence and @user.gender =='Female' %><%= fa_icon 'female ' %> <strong>Gender</strong> <%= @user.gender %> <% end %>
-<% if @user.bloodtype.presence %><%= fa_icon 'plus-square ' %> <strong>Bloodtype</strong> <%= @user.bloodtype %> <% end %>
-<% if @user.address.presence %><%= fa_icon 'home ' %> <strong>Address</strong> <%= @user.address %> <% end %>
-<b>Height</b> <% if @user.heights.any? %><%= @user.heights.order("created_at").last.amount %>in<% else %><%= link_to 'Enter', user_metrics_path(@user)%><% end %>
-<b>Weight</b> <% if @user.weights.any? %><%= @user.weights.order("created_at").last.amount %>lbs<% else %><%= link_to 'Enter', user_metrics_path(@user)%><% end %>
-
+<div class="row">
+  <div class="col-md-3"> 
+    <% if @user.date_of_birth.presence %><%= fa_icon 'birthday-cake ' %> <strong>Birthday</strong>
+    <%= @user.date_of_birth.strftime("%B %d, %Y") %> (age <%= (Date.today - @user.date_of_birth).to_i / 365 %>)
+    <% end %> 
+  </div>
+  <div class="col-md-3">
+    <% if @user.gender.presence and @user.gender == 'Male' %><%= fa_icon 'male ' %> <strong>Gender</strong> <%= @user.gender %> <% elsif @user.gender.presence and @user.gender =='Female' %><%= fa_icon 'female ' %> <strong>Gender</strong> <%= @user.gender %> <% end %>
+  </div>
+  <div class="col-md-3">
+    <% if @user.bloodtype.presence %><%= fa_icon 'plus-square ' %> <strong>Bloodtype</strong> <%= @user.bloodtype %> <% end %>
+  </div>
+  <div class="col-md-3">
+    <% if @user.address.presence %><%= fa_icon 'home ' %> <strong>Address</strong> <%= @user.address %> <% end %>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-3"> 
+    <b>Height</b> <% if @user.heights.any? %><%= @user.heights.order("created_at").last.amount %>in<% else %><%= link_to 'Enter', user_metrics_path(@user)%><% end %>
+    <b>Weight</b> <% if @user.weights.any? %><%= @user.weights.order("created_at").last.amount %>lbs<% else %><%= link_to 'Enter', user_metrics_path(@user)%><% end %>
+  </div>
+</div>
 <%= render 'layouts/panel_foot' %>

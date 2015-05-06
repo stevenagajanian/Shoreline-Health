@@ -1,0 +1,85 @@
+<h2>
+  <%= fa_icon "list-alt" %>  Timeline
+  <%= render 'users/new_record' %>
+</h2>
+
+<table class='table table-striped table-hover table-responsive'>
+
+  <tbody>
+    <% @things_month.each do |month, things| %><hr>
+    <h3><span class='label label-primary' style="background-color: #555;"><b><%= month.strftime('%B') %> <%= month.strftime('%Y') %></b></span></h3>
+    <hr>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <% for f in things %>
+
+        <% if f.is_a? Medication %>
+        <%= link_to edit_medication_path(f), class: 'btn btn-primary btn-sm pull-right', style: 'margin-top: -5px; margin-left: 10px' do %><%= fa_icon 'pencil' %> Edit<% end %>
+        <span class="pull-right"><%= f.created_at.strftime("%B %d, %Y at %I:%M %p") %></span>
+        <%= fa_icon 'medkit' %> <strong>Medication</strong>
+        <p class="lead">
+          Started taking <b><%= f.name %></b>
+        </p>
+
+
+        <% elsif f.is_a? DoctorVisit %>
+        <%= link_to doctor_visit_path(f), class: 'btn btn-default btn-sm pull-right', style: 'margin-top: -5px; margin-left: 10px', method: :delete do %><%= fa_icon 'trash' %><% end %>
+        <%= link_to edit_doctor_visit_path(f), class: 'btn btn-default btn-sm pull-right', style: 'margin-top: -5px; margin-left: 10px' do %><%= fa_icon 'pencil' %> Edit<% end %>
+        <span class="pull-right"><%= f.created_at.strftime("%B %d, %Y at %I:%M %p") %></span>
+        <strong><%= fa_icon 'user-md' %> Doctor Visit</strong>
+        <p>
+          <%= f.created_at.strftime("%B %d, %Y at %I:%M %p") %> | Visited <b><i><%= if f.has_attribute?(:doctor) then f.doctor end %></i></b> for <b><i><%= f.reason %></i></b> @ <b><i><%= f.location %></i></b>
+        </p>
+        <p class="lead">
+          <%= f.notes %>
+          <% f.photos.each do |p| %>
+          <%= link_to image_tag(p.image.url(:square)), p.image.url %>
+          <% end %>
+        </p>
+
+        <% elsif f.is_a? Immunization %>
+        <%= link_to edit_immunization_path(f), class: 'btn btn-warning btn-sm pull-right', style: 'margin-top: -5px; margin-left: 10px' do %><%= fa_icon 'pencil' %> Edit<% end %>
+        <span class="pull-right"><%= f.created_at.strftime("%B %d, %Y at %I:%M %p") %></span>
+        <strong><%= fa_icon 'bug' %> Immunization</strong>
+        <p class="lead">
+          <%= f.name %>
+        </p>
+
+        <% elsif f.is_a? Symptom %>
+        <%= link_to edit_symptom_path(f), class: 'btn btn-primary btn-sm pull-right', style: 'margin-top: -5px; margin-left: 10px' do %><%= fa_icon 'pencil' %> Edit<% end %>
+        <span class="pull-right"><%= f.date_occured.strftime("%B %d, %Y at %I:%M %p") %></span>
+        <h4><span class="label label-primary"><%= fa_icon 'heartbeat' %> Symptom/Event</span></h4>
+        <p class="lead">
+          <%= f.description %>
+          <% f.photos.each do |p| %>aaaaaad
+          <% image_tag p.image.url %>dsad
+          <% end %>
+        </p>
+
+        <% elsif f.is_a? Condition %>
+        <%= link_to edit_condition_path(f), class: 'btn btn-info btn-sm pull-right', style: 'margin-top: -5px; margin-left: 10px' do %><%= fa_icon 'pencil' %> Edit<% end %>
+        <span class="pull-right"><%= f.created_at.strftime("%B %d, %Y at %I:%M %p") %></span>
+        <strong><%= fa_icon 'stethoscope' %> Diagnosis/Condition</strong>
+        <p class="lead">
+          <%= f.name %>
+        </p>
+
+        <% elsif f.is_a? Allergy %>
+        <%= link_to edit_allergy_path(f), class: 'btn btn-success btn-sm pull-right', style: 'margin-top: -5px; margin-left: 10px' do %><%= fa_icon 'pencil' %> Edit<% end %>
+        <span class="pull-right"><%= f.created_at.strftime("%B %d, %Y at %I:%M %p") %></span>
+        <%= fa_icon 'leaf' %> <strong>Allergy</strong>
+        <p class="lead">
+          <b>Allergy: </b><%= f.name %>
+          <br>
+          <b>Notes: </b><%= f.description %>
+        </p>
+        <% end %>
+
+        <hr>
+        <% end %>
+      </div>
+    </div>
+    <% end %>
+
+  </tbody>
+</table>

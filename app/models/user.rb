@@ -63,6 +63,8 @@ class User < ActiveRecord::Base
   def full_name
     if first_name.presence
       first_name + " " + last_name
+    else return
+      email
     end
   end
 
