@@ -6,7 +6,8 @@
         <span class="label label-primary"><%= fa_icon 'info-circle' %> Fill out as much as you can. You can also make edits later.</span>
       </h4>
       <%= bootstrap_form_for @medication do |f| %>
-      <%= f.hidden_field :user_id, value: current_user.id %>
+      <%= f.hidden_field :author_id, value: current_user.id %>
+      <%= f.hidden_field :user_id, value: @user.id %>
       <%= f.text_field :name, placeholder: 'Ex. Tylenol, Miralax, etc...'%>
       <div class="row">
         <div class="col-md-12">

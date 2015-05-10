@@ -27,7 +27,8 @@ class DoctorVisitsController < ApplicationController
   end
 
   def new
-    @doctor_visit = current_user.doctor_visits.new
+    @user = User.find(params[:user_id])
+    @doctor_visit = @user.doctor_visits.new
 
     respond_to do |format|
       format.html # new.html.erb

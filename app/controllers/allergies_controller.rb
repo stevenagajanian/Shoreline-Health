@@ -27,7 +27,8 @@ class AllergiesController < ApplicationController
   end
 
   def new
-    @allergy = current_user.allergies.new
+    @user = User.find(params[:user_id])
+    @allergy = @user.allergies.new
 
     respond_to do |format|
       format.html # new.html.erb

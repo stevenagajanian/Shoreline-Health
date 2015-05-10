@@ -80,6 +80,10 @@ Tabby::Application.routes.draw do
     resources :immunizations
     resources :symptoms
     resources :permissions
+    resources :doctor_visits
+    resources :conversations do
+      resources :messages
+    end
     resources :trackers do
       resources :datapoints
     end

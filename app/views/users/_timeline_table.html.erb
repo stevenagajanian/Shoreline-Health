@@ -1,16 +1,25 @@
+<%= render 'layouts/panel_head' %>
 <h2>
-  <%= fa_icon "list-alt" %>  Timeline
+  <%= fa_icon "list-alt" %>  Timelined
   <%= render 'users/new_record' %>
 </h2>
 
-<table class='table table-striped table-hover table-responsive'>
-
+<table class='table table- table-hover table-responsive'>
+  <thead>
+    <tr class="">
+      <td>Date</td>
+      <td>Content</td>
+      <td>Author</td>
+      <td>Settings</td>
+    </tr>
+  </thead>
   <tbody>
-    <% @things_month.each do |month, things| %><hr>
-    <h3><span class='label label-primary' style="background-color: #555;"><b><%= month.strftime('%B') %> <%= month.strftime('%Y') %></b></span></h3>
-    <hr>
-    <div class="panel panel-default">
-      <div class="panel-body">
+    <% @things_month.each do |month, things| %>
+    <tr>
+      <td>
+        <h3><span class='label label-primary' style="background-color: #555;"><b><%= month.strftime('%B') %> <%= month.strftime('%Y') %></b></span></h3>
+      </td>
+      <td>
         <% for f in things %>
 
         <% if f.is_a? Medication %>
@@ -76,10 +85,15 @@
         <% end %>
 
         <hr>
+      </td>
+      <td>
+        <% if f.author_id.presence %>
+        <%= User.find(f.author_id).full_name %>
         <% end %>
-      </div>
-    </div>
-    <% end %>
-
+      </td>
+    </tr>
+        <% end %>
+        <% end %>
   </tbody>
 </table>
+<%= render 'layouts/panel_foot' %>

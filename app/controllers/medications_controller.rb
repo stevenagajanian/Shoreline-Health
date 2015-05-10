@@ -35,7 +35,8 @@ class MedicationsController < ApplicationController
   end
 
   def new
-    @medication = current_user.medications.new
+    @user = User.find(params[:user_id])
+    @medication = @user.medications.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -51,7 +52,8 @@ class MedicationsController < ApplicationController
   end
 
   def create
-    @medication = current_user.medications.new( medication_params)
+    @user = User.find(medication_params[:user_id])
+    @medication = @user.medications.new( medication_params)
 
     respond_to do |format|
       if @medication.save
@@ -67,6 +69,6 @@ class MedicationsController < ApplicationController
   private
 
   def medication_params
-    params.require(:medication).permit(:filled_by, :prescribed_by, :start_date, :end_date, :finished, :notes, :user_id, :name, :dosage, :other_dosage)
+    params.require(:medication).permit(:filled_by, :prescribed_by, :start_date, :end_date, :finished, :notes, :author_id, :user_id, :name, :dosage, :other_dosage)
   end
 end

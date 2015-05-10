@@ -1,13 +1,13 @@
 <% if user_signed_in? and current_page?(user_printable_path(current_user)) %>
-<div style="background-color: #fff; margin-top: -0px;">
+<div style="margin-top: -0px;">
   <% else %>
   <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container-fluid">
       <div class="navbar-header">
         <a href="#menu-toggle" class="btn-default navbar-toggle" id="menu-toggle"><%= fa_icon 'bars' %> Menu</a>
         <%= link_to root_path, class: "navbar-brand" do %>
-        <%= image_tag "ShorelineLogoColor.png", width: 23, style: 'margin-top: -3px;' %>
-        Shoreline<span class='text-primary'></span>
+        <%= fa_icon 'life-ring' %> Shoreline
+       <span class='text-primary'></span>
         <% end %>
       </div>
       <div class="navbar-collapse collapse">

@@ -10,22 +10,22 @@
         <% end %>
       </li>
       <li>
-        <%= link_to new_condition_path, class: '' do %>
+        <%= link_to new_user_condition_path(@user), class: '' do %>
         <%= fa_icon 'stethoscope' %> Diagnosis
         <% end %>
       </li>
       <li>
-        <%= link_to new_medication_path, class: '' do %>
+        <%= link_to new_user_medication_path(@user), class: '' do %>
         <%= fa_icon 'medkit' %> Medication
         <% end %>
       </li>
       <li>
-        <%= link_to new_allergy_path, class: ' text-' do %>
+        <%= link_to new_user_allergy_path(@user), class: ' text-' do %>
         <%= fa_icon 'bug' %> Allergy
         <% end %>
       </li>
       <li>
-        <%= link_to new_doctor_visit_path do %>
+        <%= link_to new_user_doctor_visit_path(@user) do %>
         <%= fa_icon 'user-md' %> Doctor/Clinic Visit
         <% end %>
       </li>
@@ -35,13 +35,8 @@
         <% end %>
       </li>
       <li>
-        <%= link_to user_metrics_path(current_user) do %>
+        <%= link_to user_metrics_path(@user) do %>
         <%= fa_icon 'bicycle' %> Fitness Event/Data
-        <% end %>
-      </li>
-      <li>
-        <%= link_to user_metrics_path(current_user) do %>
-        <%= fa_icon 'photo' %> Photo Upload
         <% end %>
       </li>
     </ul>

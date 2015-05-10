@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-12">
-      <% render 'layouts/panel_head' %>
+      <%= render 'layouts/panel_head' %>
       <h1><%= fa_icon "users x", class: ' ' %> Network<button class="btn pull-right btn-default" type="button" data-toggle="collapse" data-target="#collapseShare" aria-expanded="false" aria-controls="collapseExample">
         <%= fa_icon "plus" %>  Add Through Email
         </button>
@@ -80,7 +80,7 @@
       <%= link_to users_path, class: 'btn btn-primary' do %><%= fa_icon 'search' %> Find family, friends, doctors or specialists to add to your network.<% end %>
     </p>
   </center>
-  <% render 'layouts/panel_foot' %>
+  <%= render 'layouts/panel_foot' %>
 
 </div>
 </div>

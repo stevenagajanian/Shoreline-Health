@@ -1,6 +1,6 @@
 <%= render 'layouts/panel_head' %>
 <h2>
-  <h1><%= fa_icon "inbox" %> Inbox</h1>
+  <h1><%= fa_icon "inbox" %> Notifications</h1>
 </h2>
 <% if !@notifications.any?{|immunization| immunization.b_read == true} %>
 <p>
