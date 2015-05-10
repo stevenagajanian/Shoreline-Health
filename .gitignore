@@ -16,3 +16,5 @@
 /tmp
 .env
 Procfile
+
+/config/database.yml
