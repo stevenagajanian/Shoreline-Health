@@ -1,0 +1,56 @@
+    <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+          <ul class="sidebar-nav">
+            <li class="<%= 'sidebar-active success text-' if current_page?(user_dashboard_path(current_user)) %>"<a data-toggle ="tooltip" data-placement="left" title="ProfileTooltip">insert message here</a>>
+              <%= link_to user_dashboard_path(current_user) do %>
+              <%= fa_icon 'user lg', class: 'text-default' %> Profile
+              <% end %>
+            </li>
+            <li class=" <%= 'sidebar-active success text-' if current_page?(user_network_path(current_user)) %>" <a data-toggle ="tooltip" data-placement="left" title="NetworkTooltip"</a>
+              <%= link_to user_network_path(current_user) do %>
+              <%= fa_icon 'users lg', class: 'text-default' %> Network
+              <% end %>
+            </li>
+            <li class=" <%= 'sidebar-active success text-danger' if current_page?(user_metrics_path(current_user)) %>"<a data-toggle ="tooltip" data-placement="left" title="TrackerTooltip"></a>
+              <%= link_to user_metrics_path(current_user) do %>
+              <%= fa_icon 'bar-chart lg', class: 'text-default' %> Trackers
+              <% end %>
+            </li>
+            <li class=" <%= 'sidebar-active success text-danger' if current_page?(user_conditions_path(current_user)) %>"<a data-toggle ="tooltip" data-placement="left" title="ConditionsTooltip"></a>
+              <%= link_to user_conditions_path(current_user) do %>
+              <%= fa_icon 'heartbeat lg', class: 'text-default' %> Conditions
+              <% end %>
+            </li>
+            <li class=" <%= 'sidebar-active success text-danger' if current_page?(user_notifications_path(current_user)) %>"<a data-toggle ="tooltip" data-placement="left" title="NotificationsTooltip"></a>
+              <%= link_to user_notifications_path(current_user) do %>
+              <%= fa_icon 'inbox lg', class: 'text-default' %> Notifications <% if current_user.notifications.where("b_read IS null").count == 0 %>
+              <% else %><span class="label label-primary label-as-badge">
+              <%= current_user.notifications.where("b_read IS null").count %></span>
+              <% end %>
+              <% end %>
+            </li>
+            <li class=" <%= 'sidebar-active success text-' if current_page?(conversations_path) %>"<a data-toggle="tootltip" data-placement="left" title= "MessagesTooltip"></a>
+              <%= link_to conversations_path do %>
+              <%= fa_icon 'envelope-o lg', class: 'text-default' %> Messages
+              <% end %>
+            </li>
+            <li class=" <%= 'sidebar-active success text-' if current_page?(static_pages_search_path) %>"<a data-toggle="tootltip" data-placement="left" title= "SearchTooltip"></a>
+              <%= link_to static_pages_search_path do %>
+              <%= fa_icon 'search lg', class: 'text-default' %> Search
+              <% end %>
+            </li>
+            <hr>
+            <li class=" <%= 'sidebar-active success text-' if current_page?(pages_path) %>"<a data-toggle="tootltip" data-placement="left" title= "GroupsTooltip"></a>
+              <%= link_to pages_path do %>
+              <%= fa_icon 'users lg', class: 'text-default' %> Groups
+              <% end %>
+            </li>
+            <hr>
+            <li class=" <%= 'sidebar-active success text-' if current_page?(edit_registration_path(current_user)) %>"<a data-toggle="tootltip" data-placement="left" title= "SettingsTooltip"></a>
+              <%= link_to edit_registration_path(current_user) do %>
+              <%= fa_icon 'gears lg', class: 'text-default' %> Settings
+              <% end %>
+            </li>
+          </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->

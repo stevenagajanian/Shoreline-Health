@@ -22,6 +22,6 @@ test:
 production:
   adapter: postgresql
   database: shoreline_production
-  username: shoreline
+  user: shoreline
   password: secretpassword
   pool: 5
